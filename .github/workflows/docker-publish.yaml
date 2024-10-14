@@ -53,8 +53,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: # Spécifier l'argument pour passer le mode de build
-            TARGET: ${{ github.event.inputs.target }}
           target: ${{ github.event.inputs.target }} # Dev ou Prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
