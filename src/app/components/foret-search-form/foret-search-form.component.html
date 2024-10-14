@@ -1,0 +1,21 @@
+<div class="fr-grid-row">
+  <div class="fr-col-12 fr-col-lg-6">
+
+    <form *ngIf="form" [formGroup]="form">
+      <dsfr-form-input formControlName="needle" [label]="'Saisissez une commune, un lieu-dit'"
+        [hint]="'Commune, lieu-dit, adresse, …'" [required]="false" [type]="'search'"
+        buttonLabel="Rechercher"></dsfr-form-input>
+    </form>
+
+
+  </div>
+  <div class="fr-col-12 fr-col-lg-6">
+    <div class="btn-group">
+      <span>Ou</span>
+      <dsfr-button label="Charger une couche SIG" icon="fr-icon-checkbox-circle-line" iconPosition="right"
+        variant="secondary"></dsfr-button>
+      <dsfr-button label="Valider" icon="fr-icon-checkbox-circle-line" iconPosition="right"
+        variant="primary"></dsfr-button>
+    </div>
+  </div>
+</div>

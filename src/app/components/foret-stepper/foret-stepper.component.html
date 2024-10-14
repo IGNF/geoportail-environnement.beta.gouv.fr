@@ -1,0 +1,6 @@
+<h2>Votre forêt</h2>
+
+<ng-container *ngIf="currentStepTitle">
+  <dsfr-stepper [totalSteps]="4" [currentStep]="currentStep" [currentStepTitle]="currentStepTitle"
+    [nextStepTitle]="nextStepTitle"></dsfr-stepper>
+</ng-container>
