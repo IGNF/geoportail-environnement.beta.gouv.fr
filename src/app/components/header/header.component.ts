@@ -13,7 +13,12 @@ export class HeaderComponent {
 
   logoTooltipMessage = '';
 
-  headerToolsLinks: any = [];
+  operatorImagePath='img/foreg-icon.png';
+
+  headerToolsLinks: any = [
+    { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' },
+    { label: 'Espace particulier', icon: 'fr-btn--account', routerLink: '/login', routerLinkActive: 'class-active' },
+  ];
 
   menuHeader: any = [];
 

@@ -22,6 +22,7 @@ import {
   DsfrLinkModule,
   DsfrPaginationModule,
   DsfrQuoteModule,
+  DsfrResponseModule,
   DsfrSearchBarModule,
   DsfrSkiplinksModule,
   DsfrStepperModule,
@@ -64,6 +65,7 @@ import {
     DsfrQuoteModule,
     DsfrSkiplinksModule,
     DsfrStepperModule,
+    DsfrResponseModule,
   ],
   exports: [
     DsfrTranscriptionComponent,
@@ -96,6 +98,7 @@ import {
     DsfrQuoteModule,
     DsfrSkiplinksModule,
     DsfrStepperModule,
+    DsfrResponseModule,
   ]
 })
 export class SharedDesignDsfrModule { }

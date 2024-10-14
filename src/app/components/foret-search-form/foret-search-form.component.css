@@ -5,6 +5,10 @@ form {
   align-items: end;
 }
 
+.btn-group {
+  flex-wrap: wrap;
+}
+
 .btn-group>*,
 form>* {
   padding-left: 1.0rem;

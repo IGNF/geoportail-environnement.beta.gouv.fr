@@ -13,6 +13,7 @@ import { JoinUsComponent } from './components/join-us/join-us.component';
 import { ForetStepperComponent } from './components/foret-stepper/foret-stepper.component';
 import { ForetSearchFormComponent } from './components/foret-search-form/foret-search-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     JoinUsComponent,
     ForetStepperComponent,
-    ForetSearchFormComponent
+    ForetSearchFormComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
