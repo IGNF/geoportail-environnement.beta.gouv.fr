@@ -44,15 +44,18 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      - name: Display target for debugging
+        run: echo "Build target is ${{ github.event.inputs.target }}"
+
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v3
         with:
-          context: .
-          file: .docker/Dockerfile
+          context: .docker
+          file: Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          target: ${{ github.event.inputs.target }} # Dev ou Prod
+          target: ${{ github.event.inputs.target }} # Cible le stage (dev ou prod)
           cache-from: type=gha
           cache-to: type=gha,mode=max
