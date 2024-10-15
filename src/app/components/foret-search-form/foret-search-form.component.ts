@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-foret-search-form',
@@ -9,6 +10,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ForetSearchFormComponent implements OnInit {
 
   form!: FormGroup;
+
+  @Output() search: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder
@@ -20,8 +23,19 @@ export class ForetSearchFormComponent implements OnInit {
       needle: ['']
     });
 
-    this.form.valueChanges.pipe().subscribe(() => {
-      console.log('ForetSearchFormComponent', 'valueChanges', this.form.value)
-    })
+    this.form.valueChanges.pipe(
+      filter(() => this.isValid())
+    ).subscribe(() => {
+      console.log('ForetSearchFormComponent', 'valueChanges', this.form.value);
+    });
   }
+
+  isValid() {
+    return this.form.valid;
+  }
+
+  validNeedle() {
+    this.search.emit();
+  }
+
 }

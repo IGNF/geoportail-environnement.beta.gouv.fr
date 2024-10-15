@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 const STEPPER_CONFIG = [
   { currentStep: 1, currentStepTitle: 'Localiser la forêt', nextStepTitle: 'Préciser le périmètre de la forêt' },
@@ -12,7 +12,7 @@ const STEPPER_CONFIG = [
   templateUrl: './foret-stepper.component.html',
   styleUrl: './foret-stepper.component.css'
 })
-export class ForetStepperComponent implements OnInit {
+export class ForetStepperComponent implements OnInit, OnChanges {
 
   @Input() step: number = 0;
 
@@ -25,6 +25,20 @@ export class ForetStepperComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.updateStep();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateStep();
+  }
+
+  updateStep() {
+    if (this.step > 3) {
+      this.step = 3;
+    }
+    if (this.step < 0) {
+      this.step = 0;
+    }
     this.currentStep = STEPPER_CONFIG[this.step].currentStep;
     this.currentStepTitle = STEPPER_CONFIG[this.step].currentStepTitle;
     this.nextStepTitle = STEPPER_CONFIG[this.step].nextStepTitle;

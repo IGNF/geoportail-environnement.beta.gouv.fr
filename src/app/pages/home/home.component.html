@@ -24,9 +24,13 @@
 
 <div class="fr-container fr-mt-4v fr-mb-4v fr-pt-8v fr-pb-8v">
 
-  <app-foret-stepper [step]="0"></app-foret-stepper>
+  <app-foret-stepper [step]="step"></app-foret-stepper>
 
-  <app-foret-search-form></app-foret-search-form>
+  <app-foret-search-form (search)="nextStep()"></app-foret-search-form>
+
+  <div class="fr-mt-4v">
+    <app-next-step [step]="step" (previous)="previousStep()" (next)="nextStep()"></app-next-step>
+  </div>
 
 </div>
 

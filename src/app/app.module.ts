@@ -14,6 +14,7 @@ import { ForetStepperComponent } from './components/foret-stepper/foret-stepper.
 import { ForetSearchFormComponent } from './components/foret-search-form/foret-search-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { NextStepComponent } from './components/next-step/next-step.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     JoinUsComponent,
     ForetStepperComponent,
     ForetSearchFormComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NextStepComponent
   ],
   imports: [
     BrowserModule,

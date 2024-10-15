@@ -4,7 +4,7 @@
     <form *ngIf="form" [formGroup]="form">
       <dsfr-form-input formControlName="needle" [label]="'Saisissez une commune, un lieu-dit'"
         [hint]="'Commune, lieu-dit, adresse, …'" [required]="false" [type]="'search'"
-        buttonLabel="Rechercher"></dsfr-form-input>
+        buttonLabel="Rechercher" (buttonSelect)="validNeedle()"></dsfr-form-input>
     </form>
 
 
