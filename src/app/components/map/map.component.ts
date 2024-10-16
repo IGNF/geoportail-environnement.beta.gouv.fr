@@ -15,15 +15,6 @@ export class MapComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.mapContextService.createMap('map');
-
-    // barre de recherche ol-ext
-    const search = new SearchGeoportail({
-      target: 'location',
-      maxItems: 3,
-      className: 'fr-input-wrap fr-input-wrap--addon'
-    });
-    this.mapContextService.map?.addControl(search);
   }
 
 }

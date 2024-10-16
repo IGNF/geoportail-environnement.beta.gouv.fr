@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { filter } from 'rxjs';
+import SearchGeoportail from 'ol-ext/control/SearchGeoportail';
+
+import { MapContextService } from '../../shared/services/map-context.service';
 
 @Component({
   selector: 'app-foret-search-form',
@@ -9,32 +10,30 @@ import { filter } from 'rxjs';
 })
 export class ForetSearchFormComponent implements OnInit {
 
-  form!: FormGroup;
-
   @Output() search: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private fb: FormBuilder
+    private mapContextService: MapContextService
   ) { }
 
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      needle: ['']
-    });
 
-    this.form.valueChanges.pipe(
-      filter(() => this.isValid())
-    ).subscribe(() => {
-      console.log('ForetSearchFormComponent', 'valueChanges', this.form.value);
+    // barre de recherche ol-ext
+    const search = new SearchGeoportail({
+      target: 'location',
+      maxItems: 3,
+      className: 'fr-input-wrap fr-input-wrap--addon'
     });
+    this.mapContextService.map?.addControl(search);
+
   }
 
-  isValid() {
-    return this.form.valid;
+  private isValid() {
+    return true;
   }
 
-  validNeedle() {
+  private validNeedle() {
     this.search.emit();
   }
 
