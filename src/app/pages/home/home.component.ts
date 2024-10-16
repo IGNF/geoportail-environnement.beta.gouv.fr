@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { EnqueteService } from '../../shared/enquete.service';
+
+import { EnqueteService } from '../../shared/services/enquete.service';
 
 @Component({
   selector: 'app-home',
@@ -18,13 +19,11 @@ export class HomeComponent {
   nextStep() {
     console.log('nextStep', this.step);
     this.step++;
-    this.enqueteService.updateEtape(this.step);
   }
 
   previousStep() {
     console.log('previousStep', this.step);
     this.step--;
-    this.enqueteService.updateEtape(this.step);
   }
 
 }
