@@ -14,7 +14,7 @@ export class ForetSearchFormComponent implements OnInit {
 
   constructor(
     private mapContextService: MapContextService
-  ) { }
+  ) { };
 
 
   ngOnInit(): void {
@@ -27,14 +27,27 @@ export class ForetSearchFormComponent implements OnInit {
     });
     this.mapContextService.map?.addControl(search);
 
-  }
+    search.on('select', (e:any) => {
+      search.setInput(e.search.fulltext, false);
+      this.mapContextService.map?.getView().setCenter(e.coordinate);
+      this.mapContextService.map?.getView().setZoom(14);
+      search.clearHistory();
+    })
+
+    //ajustement css
+    document.querySelector("#location input.search")?.classList.add("fr-input");
+    (document.querySelector("#location input.search") as HTMLElement).style.height = "50px";
+    (document.querySelector("#location input.search") as HTMLElement).style.maxWidth = "250px";
+    (document.querySelector("#location div.fr-input-wrap") as HTMLElement).style.left = "0";
+
+  };
 
   private isValid() {
     return true;
-  }
+  };
 
   private validNeedle() {
     this.search.emit();
-  }
+  };
 
 }
