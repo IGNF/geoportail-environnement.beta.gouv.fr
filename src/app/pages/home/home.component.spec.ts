@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { ForetStepperComponent } from '../../components/foret-stepper/foret-stepper.component';
 import { ForetSearchFormComponent } from '../../components/foret-search-form/foret-search-form.component';
 import { NextStepComponent } from '../../components/next-step/next-step.component';
+import { MapComponent } from '../../components/map/map.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('HomeComponent', () => {
@@ -16,7 +17,8 @@ describe('HomeComponent', () => {
         HomeComponent,
         ForetStepperComponent,
         ForetSearchFormComponent,
-        NextStepComponent
+        NextStepComponent,
+        MapComponent
       ],
       imports: [
         SharedDesignDsfrModule,
