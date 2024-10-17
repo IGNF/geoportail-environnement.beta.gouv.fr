@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
 import { NextStepComponent } from './next-step.component';
 
 describe('NextStepComponent', () => {
@@ -8,9 +8,9 @@ describe('NextStepComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NextStepComponent]
-    })
-    .compileComponents();
+      declarations: [NextStepComponent],
+      imports: [SharedDesignDsfrModule]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NextStepComponent);
     component = fixture.componentInstance;
@@ -20,4 +20,5 @@ describe('NextStepComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

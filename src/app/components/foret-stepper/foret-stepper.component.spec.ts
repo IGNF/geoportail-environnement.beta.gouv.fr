@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
 import { ForetStepperComponent } from './foret-stepper.component';
+
 
 describe('ForetStepperComponent', () => {
   let component: ForetStepperComponent;
@@ -8,7 +9,8 @@ describe('ForetStepperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ForetStepperComponent]
+      declarations: [ForetStepperComponent],
+      imports: [SharedDesignDsfrModule]
     })
     .compileComponents();
 

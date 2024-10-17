@@ -2,6 +2,9 @@
 ARG registry=docker.io
 FROM ${registry}/node:18 AS build
 
+# Installer les dépendances nécessaires pour les tests (y compris Chromium)
+RUN apt-get update && apt-get install -y chromium
+ENV CHROME_BIN='/usr/bin/chromium'
 # Installer Angular CLI
 RUN npm install -g @angular/cli
 
@@ -17,6 +20,9 @@ RUN npm install
 # Copier le reste de l'application Angular dans le répertoire de travail
 COPY . /app
 
+# **Exécuter les tests unitaires Angular**
+RUN ng test --watch=false --code-coverage 
+
 # Construire l'application Angular pour la production
 RUN ng build --configuration production --output-path=dist
 
@@ -29,7 +35,10 @@ COPY ./.docker/nginx.conf /etc/nginx/conf.d/default.conf
 # Étape de développement (optionnelle)
 FROM ${registry}/node:18 AS dev
 USER root
-# Installer Angular CLI
+ENV CHROME_BIN='/usr/bin/chromium'
+# Installer les dépendances nécessaires pour les tests (y compris Chromium)
+RUN apt-get update && apt-get install -y chromium 
+    # Installer Angular CLI
 RUN npm install -g @angular/cli
 
 # Utiliser un répertoire de travail
@@ -39,7 +48,7 @@ WORKDIR /app
 COPY ./package*.json ./
 
 # Installer les dépendances
-RUN npm install
+RUN npm install --include=dev
 
 # Copier le reste de l'application Angular
 COPY . /app

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FooterComponent } from './footer.component';
+import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
+import { FooterComponent } from './footer.component';  
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -8,7 +8,8 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FooterComponent]
+      declarations: [FooterComponent],
+      imports: [SharedDesignDsfrModule]
     })
     .compileComponents();
 
