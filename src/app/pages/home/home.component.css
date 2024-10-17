@@ -1,3 +1,7 @@
+.hidden {
+  visibility: hidden;
+}
+
 .img-box {
   display: flex;
   justify-content: center;

@@ -28,6 +28,18 @@
 
   <app-foret-search-form (search)="nextStep()"></app-foret-search-form>
 
+  <div class="fr-grid-row fr-grid-row--gutters">
+
+    <div class="fr-col-12 fr-col-lg-6" [class.fr-col-lg-12]="step === 1" [class.hidden]="step < 1">
+      <app-map></app-map>
+    </div>
+
+    <div class="fr-col-12 fr-col-lg-6">
+      <app-map-info *ngIf="step > 1"></app-map-info>
+    </div>
+
+  </div>
+
   <div class="fr-mt-4v">
     <app-next-step [step]="step" (previous)="previousStep()" (next)="nextStep()"></app-next-step>
   </div>

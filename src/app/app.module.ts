@@ -15,6 +15,8 @@ import { ForetSearchFormComponent } from './components/foret-search-form/foret-s
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NextStepComponent } from './components/next-step/next-step.component';
+import { MapComponent } from './components/map/map.component';
+import { MapInfoComponent } from './components/map-info/map-info.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { NextStepComponent } from './components/next-step/next-step.component';
     ForetStepperComponent,
     ForetSearchFormComponent,
     NotFoundComponent,
-    NextStepComponent
+    NextStepComponent,
+    MapComponent,
+    MapInfoComponent
   ],
   imports: [
     BrowserModule,
