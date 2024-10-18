@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
 import TileLayer from 'ol/layer/Tile.js'
@@ -13,9 +13,11 @@ export class MapContextService {
 
   map?: Map;
 
+  mapLoaded: EventEmitter<any> = new EventEmitter<any>();
+
   constructor() { }
 
-  getMap(): any {
+  getMap(): Map | any {
     return this.map;
   }
 
@@ -24,6 +26,7 @@ export class MapContextService {
   }
 
   createMap(elementId: string) {
+    console.log('createMap', elementId);
     this.map = new Map({
       view: new View({
         center: [0, 0],
@@ -40,6 +43,13 @@ export class MapContextService {
       ],
       target: elementId
     });
+
+    this.map.on('rendercomplete', (event) => this.mapLoaded.next(event));
+  }
+
+  setView(coordinates: any[], zoom: number) {
+    this.map?.getView().setCenter(coordinates);
+    this.map?.getView().setZoom(14);
   }
 
   getLayerDessin(): any {

@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { distinctUntilChanged, first, map } from 'rxjs';
 import SearchGeoportail from 'ol-ext/control/SearchGeoportail';
 
 import { MapContextService } from '../../shared/services/map-context.service';
-import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-foret-search-form',
@@ -11,7 +11,9 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
 })
 export class ForetSearchFormComponent implements OnInit {
 
-  @Output() change: EventEmitter<any> = new EventEmitter<any>();
+  @Output() select: EventEmitter<any> = new EventEmitter<any>();
+
+  @ViewChild('searchControlGroup') searchControlGroup!: ElementRef;
 
   private searchControlSelect: EventEmitter<any> = new EventEmitter<any>();
 
@@ -19,40 +21,49 @@ export class ForetSearchFormComponent implements OnInit {
     private mapContextService: MapContextService
   ) { };
 
-
   ngOnInit(): void {
+    this.mapContextService.mapLoaded.pipe(
+      first(() => true)
+    ).subscribe(() => {
+      this.initControl();
+    });
 
+    // lorsqu'un choix est fait on zoom et on transmet la confirmation
+    this.searchControlSelect.pipe(
+      distinctUntilChanged(),
+      map((event) => {
+        this.mapContextService.setView(event.coordinate, 14);
+        this.select.emit();
+      })
+    ).subscribe();
+  };
+
+
+  private initControl() {
     // barre de recherche ol-ext
     const searchControl = new SearchGeoportail({
       target: 'location',
       maxItems: 3,
       className: 'fr-input-wrap fr-input-wrap--addon'
     });
-    this.mapContextService.map?.addControl(searchControl);
+    this.mapContextService.getMap().addControl(searchControl);
 
-    searchControl.on('select', (event: any) => this.searchControlSelect.emit(event));
+    // en confirmant un choix, on rempli le champ et supprime l'historique
+    searchControl.on('select', (event: any) => {
+      searchControl.setInput(event.search.fulltext, false);
+      searchControl.clearHistory();
+      this.searchControlSelect.emit(event);
+    });
 
-    this.searchControlSelect.pipe(
-      distinctUntilChanged(),
-      map((event) => {
-        searchControl.setInput(event.search.fulltext, false);
-        this.mapContextService.map?.getView().setCenter(event.coordinate);
-        this.mapContextService.map?.getView().setZoom(14);
-        searchControl.clearHistory();
-        this.change.emit();
-      })
-    ).subscribe();
-
-    //ajustement css
-    const element = document.querySelector("#location input.search");
-    if (element) {
-      document.querySelector("#location input.search")?.classList.add("fr-input");
-      (document.querySelector("#location input.search") as HTMLElement).style.height = "50px";
-      (document.querySelector("#location input.search") as HTMLElement).style.maxWidth = "250px";
-      (document.querySelector("#location div.fr-input-wrap") as HTMLElement).style.left = "0";
+    // apres le chargement de la carte on est placé après le AfterViewInit
+    if (!this.searchControlGroup) {
+      return;
     }
-
-  };
+    const input = this.searchControlGroup.nativeElement.querySelector('input.search');
+    if (input) {
+      input.classList.add('fr-input');
+    }
+  }
 
   private isValid() {
     return true;

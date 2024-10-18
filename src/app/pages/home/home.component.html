@@ -26,7 +26,7 @@
 
   <app-foret-stepper [step]="step"></app-foret-stepper>
 
-  <app-foret-search-form (search)="nextStep()" [class.hidden]="step > 1"></app-foret-search-form>
+  <app-foret-search-form (select)="confirmSelect()" [class.hidden]="step > 1"></app-foret-search-form>
 
   <div class="fr-grid-row fr-grid-row--gutters">
 

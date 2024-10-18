@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EnqueteService } from '../../shared/services/enquete.service';
 import { MapContextService } from '../../shared/services/map-context.service';
 
 @Component({
@@ -13,13 +12,18 @@ export class HomeComponent implements OnInit {
   step: number = 0;
 
   constructor(
-    private enqueteService: EnqueteService,
     private mapContextService: MapContextService
   ) { }
 
 
   ngOnInit(): void {
     this.mapContextService.createMap('map');
+  }
+
+  confirmSelect() {
+    if (this.step === 0) {
+      this.nextStep();
+    }
   }
 
 
