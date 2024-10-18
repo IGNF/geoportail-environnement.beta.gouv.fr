@@ -1,6 +1,9 @@
-import { NgModule, provideZoneChangeDetection } from '@angular/core';
+import { LOCALE_ID, NgModule, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, RouterModule } from '@angular/router';
+import { registerLocaleData } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr);
 
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -18,6 +21,7 @@ import { NextStepComponent } from './components/next-step/next-step.component';
 import { MapComponent } from './components/map/map.component';
 import { MapInfoComponent } from './components/map-info/map-info.component';
 import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
+import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
     MapComponent,
     MapInfoComponent,
     MesForetsComponent,
+    ExtendDatePipe
   ],
   imports: [
     BrowserModule,
@@ -46,8 +51,9 @@ import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
     })
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes)
+    provideRouter(routes),
   ],
   bootstrap: [AppComponent]
 })

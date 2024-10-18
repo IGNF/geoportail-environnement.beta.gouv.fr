@@ -1,4 +1,4 @@
-<div class="fr-container">
+<div class="fr-container fr-mt-4w">
 
     <h1>Mes Forets</h1>
 
@@ -14,7 +14,7 @@
                             <p class="fr-card__desc">
                                 <b>{{ foret.area }} ha</b><br>
                                 {{ foret.parcels.length}} parcelles <br>
-                                Mis à jour le {{ foret.updatedAt }}
+                                Mis à jour le {{ foret.updatedAt | extendDate }}
                             </p>
                             <div class="fr-card__start">
                                 <ul class="fr-tags-group">
