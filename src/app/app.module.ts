@@ -17,6 +17,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NextStepComponent } from './components/next-step/next-step.component';
 import { MapComponent } from './components/map/map.component';
 import { MapInfoComponent } from './components/map-info/map-info.component';
+import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MapInfoComponent } from './components/map-info/map-info.component';
     NotFoundComponent,
     NextStepComponent,
     MapComponent,
-    MapInfoComponent
+    MapInfoComponent,
+    MesForetsComponent,
   ],
   imports: [
     BrowserModule,
