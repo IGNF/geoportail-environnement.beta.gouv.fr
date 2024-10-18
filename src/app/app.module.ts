@@ -12,7 +12,6 @@ import { SharedDesignDsfrModule } from './shared-design-dsfr/shared-design-dsfr.
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
-import { JoinUsComponent } from './components/join-us/join-us.component';
 import { ForetStepperComponent } from './components/foret-stepper/foret-stepper.component';
 import { ForetSearchFormComponent } from './components/foret-search-form/foret-search-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +28,6 @@ import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    JoinUsComponent,
     ForetStepperComponent,
     ForetSearchFormComponent,
     NotFoundComponent,
