@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapInfoComponent } from './map-info.component';
+import { ThematicSelectComponent } from './thematic-select.component';
 
-describe('MapInfoComponent', () => {
-  let component: MapInfoComponent;
-  let fixture: ComponentFixture<MapInfoComponent>;
+describe('ThematicSelectComponent', () => {
+  let component: ThematicSelectComponent;
+  let fixture: ComponentFixture<ThematicSelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MapInfoComponent]
+      declarations: [ThematicSelectComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MapInfoComponent);
+    fixture = TestBed.createComponent(ThematicSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
