@@ -3,49 +3,46 @@
     <h1>Mes Forets</h1>
 
     <div class="fr-grid-row fr-grid-row--gutters fr-mb-1w">
-        @for(foret of forets;  track foret.id) {
-            <div class="fr-col-md-6 fr-col">
-                <div class="fr-card fr-card--horizontal">
-                    <div class="fr-card__body">
-                        <div class="fr-card__content">
-                            <h3 class="fr-card__title">
-                                {{ foret.name}}
-                            </h3>
-                            <p class="fr-card__desc">
-                                <b>{{ foret.area }} ha</b><br>
-                                {{ foret.parcels.length}} parcelles <br>
-                                Mis à jour le {{ foret.updatedAt | extendDate }}
-                            </p>
-                            <div class="fr-card__start">
-                                <ul class="fr-tags-group">
-                                    @for(tag of foret.tags; track tag){
-                                    <li>
-                                        <p class="fr-tag">{{ tag }}</p>
-                                    </li>
-                                    }
-                                </ul>
-                                <!-- 
+        @for(foret of forets; track foret.id) {
+        <div class="fr-col-md-6 fr-col">
+            <div class="fr-card fr-card--horizontal">
+                <div class="fr-card__body">
+                    <div class="fr-card__content">
+                        <h3 class="fr-card__title">
+                            {{ foret.name }}
+                        </h3>
+                        <p class="fr-card__desc">
+                            <b>{{ foret.area }} ha</b><br>
+                            {{ foret.parcels.length}} parcelles <br>
+                            Mis à jour le {{ foret.updatedAt | extendDate }}
+                        </p>
+                        <div class="fr-card__start">
+                            <ul class="fr-tags-group">
+                                @for(tag of foret.tags; track tag) {
+                                <li>
+                                    <p class="fr-tag">{{ tag }}</p>
+                                </li>
+                                }
+                            </ul>
+                            <!-- 
                                     <p class="fr-card__detail fr-icon-warning-fill">détail (optionnel)</p>
                                 -->
-                            </div>
-                            <div class="fr-card__end">
-                                <p class="fr-card__detail">
-                                    <a class="fr-btn">Voir le détail</a> <a class="fr-btn fr-btn--secondary">a</a>
-                                </p>
-                            </div>
                         </div>
-                    </div>
-                    <div class="fr-card__header">
-                        <div class="fr-card__img">
-                            <img [src]="foret.imgUrl" alt="" class="fr-responsive-img">
+                        <div class="fr-card__end">
+                            <p class="fr-card__detail">
+                                <a class="fr-btn">Voir le détail</a> <a class="fr-btn fr-btn--secondary">a</a>
+                            </p>
                         </div>
                     </div>
                 </div>
+                <div class="fr-card__header">
+                    <div class="fr-card__img">
+                        <img [src]="foret.imgUrl" alt="" class="fr-responsive-img">
+                    </div>
+                </div>
             </div>
+        </div>
         }
-
     </div>
-
-    
 
 </div>

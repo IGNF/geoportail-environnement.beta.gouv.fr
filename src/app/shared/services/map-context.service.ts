@@ -26,7 +26,6 @@ export class MapContextService {
   }
 
   createMap(elementId: string) {
-    console.log('createMap', elementId);
     this.map = new Map({
       view: new View({
         center: [0, 0],

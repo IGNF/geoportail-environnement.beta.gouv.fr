@@ -14,7 +14,6 @@ export class ExtendDatePipe extends DatePipe implements PipeTransform {
 
   override transform(value: any, format = 'mediumDate', timezone?: any, locale?: any): any {
     let transformed;
-    console.log('ExtendDatePipe', locale);
     try {
       transformed = super.transform(value, format, timezone, locale);
     } catch {
