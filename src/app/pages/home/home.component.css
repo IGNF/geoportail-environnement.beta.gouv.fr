@@ -2,6 +2,10 @@
   visibility: hidden;
 }
 
+.map-container.hidden {
+  height: 0;
+}
+
 .img-box {
   display: flex;
   justify-content: center;

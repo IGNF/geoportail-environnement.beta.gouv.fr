@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.mapContextService.createMap('map');
-
+    console.log(this.mapContextService.map);
   }
 
 
@@ -33,6 +33,13 @@ export class HomeComponent implements OnInit {
   previousStep() {
     console.log('previousStep', this.step);
     this.step--;
+    if(this.step == 0) {
+      //@ts-ignore
+      this.mapContextService.getLayerDessin().getSource().forEachFeature((f) => {
+        //@ts-ignore
+        this.mapContextService.getLayerDessin()?.getSource().removeFeature(f);
+      });
+    }
   }
 
 }
