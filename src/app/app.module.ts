@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
 import { SharedDesignDsfrModule } from './shared-design-dsfr/shared-design-dsfr.module';
+import { ThematicInfoModule } from './thematic-info/thematic-info.module';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -17,6 +19,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NextStepComponent } from './components/next-step/next-step.component';
 import { MapComponent } from './components/map/map.component';
 import { MapInfoComponent } from './components/map-info/map-info.component';
+import { ThematicInfoContainerComponent } from './components/thematic-info-container/thematic-info-container.component';
+
 
 @NgModule({
   declarations: [
@@ -30,13 +34,15 @@ import { MapInfoComponent } from './components/map-info/map-info.component';
     NotFoundComponent,
     NextStepComponent,
     MapComponent,
-    MapInfoComponent
+    MapInfoComponent,
+    ThematicInfoContainerComponent
   ],
   imports: [
     BrowserModule,
     SharedDesignDsfrModule,
     FormsModule,
     ReactiveFormsModule,
+    ThematicInfoModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
