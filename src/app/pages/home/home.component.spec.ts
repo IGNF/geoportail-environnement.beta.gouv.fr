@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
 import { HomeComponent } from './home.component';
 import { ForetStepperComponent } from '../../components/foret-stepper/foret-stepper.component';
 import { ForetSearchFormComponent } from '../../components/foret-search-form/foret-search-form.component';
 import { NextStepComponent } from '../../components/next-step/next-step.component';
 import { MapComponent } from '../../components/map/map.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
