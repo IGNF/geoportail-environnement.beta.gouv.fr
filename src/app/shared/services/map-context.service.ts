@@ -15,10 +15,18 @@ export class MapContextService {
 
   constructor() { }
 
+  getMap(): any {
+    return this.map;
+  }
+
+  isMapLoaded() {
+    return this.map || this.map !== null;
+  }
+
   createMap(elementId: string) {
     this.map = new Map({
       view: new View({
-        center: [0,0],
+        center: [0, 0],
         zoom: 1,
       }),
       layers: [
@@ -27,18 +35,18 @@ export class MapContextService {
         }),
         new VectorLayer({
           source: new Vector(),
-          properties: {title: "Dessin"}
+          properties: { title: "Dessin" }
         })
       ],
       target: elementId
     });
   }
 
-  getLayerDessin() {
+  getLayerDessin(): any {
     var layers = this.map?.getLayers().getArray();
-    if(layers) {
-      for(var i = 0; i < layers.length; i++) {
-        if(layers[i].get("title") == "Dessin") {
+    if (layers) {
+      for (var i = 0; i < layers.length; i++) {
+        if (layers[i].get("title") == "Dessin") {
           return layers[i];
         }
       }
