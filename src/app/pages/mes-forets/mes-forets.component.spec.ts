@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MesForetsComponent } from './mes-forets.component';
 import { ExtendDatePipe } from '../../shared/pipes/extend-date.pipe';
+import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
 
 describe('MesForetsComponent', () => {
   let component: MesForetsComponent;
@@ -11,6 +12,12 @@ describe('MesForetsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         MesForetsComponent,
+        ExtendDatePipe
+      ],
+      imports: [
+        SharedDesignDsfrModule
+      ],
+      providers: [
         ExtendDatePipe
       ]
     }).compileComponents();

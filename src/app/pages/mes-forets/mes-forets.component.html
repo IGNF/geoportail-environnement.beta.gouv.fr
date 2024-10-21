@@ -1,48 +1,22 @@
-<div class="fr-container fr-mt-4w">
+<div class="fr-container fr-mt-6v">
 
-    <h1>Mes Forets</h1>
+  <h1>Mes Forets</h1>
 
-    <div class="fr-grid-row fr-grid-row--gutters fr-mb-1w">
-        @for(foret of forets; track foret.id) {
-        <div class="fr-col-md-6 fr-col">
-            <div class="fr-card fr-card--horizontal">
-                <div class="fr-card__body">
-                    <div class="fr-card__content">
-                        <h3 class="fr-card__title">
-                            {{ foret.name }}
-                        </h3>
-                        <p class="fr-card__desc">
-                            <b>{{ foret.area }} ha</b><br>
-                            {{ foret.parcels.length}} parcelles <br>
-                            Mis à jour le {{ foret.updatedAt | extendDate }}
-                        </p>
-                        <div class="fr-card__start">
-                            <ul class="fr-tags-group">
-                                @for(tag of foret.tags; track tag) {
-                                <li>
-                                    <p class="fr-tag">{{ tag }}</p>
-                                </li>
-                                }
-                            </ul>
-                            <!-- 
-                                    <p class="fr-card__detail fr-icon-warning-fill">détail (optionnel)</p>
-                                -->
-                        </div>
-                        <div class="fr-card__end">
-                            <p class="fr-card__detail">
-                                <a class="fr-btn">Voir le détail</a> <a class="fr-btn fr-btn--secondary">a</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="fr-card__header">
-                    <div class="fr-card__img">
-                        <img [src]="foret.imgUrl" alt="" class="fr-responsive-img">
-                    </div>
-                </div>
-            </div>
-        </div>
-        }
+  <div class="fr-grid-row fr-grid-row--gutters fr-mb-4v">
+
+    @for(foret of foretCards; track foret.id) {
+    <div class="fr-col-12 fr-col-md-6 fr-col-lg-6 fr-mb-6v">
+      <dsfr-card [imagePath]="foret.imagePath" [tags]="foret.tags" [heading]="foret.heading"
+        [description]="foret.description" [enlargeLink]="foret.enlargeLink" [hasFooter]="foret.hasFooter"
+        [horizontal]="foret.horizontal">
+        <dsfr-buttons-group footer inline="always">
+          <dsfr-button label="Voir le détail"></dsfr-button>
+          <dsfr-button label="?" variant="secondary"></dsfr-button>
+        </dsfr-buttons-group>
+      </dsfr-card>
     </div>
+    }
+
+  </div>
 
 </div>
