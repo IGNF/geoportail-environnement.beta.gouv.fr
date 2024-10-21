@@ -3,6 +3,8 @@ import { map } from 'rxjs';
 
 import { Foret } from '../../shared/models/foret.model';
 import { ForetService } from '../../shared/services/foret.service';
+import { ForetCardTransformerService  } from '../../shared/services/foret-card-transformer.service';
+import { DsfrTag } from '@edugouvfr/ngx-dsfr';
 
 @Component({
   selector: 'app-mes-forets',
@@ -11,10 +13,12 @@ import { ForetService } from '../../shared/services/foret.service';
 })
 export class MesForetsComponent implements OnInit {
 
-  forets!: Foret[];
+  // forets!: Foret[];
+  foretCards: any[] = [];
 
   constructor(
-    private foretService: ForetService
+    private foretService: ForetService,
+    private foretCardTransformerService: ForetCardTransformerService,
   ) { }
 
   ngOnInit(): void {
@@ -22,8 +26,14 @@ export class MesForetsComponent implements OnInit {
     // Add 'implements OnInit' to the class.
     // appel au service de foret est asynchrone: on utilise un observable
     // pour simuler une API dans se contexte on utilise of()
+
     this.foretService.list().pipe(
-      map((forets) => this.forets = forets)
+      map((forets) => { 
+        forets.forEach( foret => {
+          this.foretCards.push( this.foretCardTransformerService.transform(foret));
+        });
+      })
     ).subscribe();
+
   }
 }

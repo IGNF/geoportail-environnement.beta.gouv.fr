@@ -50,6 +50,7 @@ import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
+    ExtendDatePipe,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
   ],
