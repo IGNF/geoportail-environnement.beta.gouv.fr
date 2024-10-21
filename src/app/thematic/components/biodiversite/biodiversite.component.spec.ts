@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapInfoComponent } from './map-info.component';
+import { BiodiversiteComponent } from './biodiversite.component';
 
-describe('MapInfoComponent', () => {
-  let component: MapInfoComponent;
-  let fixture: ComponentFixture<MapInfoComponent>;
+describe('BiodiversiteComponent', () => {
+  let component: BiodiversiteComponent;
+  let fixture: ComponentFixture<BiodiversiteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MapInfoComponent]
+      declarations: [BiodiversiteComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MapInfoComponent);
+    fixture = TestBed.createComponent(BiodiversiteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
 import { SharedDesignDsfrModule } from './shared-design-dsfr/shared-design-dsfr.module';
+import { ThematicModule } from './thematic/thematic.module';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -18,7 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NextStepComponent } from './components/next-step/next-step.component';
 import { MapComponent } from './components/map/map.component';
-import { MapInfoComponent } from './components/map-info/map-info.component';
 import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
 import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
 
@@ -33,7 +34,6 @@ import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
     NotFoundComponent,
     NextStepComponent,
     MapComponent,
-    MapInfoComponent,
     MesForetsComponent,
     ExtendDatePipe
   ],
@@ -42,6 +42,7 @@ import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
     SharedDesignDsfrModule,
     FormsModule,
     ReactiveFormsModule,
+    ThematicModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
