@@ -1,41 +1,43 @@
 import { Injectable } from '@angular/core';
+
 import { Foret } from '../models/foret.model';
-import { DsfrTag } from '@edugouvfr/ngx-dsfr';
 import { ExtendDatePipe } from '../pipes/extend-date.pipe';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
+export class CardTransformerService {
+
+  constructor(
+    private datePipe: ExtendDatePipe
+  ) { }
 
 
-export class ForetCardTransformerService {
+  fromForet(foret: Foret) {
+    const tags: any[] = foret.tags.map((tag) => {
+      return { label: tag };
+    });
 
-    constructor(
-        private datePipe: ExtendDatePipe
-    ){}
+    const updatedAt = this.datePipe.transform(foret.updatedAt, 'dd/MM/YYYY');
 
-    transform(foret: Foret){
+    const cardDescription = `
+      <p><b>${foret.area} ha</b></p>
+      <p><b>${foret.parcels.length} parcelles</b></p>
+      <p><b>Mis à jour le ${updatedAt}</b></p>
+    `;
 
-        const tags: DsfrTag[] = [];
-        foret.tags.forEach( tag => {
-            const dsfrTag: DsfrTag = { label: tag }
-            tags.push(dsfrTag);
-        });
+    const foretCard = {
+      id: foret.id,
+      heading: foret.name,
+      description: cardDescription,
+      tags: tags,
+      imagePath: foret.imgUrl,
+      enlargeLink: false,
+      hasFooter: true,
+      horizontal: true
+    };
 
-        // console.log(this.datePipe.transform(foret.updatedAt, 'dd/MM/YYY'))
-    
-        const foretCard = {
-            id: foret.id,
-            name: foret.name,
-            description: foret.description,
-            tags: tags,
-            imgUrl: foret.imgUrl,
-            area: foret.area,
-            createdAt: foret.createdAt,
-            updatedAt: this.datePipe.transform(foret.updatedAt, 'dd/MM/YYYY'),
-            parcels: foret.parcels,
-        };
+    return foretCard;
+  }
 
-        return foretCard;
-    }
 }
