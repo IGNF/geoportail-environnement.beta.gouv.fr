@@ -8,14 +8,18 @@ import { ThematicSelectService } from '../../shared/service/thematic-select.serv
 })
 export class ThematicSelectComponent {
 
+  options: any[] = [
+    { label: 'Agriculture', value: 1 },
+    { label: 'Biodiversité', value: 2 },
+    { label: 'Eau', value: 3 }
+  ];
+
   constructor(private thematicSelectService: ThematicSelectService) { }
-  
+
   // Méthode appelée lors du changement de sélection
   selectChange(event: any): void {
 
     const thematicId = event; // L'ID de la thématique sélectionnée
-
-    // Vérifier la valeur reçue
     console.log('Thématique sélectionnée:', thematicId);
 
     // Mettre à jour la sélection dans le service si l'ID est valide

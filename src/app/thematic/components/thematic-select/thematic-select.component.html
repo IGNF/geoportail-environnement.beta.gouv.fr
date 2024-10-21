@@ -1,16 +1,4 @@
-
-<div class="fr-col-12 fr-col-lg-3">
-
-    <dsfr-form-select
-      [label]="'Thématiques'"
-      [placeholder]="'Sélectionnez une thématique'"
-      [options]="[
-        {label: 'Agriculture', value: 1}, 
-        {label: 'Biodiversité', value: 2}, 
-        {label: 'Eau', value: 3}
-      ]"
-      (selectChange)="selectChange($event)"
-    ></dsfr-form-select>
-
+<div class="fr-mt-4v fr-mb-4v">
+  <dsfr-form-select label="Thématiques" hint="Vous pouvez sélectionner plusieurs thématiques." placeholder="Sélectionnez une thématique" [options]="options"
+    (selectChange)="selectChange($event)"></dsfr-form-select>
 </div>
-

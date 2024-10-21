@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     this.mapContextService.createMap('map');
   }
 
+
   confirmSelect() {
     if (this.step === 0) {
       this.nextStep();
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
   nextStep() {
     this.step++;
   }
+
 
   previousStep() {
     this.step--;
