@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { distinctUntilChanged, first, map } from 'rxjs';
 import SearchGeoportail from 'ol-ext/control/SearchGeoportail';
 
 import { MapContextService } from '../../shared/services/map-context.service';
@@ -10,44 +11,62 @@ import { MapContextService } from '../../shared/services/map-context.service';
 })
 export class ForetSearchFormComponent implements OnInit {
 
-  @Output() search: EventEmitter<any> = new EventEmitter<any>();
+  @Output() select: EventEmitter<any> = new EventEmitter<any>();
+
+  @ViewChild('searchControlGroup') searchControlGroup!: ElementRef;
+
+  private searchControlSelect: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private mapContextService: MapContextService
   ) { };
 
-
   ngOnInit(): void {
+    this.mapContextService.mapLoaded.pipe(
+      first(() => true)
+    ).subscribe(() => {
+      this.initControl();
+    });
 
+    // lorsqu'un choix est fait on zoom et on transmet la confirmation
+    this.searchControlSelect.pipe(
+      distinctUntilChanged(),
+      map((event) => {
+        this.mapContextService.setView(event.coordinate, 14);
+        this.select.emit();
+      })
+    ).subscribe();
+  };
+
+
+  private initControl() {
     // barre de recherche ol-ext
-    const search = new SearchGeoportail({
+    const searchControl = new SearchGeoportail({
       target: 'location',
       maxItems: 3,
       className: 'fr-input-wrap fr-input-wrap--addon'
     });
-    this.mapContextService.map?.addControl(search);
+    this.mapContextService.getMap().addControl(searchControl);
 
-    search.on('select', (e:any) => {
-      search.setInput(e.search.fulltext, false);
-      this.mapContextService.map?.getView().setCenter(e.coordinate);
-      this.mapContextService.map?.getView().setZoom(14);
-      search.clearHistory();
-    })
+    // en confirmant un choix, on rempli le champ et supprime l'historique
+    searchControl.on('select', (event: any) => {
+      searchControl.setInput(event.search.fulltext, false);
+      searchControl.clearHistory();
+      this.searchControlSelect.emit(event);
+    });
 
-    //ajustement css
-    document.querySelector("#location input.search")?.classList.add("fr-input");
-    (document.querySelector("#location input.search") as HTMLElement).style.height = "50px";
-    (document.querySelector("#location input.search") as HTMLElement).style.maxWidth = "250px";
-    (document.querySelector("#location div.fr-input-wrap") as HTMLElement).style.left = "0";
-
-  };
+    // apres le chargement de la carte on est placé après le AfterViewInit
+    if (!this.searchControlGroup) {
+      return;
+    }
+    const input = this.searchControlGroup.nativeElement.querySelector('input.search');
+    if (input) {
+      input.classList.add('fr-input');
+    }
+  }
 
   private isValid() {
     return true;
-  };
-
-  private validNeedle() {
-    this.search.emit();
   };
 
 }

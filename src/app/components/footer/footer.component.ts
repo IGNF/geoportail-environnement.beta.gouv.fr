@@ -50,9 +50,6 @@ export class FooterComponent {
 
   constructor() { }
 
-
-  linkSelect(event: any) {
-    console.log('linkSelect', event);
-  }
+  linkSelect(event: any) { }
 
 }

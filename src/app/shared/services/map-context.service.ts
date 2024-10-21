@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
 import TileLayer from 'ol/layer/Tile.js'
@@ -13,12 +13,22 @@ export class MapContextService {
 
   map?: Map;
 
+  mapLoaded: EventEmitter<any> = new EventEmitter<any>();
+
   constructor() { }
+
+  getMap(): Map | any {
+    return this.map;
+  }
+
+  isMapLoaded() {
+    return this.map || this.map !== null;
+  }
 
   createMap(elementId: string) {
     this.map = new Map({
       view: new View({
-        center: [0,0],
+        center: [0, 0],
         zoom: 1,
       }),
       layers: [
@@ -27,18 +37,25 @@ export class MapContextService {
         }),
         new VectorLayer({
           source: new Vector(),
-          properties: {title: "Dessin"}
+          properties: { title: "Dessin" }
         })
       ],
       target: elementId
     });
+
+    this.map.on('rendercomplete', (event) => this.mapLoaded.next(event));
   }
 
-  getLayerDessin() {
+  setView(coordinates: any[], zoom: number) {
+    this.map?.getView().setCenter(coordinates);
+    this.map?.getView().setZoom(14);
+  }
+
+  getLayerDessin(): any {
     var layers = this.map?.getLayers().getArray();
-    if(layers) {
-      for(var i = 0; i < layers.length; i++) {
-        if(layers[i].get("title") == "Dessin") {
+    if (layers) {
+      for (var i = 0; i < layers.length; i++) {
+        if (layers[i].get("title") == "Dessin") {
           return layers[i];
         }
       }

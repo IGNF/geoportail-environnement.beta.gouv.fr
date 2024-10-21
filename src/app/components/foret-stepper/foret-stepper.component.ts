@@ -42,7 +42,6 @@ export class ForetStepperComponent implements OnInit, OnChanges {
     this.currentStep = STEPPER_CONFIG[this.step].currentStep;
     this.currentStepTitle = STEPPER_CONFIG[this.step].currentStepTitle;
     this.nextStepTitle = STEPPER_CONFIG[this.step].nextStepTitle;
-    console.log('ForetStepperComponent', this.currentStep, this.currentStepTitle, this.nextStepTitle);
   }
 
 }

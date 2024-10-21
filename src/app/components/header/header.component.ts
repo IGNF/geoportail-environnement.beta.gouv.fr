@@ -13,7 +13,7 @@ export class HeaderComponent {
 
   logoTooltipMessage = '';
 
-  operatorImagePath='img/foreg-icon.png';
+  operatorImagePath = 'img/foreg-icon.png';
 
   headerToolsLinks: any = [
     { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' },
@@ -24,8 +24,6 @@ export class HeaderComponent {
 
   constructor() { }
 
-  searchSelect(event: any) {
-    console.log('searchSelect', event);
-  }
+  searchSelect(event: any) { }
 
 }
