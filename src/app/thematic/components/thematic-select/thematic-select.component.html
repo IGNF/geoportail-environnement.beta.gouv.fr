@@ -1,11 +1,16 @@
-<dsfr-form-select
-  [label]="'Thématique'"
-  [options]="[
-    {label: 'Agriculture', value: 1}, 
-    {label: 'Biodiversité', value: 2}, 
-    {label: 'Eau', value: 3}, 
-    {label: 'Monument historique', value: 4}, 
-    {label: 'Zone naturel', value: 5}
-  ]"
-  (selectChange)="selectChange($event)"
-></dsfr-form-select>
+
+<div class="fr-col-12 fr-col-lg-3">
+
+    <dsfr-form-select
+      [label]="'Thématiques'"
+      [placeholder]="'Sélectionnez une thématique'"
+      [options]="[
+        {label: 'Agriculture', value: 1}, 
+        {label: 'Biodiversité', value: 2}, 
+        {label: 'Eau', value: 3}
+      ]"
+      (selectChange)="selectChange($event)"
+    ></dsfr-form-select>
+
+</div>
+

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedDesignDsfrModule } from '../../../shared-design-dsfr/shared-design-dsfr.module';
 
 import { ThematicSelectComponent } from './thematic-select.component';
 
@@ -8,7 +9,8 @@ describe('ThematicSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ThematicSelectComponent]
+      declarations: [ThematicSelectComponent],
+      imports:[SharedDesignDsfrModule]
     })
     .compileComponents();
 

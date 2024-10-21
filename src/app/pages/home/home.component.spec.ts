@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
+import { ThematicModule } from '../../thematic/thematic.module';
 import { HomeComponent } from './home.component';
 import { ForetStepperComponent } from '../../components/foret-stepper/foret-stepper.component';
 import { ForetSearchFormComponent } from '../../components/foret-search-form/foret-search-form.component';
@@ -22,7 +23,8 @@ describe('HomeComponent', () => {
       ],
       imports: [
         SharedDesignDsfrModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ThematicModule
       ]
     })
     .compileComponents();

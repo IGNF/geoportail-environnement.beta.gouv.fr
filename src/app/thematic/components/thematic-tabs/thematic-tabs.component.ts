@@ -13,7 +13,6 @@ export class ThematicTabsComponent implements OnInit {
   constructor(private thematicSelectService: ThematicSelectService) {}
 
   ngOnInit() {
-    // S'abonner aux changements de la sélection
     this.thematicSelectService.selectedThematic$.subscribe((thematicId) => {
       this.selectedThematic = thematicId;
     });

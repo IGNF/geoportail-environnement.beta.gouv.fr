@@ -4,7 +4,7 @@ import { ThematicSelectService } from '../../shared/service/thematic-select.serv
 @Component({
   selector: 'app-thematic-select',
   templateUrl: './thematic-select.component.html',
-  styleUrl: './thematic-select.component.css'
+  styleUrls: ['./thematic-select.component.css']
 })
 export class ThematicSelectComponent {
 
@@ -12,9 +12,18 @@ export class ThematicSelectComponent {
   
   // Méthode appelée lors du changement de sélection
   selectChange(event: any): void {
-    // Mettre à jour la sélection dans le service
-    const thematicId = event.value; // L'ID de la thématique sélectionnée
-    this.thematicSelectService.updateSelectedThematic(thematicId);
+
+    const thematicId = event; // L'ID de la thématique sélectionnée
+
+    // Vérifier la valeur reçue
+    console.log('Thématique sélectionnée:', thematicId);
+
+    // Mettre à jour la sélection dans le service si l'ID est valide
+    if (typeof thematicId === 'number') {
+      this.thematicSelectService.updateSelectedThematic(thematicId);
+    } else {
+      console.error('ID thématique non valide:', thematicId);
+    }
   }
 
 }

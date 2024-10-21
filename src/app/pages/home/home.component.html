@@ -28,16 +28,20 @@
 
   <app-foret-search-form (search)="nextStep()" [class.hidden]="step > 1"></app-foret-search-form>
   
-  <app-thematic-select [class.hidden]="step > 2"></app-thematic-select>
+  <app-thematic-select [class.hidden]="step < 2"></app-thematic-select>
 
   <div class="fr-grid-row fr-grid-row--gutters">
+    
     <div class="fr-col-12 fr-col-lg-6 map-container" [class.fr-col-lg-12]="step === 1" [class.hidden]="step < 1">
       <app-map></app-map>
     </div>
 
+    
+
     <div class="fr-col-12 fr-col-lg-6">
       <app-thematic-tabs *ngIf="step > 1"></app-thematic-tabs>
     </div>
+
 
   </div>
 
