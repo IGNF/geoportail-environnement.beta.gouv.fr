@@ -22,6 +22,7 @@ import { NextStepComponent } from './components/next-step/next-step.component';
 import { MapComponent } from './components/map/map.component';
 import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
 import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
+import { SimplePageComponent } from './pages/simple-page/simple-page.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
     NextStepComponent,
     MapComponent,
     MesForetsComponent,
-    ExtendDatePipe
+    ExtendDatePipe,
+    SimplePageComponent
   ],
   imports: [
     BrowserModule,

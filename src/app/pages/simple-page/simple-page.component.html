@@ -1,0 +1,10 @@
+<div class="fr-container fr-mt-6v">
+    <dsfr-breadcrumb
+      [items]="[{label: 'Accueil', link: '/', ariaLabel: 'Accueil'}, 
+            {label: pageTitle, ariaLabel: 'Page actuelle'}]"
+    ></dsfr-breadcrumb>
+
+    <h1>{{ pageTitle }}</h1>
+
+    <div [innerHTML]="content"></div>
+</div>
