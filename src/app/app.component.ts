@@ -1,10 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  title: string = 'Observatoire des forêts françaises';
+
+  skiplinks: any[] = [
+    { label: 'Contenu', route: 'content' },
+    { label: 'Menu', route: 'header-navigation' },
+    { label: 'Pied de page', route: 'footer' }
+  ];
+
+  constructor(
+    private router: Router
+  ) { }
+
+
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      const accessibleTitle = document.getElementById('title-page');
+      if (accessibleTitle) {
+        this.title = document.title;
+        accessibleTitle.focus();
+      }
+    });
+  }
+
+
+  backToTop(event: any) {
+    this.skipLinkSelect('header-navigation');
+  }
+
+
+  skipLinkSelect(event: any) {
+    const parsed = this.router.parseUrl(this.router.url);
+    this.router.navigate(parsed.root.segments, {
+      queryParams: parsed.queryParams,
+      fragment: event
+    });
+    const anchorToFocus = document.getElementById(event);
+    if (anchorToFocus) {
+      console.log(anchorToFocus);
+      anchorToFocus.focus();
+    }
+  }
 
 }
