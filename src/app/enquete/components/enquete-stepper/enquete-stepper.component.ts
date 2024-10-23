@@ -16,8 +16,6 @@ export class EnqueteStepperComponent implements OnInit, OnChanges {
 
   @Input() step: number = 0;
 
-  @Input() title: string = '';
-
   currentStep!: number;
 
   currentStepTitle!: string;

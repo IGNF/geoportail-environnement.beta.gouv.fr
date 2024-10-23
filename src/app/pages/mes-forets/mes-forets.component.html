@@ -1,4 +1,8 @@
-<div class="fr-container fr-mt-6v">
+<div *ngIf="breadcrumb" class="fr-container">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+</div>
+
+<div class="fr-container fr-mb-8v">
 
   <h1>Mes Forets</h1>
 

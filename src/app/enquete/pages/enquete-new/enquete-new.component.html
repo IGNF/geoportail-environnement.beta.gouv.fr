@@ -1,6 +1,12 @@
-<div class="fr-container fr-mt-4v fr-mb-4v fr-pt-8v fr-pb-8v">
+<div *ngIf="breadcrumb" class="fr-container">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+</div>
 
-  <app-enquete-stepper [step]="step" [title]="forestId"></app-enquete-stepper>
+<div class="fr-container">
+
+  <h1>Votre forêt<span *ngIf="forestId"> - {{ forestId }}</span></h1>
+
+  <app-enquete-stepper [step]="step"></app-enquete-stepper>
 
   <div *ngIf="step === 0 || step === 1" class="fr-grid-row fr-mb-4v">
     <div class="fr-col-12 fr-col-lg-6">
@@ -27,7 +33,8 @@
   </div>
 
   <div class="fr-mt-4v">
-    <app-enquete-stepper-control [step]="step" (previous)="previousStep()" (next)="nextStep()"></app-enquete-stepper-control>
+    <app-enquete-stepper-control [step]="step" (previous)="previousStep()"
+      (next)="nextStep()"></app-enquete-stepper-control>
   </div>
 
 </div>

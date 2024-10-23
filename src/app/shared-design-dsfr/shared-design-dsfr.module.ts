@@ -32,8 +32,12 @@ import {
   DsfrTileModule,
   DsfrTranscriptionComponent
 } from '@edugouvfr/ngx-dsfr';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
+  declarations: [
+    BreadcrumbComponent
+  ],
   imports: [
     CommonModule,
     DsfrButtonModule,
@@ -99,6 +103,7 @@ import {
     DsfrSkiplinksModule,
     DsfrStepperModule,
     DsfrResponseModule,
+    BreadcrumbComponent,
   ]
 })
 export class SharedDesignDsfrModule { }

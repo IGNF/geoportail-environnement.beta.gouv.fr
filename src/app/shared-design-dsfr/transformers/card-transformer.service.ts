@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-
-import { Foret } from '../models/foret.model';
-import { ExtendDatePipe } from '../pipes/extend-date.pipe';
+import { Foret } from '../../shared/models/foret.model';
+import { ExtendDatePipe } from '../../shared/pipes/extend-date.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,6 @@ export class CardTransformerService {
   constructor(
     private datePipe: ExtendDatePipe
   ) { }
-
 
   fromForet(foret: Foret) {
     const tags: any[] = foret.tags.map((tag) => {
@@ -39,5 +37,4 @@ export class CardTransformerService {
 
     return foretCard;
   }
-
 }
