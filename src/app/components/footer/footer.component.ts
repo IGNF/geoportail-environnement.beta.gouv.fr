@@ -50,6 +50,8 @@ export class FooterComponent {
 
   constructor() { }
 
-  linkSelect(event: any) { }
+  linkSelect(event: any) { 
+    window.location.href = event;
+  }
 
 }
