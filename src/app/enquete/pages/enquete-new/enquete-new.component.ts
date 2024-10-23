@@ -22,11 +22,11 @@ export class EnqueteNewComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.pipe(
       map((params) => {
-        console.log('identifiant de foret', params['id']);
-        if (params['id']) {
-          this.forestId = params['id'];
-          this.step = 2;
+        if (!params['id']) {
+          return;
         }
+        this.forestId = params['id'];
+        this.step = 2;
       })
     ).subscribe();
 

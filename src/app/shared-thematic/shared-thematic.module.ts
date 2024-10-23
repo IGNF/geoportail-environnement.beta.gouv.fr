@@ -1,4 +1,3 @@
-// thematic.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedDesignDsfrModule } from '../shared-design-dsfr/shared-design-dsfr.module';
@@ -23,15 +22,11 @@ import { ThematicTabsComponent } from './components/thematic-tabs/thematic-tabs.
   ],
   imports: [
     CommonModule,
-    SharedDesignDsfrModule, 
+    SharedDesignDsfrModule,
   ],
   exports: [
-    SyntheseComponent,
-    BiodiversiteComponent,
-    EauComponent,
-    AgricultureComponent,
     ThematicSelectComponent,
     ThematicTabsComponent
   ]
 })
-export class ThematicModule { }
+export class SharedThematicModule { }

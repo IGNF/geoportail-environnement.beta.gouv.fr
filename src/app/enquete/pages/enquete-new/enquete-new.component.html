@@ -12,11 +12,11 @@
     </div>
   </div>
 
-  <!-- <div class="fr-grid-row fr-grid-row--gutters">
+  <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-6">
       <app-thematic-select *ngIf="step > 1"></app-thematic-select>
     </div>
-  </div> -->
+  </div>
 
   <div class="fr-grid-row fr-grid-row--gutters">
 
@@ -24,14 +24,14 @@
       <app-map-viewer></app-map-viewer>
     </div>
 
-    <!-- <div class="fr-col-12 fr-col-lg-6">
+    <div class="fr-col-12 fr-col-lg-6">
       <app-thematic-tabs *ngIf="step > 1"></app-thematic-tabs>
-    </div> -->
+    </div>
 
   </div>
 
-  <!-- <div class="fr-mt-4v">
-    <app-next-step [step]="step" (previous)="previousStep()" (next)="nextStep()"></app-next-step>
-  </div> -->
+  <div class="fr-mt-4v">
+    <app-enquete-stepper-control [step]="step" (previous)="previousStep()" (next)="nextStep()"></app-enquete-stepper-control>
+  </div>
 
 </div>

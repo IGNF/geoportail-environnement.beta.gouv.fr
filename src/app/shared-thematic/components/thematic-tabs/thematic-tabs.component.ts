@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ThematicSelectService } from '../../shared/service/thematic-select.service';
+import { ThematicSelectService } from '../../services/thematic-select.service';
 
 @Component({
   selector: 'app-thematic-tabs',
@@ -10,7 +10,9 @@ export class ThematicTabsComponent implements OnInit {
   selectedTabIndex: number = 0; // Onglet par défaut (Synthèse)
   selectedThematic: number | null = null; // Stocke la thématique sélectionnée
 
-  constructor(private thematicSelectService: ThematicSelectService) {}
+  constructor(
+    private thematicSelectService: ThematicSelectService
+  ) {}
 
   ngOnInit() {
     this.thematicSelectService.selectedThematic$.subscribe((thematicId) => {
