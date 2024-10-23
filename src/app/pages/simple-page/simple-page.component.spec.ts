@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { SimplePageComponent } from './simple-page.component';
+import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
 
 describe('SimplePageComponent', () => {
   let component: SimplePageComponent;
@@ -8,7 +10,13 @@ describe('SimplePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SimplePageComponent]
+      declarations: [SimplePageComponent],
+      imports: [
+        SharedDesignDsfrModule
+      ],
+      providers: [
+        provideRouter([])
+      ]
     })
     .compileComponents();
 

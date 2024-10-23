@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnqueteStepperControlComponent } from './enquete-stepper-control.component';
+import { SharedDesignDsfrModule } from '../../../shared-design-dsfr/shared-design-dsfr.module';
 
 describe('EnqueteStepperControlComponent', () => {
   let component: EnqueteStepperControlComponent;
@@ -8,7 +9,8 @@ describe('EnqueteStepperControlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EnqueteStepperControlComponent]
+      declarations: [EnqueteStepperControlComponent],
+      imports: [SharedDesignDsfrModule]
     })
     .compileComponents();
 

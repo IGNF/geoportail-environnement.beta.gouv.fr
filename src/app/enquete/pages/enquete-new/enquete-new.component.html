@@ -2,10 +2,6 @@
 
   <app-enquete-stepper [step]="step" [title]="forestId"></app-enquete-stepper>
 
-  <p *ngIf="forestId">Reprise de ma forêt {{ forestId }}</p>
-
-  <p *ngIf="!forestId">Nouvelle enquête</p>
-
   <div *ngIf="step === 0 || step === 1" class="fr-grid-row fr-mb-4v">
     <div class="fr-col-12 fr-col-lg-6">
       <app-geolocalise-form (select)="confirmSelect()"></app-geolocalise-form>
