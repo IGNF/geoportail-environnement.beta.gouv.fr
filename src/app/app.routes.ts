@@ -8,6 +8,10 @@ import { SimplePageComponent } from './pages/simple-page/simple-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  {
+    path: 'enquete',
+    loadChildren: () => import('./enquete/enquete.module').then(m => m.EnqueteModule)
+  },
   { path: 'login', component: MesForetsComponent },
   { path: 'mes-forets', component: MesForetsComponent },
   { path: 'help', component: AngularHelpComponent },

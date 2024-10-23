@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Fill, Stroke, Style } from 'ol/style';
 import { Select } from 'ol/interaction';
-import EditBar from 'ol-ext/control/EditBar.js'
+import EditBar from 'ol-ext/control/EditBar.js';
 
-import { MapContextService } from '../../shared/services/map-context.service';
+import { MapContextService } from '../../services/map-context.service';
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrl: './map.component.css'
+  selector: 'app-map-viewer',
+  templateUrl: './map-viewer.component.html',
+  styleUrl: './map-viewer.component.css'
 })
-export class MapComponent implements OnInit {
+export class MapViewerComponent implements OnInit {
 
   constructor(
     private mapContextService: MapContextService
@@ -33,7 +33,7 @@ export class MapComponent implements OnInit {
         color: '#3399CC'
       })
     });
-    
+
     this.mapContextService.getLayerDessin()?.setStyle(style);
 
     const selectStyle = new Style({

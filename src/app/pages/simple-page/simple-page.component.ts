@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import template from '../../../assets/simple-pages-template';
-import { DsfrBreadcrumbComponent } from '@edugouvfr/ngx-dsfr';
 
 @Component({
   selector: 'app-simple-page',

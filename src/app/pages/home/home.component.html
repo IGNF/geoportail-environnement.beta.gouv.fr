@@ -24,37 +24,14 @@
 
 <div class="fr-container fr-mt-4v fr-mb-4v fr-pt-8v fr-pb-8v">
 
-  <app-foret-stepper [step]="step"></app-foret-stepper>
-
-  <div class="fr-mb-4v">
-    <app-foret-search-form *ngIf="step === 0 || step === 1" (select)="confirmSelect()"></app-foret-search-form>
-  </div>
-
-  <div class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-12 fr-col-lg-6">
-      <app-thematic-select *ngIf="step > 1"></app-thematic-select>
-    </div>
-  </div>
-
-  <div class="fr-grid-row fr-grid-row--gutters">
-
-    <div class="fr-col-12 fr-col-lg-6" [class.fr-col-lg-12]="step === 1" [class.map-hidden]="step < 1">
-      <app-map></app-map>
-    </div>
-
-    <div class="fr-col-12 fr-col-lg-6">
-      <app-thematic-tabs *ngIf="step > 1"></app-thematic-tabs>
-    </div>
-
-  </div>
-
-  <div class="fr-mt-4v">
-    <app-next-step [step]="step" (previous)="previousStep()" (next)="nextStep()"></app-next-step>
-  </div>
+  <dsfr-buttons-group inline="always" iconPosition="left">
+    <dsfr-button label="Démarrer" icon="fr-icon-arrow-right-fill" iconPosition="left"
+      (click)="newEnquete()"></dsfr-button>
+  </dsfr-buttons-group>
 
 </div>
 
-<div *ngIf="step === 0" class="fr-container fr-mt-4v fr-mb-4v fr-pt-8v fr-pb-8v">
+<div class="fr-container fr-mt-4v fr-mb-4v fr-pt-8v fr-pb-8v">
 
   <h2>Trouver la réglementation sur votre forêt et préserver la biodiversité</h2>
   <ul>

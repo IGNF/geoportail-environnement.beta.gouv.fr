@@ -3,6 +3,7 @@ import { map } from 'rxjs';
 
 import { ForetService } from '../../shared/services/foret.service';
 import { CardTransformerService } from '../../shared/services/foret-card-transformer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mes-forets',
@@ -14,8 +15,9 @@ export class MesForetsComponent implements OnInit {
   foretCards: any[] = [];
 
   constructor(
+    private cardTransformerService: CardTransformerService,
     private foretService: ForetService,
-    private cardTransformerService: CardTransformerService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +26,10 @@ export class MesForetsComponent implements OnInit {
         this.foretCards = forets.map((foret) => this.cardTransformerService.fromForet(foret));
       })
     ).subscribe();
+  }
+
+  goToEnquete(foretTitle: string) {
+    this.router.navigate(['/', 'enquete', foretTitle]);
   }
 
 }

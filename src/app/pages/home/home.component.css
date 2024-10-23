@@ -2,11 +2,6 @@
   visibility: hidden;
 }
 
-.map-hidden {
-  visibility: hidden;
-  height: 0;
-}
-
 .img-box {
   display: flex;
   justify-content: center;

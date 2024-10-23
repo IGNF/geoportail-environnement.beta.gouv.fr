@@ -10,7 +10,7 @@
         [description]="foret.description" [enlargeLink]="foret.enlargeLink" [hasFooter]="foret.hasFooter"
         [horizontal]="foret.horizontal">
         <dsfr-buttons-group footer inline="always">
-          <dsfr-button label="Voir le détail"></dsfr-button>
+          <dsfr-button label="Voir le détail" (click)="goToEnquete(foret.heading)"></dsfr-button>
           <dsfr-button label="?" variant="secondary"></dsfr-button>
         </dsfr-buttons-group>
       </dsfr-card>

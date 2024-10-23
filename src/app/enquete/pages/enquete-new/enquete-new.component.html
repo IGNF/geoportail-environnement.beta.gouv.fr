@@ -1,0 +1,33 @@
+<div class="fr-container fr-mt-4v fr-mb-4v fr-pt-8v fr-pb-8v">
+
+  <app-enquete-stepper [step]="step" [title]="forestId"></app-enquete-stepper>
+
+  <div *ngIf="step === 0 || step === 1" class="fr-grid-row fr-mb-4v">
+    <div class="fr-col-12 fr-col-lg-6">
+      <app-geolocalise-form (select)="confirmSelect()"></app-geolocalise-form>
+    </div>
+  </div>
+
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-12 fr-col-lg-6">
+      <app-thematic-select *ngIf="step > 1"></app-thematic-select>
+    </div>
+  </div>
+
+  <div class="fr-grid-row fr-grid-row--gutters">
+
+    <div class="fr-col-12 fr-col-lg-6" [class.fr-col-lg-12]="step === 1" [class.map-hidden]="step < 1">
+      <app-map-viewer></app-map-viewer>
+    </div>
+
+    <div class="fr-col-12 fr-col-lg-6">
+      <app-thematic-tabs *ngIf="step > 1"></app-thematic-tabs>
+    </div>
+
+  </div>
+
+  <div class="fr-mt-4v">
+    <app-enquete-stepper-control [step]="step" (previous)="previousStep()" (next)="nextStep()"></app-enquete-stepper-control>
+  </div>
+
+</div>

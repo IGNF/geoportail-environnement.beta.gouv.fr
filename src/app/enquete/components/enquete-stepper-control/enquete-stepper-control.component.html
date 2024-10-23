@@ -1,0 +1,4 @@
+<dsfr-buttons-group inline="always" iconPosition="left" class="step-btn">
+  <dsfr-button label="Modifier" variant="secondary" icon="fr-icon-arrow-left-fill" (click)="emitPrevious()" [disabled]="step < 1"></dsfr-button>
+  <dsfr-button label="Valider" icon="fr-icon-arrow-right-fill" (click)="emitNext()" [disabled]="step > 2"></dsfr-button>
+</dsfr-buttons-group>

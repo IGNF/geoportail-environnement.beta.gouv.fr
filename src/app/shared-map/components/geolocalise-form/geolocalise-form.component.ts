@@ -1,15 +1,14 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { distinctUntilChanged, first, map } from 'rxjs';
 import SearchGeoportail from 'ol-ext/control/SearchGeoportail';
-
-import { MapContextService } from '../../shared/services/map-context.service';
+import { distinctUntilChanged, first, map } from 'rxjs';
+import { MapContextService } from '../../services/map-context.service';
 
 @Component({
-  selector: 'app-foret-search-form',
-  templateUrl: './foret-search-form.component.html',
-  styleUrl: './foret-search-form.component.css'
+  selector: 'app-geolocalise-form',
+  templateUrl: './geolocalise-form.component.html',
+  styleUrl: './geolocalise-form.component.css'
 })
-export class ForetSearchFormComponent implements OnInit {
+export class GeolocaliseFormComponent implements OnInit {
 
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
 
@@ -64,9 +63,5 @@ export class ForetSearchFormComponent implements OnInit {
       input.classList.add('fr-input');
     }
   }
-
-  private isValid() {
-    return true;
-  };
 
 }

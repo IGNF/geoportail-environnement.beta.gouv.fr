@@ -8,13 +8,15 @@ const STEPPER_CONFIG = [
 ];
 
 @Component({
-  selector: 'app-foret-stepper',
-  templateUrl: './foret-stepper.component.html',
-  styleUrl: './foret-stepper.component.css'
+  selector: 'app-enquete-stepper',
+  templateUrl: './enquete-stepper.component.html',
+  styleUrl: './enquete-stepper.component.css'
 })
-export class ForetStepperComponent implements OnInit, OnChanges {
+export class EnqueteStepperComponent implements OnInit, OnChanges {
 
   @Input() step: number = 0;
+
+  @Input() title: string = '';
 
   currentStep!: number;
 
