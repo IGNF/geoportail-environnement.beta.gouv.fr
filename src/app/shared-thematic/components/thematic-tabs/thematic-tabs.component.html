@@ -29,4 +29,12 @@
   >
     <app-eau></app-eau>
   </dsfr-tab>
+
+  <dsfr-tab
+    *ngIf="shouldDisplayTab(4)"
+    tabId="monument-historique"
+    label="Monument Historique"
+  >
+    <app-monument-historique></app-monument-historique>
+  </dsfr-tab>
 </dsfr-tabs>

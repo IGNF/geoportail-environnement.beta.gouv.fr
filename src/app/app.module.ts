@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideRouter, RouterModule, TitleStrategy } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
 
@@ -48,6 +49,7 @@ import { TitlePrefixStrategy } from './core/strategies/title-prefix.strategy';
     { provide: TitleStrategy, useClass: TitlePrefixStrategy },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })

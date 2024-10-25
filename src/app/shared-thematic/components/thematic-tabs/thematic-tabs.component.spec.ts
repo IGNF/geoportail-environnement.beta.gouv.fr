@@ -5,6 +5,7 @@ import { SyntheseComponent } from '../synthese/synthese.component';
 import { AgricultureComponent } from '../agriculture/agriculture.component';
 import { BiodiversiteComponent } from '../biodiversite/biodiversite.component';
 import { EauComponent } from '../eau/eau.component';
+import { MonumentHistoriqueComponent } from '../monument-historique/monument-historique.component';
 
 
 describe('ThematicTabsComponent', () => {
@@ -13,7 +14,7 @@ describe('ThematicTabsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ThematicTabsComponent, SyntheseComponent, AgricultureComponent, BiodiversiteComponent, EauComponent],
+      declarations: [ThematicTabsComponent, SyntheseComponent, AgricultureComponent, BiodiversiteComponent, EauComponent, MonumentHistoriqueComponent],
       imports: [SharedDesignDsfrModule]
     })
     .compileComponents();

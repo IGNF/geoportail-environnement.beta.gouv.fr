@@ -1,0 +1,11 @@
+<h3>Votre forêt se trouve dans la zone des monuments suivants :</h3>
+
+<ul>
+    @for(monument of monumentList; track monument){
+        @if(monument[1] != "none"){
+            <li><a href = {{monument[1]}} target="_blank"> {{monument[0]}} </a></li>
+        }@else {
+            <li>{{monument[0]}}</li>
+        }
+    }
+</ul>

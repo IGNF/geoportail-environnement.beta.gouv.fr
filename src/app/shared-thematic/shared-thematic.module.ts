@@ -5,6 +5,7 @@ import { SharedDesignDsfrModule } from '../shared-design-dsfr/shared-design-dsfr
 import { AgricultureComponent } from './components/agriculture/agriculture.component';
 import { BiodiversiteComponent } from './components/biodiversite/biodiversite.component';
 import { EauComponent } from './components/eau/eau.component';
+import { MonumentHistoriqueComponent } from './components/monument-historique/monument-historique.component';
 import { SyntheseComponent } from './components/synthese/synthese.component';
 
 import { ThematicSelectComponent } from './components/thematic-select/thematic-select.component';
@@ -16,6 +17,7 @@ import { ThematicTabsComponent } from './components/thematic-tabs/thematic-tabs.
     SyntheseComponent,
     BiodiversiteComponent,
     EauComponent,
+    MonumentHistoriqueComponent,
     AgricultureComponent,
     ThematicSelectComponent,
     ThematicTabsComponent
