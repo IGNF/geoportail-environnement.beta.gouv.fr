@@ -29,15 +29,20 @@ export class MonumentHistoriqueComponent implements OnInit{
 
   getMonumentList(features: Array<any>) {
     var list = [];
+    var pdfLink : Array<string> = [];
     for(var i=0; i<features.length; i++) {
       var pdf : any;
       if(features[i].properties.fichier) {
         pdf = "https://data.geopf.fr/annexes/gpu/documents/" + features[i].properties.partition + "/" + features[i].properties.gpu_doc_id + "/" + features[i].properties.fichier;
+        if(pdfLink.includes(pdf)) {
+          continue;
+        }
       }
       else {
         pdf = "none";
       }
       list.push([this.isoToUtf(features[i].properties.nomsuplitt), pdf]);
+      pdfLink.push(pdf);
     }
     return list;
   }
