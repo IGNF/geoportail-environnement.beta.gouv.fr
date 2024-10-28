@@ -1,13 +1,13 @@
-<h3>Votre forêt se trouve dans la zone des monuments suivants</h3>
+<h3 class="fr-h6">Votre forêt se trouve dans la zone des monuments suivants</h3>
 
 <ul>
-@for(monument of monuments; track monument) {
+  @for(monument of monuments; track monument) {
   @if(monument.link !== ""){
-    <li>
-      <a [href]="monument.link" target="_blank">{{ monument.name }}</a>
-    </li>
+  <li>
+    <a [href]="monument.link" target="_blank">{{ monument.name }}</a>
+  </li>
   } @else {
-    <li>{{ monument.name }}</li>
+  <li>{{ monument.name }}</li>
   }
-}
+  }
 </ul>
