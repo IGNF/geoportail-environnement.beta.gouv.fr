@@ -1,19 +1,37 @@
-<h3 class="fr-h6">Hautes valeurs de conservation</h3>
+<h3 class="fr-h6">Votre forêt se trouve sur les sites suivants</h3>
 
+@if(oiseaux.length > 0){
+<p>Site Natura 2000 au titre de la Directive Oiseaux</p>
 <ul>
-  <li><b>Type</b> : ZNIEFF type 1</li>
-  <li><b>Nom</b> :  Grottes d'Oxocelhaya et d'Isturitz</li>
+  @for(site of oiseaux; track site){
+  <li>{{ site.name }} - <a [href]="site.link" target="_blank">{{ site.link }}</a></li>
+  }
 </ul>
+}
 
-<h3 class="fr-h6">Espèces prioritaires présentes</h3>
-
-<p>TODO! app-feature-table</p>
-
-<h3 class="fr-h6">Habitats présents</h3>
-
+@if(habitats.length > 0){
+<p>Sites Natura 2000 au titre de la Directive Habitats</p>
 <ul>
-  <li>Chênaies acidiphiles</li>
-  <li>Cultures</li>
-  <li>Falaises continentales et rochers exposés</li>
-  <li>Grottes</li>
+  @for(site of habitats; track site){
+  <li>{{ site.name }} - <a [href]="site.link" target="_blank">{{ site.link }}</a></li>
+  }
 </ul>
+}
+
+@if(znieffs.length > 0){
+<p>Sites ZNIEFF Type 1</p>
+<ul>
+  @for(site of znieffs; track site){
+  <li>{{ site.name }} - <a [href]="site.link" target="_blank">{{ site.link }}</a></li>
+  }
+</ul>
+}
+
+@if(znieffsType2.length > 0){
+<p>Sites ZNIEFF Type 2</p>
+<ul>
+  @for(site of znieffsType2; track site){
+  <li>{{ site.name }} - <a [href]="site.link" target="_blank">{{ site.link }}</a></li>
+  }
+</ul>
+}

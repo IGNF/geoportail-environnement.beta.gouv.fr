@@ -11,7 +11,8 @@ export class ThematicSelectComponent {
   options: any[] = [
     { label: 'Agriculture', value: 1 },
     { label: 'Biodiversité', value: 2 },
-    { label: 'Eau', value: 3 }
+    { label: 'Eau', value: 3 },
+    { label: 'Monument Historique', value: 4 },
   ];
 
   constructor(

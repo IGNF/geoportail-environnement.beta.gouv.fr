@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BiodiversiteComponent } from './biodiversite.component';
+import { MonumentHistoriqueComponent } from './monument-historique.component';
 import { appConfig } from '../../../app.config';
 
-describe('BiodiversiteComponent', () => {
-  let component: BiodiversiteComponent;
-  let fixture: ComponentFixture<BiodiversiteComponent>;
+describe('MonumentHistoriqueComponent', () => {
+  let component: MonumentHistoriqueComponent;
+  let fixture: ComponentFixture<MonumentHistoriqueComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BiodiversiteComponent],
+      declarations: [MonumentHistoriqueComponent],
       providers: appConfig.providers
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BiodiversiteComponent);
+    fixture = TestBed.createComponent(MonumentHistoriqueComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

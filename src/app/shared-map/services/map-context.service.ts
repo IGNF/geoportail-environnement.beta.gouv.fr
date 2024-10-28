@@ -37,7 +37,7 @@ export class MapContextService {
         }),
         new VectorLayer({
           source: new Vector(),
-          properties: { title: "Dessin" }
+          properties: { title: 'Dessin' }
         })
       ],
       target: elementId
@@ -48,18 +48,25 @@ export class MapContextService {
 
   setView(coordinates: any[], zoom: number) {
     this.map?.getView().setCenter(coordinates);
-    this.map?.getView().setZoom(14);
+    this.map?.getView().setZoom(zoom);
   }
 
   getLayerDessin(): any {
     var layers = this.map?.getLayers().getArray();
     if (layers) {
       for (var i = 0; i < layers.length; i++) {
-        if (layers[i].get("title") == "Dessin") {
+        if (layers[i].get('title') == 'Dessin') {
           return layers[i];
         }
       }
     }
     return null;
+  }
+
+  getMaForet() {
+    if (!this.getLayerDessin()) {
+      return [];
+    }
+    return this.getLayerDessin().getSource().getFeatures();
   }
 }
