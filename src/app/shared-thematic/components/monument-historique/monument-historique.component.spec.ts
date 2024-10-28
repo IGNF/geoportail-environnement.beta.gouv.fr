@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MonumentHistoriqueComponent } from './monument-historique.component';
+import { appConfig } from '../../../app.config';
 
 describe('MonumentHistoriqueComponent', () => {
   let component: MonumentHistoriqueComponent;
@@ -8,7 +9,8 @@ describe('MonumentHistoriqueComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MonumentHistoriqueComponent]
+      declarations: [MonumentHistoriqueComponent],
+      providers: appConfig.providers
     })
     .compileComponents();
 

@@ -37,7 +37,7 @@ export class MapContextService {
         }),
         new VectorLayer({
           source: new Vector(),
-          properties: { title: "Dessin" }
+          properties: { title: 'Dessin' }
         })
       ],
       target: elementId
@@ -55,7 +55,7 @@ export class MapContextService {
     var layers = this.map?.getLayers().getArray();
     if (layers) {
       for (var i = 0; i < layers.length; i++) {
-        if (layers[i].get("title") == "Dessin") {
+        if (layers[i].get('title') == 'Dessin') {
           return layers[i];
         }
       }
@@ -64,6 +64,9 @@ export class MapContextService {
   }
 
   getMaForet() {
+    if (!this.getLayerDessin()) {
+      return [];
+    }
     return this.getLayerDessin().getSource().getFeatures();
   }
 }
