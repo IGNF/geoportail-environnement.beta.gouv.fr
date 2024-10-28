@@ -32,7 +32,7 @@ export class WfsRequest implements Serializable {
       service: this.service,
       version: this.version,
       request: this.request,
-      srsName: this.srsName,
+      // srsName: this.srsName,
       outputFormat: this.outputFormat,
       maxFeatures: this.maxFeatures,
       typeName: this.typeName,

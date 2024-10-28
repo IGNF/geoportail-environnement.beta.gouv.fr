@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { zip } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService, LON_LAT_ORDER } from '../../services/geoplateforme-wfs.service';
-import { zip } from 'rxjs';
 
 @Component({
   selector: 'app-biodiversite',
@@ -55,25 +55,17 @@ export class BiodiversiteComponent implements OnInit {
       this.znieffs = this.parseSites(znieffsResponse);
       this.znieffsType2 = this.parseSites(znieffsType2Response);
     });
-
-    // var spatialFilter = "" + this.HttpClientService.getIntersectsFilter("geom", false, this.mapContextService.getLayerDessin().getSource().getFeatures());
-    // this.HttpClientService.setOption("typeName", "PROTECTEDAREAS.ZPS:zps");
-    // this.HttpClientService.setOption("cql_filter", spatialFilter);
-    // this.HttpClientService.sendRequest((resp: any) => { this.siteZps = this.getSiteList(resp.features); });
-    // this.HttpClientService.setOption("typeName", "PROTECTEDAREAS.SIC:sic");
-    // this.HttpClientService.sendRequest((resp: any) => { this.siteSic = this.getSiteList(resp.features); });
-    // this.HttpClientService.setOption("typeName", "PROTECTEDAREAS.ZNIEFF1:znieff1");
-    // this.HttpClientService.sendRequest((resp: any) => { this.siteZnieff1 = this.getSiteList(resp.features); });
-    // this.HttpClientService.setOption("typeName", "PROTECTEDAREAS.ZNIEFF2:znieff2");
-    // this.HttpClientService.sendRequest((resp: any) => { this.siteZnieff2 = this.getSiteList(resp.features); });
   };
 
-  private parseSites(features: any[]): any[] {
-    return features.map((feature) => {
+  private parseSites(response: any): any[] {
+    if (!response || response.features.length <= 0) {
+      return [];
+    }
+    return response.features.map((feature: any) => {
       const properties = feature.properties;
       return {
         name: properties.sitename || properties.nom,
-        link: properties.link
+        link: properties.url
       }
     });
   };

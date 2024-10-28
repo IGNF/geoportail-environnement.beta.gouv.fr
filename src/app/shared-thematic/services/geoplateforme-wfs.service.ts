@@ -106,7 +106,7 @@ export class GeoplateformeWfsService {
 
       spatialFilter += 'INTERSECTS(' + geomName + ', MULTIPOLYGON((';
       for (let i = 0; i < polygons.length; i++) {
-        spatialFilter += this.getPolygonString(polygons[i]) + '), (';
+        spatialFilter += this.getPolygonString(polygons[i], lonLatOrder) + '), (';
       }
       spatialFilter = spatialFilter.replace(/, \($/, '');
       spatialFilter += '))';
