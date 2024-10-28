@@ -1,19 +1,62 @@
-<h3 class="fr-h6">Hautes valeurs de conservation</h3>
+<h3>Votre forêt se trouve sur les sites suivants :</h3>
 
-<ul>
-  <li><b>Type</b> : ZNIEFF type 1</li>
-  <li><b>Nom</b> :  Grottes d'Oxocelhaya et d'Isturitz</li>
+
+@if(siteZps.length){
+  @if(siteZps.length == 1){
+    <p> Site Natura 2000 au titre de la Directive Oiseaux : </p>
+  }
+  @else {
+    <p> Sites Natura 2000 au titre de la Directive Oiseaux : </p>p>
+  }
+  <ul>
+    @for(site of siteZps; track site){
+        <li> {{site[0]}} : <a href={{site[1]}} target="_blank">{{site[1]}}</a></li>
+    }
 </ul>
+}
+<br>
 
-<h3 class="fr-h6">Espèces prioritaires présentes</h3>
-
-<p>TODO! app-feature-table</p>
-
-<h3 class="fr-h6">Habitats présents</h3>
-
-<ul>
-  <li>Chênaies acidiphiles</li>
-  <li>Cultures</li>
-  <li>Falaises continentales et rochers exposés</li>
-  <li>Grottes</li>
+@if(siteSic.length){
+  @if(siteSic.length == 1){
+    <p> Site Natura 2000 au titre de la Directive Habitats : </p>
+  }
+  @else {
+    <p> Sites Natura 2000 au titre de la Directive Habitats : </p>p>
+  }
+  <ul>
+    @for(site of siteSic; track site){
+        <li> {{site[0]}} : <a href={{site[1]}} target="_blank">{{site[1]}}</a></li>
+    }
 </ul>
+}
+<br>
+
+@if(siteZnieff1.length){
+  @if(siteZnieff1.length == 1){
+    <p> Site ZNIEFF1 : </p>
+  }
+  @else {
+    <p> Sites ZNIEFF1 : </p>
+  }
+  <ul>
+    @for(site of siteZnieff1; track site){
+        <li> {{site[0]}} : <a href={{site[1]}} target="_blank">{{site[1]}}</a></li>
+    }
+</ul>
+}
+<br>
+
+@if(siteZnieff2.length){
+  @if(siteZnieff2.length == 1){
+    <p> Site ZNIEFF2: </p>
+  }
+  @else {
+    <p> Sites ZNIEFF2: </p>
+  }
+  <ul>
+    @for(site of siteZnieff2; track site){
+        <li> {{site[0]}} : <a href={{site[1]}} target="_blank">{{site[1]}}</a></li>
+    }
+</ul>
+}
+

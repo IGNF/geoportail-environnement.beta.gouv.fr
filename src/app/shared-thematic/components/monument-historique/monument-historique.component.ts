@@ -19,7 +19,7 @@ export class MonumentHistoriqueComponent implements OnInit{
   ) { };
 
   ngOnInit(): void {
-    var spatialFilter = this.HttpClientService.getIntersectsFilter("the_geom", this.mapContextService.getLayerDessin().getSource().getFeatures());
+    var spatialFilter = this.HttpClientService.getIntersectsFilter("the_geom", true, this.mapContextService.getLayerDessin().getSource().getFeatures());
     this.HttpClientService.setOption("typeName", "wfs_sup:assiette_sup_s");
 
     this.HttpClientService.setOption("cql_filter", "suptype='ac1' AND " + spatialFilter);

@@ -8,7 +8,7 @@ import { toLonLat } from 'ol/proj';
 export class HttpClientService {
   private http = inject(HttpClient);
   private url : string = "https://data.geopf.fr/wfs/ows";
-  private options : object = {
+  private options : any = {
     "service" : "WFS",
     "version" : "2.0.0",
     "request" : "GetFeature",
@@ -20,16 +20,26 @@ setOption(name : string, value : string) {
   this.options = Object.assign(this.options, {[name] : value});
 };
 
-getIntersectsFilter(geomName : string, features : Array<any>) {
+getIntersectsFilter(geomName : string, lonlat: boolean, features : Array<any>) {
 
-  var getPolygonString = function(coords:Array<any>) {
+  var getPolygonString = function(coords:Array<any>, lonlat : boolean) {
     var str = "";
     for(var i = 0; i < coords.length; i++) {
       str += "(";
       for(var j = 0; j < coords[i].length; j++) {
-        str += coords[i][j][1] + " " + coords[i][j][0] + ", ";
+        if(lonlat) {
+          str += coords[i][j][1] + " " + coords[i][j][0] + ", ";
+        }
+        else {
+          str += coords[i][j][0] + " " + coords[i][j][1] + ", ";
+        }
       }
-      str += coords[i][0][1] + " " + coords[i][0][0] + "), ";
+      if(lonlat) {
+        str += coords[i][0][1] + " " + coords[i][0][0] + "), ";
+      }
+      else {
+        str += coords[i][0][0] + " " + coords[i][0][1] + "), ";
+      }
     }
     str = str.replace(/, $/, "");
     return str;
@@ -44,7 +54,11 @@ getIntersectsFilter(geomName : string, features : Array<any>) {
     for(var i=0; i < features.length; i++) {
       for(var j = 0; j < features[i].getGeometry().getCoordinates().length; j++) {
         for(var k = 0; k < features[i].getGeometry().getCoordinates()[j].length; k++) {
-          lonLatCoords.push(toLonLat(features[i].getGeometry().getCoordinates()[j][k]));
+          if(lonlat) {
+            lonLatCoords.push(toLonLat(features[i].getGeometry().getCoordinates()[j][k]));  
+          } else {
+            lonLatCoords.push(features[i].getGeometry().getCoordinates()[j][k]);
+          }
         }
         coordinates.push(lonLatCoords);
         lonLatCoords = [];
@@ -55,7 +69,7 @@ getIntersectsFilter(geomName : string, features : Array<any>) {
 
     spatialFilter += "INTERSECTS(" + geomName + ", MULTIPOLYGON((";
     for(var i = 0; i < polygons.length; i++) {
-      spatialFilter += getPolygonString(polygons[i]) + "), (";
+      spatialFilter += getPolygonString(polygons[i], lonlat) + "), (";
     }
     spatialFilter = spatialFilter.replace(/, \($/, "");
     spatialFilter += "))"
@@ -76,4 +90,5 @@ sendRequest(callback : Function) {
 
   this.http.get(requestUrl).subscribe((resp) => callback(resp));
 };
+
 }
