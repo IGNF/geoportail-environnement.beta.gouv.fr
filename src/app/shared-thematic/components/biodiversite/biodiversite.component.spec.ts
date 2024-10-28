@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BiodiversiteComponent } from './biodiversite.component';
+import { appConfig } from '../../../app.config';
 
 describe('BiodiversiteComponent', () => {
   let component: BiodiversiteComponent;
@@ -8,7 +9,8 @@ describe('BiodiversiteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BiodiversiteComponent]
+      declarations: [BiodiversiteComponent],
+      providers: appConfig.providers
     })
     .compileComponents();
 

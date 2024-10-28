@@ -4,6 +4,7 @@ import { SharedDesignDsfrModule } from './shared-design-dsfr/shared-design-dsfr.
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AppComponent } from './app.component';
+import { appConfig } from './app.config';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -13,7 +14,8 @@ describe('AppComponent', () => {
         HeaderComponent,
         FooterComponent
       ],  
-      imports:[SharedDesignDsfrModule, RouterModule]
+      imports:[SharedDesignDsfrModule, RouterModule],
+      providers: appConfig.providers
     }).compileComponents();
   });
 

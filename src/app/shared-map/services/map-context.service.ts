@@ -62,4 +62,8 @@ export class MapContextService {
     }
     return null;
   }
+
+  getMaForet() {
+    return this.getLayerDessin().getSource().getFeatures();
+  }
 }
