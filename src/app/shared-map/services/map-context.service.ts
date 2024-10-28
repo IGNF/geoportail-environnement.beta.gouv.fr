@@ -48,7 +48,7 @@ export class MapContextService {
 
   setView(coordinates: any[], zoom: number) {
     this.map?.getView().setCenter(coordinates);
-    this.map?.getView().setZoom(14);
+    this.map?.getView().setZoom(zoom);
   }
 
   getLayerDessin(): any {

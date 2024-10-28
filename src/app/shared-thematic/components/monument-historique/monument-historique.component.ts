@@ -24,7 +24,7 @@ export class MonumentHistoriqueComponent implements OnInit{
 
     this.HttpClientService.setOption("cql_filter", "suptype='ac1' AND " + spatialFilter);
 
-    this.HttpClientService.sendRequest((resp:any) => {this.monumentList = this.getMonumentList(resp.features); console.log(resp)});
+    this.HttpClientService.sendRequest((resp:any) => {this.monumentList = this.getMonumentList(resp.features);});
   };
 
   getMonumentList(features: Array<any>) {

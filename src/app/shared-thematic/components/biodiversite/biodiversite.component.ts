@@ -16,7 +16,6 @@ export class BiodiversiteComponent implements OnInit{
   ) { };
 
   ngOnInit(): void {
-    //var request = new RequestService();
 
     var spatialFilter = "" + this.HttpClientService.getIntersectsFilter("geom", this.mapContextService.getLayerDessin().getSource().getFeatures());
     this.HttpClientService.setOption("typeName", "PROTECTEDAREAS.ZPS:zps");
@@ -24,10 +23,6 @@ export class BiodiversiteComponent implements OnInit{
     this.HttpClientService.setOption("cql_filter", spatialFilter);
 
     this.HttpClientService.sendRequest((resp:any) => {console.log(resp)});
-
-
-    //todo : fiche / polygone à trou / plusieurs polygones / maj service getSpatialfilter ? /
   };
-
 
 }

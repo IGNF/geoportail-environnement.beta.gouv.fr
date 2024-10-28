@@ -47,7 +47,6 @@ export class MapViewerComponent implements OnInit {
     });
 
     const select = new Select({
-      //@ts-ignore
       layers: [this.mapContextService.getLayerDessin()],
       style: selectStyle
     })

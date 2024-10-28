@@ -63,26 +63,6 @@ getIntersectsFilter(geomName : string, features : Array<any>) {
     return spatialFilter;
   }
   return;
-  // else {
-  //   var coordinates = [];
-  //   var lonLatCoords = [];
-  //   for(var i = 0; i < features[0].getGeometry().getCoordinates().length; i++) {
-  //     for(var j = 0; j < features[0].getGeometry().getCoordinates()[i].length; j++) {
-  //       lonLatCoords.push(toLonLat(features[0].getGeometry().getCoordinates()[i][j]));
-  //     }
-  //     coordinates.push(lonLatCoords);
-  //     lonLatCoords = [];
-  //   }
-
-  //   spatialFilter += "INTERSECTS(" + geomName + ", POLYGON(";
-  //   spatialFilter += getPolygonString(coordinates);
-  //   spatialFilter+= "))";
-
-  //     return spatialFilter;
-  // }
-
-
-  
 };
 
 sendRequest(callback : Function) {
