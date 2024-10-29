@@ -66,7 +66,7 @@ export class MapViewerComponent implements OnInit {
         Split: false,
         Offset: false
       },
-      source: this.mapContextService.getMap()?.getLayers().getArray()[1].getSource()
+      source: this.mapContextService.getLayerDessin().getSource()
     });
     this.mapContextService.map?.addControl(editBar);
   }

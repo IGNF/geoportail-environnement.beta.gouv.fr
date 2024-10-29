@@ -18,6 +18,15 @@
 </ul>
 }
 
+@if(prairies.length > 0){
+<p>Préservation des prairies et pâturages permanents en zone Natura 2000</p>
+<ul>
+  @for(site of prairies; track site){
+  <li>num_prs : {{ site.num_prs }}</li>
+  }
+</ul>
+}
+
 @if(znieffs.length > 0){
 <p>Sites ZNIEFF Type 1</p>
 <ul>
