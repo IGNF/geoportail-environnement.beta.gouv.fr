@@ -7,21 +7,42 @@ import { ThematicSelectService } from '../../services/thematic-select.service';
   styleUrl: './thematic-tabs.component.css'
 })
 export class ThematicTabsComponent implements OnInit {
-  selectedTabIndex: number = 0; // Onglet par défaut (Synthèse)
-  selectedThematic: number | null = null; // Stocke la thématique sélectionnée
+
+  selectedTabIndex: number = 0;
+
+  tabsConfig = [{
+    tabId: "synthese",
+    label: "Synthèse"
+  }, {
+    tabId: "agriculture",
+    label: "Agriculture"
+  }, {
+    tabId: "biodiversite",
+    label: "biodiversite"
+  }, {
+    tabId: "eau",
+    label: "eau"
+  }, {
+    tabId: "monument-historique",
+    label: "Monument Historique"
+  }];
+
+  selectedThematic: any;
 
   constructor(
     private thematicSelectService: ThematicSelectService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.thematicSelectService.selectedThematic$.subscribe((thematicId) => {
+    this.thematicSelectService.thematicSelection.subscribe((thematicId) => {
       this.selectedThematic = thematicId;
     });
   }
 
   // Méthode pour vérifier si l'onglet doit être affiché
-  shouldDisplayTab(thematicId: number): boolean {
+  shouldDisplayTab(thematicId: any): boolean {
+    console.log(thematicId, this.selectedThematic);
     return this.selectedThematic === thematicId;
   }
+
 }

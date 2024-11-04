@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
-import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';                                                         
 import { MAP_LAYERS_DEFAULT } from '../models/map-layers-default.enum';
 import { MAP_BIODIVERISTE_LAYERS, MAP_MONUMENTS_LAYERS } from '../../shared-thematic/models/map-thematic-layers.enum';
 import VectorLayer from 'ol/layer/Vector';
@@ -34,7 +34,7 @@ export class MapContextService {
       }),
       layers: [
         ...MAP_LAYERS_DEFAULT,
-        ...MAP_BIODIVERISTE_LAYERS,
+        // ...MAP_BIODIVERISTE_LAYERS,
         ...MAP_MONUMENTS_LAYERS,
         new VectorLayer({
           source: new Vector(),
@@ -55,9 +55,9 @@ export class MapContextService {
   }
 
   getLayerDessin(): any {
-    var layers = this.map?.getLayers().getArray();
+    const layers = this.map?.getLayers().getArray();
     if (layers) {
-      for (var i = 0; i < layers.length; i++) {
+      for (let i = 0; i < layers.length; i++) {
         if (layers[i].get('title') === 'Ma Forêt') {
           return layers[i];
         }
@@ -72,4 +72,11 @@ export class MapContextService {
     }
     return this.getLayerDessin().getSource().getFeatures();
   }
+
+  resetDessin() {
+    this.getLayerDessin().getSource().forEachFeature((f: any) => {
+      this.getLayerDessin()?.getSource().removeFeature(f);
+    });
+  }
+
 }
