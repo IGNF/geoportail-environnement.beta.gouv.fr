@@ -49,7 +49,7 @@ export class MapViewerComponent implements OnInit {
     const select = new Select({
       layers: [this.mapContextService.getLayerDessin()],
       style: selectStyle
-    })
+    });
 
     const editBar = new EditBar({
       interactions: {
