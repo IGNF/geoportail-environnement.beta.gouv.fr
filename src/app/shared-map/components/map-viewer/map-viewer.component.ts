@@ -34,6 +34,9 @@ export class MapViewerComponent implements OnInit {
       })
     });
 
+    if (!this.mapContextService.getLayerDessin()) {
+      return;
+    }
     this.mapContextService.getLayerDessin()?.setStyle(style);
 
     const selectStyle = new Style({

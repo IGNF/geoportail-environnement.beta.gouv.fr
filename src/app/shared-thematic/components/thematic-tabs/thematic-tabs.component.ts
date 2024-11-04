@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThematicSelectService } from '../../services/thematic-select.service';
+import { THEMATICS } from '../../models/thematic.enum';
 
 @Component({
   selector: 'app-thematic-tabs',
@@ -10,39 +11,36 @@ export class ThematicTabsComponent implements OnInit {
 
   selectedTabIndex: number = 0;
 
-  tabsConfig = [{
-    tabId: "synthese",
-    label: "Synthèse"
-  }, {
-    tabId: "agriculture",
-    label: "Agriculture"
-  }, {
-    tabId: "biodiversite",
-    label: "biodiversite"
-  }, {
-    tabId: "eau",
-    label: "eau"
-  }, {
-    tabId: "monument-historique",
-    label: "Monument Historique"
-  }];
+  tabsConfig: any[] = [];
 
-  selectedThematic: any;
+  selectedThematic: any = 0;
 
   constructor(
     private thematicSelectService: ThematicSelectService
   ) { }
 
   ngOnInit() {
-    this.thematicSelectService.thematicSelection.subscribe((thematicId) => {
-      this.selectedThematic = thematicId;
+    this.configFromThemes();
+    this.thematicSelectService.thematicSelection.subscribe((theme) => {
+      this.configFromThemes(theme);
     });
   }
 
-  // Méthode pour vérifier si l'onglet doit être affiché
-  shouldDisplayTab(thematicId: any): boolean {
-    console.log(thematicId, this.selectedThematic);
-    return this.selectedThematic === thematicId;
+  private configFromThemes(selectTheme: any = null) {
+    this.tabsConfig = THEMATICS.map((theme: any) => {
+      let active = false;
+      if (theme.name === 'synthese') {
+        active = true;
+      }
+      if (selectTheme && theme.name === selectTheme.name) {
+        active = true;
+      }
+      return {
+        tabId: theme.name,
+        label: theme.label,
+        active: active
+      };
+    });
   }
 
 }

@@ -1,7 +1,7 @@
 <dsfr-tabs [selectedTabIndex]="selectedTabIndex">
 
   @for (tab of tabsConfig; track $index) {
-  <dsfr-tab *ngIf="shouldDisplayTab($index)" [tabId]="tab.tabId" [label]="tab.label">
+  <dsfr-tab *ngIf="tab.active" [tabId]="tab.tabId" [label]="tab.label">
     @switch (tab.tabId) {
     @case ('synthese') {
     <app-synthese></app-synthese>

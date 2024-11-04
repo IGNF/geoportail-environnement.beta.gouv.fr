@@ -1,11 +1,12 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
-import LayerSwitcher from 'ol-ext/control/LayerSwitcher';                                                         
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { MAP_LAYERS_DEFAULT } from '../models/map-layers-default.enum';
 import { MAP_BIODIVERISTE_LAYERS, MAP_MONUMENTS_LAYERS } from '../../shared-thematic/models/map-thematic-layers.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
+import LayerGroup from 'ol/layer/Group';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class MapContextService {
       }),
       layers: [
         ...MAP_LAYERS_DEFAULT,
-        // ...MAP_BIODIVERISTE_LAYERS,
+        ...MAP_BIODIVERISTE_LAYERS,
         ...MAP_MONUMENTS_LAYERS,
         new VectorLayer({
           source: new Vector(),
@@ -44,9 +45,26 @@ export class MapContextService {
       target: elementId
     });
 
-    this.map.addControl(new LayerSwitcher())
+    this.map.addControl(new LayerSwitcher());
 
     this.map.on('rendercomplete', (event) => this.mapLoaded.next(event));
+  }
+
+  updateLayers(thematicName: string) {
+    // const layers = this.map?.getLayers().getArray();
+    // layers?.forEach((layer) => {
+    //   const group = layer.get('group') || 'base-layer';
+    //   if (group !== 'base-layer') {
+    //     this.map?.removeLayer(layer);
+    //   }
+    // });
+
+    // [...MAP_BIODIVERISTE_LAYERS, ...MAP_MONUMENTS_LAYERS].forEach((newlayer) => {
+    //   const group = newlayer.get('group') || 'no-group';
+    //   if (group === thematicName) {
+    //     this.map?.addLayer(newlayer);
+    //   }
+    // });
   }
 
   setView(coordinates: any[], zoom: number) {

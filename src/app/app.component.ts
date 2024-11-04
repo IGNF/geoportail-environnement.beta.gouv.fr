@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
     });
     const anchorToFocus = document.getElementById(event);
     if (anchorToFocus) {
-      console.log(anchorToFocus);
       anchorToFocus.focus();
     }
   }

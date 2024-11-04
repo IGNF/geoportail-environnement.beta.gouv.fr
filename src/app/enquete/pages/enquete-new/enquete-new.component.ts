@@ -58,8 +58,8 @@ export class EnqueteNewComponent implements OnInit {
     }
   }
 
-  updateThematics() {
-    
+  updateThematics(event: any) {
+    this.mapContextService.updateLayers(event.name);
   }
 
 

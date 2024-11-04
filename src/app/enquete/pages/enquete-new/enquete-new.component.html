@@ -16,11 +16,11 @@
 
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-6">
-      <app-thematic-select *ngIf="step > 1" (select)="updateThematics()"></app-thematic-select>
+      <app-thematic-select *ngIf="step > 1" (select)="updateThematics($event)"></app-thematic-select>
     </div>
   </div>
 
-  <div class="frF-grid-row fr-grid-row--gutters">
+  <div class="fr-grid-row fr-grid-row--gutters">
 
     <div class="fr-col-12 fr-col-lg-6" [class.fr-col-lg-12]="step === 1" [class.map-hidden]="step < 1">
       <app-map-viewer></app-map-viewer>
