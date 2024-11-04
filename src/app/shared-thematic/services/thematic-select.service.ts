@@ -1,19 +1,16 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThematicSelectService {
 
-  // BehaviorSubject pour stocker la sélection actuelle, avec une valeur par défaut
-  private selectedThematic = new BehaviorSubject<number | null>(null);
+  thematicSelection: EventEmitter<any> = new EventEmitter<any>();
 
-  // Observable pour écouter les changements
-  selectedThematic$ = this.selectedThematic.asObservable();
+  constructor() {}
 
-  // Méthode pour mettre à jour la sélection
-  updateSelectedThematic(thematicId: number | null) {
-    this.selectedThematic.next(thematicId);
+  updateSelectedThematic(thematic: any) {
+    this.thematicSelection.next(thematic);
   }
+
 }

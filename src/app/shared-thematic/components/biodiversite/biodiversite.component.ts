@@ -15,6 +15,8 @@ export class BiodiversiteComponent implements OnInit {
 
   habitats: any[] = [];
 
+  prairies: any[] = [];
+
   znieffs: any[] = [];
 
   znieffsType2: any[] = [];
@@ -34,6 +36,7 @@ export class BiodiversiteComponent implements OnInit {
     const observableRequest = [
       'PROTECTEDAREAS.ZPS:zps',
       'PROTECTEDAREAS.SIC:sic',
+      'PRAIRIES.SENSIBLES.BCAE:prairies_sensibles',
       'PROTECTEDAREAS.ZNIEFF1:znieff1',
       'PROTECTEDAREAS.ZNIEFF2:znieff2'
     ].map((layername) => {
@@ -47,11 +50,13 @@ export class BiodiversiteComponent implements OnInit {
     zip(observableRequest).subscribe(([
       oiseauxResponse,
       habitatsResponse,
+      prairiesResponse,
       znieffsResponse,
       znieffsType2Response
     ]) => {
       this.oiseaux = this.parseSites(oiseauxResponse);
       this.habitats = this.parseSites(habitatsResponse);
+      this.prairies = this.parseSites(prairiesResponse);
       this.znieffs = this.parseSites(znieffsResponse);
       this.znieffsType2 = this.parseSites(znieffsType2Response);
     });
@@ -65,7 +70,8 @@ export class BiodiversiteComponent implements OnInit {
       const properties = feature.properties;
       return {
         name: properties.sitename || properties.nom,
-        link: properties.url
+        link: properties.url,
+        num_prs: properties.num_prs
       }
     });
   };

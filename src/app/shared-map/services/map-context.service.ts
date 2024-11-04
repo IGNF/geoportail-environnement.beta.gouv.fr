@@ -1,10 +1,12 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
-import TileLayer from 'ol/layer/Tile.js'
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+import { MAP_LAYERS_DEFAULT } from '../models/map-layers-default.enum';
+import { MAP_BIODIVERISTE_LAYERS, MAP_MONUMENTS_LAYERS } from '../../shared-thematic/models/map-thematic-layers.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
-import OSM from 'ol/source/OSM.js';
+import LayerGroup from 'ol/layer/Group';
 
 @Injectable({
   providedIn: 'root'
@@ -32,18 +34,37 @@ export class MapContextService {
         zoom: 1,
       }),
       layers: [
-        new TileLayer({
-          source: new OSM(),
-        }),
+        ...MAP_LAYERS_DEFAULT,
+        ...MAP_BIODIVERISTE_LAYERS,
+        ...MAP_MONUMENTS_LAYERS,
         new VectorLayer({
           source: new Vector(),
-          properties: { title: 'Dessin' }
+          properties: { title: 'Ma Forêt' }
         })
       ],
       target: elementId
     });
 
+    this.map.addControl(new LayerSwitcher());
+
     this.map.on('rendercomplete', (event) => this.mapLoaded.next(event));
+  }
+
+  updateLayers(thematicName: string) {
+    // const layers = this.map?.getLayers().getArray();
+    // layers?.forEach((layer) => {
+    //   const group = layer.get('group') || 'base-layer';
+    //   if (group !== 'base-layer') {
+    //     this.map?.removeLayer(layer);
+    //   }
+    // });
+
+    // [...MAP_BIODIVERISTE_LAYERS, ...MAP_MONUMENTS_LAYERS].forEach((newlayer) => {
+    //   const group = newlayer.get('group') || 'no-group';
+    //   if (group === thematicName) {
+    //     this.map?.addLayer(newlayer);
+    //   }
+    // });
   }
 
   setView(coordinates: any[], zoom: number) {
@@ -52,10 +73,10 @@ export class MapContextService {
   }
 
   getLayerDessin(): any {
-    var layers = this.map?.getLayers().getArray();
+    const layers = this.map?.getLayers().getArray();
     if (layers) {
-      for (var i = 0; i < layers.length; i++) {
-        if (layers[i].get('title') == 'Dessin') {
+      for (let i = 0; i < layers.length; i++) {
+        if (layers[i].get('title') === 'Ma Forêt') {
           return layers[i];
         }
       }
@@ -69,4 +90,11 @@ export class MapContextService {
     }
     return this.getLayerDessin().getSource().getFeatures();
   }
+
+  resetDessin() {
+    this.getLayerDessin().getSource().forEachFeature((f: any) => {
+      this.getLayerDessin()?.getSource().removeFeature(f);
+    });
+  }
+
 }

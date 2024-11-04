@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThematicSelectService } from '../../services/thematic-select.service';
+import { THEMATICS } from '../../models/thematic.enum';
 
 @Component({
   selector: 'app-thematic-tabs',
@@ -7,21 +8,39 @@ import { ThematicSelectService } from '../../services/thematic-select.service';
   styleUrl: './thematic-tabs.component.css'
 })
 export class ThematicTabsComponent implements OnInit {
-  selectedTabIndex: number = 0; // Onglet par défaut (Synthèse)
-  selectedThematic: number | null = null; // Stocke la thématique sélectionnée
+
+  selectedTabIndex: number = 0;
+
+  tabsConfig: any[] = [];
+
+  selectedThematic: any = 0;
 
   constructor(
     private thematicSelectService: ThematicSelectService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.thematicSelectService.selectedThematic$.subscribe((thematicId) => {
-      this.selectedThematic = thematicId;
+    this.configFromThemes();
+    this.thematicSelectService.thematicSelection.subscribe((theme) => {
+      this.configFromThemes(theme);
     });
   }
 
-  // Méthode pour vérifier si l'onglet doit être affiché
-  shouldDisplayTab(thematicId: number): boolean {
-    return this.selectedThematic === thematicId;
+  private configFromThemes(selectTheme: any = null) {
+    this.tabsConfig = THEMATICS.map((theme: any) => {
+      let active = false;
+      if (theme.name === 'synthese') {
+        active = true;
+      }
+      if (selectTheme && theme.name === selectTheme.name) {
+        active = true;
+      }
+      return {
+        tabId: theme.name,
+        label: theme.label,
+        active: active
+      };
+    });
   }
+
 }

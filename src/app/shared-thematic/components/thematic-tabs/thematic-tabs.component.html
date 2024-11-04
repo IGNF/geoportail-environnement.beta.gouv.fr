@@ -1,40 +1,25 @@
 <dsfr-tabs [selectedTabIndex]="selectedTabIndex">
-  <dsfr-tab
-    tabId="synthese"
-    label="Synthèse"
-  >
+
+  @for (tab of tabsConfig; track $index) {
+  <dsfr-tab *ngIf="tab.active" [tabId]="tab.tabId" [label]="tab.label">
+    @switch (tab.tabId) {
+    @case ('synthese') {
     <app-synthese></app-synthese>
-  </dsfr-tab>
-
-  <dsfr-tab
-    *ngIf="shouldDisplayTab(1)"
-    tabId="agriculture"
-    label="Agriculture"
-  >
-    <app-agriculture></app-agriculture>
-  </dsfr-tab>
-
-  <dsfr-tab
-    *ngIf="shouldDisplayTab(2)"
-    tabId="biodiversite"
-    label="Biodiversité"
-  >
+    }
+    @case ('agriculture') {
+    <p>TODO</p>
+    }
+    @case ('biodiversite') {
     <app-biodiversite></app-biodiversite>
-  </dsfr-tab>
-
-  <dsfr-tab
-    *ngIf="shouldDisplayTab(3)"
-    tabId="eau"
-    label="Eau"
-  >
-    <app-eau></app-eau>
-  </dsfr-tab>
-
-  <dsfr-tab
-    *ngIf="shouldDisplayTab(4)"
-    tabId="monument-historique"
-    label="Monument Historique"
-  >
+    }
+    @case ('eau') {
+    <p>TODO</p>
+    }
+    @case ('monument-historique') {
     <app-monument-historique></app-monument-historique>
+    }
+    }
   </dsfr-tab>
+  }
+
 </dsfr-tabs>

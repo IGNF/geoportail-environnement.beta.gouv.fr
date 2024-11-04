@@ -54,10 +54,12 @@ export class EnqueteNewComponent implements OnInit {
   previousStep() {
     this.step--;
     if (this.step == 0) {
-      this.mapContextService.getLayerDessin().getSource().forEachFeature((f: any) => {
-        this.mapContextService.getLayerDessin()?.getSource().removeFeature(f);
-      });
+      this.mapContextService.resetDessin();
     }
+  }
+
+  updateThematics(event: any) {
+    this.mapContextService.updateLayers(event.name);
   }
 
 

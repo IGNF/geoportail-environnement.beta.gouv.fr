@@ -34,6 +34,9 @@ export class MapViewerComponent implements OnInit {
       })
     });
 
+    if (!this.mapContextService.getLayerDessin()) {
+      return;
+    }
     this.mapContextService.getLayerDessin()?.setStyle(style);
 
     const selectStyle = new Style({
@@ -49,7 +52,7 @@ export class MapViewerComponent implements OnInit {
     const select = new Select({
       layers: [this.mapContextService.getLayerDessin()],
       style: selectStyle
-    })
+    });
 
     const editBar = new EditBar({
       interactions: {
@@ -66,7 +69,7 @@ export class MapViewerComponent implements OnInit {
         Split: false,
         Offset: false
       },
-      source: this.mapContextService.getMap()?.getLayers().getArray()[1].getSource()
+      source: this.mapContextService.getLayerDessin().getSource()
     });
     this.mapContextService.map?.addControl(editBar);
   }
