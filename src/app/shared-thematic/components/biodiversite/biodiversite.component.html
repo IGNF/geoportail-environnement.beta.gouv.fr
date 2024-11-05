@@ -1,46 +1,31 @@
 <h3 class="fr-h6">Votre forêt se trouve sur les sites suivants</h3>
 
-@if(oiseaux.length > 0){
-<p>Site Natura 2000 au titre de la Directive Oiseaux</p>
 <ul>
-  @for(site of oiseaux; track site){
-  <li>{{ site.name }} - <a [href]="site.link" target="_blank">{{ site.link }}</a></li>
+  @for (site of sites; track site) {
+  <li>
+    @if (site.link) {
+    <a *ngIf="site.link" [href]="site.link" target="_blank">{{ site.name }}</a> -
+    } @else {
+    {{ site.name }} -
+    }
+    @if (site.layer === 'sic') {
+    Site Natura 2000 Oiseaux
+    }
+    @if (site.layer === 'zps') {
+    Site Natura 2000 Habitats
+    }
+    @if (site.layer === 'prairies_sensibles') {
+    Zone Natura 2000 prairies et pâturages
+    }
+    @if (site.layer === 'znieff1') {
+    Site ZNIEFF2 type 1
+    }
+    @if (site.layer === 'znieff2') {
+    Site ZNIEFF2 type 2
+    }
+    @if (site.prairiesCount) {
+    - {{ site.prairiesCount }} prairies
+    }
+  </li>
   }
 </ul>
-}
-
-@if(habitats.length > 0){
-<p>Sites Natura 2000 au titre de la Directive Habitats</p>
-<ul>
-  @for(site of habitats; track site){
-  <li>{{ site.name }} - <a [href]="site.link" target="_blank">{{ site.link }}</a></li>
-  }
-</ul>
-}
-
-@if(prairies.length > 0){
-<p>Préservation des prairies et pâturages permanents en zone Natura 2000</p>
-<ul>
-  @for(site of prairies; track site){
-  <li>num_prs : {{ site.num_prs }}</li>
-  }
-</ul>
-}
-
-@if(znieffs.length > 0){
-<p>Sites ZNIEFF Type 1</p>
-<ul>
-  @for(site of znieffs; track site){
-  <li>{{ site.name }} - <a [href]="site.link" target="_blank">{{ site.link }}</a></li>
-  }
-</ul>
-}
-
-@if(znieffsType2.length > 0){
-<p>Sites ZNIEFF Type 2</p>
-<ul>
-  @for(site of znieffsType2; track site){
-  <li>{{ site.name }} - <a [href]="site.link" target="_blank">{{ site.link }}</a></li>
-  }
-</ul>
-}

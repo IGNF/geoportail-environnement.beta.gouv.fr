@@ -3,6 +3,7 @@ import { zip } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService, LON_LAT_ORDER } from '../../services/geoplateforme-wfs.service';
+import { MAP_BIODIVERISTE_LAYERS } from '../../models/map-thematic-layers.enum';
 
 @Component({
   selector: 'app-biodiversite',
@@ -11,15 +12,7 @@ import { GeoplateformeWfsService, LON_LAT_ORDER } from '../../services/geoplatef
 })
 export class BiodiversiteComponent implements OnInit {
 
-  oiseaux: any[] = [];
-
-  habitats: any[] = [];
-
-  prairies: any[] = [];
-
-  znieffs: any[] = [];
-
-  znieffsType2: any[] = [];
+  sites: any[] = [];
 
   constructor(
     private geoplateformeWfsService: GeoplateformeWfsService,
@@ -32,14 +25,10 @@ export class BiodiversiteComponent implements OnInit {
     if (!maForet) {
       return;
     }
-
-    const observableRequest = [
-      'PROTECTEDAREAS.ZPS:zps',
-      'PROTECTEDAREAS.SIC:sic',
-      'PRAIRIES.SENSIBLES.BCAE:prairies_sensibles',
-      'PROTECTEDAREAS.ZNIEFF1:znieff1',
-      'PROTECTEDAREAS.ZNIEFF2:znieff2'
-    ].map((layername) => {
+    const observableRequest = MAP_BIODIVERISTE_LAYERS.map((layer)=> {
+      // PROTECTEDAREAS.ZPS:zps || PROTECTEDAREAS.ZNIEFF1:znieff1
+      return layer.get('technicalName');
+    }).map((layername) => {
       return this.geoplateformeWfsService
         .buildRequest()
         .fromLayer(layername)
@@ -47,33 +36,34 @@ export class BiodiversiteComponent implements OnInit {
         .getRequest();
     }).map((request) => this.geoplateformeWfsService.getFeatures(request))
 
-    zip(observableRequest).subscribe(([
-      oiseauxResponse,
-      habitatsResponse,
-      prairiesResponse,
-      znieffsResponse,
-      znieffsType2Response
-    ]) => {
-      this.oiseaux = this.parseSites(oiseauxResponse);
-      this.habitats = this.parseSites(habitatsResponse);
-      this.prairies = this.parseSites(prairiesResponse);
-      this.znieffs = this.parseSites(znieffsResponse);
-      this.znieffsType2 = this.parseSites(znieffsType2Response);
+    zip(observableRequest).subscribe((responses: any[]) => {
+      const features = responses.reduce((collection, response) => {
+        if (response.features) {
+          collection.push(...response.features);
+        }
+        return collection;
+      },[]);
+      this.sites = this.parseSites(features);
     });
   };
 
-  private parseSites(response: any): any[] {
-    if (!response || response.features.length <= 0) {
-      return [];
-    }
-    return response.features.map((feature: any) => {
+  private parseSites(features: any): any[] {
+    return features.map((feature: any) => {
+      const id = feature.id;
+      const layer = this.parseLayerFromId(id);
       const properties = feature.properties;
       return {
+        id: id,
+        layer: layer,
         name: properties.sitename || properties.nom,
         link: properties.url,
-        num_prs: properties.num_prs
-      }
+        prairiesCount: properties.num_prs
+      };
     });
   };
+
+  private parseLayerFromId(id: string) {
+    return id.split('.')[0];
+  }
 
 }

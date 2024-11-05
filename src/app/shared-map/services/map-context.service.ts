@@ -39,7 +39,8 @@ export class MapContextService {
         ...MAP_MONUMENTS_LAYERS,
         new VectorLayer({
           source: new Vector(),
-          properties: { title: 'Ma Forêt' }
+          properties: { title: 'Ma Forêt' },
+          zIndex: 1000
         })
       ],
       target: elementId
@@ -51,20 +52,20 @@ export class MapContextService {
   }
 
   updateLayers(thematicName: string) {
-    // const layers = this.map?.getLayers().getArray();
-    // layers?.forEach((layer) => {
-    //   const group = layer.get('group') || 'base-layer';
-    //   if (group !== 'base-layer') {
-    //     this.map?.removeLayer(layer);
-    //   }
-    // });
+    const layers = this.map?.getAllLayers();
+    layers?.forEach((layer) => {
+      const group = layer.get('group') || 'base-layer';
+      if (group !== 'base-layer') {
+        this.map?.removeLayer(layer);
+      }
+    });
 
-    // [...MAP_BIODIVERISTE_LAYERS, ...MAP_MONUMENTS_LAYERS].forEach((newlayer) => {
-    //   const group = newlayer.get('group') || 'no-group';
-    //   if (group === thematicName) {
-    //     this.map?.addLayer(newlayer);
-    //   }
-    // });
+    [...MAP_BIODIVERISTE_LAYERS, ...MAP_MONUMENTS_LAYERS].forEach((newlayer) => {
+      const group = newlayer.get('group') || 'no-group';
+      if (group === thematicName) {
+        this.map?.addLayer(newlayer);
+      }
+    });
   }
 
   setView(coordinates: any[], zoom: number) {
@@ -73,15 +74,9 @@ export class MapContextService {
   }
 
   getLayerDessin(): any {
-    const layers = this.map?.getLayers().getArray();
-    if (layers) {
-      for (let i = 0; i < layers.length; i++) {
-        if (layers[i].get('title') === 'Ma Forêt') {
-          return layers[i];
-        }
-      }
-    }
-    return null;
+    const layers = this.map?.getAllLayers();
+    const dessin = layers?.find((layer) => layer.get('title') === 'Ma Forêt');
+    return dessin;
   }
 
   getMaForet() {
