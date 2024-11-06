@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ "main", "coveralls" ]
+    branches: [ "main" ]
     tags:         # Exécuter aussi le workflow quand un tag est créé
       - 'v*'      # Pour les tags de version comme v1.0.0
   pull_request:
