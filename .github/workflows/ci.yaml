@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:         # Exécuter aussi le workflow quand un tag est créé
+      - 'v*'      # Pour les tags de version comme v1.0.0
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+      - name: Set environment for Chromium
+        run: |
+          echo "CHROME_BIN='/usr/bin/chromium'" >> $GITHUB_ENV
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Install dependencies
+        run: npm install --include=dev
+
+      - name: Run unit tests and generate code coverage
+        run: ng test --watch=false --code-coverage
+
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          coveralls-repo-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          path-to-lcov: coverage/lcov.info

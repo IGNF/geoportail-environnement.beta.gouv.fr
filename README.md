@@ -1,5 +1,7 @@
 # Foreg-site
 
+[![Coverage Status](https://coveralls.io/repos/github/IGNF/geoportail-environnement.beta.gouv.fr/badge.svg?branch=coveralls)](https://coveralls.io/github/IGNF/geoportail-environnement.beta.gouv.fr?branch=coveralls)
+
 Reglementation en Foret. Application web Angular.
 
 * [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7
