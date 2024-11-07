@@ -3,7 +3,7 @@ import { zip } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService, LON_LAT_ORDER } from '../../services/geoplateforme-wfs.service';
-import { MAP_BIODIVERISTE_LAYERS } from '../../models/map-thematic-layers.enum';
+import { MAP_BIODIVERISTE_LAYER_GROUP } from '../../models/map-thematic-layers.enum';
 
 @Component({
   selector: 'app-biodiversite',
@@ -21,12 +21,8 @@ export class BiodiversiteComponent implements OnInit {
 
   ngOnInit(): void {
     const maForet = this.mapContextService.getMaForet();
-    // TODO trouver un moyen de tester l'abscence de foret dessiné sinon ça requete toutes les features
-    if (!maForet) {
-      return;
-    }
-    const observableRequest = MAP_BIODIVERISTE_LAYERS.map((layer)=> {
-      // PROTECTEDAREAS.ZPS:zps || PROTECTEDAREAS.ZNIEFF1:znieff1
+
+    const observableRequest = MAP_BIODIVERISTE_LAYER_GROUP.getLayersArray().map((layer)=> {
       return layer.get('technicalName');
     }).map((layername) => {
       return this.geoplateformeWfsService

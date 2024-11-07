@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Fill, Stroke, Style } from 'ol/style';
-import { Select } from 'ol/interaction';
-import EditBar from 'ol-ext/control/EditBar.js';
 
 import { MapContextService } from '../../services/map-context.service';
 
@@ -22,55 +19,8 @@ export class MapViewerComponent implements OnInit {
       return;
     }
 
-    this.mapContextService.map?.getView().setCenter([261271, 6249998]);
-    this.mapContextService.map?.getView().setZoom(13);
+    this.mapContextService.setView([261271, 6249998], 13);
+    this.mapContextService.addDrawingTools();
 
-    const style = new Style({
-      fill: new Fill({
-        color: 'rgba(73,73,232,0.4)',
-      }),
-      stroke: new Stroke({
-        color: '#3399CC'
-      })
-    });
-
-    if (!this.mapContextService.getLayerDessin()) {
-      return;
-    }
-    this.mapContextService.getLayerDessin()?.setStyle(style);
-
-    const selectStyle = new Style({
-      fill: new Fill({
-        color: 'rgba(255,40,48,0.4)',
-      }),
-      stroke: new Stroke({
-        color: '#F44336',
-        width: 4
-      })
-    });
-
-    const select = new Select({
-      layers: [this.mapContextService.getLayerDessin()],
-      style: selectStyle
-    });
-
-    const editBar = new EditBar({
-      interactions: {
-        Select: select,
-        Delete: true,
-        Info: false,
-        DrawPoint: false,
-        DrawLine: false,
-        DrawPolygon: true,
-        //@ts-ignore
-        DrawHole: true,
-        DrawRegular: false,
-        Transform: false,
-        Split: false,
-        Offset: false
-      },
-      source: this.mapContextService.getLayerDessin().getSource()
-    });
-    this.mapContextService.map?.addControl(editBar);
   }
 }

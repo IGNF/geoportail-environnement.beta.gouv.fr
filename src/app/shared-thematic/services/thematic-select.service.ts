@@ -9,8 +9,8 @@ export class ThematicSelectService {
 
   constructor() {}
 
-  updateSelectedThematic(thematic: any) {
-    this.thematicSelection.next(thematic);
+  updateThematics(thematics: any) {
+    this.thematicSelection.next(thematics);
   }
 
 }
