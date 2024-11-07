@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThematicSelectService } from '../../services/thematic-select.service';
+import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { THEMATICS } from '../../models/thematic.enum';
 
 @Component({
@@ -16,31 +17,35 @@ export class ThematicTabsComponent implements OnInit {
   selectedThematic: any = 0;
 
   constructor(
-    private thematicSelectService: ThematicSelectService
+    private thematicSelectService: ThematicSelectService,
+    private mapContextService: MapContextService
   ) { }
 
   ngOnInit() {
-    this.configFromThemes();
-    this.thematicSelectService.thematicSelection.subscribe((theme) => {
-      this.configFromThemes(theme);
+    this.tabsConfig = THEMATICS;
+    this.thematicSelectService.thematicSelection.subscribe(() => {
+      this.tabsConfig = THEMATICS;
+      if(!THEMATICS[this.selectedTabIndex].checked){
+        this.selectedTabIndex = 0;
+        this.selectTab("synthese");
+      }
     });
   }
 
-  private configFromThemes(selectTheme: any = null) {
-    this.tabsConfig = THEMATICS.map((theme: any) => {
-      let active = false;
-      if (theme.name === 'synthese') {
-        active = true;
+  selectTab(event: any) {
+    this.setSelectedTabIndex(event);
+    this.mapContextService.updateLayersVisibility(event);
+  }
+
+  setSelectedTabIndex(tabId: string) {
+    let indexModifier = 0;
+    for(let i = 0; i < THEMATICS.length; i++) {
+      if(THEMATICS[i].name === tabId) {
+        this.selectedTabIndex = i-indexModifier;
+      }else if(!THEMATICS[i].checked) {
+        indexModifier++;
       }
-      if (selectTheme && theme.name === selectTheme.name) {
-        active = true;
-      }
-      return {
-        tabId: theme.name,
-        label: theme.label,
-        active: active
-      };
-    });
+    }
   }
 
 }

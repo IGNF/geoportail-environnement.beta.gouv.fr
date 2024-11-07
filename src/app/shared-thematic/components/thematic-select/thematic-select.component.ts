@@ -11,32 +11,30 @@ export class ThematicSelectComponent implements OnInit {
 
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
 
-  options: any[] = [];
+   checkboxes: any[] = [];
 
   constructor(
     private thematicSelectService: ThematicSelectService
   ) { }
 
   ngOnInit(): void {
-    this.optionsFromThematics();
-  }
+     this.checkboxes = THEMATICS.slice(1);
+  };
 
-  // Méthode appelée lors du changement de sélection
-  selectChange(event: any): void {
+  onCheckboxChange(event: any): void {
     if (!event) {
       return;
     }
-    this.thematicSelectService.updateSelectedThematic(event);
-    this.select.emit(event);
-  }
+    let label = event.target.labels[0].textContent;
 
-  private optionsFromThematics(): void {
-    this.options = THEMATICS.filter((theme) => theme.name !== 'synthese').map((theme) => {
-      return {
-        label: theme.label,
-        value: theme
-      };
-    });
-  }
+    for(let i = 0; i < THEMATICS.length; i++) {
+      if(THEMATICS[i].label == label) {
+        THEMATICS[i].checked = !THEMATICS[i].checked;
+      }
+    }
+
+    this.thematicSelectService.updateThematics(THEMATICS);
+    this.select.emit(event);
+  };
 
 }

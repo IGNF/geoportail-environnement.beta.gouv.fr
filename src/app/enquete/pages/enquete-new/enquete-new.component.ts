@@ -48,18 +48,32 @@ export class EnqueteNewComponent implements OnInit {
 
   nextStep() {
     this.step++;
+    switch(this.step) {
+      case 2:
+        if(!this.mapContextService.getLayerDessin().getSource().getFeatures().length) {
+          alert("Veuillez préciser le périmètre de votre forêt à l'aide des outils de dessins disponible sur la carte.");
+          this.step--;
+        }else {
+          this.mapContextService.removeDrawingTools();
+        };
+        return;
+    }
   }
 
 
   previousStep() {
     this.step--;
-    if (this.step == 0) {
-      this.mapContextService.resetDessin();
+    switch(this.step) {
+      case 0:
+        this.mapContextService.resetDessin();
+        return;
+      case 1:
+        this.mapContextService.addDrawingTools();
     }
   }
 
-  updateThematics(event: any) {
-    this.mapContextService.updateLayers(event.name);
+  updateThematics() {
+    this.mapContextService.updateLayers();
   }
 
 

@@ -21,10 +21,6 @@ export class MonumentHistoriqueComponent implements OnInit {
 
   ngOnInit(): void {
     const maForet = this.mapContextService.getMaForet();
-    // TODO trouver un moyen de tester l'abscence de foret dessiné sinon ça requete toutes les features
-    if (!maForet) {
-      return;
-    }
 
     const request = this.geoplateformeWfsService
       .buildRequest()

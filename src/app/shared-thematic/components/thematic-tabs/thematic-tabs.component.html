@@ -1,8 +1,8 @@
-<dsfr-tabs [selectedTabIndex]="selectedTabIndex">
+<dsfr-tabs [selectedTabIndex]="selectedTabIndex" (tabSelect)="selectTab($event)">
 
   @for (tab of tabsConfig; track $index) {
-  <dsfr-tab *ngIf="tab.active" [tabId]="tab.tabId" [label]="tab.label">
-    @switch (tab.tabId) {
+  <dsfr-tab *ngIf="tab.checked" [tabId]="tab.name" [label]="tab.label">
+    @switch (tab.name) {
     @case ('synthese') {
     <app-synthese></app-synthese>
     }

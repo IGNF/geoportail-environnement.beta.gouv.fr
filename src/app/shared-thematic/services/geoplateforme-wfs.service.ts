@@ -49,7 +49,6 @@ export class GeoplateformeWfsService {
   }
 
   intersectCollection(features: any[], geometryName: string = GEOMETRY_NAME, lonLatOrder: boolean = LON_LAT_ORDER): GeoplateformeWfsService {
-    // const intersectFilter = 'INTERSECTS(the_geom, MULTIPOLYGON(((48.83555415770596 2.4272448684002867, 48.828209180338774 2.4310214186932555, 48.83306828591324 2.4629504348065367, 48.84312400742064 2.4552256728436457, 48.83555415770596 2.4272448684002867, 48.83555415770596 2.4272448684002867))))';
     const intersectFilter = this.getIntersectsFilter(geometryName, features, lonLatOrder);
     if (intersectFilter !== '') {
       this.request.cqlFilters.push(intersectFilter);
