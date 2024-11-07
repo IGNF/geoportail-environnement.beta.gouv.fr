@@ -2,11 +2,12 @@ import TileLayer from 'ol/layer/Tile';
 import { TileWMS } from 'ol/source';
 import LayerGroup from 'ol/layer/Group';
 
-export const MAP_BIODIVERISTE_LAYERS = [
+export const MAP_BIODIVERISTE_LAYER_GROUP = 
   new LayerGroup({
-    //@ts-ignore
-    title: 'Biodiversité',
-    group: 'biodiversite',
+    properties: {
+      title: 'Biodiversité',
+      group: 'biodiversite'
+    },
     layers: [
       new TileLayer({
         properties: {
@@ -139,10 +140,9 @@ export const MAP_BIODIVERISTE_LAYERS = [
         })
       })
     ]
-  })
-];
+  });
 
-export const MAP_MONUMENTS_LAYERS = [
+export const MAP_MONUMENTS_LAYER_GROUP = 
   new LayerGroup({
     //@ts-ignore
     title: 'Monument Historique',
@@ -175,5 +175,4 @@ export const MAP_MONUMENTS_LAYERS = [
         })
       })
     ]
-  })
-];
+  });

@@ -5,8 +5,8 @@ import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { Fill, Stroke, Style } from 'ol/style';
 import { Select } from 'ol/interaction';
 import EditBar from 'ol-ext/control/EditBar.js';
-import { MAP_LAYERS_DEFAULT } from '../models/map-layers-default.enum';
-import { MAP_BIODIVERISTE_LAYERS, MAP_MONUMENTS_LAYERS } from '../../shared-thematic/models/map-thematic-layers.enum';
+import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
+import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
 import { THEMATICS } from '../../shared-thematic/models/thematic.enum';
@@ -37,9 +37,9 @@ export class MapContextService {
         zoom: 1,
       }),
       layers: [
-        ...MAP_LAYERS_DEFAULT,
-        ...MAP_BIODIVERISTE_LAYERS,
-        ...MAP_MONUMENTS_LAYERS,
+        MAP_DEFAULT_LAYER_GROUP,
+        MAP_BIODIVERISTE_LAYER_GROUP,
+        MAP_MONUMENTS_LAYER_GROUP,
         new VectorLayer({
           source: new Vector(),
           properties: { title: 'Ma Forêt' },
@@ -128,7 +128,7 @@ export class MapContextService {
       }
     }
 
-    [...MAP_BIODIVERISTE_LAYERS, ...MAP_MONUMENTS_LAYERS].forEach((newlayer) => {
+    [MAP_BIODIVERISTE_LAYER_GROUP,MAP_MONUMENTS_LAYER_GROUP].forEach((newlayer) => {
       const group = newlayer.get('group') || 'no-group';
       for(let i = 0; i < THEMATICS.length; i++) {
         if(group === THEMATICS[i].name && THEMATICS[i].checked) {

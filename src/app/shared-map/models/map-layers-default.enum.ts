@@ -1,11 +1,12 @@
 import GeoportailLayer from 'ol-ext/layer/Geoportail';
 import LayerGroup from 'ol/layer/Group';
 
-export const MAP_LAYERS_DEFAULT = [
+export const MAP_DEFAULT_LAYER_GROUP =
   new LayerGroup({
-    //@ts-ignore
-    title: 'Fonds de carte',
-    group: 'base-layer',
+    
+    properties: {
+      title: 'Fonds de carte',
+      group: 'base-layer'},
     layers: [
       new GeoportailLayer({
         layer: 'ORTHOIMAGERY.ORTHOPHOTOS',
@@ -24,5 +25,4 @@ export const MAP_LAYERS_DEFAULT = [
         visible: true
       })
     ]
-  })
-];
+  });
