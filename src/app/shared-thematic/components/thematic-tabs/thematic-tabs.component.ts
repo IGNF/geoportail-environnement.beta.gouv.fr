@@ -25,7 +25,7 @@ export class ThematicTabsComponent implements OnInit {
     this.tabsConfig = THEMATICS;
     this.thematicSelectService.thematicSelection.subscribe(() => {
       this.tabsConfig = THEMATICS;
-      if(!THEMATICS[this.selectedTabIndex].checked){
+      if (!THEMATICS[this.selectedTabIndex].checked) {
         this.selectedTabIndex = 0;
         this.selectTab("synthese");
       }
@@ -34,15 +34,16 @@ export class ThematicTabsComponent implements OnInit {
 
   selectTab(event: any) {
     this.setSelectedTabIndex(event);
+    this.mapContextService.updateLayers();
     this.mapContextService.updateLayersVisibility(event);
   }
 
   setSelectedTabIndex(tabId: string) {
     let indexModifier = 0;
-    for(let i = 0; i < THEMATICS.length; i++) {
-      if(THEMATICS[i].name === tabId) {
-        this.selectedTabIndex = i-indexModifier;
-      }else if(!THEMATICS[i].checked) {
+    for (let i = 0; i < THEMATICS.length; i++) {
+      if (THEMATICS[i].name === tabId) {
+        this.selectedTabIndex = i - indexModifier;
+      } else if (!THEMATICS[i].checked) {
         indexModifier++;
       }
     }
