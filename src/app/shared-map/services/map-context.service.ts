@@ -6,10 +6,11 @@ import { Fill, Stroke, Style } from 'ol/style';
 import { Select } from 'ol/interaction';
 import EditBar from 'ol-ext/control/EditBar.js';
 import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
-import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
+
 import { THEMATICS } from '../../shared-thematic/models/thematic.enum';
+import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +39,6 @@ export class MapContextService {
       }),
       layers: [
         MAP_DEFAULT_LAYER_GROUP,
-        MAP_BIODIVERISTE_LAYER_GROUP,
-        MAP_MONUMENTS_LAYER_GROUP,
         new VectorLayer({
           source: new Vector(),
           properties: { title: 'Ma Forêt' },
@@ -68,7 +67,7 @@ export class MapContextService {
       })
     });
 
-    
+
     this.getLayerDessin().setStyle(style);
 
     const selectStyle = new Style({
@@ -103,14 +102,14 @@ export class MapContextService {
       },
       source: this.getLayerDessin().getSource()
     });
-    editBar.setProperties({name: "editBar"});
+    editBar.setProperties({ name: "editBar" });
     this.map?.addControl(editBar);
   }
 
   removeDrawingTools() {
     let editBar: any;
     this.map?.getControls().forEach((control) => {
-      if(control.get("name") == "editBar"){
+      if (control.get("name") == "editBar") {
         editBar = control;
       }
     })
@@ -121,17 +120,17 @@ export class MapContextService {
   updateLayers() {
     const layers: any = this.map?.getLayers().getArray();
     //utiliser "layers.forEach(...)" ne fonctionne pas
-    for(let i = layers.length-1; i > -1; i--) {
+    for (let i = layers.length - 1; i > -1; i--) {
       const group = layers[i].get('group') || 'base-layer';
       if (group !== 'base-layer') {
         this.map?.removeLayer(layers[i]);
       }
     }
 
-    [MAP_BIODIVERISTE_LAYER_GROUP,MAP_MONUMENTS_LAYER_GROUP].forEach((newlayer) => {
+    [MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP].forEach((newlayer) => {
       const group = newlayer.get('group') || 'no-group';
-      for(let i = 0; i < THEMATICS.length; i++) {
-        if(group === THEMATICS[i].name && THEMATICS[i].checked) {
+      for (let i = 0; i < THEMATICS.length; i++) {
+        if (group === THEMATICS[i].name && THEMATICS[i].checked) {
           this.map?.addLayer(newlayer);
           continue;
         }
@@ -143,7 +142,7 @@ export class MapContextService {
     const layers = this.map?.getLayers().getArray();
     layers?.forEach((layer) => {
       const group = layer.get('group') || 'base-layer';
-      if(group === 'base-layer' || group === event || event === 'synthese') {
+      if (group === 'base-layer' || group === event || event === 'synthese') {
         layer.setVisible(true);
       } else {
         layer.setVisible(false);
