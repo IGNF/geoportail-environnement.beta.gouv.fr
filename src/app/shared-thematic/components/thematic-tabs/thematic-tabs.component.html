@@ -1,4 +1,3 @@
-<dsfr-tabs [selectedTabIndex]="selectedTabIndex" (tabSelect)="selectTab($event)">
 
   @for (ficheTab of ficheTabs; track $index; let first = $first) {
   @if (ficheTab.active) {
@@ -14,4 +13,4 @@
   }
   }
 
-</dsfr-tabs>
+

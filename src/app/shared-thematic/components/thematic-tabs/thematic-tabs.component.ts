@@ -11,10 +11,9 @@ import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-thematic-tabs',
   templateUrl: './thematic-tabs.component.html',
-  styleUrl: './thematic-tabs.component.css'
+  styleUrls: ['./thematic-tabs.component.css']
 })
 export class ThematicTabsComponent implements OnInit {
-
   selectedTabIndex: number = 0;
 
   ficheTabs: any[] = [];
@@ -25,7 +24,7 @@ export class ThematicTabsComponent implements OnInit {
     private ficheInfoFeatureService: FicheInfoFeatureService,
     private thematicSelectService: ThematicSelectService,
     private mapContextService: MapContextService
-  ) { }
+  ) {}
 
   ngOnInit() {
 
