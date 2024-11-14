@@ -12,8 +12,8 @@ export class HomeComponent {
     private router: Router
   ) { }
 
-  newEnquete() {
-    this.router.navigate(['/', 'enquete', 'new']);
+  newRequete() {
+    this.router.navigate(['/', 'requete', 'new']);
   }
 
 }
