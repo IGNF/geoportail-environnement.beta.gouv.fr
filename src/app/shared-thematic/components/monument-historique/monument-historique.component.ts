@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { environment } from '../../../../environments/environment';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService } from '../../services/geoplateforme-wfs.service';
+import { INTERSECTED_LAYERS } from '../../models/thematic.enum';
 
 @Component({
   selector: 'app-monument-historique',
@@ -30,13 +31,16 @@ export class MonumentHistoriqueComponent implements OnInit {
       .getRequest();
 
     this.geoplateformeWfsService.getFeatures(request).subscribe((response: any) => {
+      if(response.features.length) {
+        INTERSECTED_LAYERS.push({name: 'monument_historique'});
+      }
+      this.mapContextService.updateLayersVisibility('synthese');
       this.monuments = this.parseMonuments(response.features);
     });
   };
 
   parseMonuments(features: any[]): { name: string, link: string }[] {
-    // TODO faire sauter le splice qui sert ici à filtres les X premiers resultats
-    return features.splice(0, 14).map((feature) => {
+    return features.map((feature) => {
       const properties = feature.properties;
       let link = '';
       if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier']) {

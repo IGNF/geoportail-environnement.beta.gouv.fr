@@ -9,7 +9,7 @@ import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
 
-import { THEMATICS } from '../../shared-thematic/models/thematic.enum';
+import { INTERSECTED_LAYERS, THEMATICS } from '../../shared-thematic/models/thematic.enum';
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 
 @Injectable({
@@ -139,13 +139,26 @@ export class MapContextService {
   }
 
   updateLayersVisibility(event: any) {
-    const layers = this.map?.getLayers().getArray();
-    layers?.forEach((layer) => {
-      const group = layer.get('group') || 'base-layer';
+    const layersGroup:any = this.map?.getLayers().getArray();
+    layersGroup?.forEach((layerGroup:any) => {
+      const group = layerGroup.get('group') || 'base-layer';
       if (group === 'base-layer' || group === event || event === 'synthese') {
-        layer.setVisible(true);
+        layerGroup.setVisible(true);
+        if(group === event || (event === 'synthese' && group != 'base-layer')) {
+          let visible: boolean;
+          layerGroup.getLayers().forEach((layer:any) => {
+            visible = false;
+            for(let i = 0; i < INTERSECTED_LAYERS.length; i++) {
+              if(layer.get("technicalName").match(new RegExp(INTERSECTED_LAYERS[i].name + "$"))) {
+                visible = true;
+                break;
+              }
+            }
+            layer.setVisible(visible);
+          })
+        }
       } else {
-        layer.setVisible(false);
+        layerGroup.setVisible(false);
       }
     });
   }

@@ -62,8 +62,10 @@ export class GeoplateformeWfsService {
 
   getFeatures(request: WfsRequest): Observable<any> {
     // TODO correct error 500 on POST
-    // return this.httpClient.post(this.url, request.serialise(), { headers: this.headers });
-    return this.httpClient.get(this.toQueryParams(request), { headers: this.headers });
+    let res:any = this.httpClient.get(this.toQueryParams(request), { headers: this.headers });
+    res.typeName = request.typeName;
+
+    return res;
   }
 
   private toQueryParams(request: WfsRequest): string {

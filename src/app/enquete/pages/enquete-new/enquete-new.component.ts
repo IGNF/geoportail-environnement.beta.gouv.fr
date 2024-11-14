@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
+import { INTERSECTED_LAYERS, THEMATICS } from '../../../shared-thematic/models/thematic.enum';
 
 @Component({
   selector: 'app-enquete-new',
@@ -55,6 +56,10 @@ export class EnqueteNewComponent implements OnInit {
           this.step--;
         }else {
           this.mapContextService.removeDrawingTools();
+          for(let i = 0; i < THEMATICS.length; i++) {
+            THEMATICS[i].checked = true;
+          }
+          this.mapContextService.updateLayers();
         };
         return;
     }
@@ -69,6 +74,14 @@ export class EnqueteNewComponent implements OnInit {
         return;
       case 1:
         this.mapContextService.addDrawingTools();
+        for(let i = INTERSECTED_LAYERS.length; i >= 0; i--) {
+          INTERSECTED_LAYERS.pop();
+        }
+        for(let i = 0; i < THEMATICS.length; i++) {
+          THEMATICS[i].checked = false;
+        }
+        this.mapContextService.updateLayers();
+        
     }
   }
 
