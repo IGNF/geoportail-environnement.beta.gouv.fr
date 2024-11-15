@@ -1,5 +1,11 @@
 <dsfr-tabs [selectedTabIndex]="selectedTabIndex" (tabSelect)="selectTab($event)">
 
+  <!--
+  <dsfr-tab tabId="tab.name" label="tab.label">
+    <app-fiche-info-view></app-fiche-info-view>
+  </dsfr-tab>
+  -->
+
   @for (tab of tabsConfig; track $index) {
   <dsfr-tab *ngIf="tab.checked" [tabId]="tab.name" [label]="tab.label">
     @switch (tab.name) {

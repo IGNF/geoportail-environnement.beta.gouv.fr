@@ -1,6 +1,7 @@
 import TileLayer from 'ol/layer/Tile';
 import { TileWMS } from 'ol/source';
 import LayerGroup from 'ol/layer/Group';
+import { THEMATIC_FICHE_LIST } from './thematic-fiche-list';
 
 export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
   properties: {
@@ -9,11 +10,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
   },
   layers: [
     new TileLayer({
-      properties: {
-        title: 'Terrains des conservatoires d\'espaces naturels',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.MNHN.CONSERVATOIRES:cen'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CONSERVATOIRES:cen'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -35,11 +32,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Conservatoire du littoral - sites sous responsabilité du conservatoire',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -61,11 +54,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Parcs naturels régionaux',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.PNR:pnr'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -87,11 +76,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Réserves nationales de chasse et de faune sauvage',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.RNCF:rncfs'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNCF:rncfs'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -113,11 +98,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Réserves Biologiques',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.RB:rb'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RB:rb'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -139,11 +120,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Arrêtés listes de sites d\'intérêt géologique',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.APLG:aplg'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APLG:aplg'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -165,11 +142,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Périmètres de protection de réserves naturelles',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.MNHN.RN.PERIMETER:pprnn'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.RN.PERIMETER:pprnn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -191,11 +164,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Réserves naturelles régionales',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDSITES.MNHN.RESERVES-REGIONALES:rnr'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDSITES.MNHN.RESERVES-REGIONALES:rnr'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -217,11 +186,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Réserves naturelles nationales',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.RNN:rnn'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNN:rnn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -243,11 +208,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Réserves Naturelles de Corse',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.RNC:rnc'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNC:rnc'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -269,11 +230,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Biotopes d\'espèces protégées',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.APB:apb'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APB:apb'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -295,11 +252,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Arrêtés de protection d\'habitats naturels',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.APHN:aphn'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APHN:aphn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -321,11 +274,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Arrêtés de protection de géotope',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.APG:apg'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APG:apg'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -347,11 +296,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Parcs Nationaux',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.PN:pn'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PN:pn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -373,11 +318,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Natura 2000 Habitats',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.SIC:sic'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.SIC:sic'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -399,11 +340,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'Natura 2000 Oiseaux',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.ZPS:zps'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZPS:zps'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -425,11 +362,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'ZNIEFF2',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.ZNIEFF2:znieff2'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZNIEFF2:znieff2'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -451,11 +384,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: {
-        title: 'ZNIEFF1',
-        group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.ZNIEFF1:znieff1'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZNIEFF1:znieff1'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,

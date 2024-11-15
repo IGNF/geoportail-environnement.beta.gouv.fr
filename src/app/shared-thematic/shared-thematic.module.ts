@@ -10,6 +10,8 @@ import { SyntheseComponent } from './components/synthese/synthese.component';
 
 import { ThematicSelectComponent } from './components/thematic-select/thematic-select.component';
 import { ThematicTabsComponent } from './components/thematic-tabs/thematic-tabs.component';
+import { FicheInfoViewComponent } from './components/fiche-info-view/fiche-info-view.component';
+import { ReglementationViewComponent } from './components/reglementation-view/reglementation-view.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ThematicTabsComponent } from './components/thematic-tabs/thematic-tabs.
     MonumentHistoriqueComponent,
     AgricultureComponent,
     ThematicSelectComponent,
-    ThematicTabsComponent
+    ThematicTabsComponent,
+    FicheInfoViewComponent,
+    ReglementationViewComponent
   ],
   imports: [
     CommonModule,

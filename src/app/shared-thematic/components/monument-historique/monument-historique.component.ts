@@ -1,9 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService } from '../../services/geoplateforme-wfs.service';
-import { INTERSECTED_LAYERS } from '../../models/thematic.enum';
 
 @Component({
   selector: 'app-monument-historique',
@@ -31,8 +30,8 @@ export class MonumentHistoriqueComponent implements OnInit {
       .getRequest();
 
     this.geoplateformeWfsService.getFeatures(request).subscribe((response: any) => {
-      if(response.features.length) {
-        INTERSECTED_LAYERS.push({name: 'monument_historique'});
+      if (response.features.length) {
+        this.mapContextService.getActiveThematicLayers().push({ name: 'monument_historique' });
       }
       this.mapContextService.updateLayersVisibility('synthese');
       this.monuments = this.parseMonuments(response.features);

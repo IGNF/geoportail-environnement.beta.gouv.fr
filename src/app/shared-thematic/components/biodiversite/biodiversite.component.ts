@@ -1,10 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { zip } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService, LON_LAT_ORDER } from '../../services/geoplateforme-wfs.service';
 import { MAP_BIODIVERISTE_LAYER_GROUP } from '../../models/map-thematic-layers.enum';
-import { INTERSECTED_LAYERS } from '../../models/thematic.enum';
 
 @Component({
   selector: 'app-biodiversite',
@@ -23,7 +22,7 @@ export class BiodiversiteComponent implements OnInit {
   ngOnInit(): void {
     const maForet = this.mapContextService.getMaForet();
 
-    const observableRequest = MAP_BIODIVERISTE_LAYER_GROUP.getLayersArray().map((layer)=> {
+    const observableRequest = MAP_BIODIVERISTE_LAYER_GROUP.getLayersArray().map((layer) => {
       return layer.get('technicalName');
     }).map((layername) => {
       return this.geoplateformeWfsService
@@ -34,18 +33,18 @@ export class BiodiversiteComponent implements OnInit {
     }).map((request) => this.geoplateformeWfsService.getFeatures(request));
 
     zip(observableRequest).subscribe((responses: any[]) => {
-      const features = responses.reduce((collection, response) => { 
+      const features = responses.reduce((collection, response) => {
         if (response.features) {
           collection.push(...response.features);
         }
         return collection;
-      },[]);
+      }, []);
 
-      for(let i = 0; i < features.length; i++) {
+      for (let i = 0; i < features.length; i++) {
         const layer = this.parseLayerFromId(features[i].id);
-        INTERSECTED_LAYERS.push({theme: 'biodiversite', name: layer});
+        this.mapContextService.getActiveThematicLayers().push({ theme: 'biodiversite', name: layer });
       }
-        this.mapContextService.updateLayersVisibility('synthese');
+      this.mapContextService.updateLayersVisibility('synthese');
 
       this.sites = this.parseSites(features);
     });

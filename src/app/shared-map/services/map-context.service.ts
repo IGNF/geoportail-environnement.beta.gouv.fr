@@ -9,8 +9,8 @@ import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
 
-import { INTERSECTED_LAYERS, THEMATICS } from '../../shared-thematic/models/thematic.enum';
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
+import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche-list';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,8 @@ export class MapContextService {
   map?: Map;
 
   mapLoaded: EventEmitter<any> = new EventEmitter<any>();
+
+  private activeThematicLayers: any[] = [];
 
   constructor() { }
 
@@ -102,14 +104,14 @@ export class MapContextService {
       },
       source: this.getLayerDessin().getSource()
     });
-    editBar.setProperties({ name: "editBar" });
+    editBar.setProperties({ name: 'editBar' });
     this.map?.addControl(editBar);
   }
 
   removeDrawingTools() {
     let editBar: any;
     this.map?.getControls().forEach((control) => {
-      if (control.get("name") == "editBar") {
+      if (control.get('name') == 'editBar') {
         editBar = control;
       }
     })
@@ -119,7 +121,7 @@ export class MapContextService {
 
   updateLayers() {
     const layers: any = this.map?.getLayers().getArray();
-    //utiliser "layers.forEach(...)" ne fonctionne pas
+    //utiliser 'layers.forEach(...)' ne fonctionne pas
     for (let i = layers.length - 1; i > -1; i--) {
       const group = layers[i].get('group') || 'base-layer';
       if (group !== 'base-layer') {
@@ -129,8 +131,8 @@ export class MapContextService {
 
     [MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP].forEach((newlayer) => {
       const group = newlayer.get('group') || 'no-group';
-      for (let i = 0; i < THEMATICS.length; i++) {
-        if (group === THEMATICS[i].name && THEMATICS[i].checked) {
+      for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
+        if (group === THEMATIC_FICHE_LIST[i].name && THEMATIC_FICHE_LIST[i].active) {
           this.map?.addLayer(newlayer);
           continue;
         }
@@ -139,17 +141,17 @@ export class MapContextService {
   }
 
   updateLayersVisibility(event: any) {
-    const layersGroup:any = this.map?.getLayers().getArray();
-    layersGroup?.forEach((layerGroup:any) => {
+    const layersGroup: any = this.map?.getLayers().getArray();
+    layersGroup?.forEach((layerGroup: any) => {
       const group = layerGroup.get('group') || 'base-layer';
       if (group === 'base-layer' || group === event || event === 'synthese') {
         layerGroup.setVisible(true);
-        if(group === event || (event === 'synthese' && group != 'base-layer')) {
+        if (group === event || (event === 'synthese' && group != 'base-layer')) {
           let visible: boolean;
-          layerGroup.getLayers().forEach((layer:any) => {
+          layerGroup.getLayers().forEach((layer: any) => {
             visible = false;
-            for(let i = 0; i < INTERSECTED_LAYERS.length; i++) {
-              if(layer.get("technicalName").match(new RegExp(INTERSECTED_LAYERS[i].name + "$"))) {
+            for (let i = 0; i < this.activeThematicLayers.length; i++) {
+              if (layer.get('technicalName').match(new RegExp(this.activeThematicLayers[i].name + '$'))) {
                 visible = true;
                 break;
               }
@@ -172,6 +174,14 @@ export class MapContextService {
     const layers = this.map?.getAllLayers();
     const dessin = layers?.find((layer) => layer.get('title') === 'Ma Forêt');
     return dessin;
+  }
+
+  /**
+   * liste des couches thematiques pour lesquels on une réponse avec notre zone forestiere
+   * @returns 
+   */
+  getActiveThematicLayers() {
+    return this.activeThematicLayers;
   }
 
   getMaForet() {
