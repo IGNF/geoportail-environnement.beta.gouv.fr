@@ -8,11 +8,11 @@ const STEPPER_CONFIG = [
 ];
 
 @Component({
-  selector: 'app-enquete-stepper',
-  templateUrl: './enquete-stepper.component.html',
-  styleUrl: './enquete-stepper.component.css'
+  selector: 'app-requete-stepper',
+  templateUrl: './requete-stepper.component.html',
+  styleUrl: './requete-stepper.component.css'
 })
-export class EnqueteStepperComponent implements OnInit, OnChanges {
+export class RequeteStepperComponent implements OnInit, OnChanges {
 
   @Input() step: number = 0;
 

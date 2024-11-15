@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EauComponent } from './eau.component';
+import { FicheInfoViewComponent } from './fiche-info-view.component';
 
-describe('EauComponent', () => {
-  let component: EauComponent;
-  let fixture: ComponentFixture<EauComponent>;
+describe('FicheInfoViewComponent', () => {
+  let component: FicheInfoViewComponent;
+  let fixture: ComponentFixture<FicheInfoViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EauComponent]
+      declarations: [FicheInfoViewComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EauComponent);
+    fixture = TestBed.createComponent(FicheInfoViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

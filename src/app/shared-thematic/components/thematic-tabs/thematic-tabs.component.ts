@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
-import { THEMATICS } from '../../models/thematic.enum';
+import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
 
 @Component({
   selector: 'app-thematic-tabs',
@@ -22,28 +22,34 @@ export class ThematicTabsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tabsConfig = THEMATICS;
-    this.thematicSelectService.thematicSelection.subscribe(() => {
-      this.tabsConfig = THEMATICS;
-      if (!THEMATICS[this.selectedTabIndex].checked) {
-        this.selectedTabIndex = 0;
-        this.selectTab("synthese");
-      }
+    this.tabsConfig = THEMATIC_FICHE_LIST;
+
+    this.thematicSelectService.thematicSelection.subscribe((activeThemeList: any[]) => {
+      // TODO recuperer la liste des couches actives et reconstruire le tableau tabconfig a partir de cette liste
+      activeThemeList = ['biodiversite', 'monument-historique'];
+      activeThemeList.unshift('synthese');
+      this.updateActiveTabs(activeThemeList);
     });
   }
 
+
   selectTab(event: any) {
     this.setSelectedTabIndex(event);
-    this.mapContextService.updateLayers();
     this.mapContextService.updateLayersVisibility(event);
   }
 
-  setSelectedTabIndex(tabId: string) {
+  private updateActiveTabs(activeThemeList: any[]) {
+    this.tabsConfig = THEMATIC_FICHE_LIST.filter((theme) => activeThemeList.includes(theme.name));
+    this.selectTab('synthese');
+  }
+
+
+  private setSelectedTabIndex(tabId: string) {
     let indexModifier = 0;
-    for (let i = 0; i < THEMATICS.length; i++) {
-      if (THEMATICS[i].name === tabId) {
+    for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
+      if (THEMATIC_FICHE_LIST[i].name === tabId) {
         this.selectedTabIndex = i - indexModifier;
-      } else if (!THEMATICS[i].checked) {
+      } else if (!THEMATIC_FICHE_LIST[i].active) {
         indexModifier++;
       }
     }

@@ -11,8 +11,8 @@ export const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'enquete',
-    loadChildren: () => import('./enquete/enquete.module').then(m => m.EnqueteModule)
+    path: 'requete',
+    loadChildren: () => import('./requete/requete.module').then(m => m.RequeteModule)
   },
   {
     path: 'login',

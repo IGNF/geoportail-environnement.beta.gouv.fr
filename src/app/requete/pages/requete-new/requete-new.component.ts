@@ -4,13 +4,14 @@ import { map } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
+import { THEMATIC_FICHE_LIST } from '../../../shared-thematic/models/thematic-fiche-list';
 
 @Component({
-  selector: 'app-enquete-new',
-  templateUrl: './enquete-new.component.html',
-  styleUrl: './enquete-new.component.css'
+  selector: 'app-requete-new',
+  templateUrl: './requete-new.component.html',
+  styleUrl: './requete-new.component.css'
 })
-export class EnqueteNewComponent implements OnInit {
+export class RequeteNewComponent implements OnInit {
 
   forestId: string = '';
 
@@ -48,27 +49,36 @@ export class EnqueteNewComponent implements OnInit {
 
   nextStep() {
     this.step++;
-    switch(this.step) {
-      case 2:
-        if(!this.mapContextService.getLayerDessin().getSource().getFeatures().length) {
-          alert("Veuillez préciser le périmètre de votre forêt à l'aide des outils de dessins disponible sur la carte.");
-          this.step--;
-        }else {
-          this.mapContextService.removeDrawingTools();
-        };
+    if (this.step === 2) {
+      if (!this.mapContextService.getLayerDessin().getSource().getFeatures().length) {
+        alert("Veuillez préciser le périmètre de votre forêt à l'aide des outils de dessins disponible sur la carte.");
+        this.step--;
         return;
+      }
+      this.mapContextService.removeDrawingTools();
+      for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
+        THEMATIC_FICHE_LIST[i].active = true;
+      }
+      this.mapContextService.updateLayers();
     }
   }
 
 
   previousStep() {
     this.step--;
-    switch(this.step) {
+    switch (this.step) {
       case 0:
         this.mapContextService.resetDessin();
         return;
       case 1:
         this.mapContextService.addDrawingTools();
+        for (let i = this.mapContextService.getActiveThematicLayers().length; i >= 0; i--) {
+          this.mapContextService.getActiveThematicLayers().pop();
+        }
+        for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
+          THEMATIC_FICHE_LIST[i].active = false;
+        }
+        this.mapContextService.updateLayers();
     }
   }
 
@@ -78,7 +88,7 @@ export class EnqueteNewComponent implements OnInit {
 
 
   private buildBreadcrumb() {
-    const label = this.forestId ? `Enquête ${this.forestId}` : 'Nouvelle enquête';
+    const label = this.forestId ? `Requête ${this.forestId}` : 'Nouvelle requête';
     this.breadcrumb = this.breadcrumbTransformerService.fromOptions({
       label: label, route: ''
     });
