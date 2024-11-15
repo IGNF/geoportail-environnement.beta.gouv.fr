@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnqueteStepperControlComponent } from './enquete-stepper-control.component';
+import { RequeteStepperControlComponent } from './requete-stepper-control.component';
 import { SharedDesignDsfrModule } from '../../../shared-design-dsfr/shared-design-dsfr.module';
 
-describe('EnqueteStepperControlComponent', () => {
-  let component: EnqueteStepperControlComponent;
-  let fixture: ComponentFixture<EnqueteStepperControlComponent>;
+describe('RequeteStepperControlComponent', () => {
+  let component: RequeteStepperControlComponent;
+  let fixture: ComponentFixture<RequeteStepperControlComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EnqueteStepperControlComponent],
+      declarations: [RequeteStepperControlComponent],
       imports: [SharedDesignDsfrModule]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EnqueteStepperControlComponent);
+    fixture = TestBed.createComponent(RequeteStepperControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

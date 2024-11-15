@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-enquete-stepper-control',
-  templateUrl: './enquete-stepper-control.component.html',
-  styleUrl: './enquete-stepper-control.component.css'
+  selector: 'app-requete-stepper-control',
+  templateUrl: './requete-stepper-control.component.html',
+  styleUrl: './requete-stepper-control.component.css'
 })
-export class EnqueteStepperControlComponent {
+export class RequeteStepperControlComponent {
 
   @Input() step: number = 0;
 

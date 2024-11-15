@@ -7,11 +7,11 @@ import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transf
 import { THEMATIC_FICHE_LIST } from '../../../shared-thematic/models/thematic-fiche-list';
 
 @Component({
-  selector: 'app-enquete-new',
-  templateUrl: './enquete-new.component.html',
-  styleUrl: './enquete-new.component.css'
+  selector: 'app-requete-new',
+  templateUrl: './requete-new.component.html',
+  styleUrl: './requete-new.component.css'
 })
-export class EnqueteNewComponent implements OnInit {
+export class RequeteNewComponent implements OnInit {
 
   forestId: string = '';
 
@@ -88,7 +88,7 @@ export class EnqueteNewComponent implements OnInit {
 
 
   private buildBreadcrumb() {
-    const label = this.forestId ? `Enquête ${this.forestId}` : 'Nouvelle enquête';
+    const label = this.forestId ? `Requête ${this.forestId}` : 'Nouvelle requête';
     this.breadcrumb = this.breadcrumbTransformerService.fromOptions({
       label: label, route: ''
     });

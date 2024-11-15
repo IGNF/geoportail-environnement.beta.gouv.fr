@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { provideRouter } from '@angular/router';
 
-import { EnqueteNewComponent } from './pages/enquete-new/enquete-new.component';
-import { EnqueteStepperComponent } from './components/enquete-stepper/enquete-stepper.component';
+import { RequeteNewComponent } from './pages/requete-new/requete-new.component';
+import { RequeteStepperComponent } from './components/requete-stepper/requete-stepper.component';
 import { SharedDesignDsfrModule } from '../shared-design-dsfr/shared-design-dsfr.module';
 import { SharedMapModule } from '../shared-map/shared-map.module';
-import { EnqueteStepperControlComponent } from './components/enquete-stepper-control/enquete-stepper-control.component';
+import { RequeteStepperControlComponent } from './components/requete-stepper-control/requete-stepper-control.component';
 import { SharedThematicModule } from '../shared-thematic/shared-thematic.module';
-import { enqueteRoutes } from './enquete.routes';
+import { requeteRoutes } from './requete.routes';
 
 @NgModule({
   declarations: [
-    EnqueteNewComponent,
-    EnqueteStepperComponent,
-    EnqueteStepperControlComponent
+    RequeteNewComponent,
+    RequeteStepperComponent,
+    RequeteStepperControlComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +23,7 @@ import { enqueteRoutes } from './enquete.routes';
     SharedDesignDsfrModule
   ],
   providers: [
-    provideRouter(enqueteRoutes)
+    provideRouter(requeteRoutes)
   ]
 })
-export class EnqueteModule { }
+export class RequeteModule { }

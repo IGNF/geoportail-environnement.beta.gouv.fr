@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnqueteStepperComponent } from './enquete-stepper.component';
+import { RequeteStepperComponent } from './requete-stepper.component';
 import { SharedDesignDsfrModule } from '../../../shared-design-dsfr/shared-design-dsfr.module';
 import { provideRouter } from '@angular/router';
 
-describe('EnqueteStepperComponent', () => {
-  let component: EnqueteStepperComponent;
-  let fixture: ComponentFixture<EnqueteStepperComponent>;
+describe('RequeteStepperComponent', () => {
+  let component: RequeteStepperComponent;
+  let fixture: ComponentFixture<RequeteStepperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EnqueteStepperComponent],
+      declarations: [RequeteStepperComponent],
       imports: [
         SharedDesignDsfrModule
       ],
@@ -19,7 +19,7 @@ describe('EnqueteStepperComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EnqueteStepperComponent);
+    fixture = TestBed.createComponent(RequeteStepperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
