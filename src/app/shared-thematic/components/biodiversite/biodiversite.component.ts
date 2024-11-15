@@ -22,7 +22,7 @@ export class BiodiversiteComponent implements OnInit {
   ngOnInit(): void {
     const maForet = this.mapContextService.getMaForet();
 
-    const observableRequest = MAP_BIODIVERISTE_LAYER_GROUP.getLayersArray().map((layer)=> {
+    const observableRequest = MAP_BIODIVERISTE_LAYER_GROUP.getLayersArray().map((layer) => {
       return layer.get('technicalName');
     }).map((layername) => {
       return this.geoplateformeWfsService
@@ -30,7 +30,7 @@ export class BiodiversiteComponent implements OnInit {
         .fromLayer(layername)
         .intersectCollection(maForet, 'geom', !LON_LAT_ORDER)
         .getRequest();
-    }).map((request) => this.geoplateformeWfsService.getFeatures(request))
+    }).map((request) => this.geoplateformeWfsService.getFeatures(request));
 
     zip(observableRequest).subscribe((responses: any[]) => {
       const features = responses.reduce((collection, response) => {
@@ -38,7 +38,14 @@ export class BiodiversiteComponent implements OnInit {
           collection.push(...response.features);
         }
         return collection;
-      },[]);
+      }, []);
+
+      for (let i = 0; i < features.length; i++) {
+        const layer = this.parseLayerFromId(features[i].id);
+        this.mapContextService.getActiveThematicLayers().push({ theme: 'biodiversite', name: layer });
+      }
+      this.mapContextService.updateLayersVisibility('synthese');
+
       this.sites = this.parseSites(features);
     });
   };
@@ -51,9 +58,8 @@ export class BiodiversiteComponent implements OnInit {
       return {
         id: id,
         layer: layer,
-        name: properties.sitename || properties.nom,
-        link: properties.url,
-        prairiesCount: properties.num_prs
+        name: properties.sitename || properties.nom || properties.nom_site,
+        link: properties.url
       };
     });
   };

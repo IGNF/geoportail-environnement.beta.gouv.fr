@@ -30,13 +30,16 @@ export class MonumentHistoriqueComponent implements OnInit {
       .getRequest();
 
     this.geoplateformeWfsService.getFeatures(request).subscribe((response: any) => {
+      if (response.features.length) {
+        this.mapContextService.getActiveThematicLayers().push({ name: 'monument_historique' });
+      }
+      this.mapContextService.updateLayersVisibility('synthese');
       this.monuments = this.parseMonuments(response.features);
     });
   };
 
   parseMonuments(features: any[]): { name: string, link: string }[] {
-    // TODO faire sauter le splice qui sert ici à filtres les X premiers resultats
-    return features.splice(0, 14).map((feature) => {
+    return features.map((feature) => {
       const properties = feature.properties;
       let link = '';
       if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier']) {

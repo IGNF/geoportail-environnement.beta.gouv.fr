@@ -8,23 +8,59 @@
     } @else {
     {{ site.name }} -
     }
+    @if (site.layer === 'cen') {
+      Terrain des conservatoires d'espaces naturels
+    }
+    @if (site.layer === 'cdl') {
+      Site sous responsabilité du conservatoire du littoral
+    }
+    @if (site.layer === 'pnr') {
+      Parc naturel régional
+    }
+    @if (site.layer === 'rncfs') {
+      Réserve nationale de chasse et de faune sauvage
+    }
+    @if (site.layer === 'rb') {
+      Réserve biologique
+    }
+    @if (site.layer === 'aplg') {
+      Arrêté listes de sites d'intérêt géologique
+    }
+    @if (site.layer === 'pprnn') {
+      Périmètre de protection d'une réserve naturelle
+    }
+    @if (site.layer === 'rnn') {
+      Réserve naturelle nationale
+    }
+    @if (site.layer === 'rnr') {
+      Réserve naturelle régionale
+    }
+    @if (site.layer === 'rnc') {
+      Réserve Naturelle de Corse
+    }
+    @if (site.layer === 'apb') {
+      Biotope d'espèces protégées
+    }
+    @if (site.layer === 'aphn') {
+      Arrêté de protection d'habitats naturels
+    }
+    @if (site.layer === 'apg') {
+      Arrêté de protection de géotope
+    }
+    @if (site.layer === 'pn') {
+      Parc National
+    }
     @if (site.layer === 'sic') {
-    Site Natura 2000 Oiseaux
+      Site Natura 2000 Oiseaux
     }
     @if (site.layer === 'zps') {
-    Site Natura 2000 Habitats
-    }
-    @if (site.layer === 'prairies_sensibles') {
-    Zone Natura 2000 prairies et pâturages
+      Site Natura 2000 Habitats
     }
     @if (site.layer === 'znieff1') {
-    Site ZNIEFF2 type 1
+      Site ZNIEFF2 type 1
     }
     @if (site.layer === 'znieff2') {
-    Site ZNIEFF2 type 2
-    }
-    @if (site.prairiesCount) {
-    - {{ site.prairiesCount }} prairies
+      Site ZNIEFF2 type 2
     }
   </li>
   }

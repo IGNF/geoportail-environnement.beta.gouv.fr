@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { WfsRequest } from '../models/wfs-request';
@@ -62,7 +62,6 @@ export class GeoplateformeWfsService {
 
   getFeatures(request: WfsRequest): Observable<any> {
     // TODO correct error 500 on POST
-    // return this.httpClient.post(this.url, request.serialise(), { headers: this.headers });
     return this.httpClient.get(this.toQueryParams(request), { headers: this.headers });
   }
 
