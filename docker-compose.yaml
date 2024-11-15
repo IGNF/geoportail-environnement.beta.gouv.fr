@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      target: prod  # Utilise l'étape "dev" pour le développement
+    container_name: angular_foreg
+    ports:
+      - "8089:8080"  # Expose le port nginx
+
