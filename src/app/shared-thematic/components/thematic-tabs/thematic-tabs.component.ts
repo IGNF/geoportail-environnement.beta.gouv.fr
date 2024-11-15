@@ -23,12 +23,12 @@ export class ThematicTabsComponent implements OnInit {
 
   ngOnInit() {
     this.tabsConfig = THEMATIC_FICHE_LIST;
-    this.thematicSelectService.thematicSelection.subscribe(() => {
-      this.tabsConfig = THEMATIC_FICHE_LIST;
-      if (!THEMATIC_FICHE_LIST[this.selectedTabIndex].active) {
-        this.selectedTabIndex = 0;
-        this.selectTab("synthese");
-      }
+
+    this.thematicSelectService.thematicSelection.subscribe((activeThemeList: any[]) => {
+      // TODO recuperer la liste des couches actives et reconstruire le tableau tabconfig a partir de cette liste
+      activeThemeList = ['biodiversite', 'monument-historique'];
+      activeThemeList.unshift('synthese');
+      this.updateActiveTabs(activeThemeList);
     });
   }
 
@@ -36,6 +36,11 @@ export class ThematicTabsComponent implements OnInit {
   selectTab(event: any) {
     this.setSelectedTabIndex(event);
     this.mapContextService.updateLayersVisibility(event);
+  }
+
+  private updateActiveTabs(activeThemeList: any[]) {
+    this.tabsConfig = THEMATIC_FICHE_LIST.filter((theme) => activeThemeList.includes(theme.name));
+    this.selectTab('synthese');
   }
 
 

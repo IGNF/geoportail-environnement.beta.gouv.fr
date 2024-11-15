@@ -7,19 +7,13 @@
   -->
 
   @for (tab of tabsConfig; track $index) {
-  <dsfr-tab *ngIf="tab.checked" [tabId]="tab.name" [label]="tab.label">
+  <dsfr-tab *ngIf="tab.active" [tabId]="tab.name" [label]="tab.label">
     @switch (tab.name) {
     @case ('synthese') {
     <app-synthese></app-synthese>
     }
-    @case ('agriculture') {
-    <p>TODO</p>
-    }
     @case ('biodiversite') {
     <app-biodiversite></app-biodiversite>
-    }
-    @case ('eau') {
-    <p>TODO</p>
     }
     @case ('monument-historique') {
     <app-monument-historique></app-monument-historique>
