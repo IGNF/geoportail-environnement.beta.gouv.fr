@@ -4,7 +4,7 @@ import { RequeteNewComponent } from './pages/requete-new/requete-new.component';
 
 export const requeteRoutes: Routes = [
   {
-    path: 'new',
+    path: 'nouvelle',
     component: RequeteNewComponent,
     title: 'Nouvelle Requête'
   },

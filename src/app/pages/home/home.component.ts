@@ -13,7 +13,7 @@ export class HomeComponent {
   ) { }
 
   newRequete() {
-    this.router.navigate(['/', 'requete', 'new']);
+    this.router.navigate(['/', 'requete', 'nouvelle']);
   }
 
 }
