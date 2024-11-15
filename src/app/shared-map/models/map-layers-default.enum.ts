@@ -14,6 +14,7 @@ export const MAP_DEFAULT_LAYER_GROUP = new LayerGroup({
     }),
     new GeoportailLayer({
       properties: { title: 'Cadastre' },
+      minZoom: 14, // visible at zoom levels 14 and below
       layer: 'CADASTRALPARCELS.PARCELLAIRE_EXPRESS',
       visible: true
     }),

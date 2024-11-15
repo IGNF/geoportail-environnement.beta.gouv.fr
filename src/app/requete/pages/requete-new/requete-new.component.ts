@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
+import { THEMATIC_FICHE_LIST } from '../../../shared-thematic/models/thematic-fiche-list';
 
 @Component({
   selector: 'app-requete-new',
@@ -48,27 +49,36 @@ export class RequeteNewComponent implements OnInit {
 
   nextStep() {
     this.step++;
-    switch(this.step) {
-      case 2:
-        if(!this.mapContextService.getLayerDessin().getSource().getFeatures().length) {
-          alert("Veuillez préciser le périmètre de votre forêt à l'aide des outils de dessins disponible sur la carte.");
-          this.step--;
-        }else {
-          this.mapContextService.removeDrawingTools();
-        };
+    if (this.step === 2) {
+      if (!this.mapContextService.getLayerDessin().getSource().getFeatures().length) {
+        alert("Veuillez préciser le périmètre de votre forêt à l'aide des outils de dessins disponible sur la carte.");
+        this.step--;
         return;
+      }
+      this.mapContextService.removeDrawingTools();
+      for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
+        THEMATIC_FICHE_LIST[i].active = true;
+      }
+      this.mapContextService.updateLayers();
     }
   }
 
 
   previousStep() {
     this.step--;
-    switch(this.step) {
+    switch (this.step) {
       case 0:
         this.mapContextService.resetDessin();
         return;
       case 1:
         this.mapContextService.addDrawingTools();
+        for (let i = this.mapContextService.getActiveThematicLayers().length; i >= 0; i--) {
+          this.mapContextService.getActiveThematicLayers().pop();
+        }
+        for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
+          THEMATIC_FICHE_LIST[i].active = false;
+        }
+        this.mapContextService.updateLayers();
     }
   }
 

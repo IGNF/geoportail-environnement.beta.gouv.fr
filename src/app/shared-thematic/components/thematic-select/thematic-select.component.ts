@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ThematicSelectService } from '../../services/thematic-select.service';
-import { THEMATICS } from '../../models/thematic.enum';
+import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
 
 @Component({
   selector: 'app-thematic-select',
@@ -11,14 +11,18 @@ export class ThematicSelectComponent implements OnInit {
 
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
 
-   checkboxes: any[] = [];
+  checkboxes: any[] = [];
 
   constructor(
     private thematicSelectService: ThematicSelectService
   ) { }
 
   ngOnInit(): void {
-     this.checkboxes = THEMATICS.slice(1);
+    this.checkboxes = THEMATIC_FICHE_LIST.slice(1).map((theme) => {
+      return Object.assign(theme, {
+        checked: theme.active
+      });
+    });
   };
 
   onCheckboxChange(event: any): void {
@@ -27,13 +31,7 @@ export class ThematicSelectComponent implements OnInit {
     }
     let label = event.target.labels[0].textContent;
 
-    for(let i = 0; i < THEMATICS.length; i++) {
-      if(THEMATICS[i].label == label) {
-        THEMATICS[i].checked = !THEMATICS[i].checked;
-      }
-    }
-
-    this.thematicSelectService.updateThematics(THEMATICS);
+    this.thematicSelectService.updateThematics([]);
     this.select.emit(event);
   };
 
