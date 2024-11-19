@@ -2,8 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedDesignDsfrModule } from '../../../shared-design-dsfr/shared-design-dsfr.module';
 import { ThematicTabsComponent } from './thematic-tabs.component';
 import { SyntheseComponent } from '../synthese/synthese.component';
-import { BiodiversiteComponent } from '../biodiversite/biodiversite.component';
-import { MonumentHistoriqueComponent } from '../monument-historique/monument-historique.component';
+import { FicheInfoViewComponent } from '../fiche-info-view/fiche-info-view.component';
 import { appConfig } from '../../../app.config';
 
 
@@ -13,7 +12,7 @@ describe('ThematicTabsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ThematicTabsComponent, SyntheseComponent, BiodiversiteComponent, MonumentHistoriqueComponent],
+      declarations: [ThematicTabsComponent, SyntheseComponent, FicheInfoViewComponent],
       imports: [SharedDesignDsfrModule],
       providers: appConfig.providers
     })

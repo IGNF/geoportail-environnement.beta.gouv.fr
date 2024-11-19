@@ -415,11 +415,7 @@ export const MAP_MONUMENTS_LAYER_GROUP = new LayerGroup({
   },
   layers: [
     new TileLayer({
-      properties: {
-        title: 'Monuments historiques',
-        group: 'monument-historique',
-        technicalName: 'monument_historique'
-      },
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'monument-historique')?.layers?.find((l) => l.technicalName === 'wfs_sup:assiette_sup_s'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
