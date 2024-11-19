@@ -7,14 +7,15 @@ import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 })
 export class TitlePrefixStrategy extends TitleStrategy {
 
-  updateTitle(snapshot: RouterStateSnapshot): void {
-    const title = this.buildTitle(snapshot);
-    if (title) {
-      this.title.setTitle(`${title} - Géoportail de l'environnement`);
-    }
-  }
-
   constructor(private title: Title) {
     super();
   }
+
+  updateTitle(snapshot: RouterStateSnapshot): void {
+    const title = this.buildTitle(snapshot);
+    let content = title ? `${title} - ` : '';
+    content += 'Géoportail de l\'environnement';
+    this.title.setTitle(content);
+  }
+
 }

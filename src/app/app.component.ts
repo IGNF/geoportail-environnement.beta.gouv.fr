@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  title: string = 'Observatoire des forêts françaises';
+  title: string = 'Géoportail de l\'environnement';
 
   skiplinks: any[] = [
     { label: 'Contenu', route: 'content' },
@@ -29,11 +29,6 @@ export class AppComponent implements OnInit {
         accessibleTitle.focus();
       }
     });
-  }
-
-
-  backToTop(event: any) {
-    this.skipLinkSelect('header-navigation');
   }
 
 

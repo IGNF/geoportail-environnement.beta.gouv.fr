@@ -27,22 +27,22 @@ export const routes: Routes = [
   {
     path: 'accessibilite',
     component: SimplePageComponent,
-    title: 'Accessibilite'
+    title: 'Déclaration d\'accessibilité'
   },
   {
     path: 'mentions-legales',
     component: SimplePageComponent,
-    title: 'Accessibilite'
+    title: 'Mentions légales'
   },
   {
     path: 'donnees-a-caractere-personnel',
     component: SimplePageComponent,
-    title: 'Accessibilite'
+    title: 'Données à caractère personnel'
   },
   {
     path: 'cookies-et-statistiques',
     component: SimplePageComponent,
-    title: 'Accessibilite'
+    title: 'Gestion des cookies'
   },
   {
     path: '**',
