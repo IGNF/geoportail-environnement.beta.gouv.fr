@@ -5,6 +5,7 @@ FROM ${registry}/node:18 AS build
 # Installer les dépendances nécessaires pour les tests (y compris Chromium)
 RUN apt-get update && apt-get install -y chromium
 ENV CHROME_BIN='/usr/bin/chromium'
+
 # Installer Angular CLI
 RUN npm install -g @angular/cli
 
@@ -29,8 +30,8 @@ RUN ng build --configuration production --output-path=dist
 # Étape finale : image légère pour la production
 FROM ${registry}/nginxinc/nginx-unprivileged:stable AS prod
 
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY ./.docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/browser /usr/share/nginx/html
+COPY .docker/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Étape de développement (optionnelle)
 FROM ${registry}/node:18 AS dev

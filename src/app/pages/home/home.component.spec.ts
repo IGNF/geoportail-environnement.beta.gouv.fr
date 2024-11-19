@@ -3,8 +3,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
 import { HomeComponent } from './home.component';
-import { EnqueteStepperComponent } from '../../enquete/components/enquete-stepper/enquete-stepper.component';
-import { EnqueteStepperControlComponent } from '../../enquete/components/enquete-stepper-control/enquete-stepper-control.component';
+import { RequeteStepperComponent } from '../../requete/components/requete-stepper/requete-stepper.component';
+import { RequeteStepperControlComponent } from '../../requete/components/requete-stepper-control/requete-stepper-control.component';
 import { GeolocaliseFormComponent } from '../../shared-map/components/geolocalise-form/geolocalise-form.component';
 import { MapViewerComponent } from '../../shared-map/components/map-viewer/map-viewer.component';
 import { SharedThematicModule } from '../../shared-thematic/shared-thematic.module';
@@ -17,8 +17,8 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         HomeComponent,
-        EnqueteStepperComponent,
-        EnqueteStepperControlComponent,
+        RequeteStepperComponent,
+        RequeteStepperControlComponent,
         GeolocaliseFormComponent,
         MapViewerComponent
       ],

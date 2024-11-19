@@ -33,8 +33,8 @@ export class MesForetsComponent implements OnInit {
     ).subscribe();
   }
 
-  goToEnquete(foretTitle: string) {
-    this.router.navigate(['/', 'enquete', foretTitle]);
+  goToRequete(foretTitle: string) {
+    this.router.navigate(['/', 'requete', foretTitle]);
   }
 
   private buildBreadcrumb() {

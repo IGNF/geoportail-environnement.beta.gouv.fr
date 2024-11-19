@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      target: dev
+    container_name: angular_foreg
+    volumes:
+      - ./:/app  # Monte le code source Angular local dans le conteneur
+      - /app/node_modules  
+      - /app/.angular
+    ports:
+      - "4200:4200"  # Expose le port angular
+      - "9876:9876"  # Expose le port karma
