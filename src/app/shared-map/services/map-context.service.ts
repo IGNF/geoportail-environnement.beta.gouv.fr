@@ -9,6 +9,13 @@ import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
 
+import { Feature } from 'ol';
+import Geometry  from 'ol/geom/Geometry';
+import Polygon from 'ol/geom/Polygon';
+import MultiPolygon from 'ol/geom/MultiPolygon';
+import { boundingExtent, extend } from 'ol/extent';
+import { getCenter } from 'ol/extent';
+
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche-list';
 
@@ -16,45 +23,63 @@ import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche
   providedIn: 'root'
 })
 export class MapContextService {
-
-  map?: Map;
-
+  private map?: Map; // Instance unique de la carte
   mapLoaded: EventEmitter<any> = new EventEmitter<any>();
-
   private activeThematicLayers: any[] = [];
 
   constructor() { }
 
-  getMap(): Map | any {
+  // Obtenir la carte
+  getMap(): Map | undefined {
     return this.map;
   }
 
-  isMapLoaded() {
-    return this.map || this.map !== null;
+  // Vérifier si une carte est déjà chargée
+  isMapLoaded(): boolean {
+    return !!this.map;
   }
 
-  createMap(elementId: string) {
-    this.map = new Map({
-      view: new View({
-        center: [0, 0],
-        zoom: 1,
-      }),
-      layers: [
-        MAP_DEFAULT_LAYER_GROUP,
-        new VectorLayer({
-          source: new Vector(),
-          properties: { title: 'Ma Forêt' },
-          zIndex: 1000
-        })
-      ],
-      target: elementId
-    });
+  // Créer ou réaffecter la carte
+  createMap(elementId: string): void {
+    if (!this.map) {
+      // Initialiser une nouvelle carte si elle n'existe pas
+      this.map = new Map({
+        view: new View({
+          center: [0, 0],
+          zoom: 1,
+        }),
+        layers: [
+          MAP_DEFAULT_LAYER_GROUP,
+          new VectorLayer({
+            source: new Vector(),
+            properties: { title: 'Ma Forêt' },
+            zIndex: 1000,
+          }),
+        ],
+        target: elementId,
+      });
 
-    this.map.addControl(new LayerSwitcher());
+      this.map.addControl(new LayerSwitcher());
 
-    this.map.on('rendercomplete', (event) => this.mapLoaded.next(event));
+      this.map.on('rendercomplete', (event) => this.mapLoaded.emit(event));
+    } else {
+      // Réutiliser la carte existante
+      this.map.setTarget(elementId);
+    }
   }
 
+  // Détruire la carte (réinitialiser sa cible)
+  destroyMap(): void {
+    if (this.map) {
+      this.map.setTarget(undefined); // Libère la carte de sa cible DOM
+    }
+  }
+  setTarget(elementId: string) {
+    if (this.map) {
+      this.map.setTarget(elementId);
+    }
+  }
+  // Outils de dessin, couches, et autres fonctions non modifiées
   addDrawingTools() {
     if (!this.getLayerDessin()) {
       return;
@@ -65,10 +90,9 @@ export class MapContextService {
         color: 'rgba(73,73,232,0.4)',
       }),
       stroke: new Stroke({
-        color: '#3399CC'
-      })
+        color: '#3399CC',
+      }),
     });
-
 
     this.getLayerDessin().setStyle(style);
 
@@ -78,13 +102,13 @@ export class MapContextService {
       }),
       stroke: new Stroke({
         color: '#F44336',
-        width: 4
-      })
+        width: 4,
+      }),
     });
 
     const select = new Select({
       layers: [this.getLayerDessin()],
-      style: selectStyle
+      style: selectStyle,
     });
 
     const editBar = new EditBar({
@@ -100,9 +124,9 @@ export class MapContextService {
         DrawRegular: false,
         Transform: false,
         Split: false,
-        Offset: false
+        Offset: false,
       },
-      source: this.getLayerDessin().getSource()
+      source: this.getLayerDessin().getSource(),
     });
     editBar.setProperties({ name: 'editBar' });
     this.map?.addControl(editBar);
@@ -111,13 +135,13 @@ export class MapContextService {
   removeDrawingTools() {
     let editBar: any;
     this.map?.getControls().forEach((control) => {
-      if (control.get('name') == 'editBar') {
+      if (control.get('name') === 'editBar') {
         editBar = control;
       }
-    })
+    });
 
     this.map?.removeControl(editBar);
-  };
+  }
 
   updateLayers() {
     const layers: any = this.map?.getLayers().getArray();
@@ -195,6 +219,50 @@ export class MapContextService {
     this.getLayerDessin().getSource().forEachFeature((f: any) => {
       this.getLayerDessin()?.getSource().removeFeature(f);
     });
+  }
+  
+  centerOnDessin() {
+    const dessinLayer = this.getLayerDessin();
+    if (!dessinLayer) {
+      console.warn('No dessin layer found.');
+      return;
+    }
+
+    const source = dessinLayer.getSource();
+    const features = source.getFeatures();
+
+    if (features.length === 0) {
+      console.warn('No features in dessin layer.');
+      return;
+    }
+
+    // Initialiser l'extension globale
+    let globalExtent: number[] | null = null;
+
+    // Calculer l'extension globale de toutes les géométries
+    features.forEach((feature: Feature<Geometry>) => {
+      const geometry = feature.getGeometry();
+      if (geometry) {
+        const featureExtent = geometry.getExtent(); // Étendue de la géométrie actuelle
+        if (globalExtent === null) {
+          globalExtent = featureExtent.slice(); // Initialiser l'extension
+        } else {
+          extend(globalExtent, featureExtent); // Étendre l'extension globale
+        }
+      }
+    });
+
+    if (globalExtent) {
+      // Centrer la carte et ajuster le zoom pour voir toutes les entités
+      this.map?.getView().fit(globalExtent, {
+        size: this.map?.getSize(), // Taille de la carte
+        padding: [50, 50, 50, 50], // Espacement autour des entités (en pixels)
+        duration: 500, // Durée de l'animation (en ms)
+        maxZoom: 20, // Facultatif : limite maximale du zoom
+      });
+    } else {
+      console.warn('No valid global extent found.');
+    }
   }
 
 }
