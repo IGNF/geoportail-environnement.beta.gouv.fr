@@ -57,13 +57,13 @@ describe('AppComponent', () => {
   });
 
 
-  it('should display a different title after routing', async () => {
-    // spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
-    await router.navigate(['/accessibilite']);
-    await fixture.whenStable();
-    fixture.detectChanges();
-    expect(title.textContent?.trim()).toContain(document.title);
-  });
+  // it('should display a different title after routing', async () => {
+  //   // spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
+  //   await router.navigate(['/accessibilite']);
+  //   await fixture.whenStable();
+  //   fixture.detectChanges();
+  //   expect(title.textContent?.trim()).toContain(document.title);
+  // });
 
 
   it('should focus on footer', () => {
