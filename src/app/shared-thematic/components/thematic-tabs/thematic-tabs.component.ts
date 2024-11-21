@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FicheInfo } from '../../models/fiche-info.model';
+import { delay, zip } from 'rxjs';
+
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService, LON_LAT_ORDER } from '../../services/geoplateforme-wfs.service';
 import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
 import { MAP_BIODIVERISTE_LAYER_GROUP } from '../../models/map-thematic-layers.enum';
-import { zip } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -17,25 +17,19 @@ export class ThematicTabsComponent implements OnInit {
 
   selectedTabIndex: number = 0;
 
-  tabsConfig: any[] = [];
+  ficheTabs: any[] = [];
 
-  selectedThematic: any = 0;
-
-  features : any[] = [];
-
-  fiche!: FicheInfo;
+  responseFeatures: any[] = [];
 
   constructor(
     private thematicSelectService: ThematicSelectService,
     private mapContextService: MapContextService,
-    private geoplateformeWfsService: GeoplateformeWfsService,
+    private geoplateformeWfsService: GeoplateformeWfsService
   ) { }
 
   ngOnInit() {
 
     this.initFicheList();
-
-    this.features = [];
 
     this.thematicSelectService.thematicSelection.subscribe((activeThemeList: any[]) => {
       activeThemeList.unshift('synthese');
@@ -54,32 +48,34 @@ export class ThematicTabsComponent implements OnInit {
         .fromLayer(layername)
         .intersectCollection(maForet, 'geom', !LON_LAT_ORDER)
         .getRequest();
-    })
+    });
 
     const monumentsRequest = this.geoplateformeWfsService
-    .buildRequest()
-    .fromLayer('wfs_sup:assiette_sup_s')
-    .filterSupType('ac1')
-    .intersectCollection(maForet)
-    .getRequest();
+      .buildRequest()
+      .fromLayer('wfs_sup:assiette_sup_s')
+      .filterSupType('ac1')
+      .intersectCollection(maForet)
+      .getRequest();
 
     requests.push(monumentsRequest);
 
     const observableRequest = requests.map((request) => this.geoplateformeWfsService.getFeatures(request));
 
     zip(observableRequest).subscribe((responses: any[]) => {
-      const feats = responses.reduce((collection, response) => {
+      // const features = this.parseFeatures(features);
+      let features = responses.reduce((collection, response) => {
         if (response.features) {
           collection.push(...response.features);
         }
         return collection;
       }, []);
 
-      this.updateActiveThematicLayersFromFeatures(feats);
+      this.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
-      this.features = this.parseFeatures(feats);
-      this.tabsConfig = THEMATIC_FICHE_LIST;
-      this.updateFiche(this.features);
+      this.responseFeatures = this.parseFeatures(features);
+      // this.ficheTabs = THEMATIC_FICHE_LIST;
+      this.initFicheList();
+      this.updateFiche();
     });
 
   }
@@ -87,12 +83,11 @@ export class ThematicTabsComponent implements OnInit {
 
   selectTab(event: any) {
     this.setSelectedTabIndex(event);
-    this.thematicSelectService.selectThematicTab([event, this.features])
     this.mapContextService.updateLayersVisibility(event);
   }
 
   private updateActiveTabs(activeThemeList: any[]) {
-    this.tabsConfig = THEMATIC_FICHE_LIST.filter((theme) => activeThemeList.includes(theme.name));
+    this.ficheTabs = THEMATIC_FICHE_LIST.filter((theme) => activeThemeList.includes(theme.name));
     this.selectTab('synthese');
   }
 
@@ -116,28 +111,70 @@ export class ThematicTabsComponent implements OnInit {
       let link;
       if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier']) {
         link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${properties['fichier']}`;
-      }else {
+      } else {
         link = properties.url;
       }
-      return{
+      return {
         id: id,
         layer: layer,
         name: properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt']),
         link: properties.url
-      }
-    })
+      };
+    });
   }
 
   private parseLayerFromId(id: string) {
     return id.split('.')[0];
   }
-  
+
   private parseLayerFromTechnicalName(technicalName: string) {
     return technicalName.split(':')[1];
   }
- 
+
+  private initFicheList() {
+    this.ficheTabs = THEMATIC_FICHE_LIST.map((fiche) => {
+      if (!fiche.layers) {
+        fiche.layers = [];
+      }
+      return fiche;
+    });
+  }
+
+  private updateFicheLayer(layer: any) {
+    layer.features = [];
+    layer.features = this.responseFeatures.filter((feature) => {
+      const id = feature.id;
+      return this.parseLayerFromTechnicalName(layer.technicalName) === this.parseLayerFromId(id);
+    });
+    return layer;
+  }
+
+  private updateFiche() {
+    this.ficheTabs = this.ficheTabs.map((fiche) => {
+      fiche.layers = fiche.layers.map((layer: any) => this.updateFicheLayer(layer));
+      return fiche;
+    });
+  }
+
+  private updateActiveThematicLayersFromFeatures(features: any) {
+    for (let i = 0; i < features.length; i++) {
+      const layer = this.parseLayerFromId(features[i].id);
+      switch (layer) {
+        case 'assiette_sup_s':
+          if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'monument_historique', name: "assiette_sup_s" })) {
+            this.mapContextService.getActiveThematicLayers().push({ theme: 'monument_historique', name: "assiette_sup_s" });
+          }
+          break;
+        default:
+          if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'biodiversite', name: layer })) {
+            this.mapContextService.getActiveThematicLayers().push({ theme: 'biodiversite', name: layer });
+          }
+      }
+    }
+  }
+
   // TODO a deplacer dans une pipe
-  forceUtfEncoded(encodedErrorStr: string): string {
+  private forceUtfEncoded(encodedErrorStr: string): string {
     return encodedErrorStr.replace(/Ã©/g, 'é')
       .replace(/Ã¨/g, 'è')
       .replace(/Ã/g, 'à')
@@ -152,63 +189,6 @@ export class ThematicTabsComponent implements OnInit {
       .replace(/Ã«/g, 'ë')
       .replace(/Ã¼/g, 'ü')
       .replace(/à¢/g, 'â');
-  }
-
-  initFicheList() {
-    THEMATIC_FICHE_LIST.forEach((fiche) => {
-      if(fiche.layers) {
-        fiche.layers.forEach((layer) => {
-          layer.features = null;
-        })
-      }
-    })
-  }
-
-  updateFiche(feats: any) {
-    this.tabsConfig.forEach((fiche) => {
-      if(fiche.layers) {
-        fiche.layers.forEach((layer : any) => {
-          feats.forEach((f : any) => {
-            if(this.parseLayerFromTechnicalName(layer.technicalName) == this.parseLayerFromId(f.id)) {
-              if(!layer.features) {
-                layer.features = [];
-              }
-              layer.features.push(f);
-            }
-          })
-        });
-      }
-    })
-  }
-
-  setFicheLayersFeatures(features : any) {
-    features.forEach((feature : any) => {
-      this.fiche.layers.forEach((layer) => {
-        if(this.parseLayerFromTechnicalName(layer.technicalName) == this.parseLayerFromId(feature.id)) {
-          if(!layer.features) {
-            layer.features = [];
-          }
-          layer.features.push(feature);
-        }
-      });
-    });
-  }
-
-  updateActiveThematicLayersFromFeatures(features : any) {
-    for (let i = 0; i < features.length; i++) {
-      const layer = this.parseLayerFromId(features[i].id);
-      switch(layer){
-        case 'assiette_sup_s':
-          if(!this.mapContextService.getActiveThematicLayers().includes({ theme: 'monument_historique', name: "assiette_sup_s"})) {
-            this.mapContextService.getActiveThematicLayers().push({ theme: 'monument_historique', name: "assiette_sup_s"});
-          }
-          break;
-        default:
-          if(!this.mapContextService.getActiveThematicLayers().includes({ theme: 'biodiversite', name: layer })) {
-            this.mapContextService.getActiveThematicLayers().push({ theme: 'biodiversite', name: layer });
-          }
-      }
-    }
   }
 
 }

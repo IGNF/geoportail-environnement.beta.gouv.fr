@@ -1,19 +1,17 @@
 <dsfr-tabs [selectedTabIndex]="selectedTabIndex" (tabSelect)="selectTab($event)">
 
-  @for (tab of tabsConfig; track $index) {
-  <dsfr-tab *ngIf="tab.active" [tabId]="tab.name" [label]="tab.label">
-    @switch(tab.name){
-      @case('synthese'){
-        <app-synthese></app-synthese>
-      }
-      @case('biodiversite'){
-        <app-fiche-info-view [fiche]="tab"></app-fiche-info-view>
-      }
-      @case('monument-historique'){
-        <app-fiche-info-view [fiche]="tab"></app-fiche-info-view>
-      }
+  @for (ficheTab of ficheTabs; track $index; let first = $first) {
+  @if (ficheTab.active) {
+  <dsfr-tab [tabId]="ficheTab.name" [label]="ficheTab.label">
+
+    @if (first) {
+    <app-synthese></app-synthese>
+    } @else {
+    <app-fiche-info-view [fiche]="ficheTab" [features]="responseFeatures"></app-fiche-info-view>
     }
+
   </dsfr-tab>
+  }
   }
 
 </dsfr-tabs>
