@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { zip } from 'rxjs';
 
+=======
+import { Component, Input, OnInit } from '@angular/core';
+>>>>>>> 4416c01 (fix: Ajout d'une flatview pour la page d'impression)
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService } from '../../services/geoplateforme-wfs.service';
@@ -14,6 +18,7 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./thematic-tabs.component.css']
 })
 export class ThematicTabsComponent implements OnInit {
+  @Input() flatView: boolean = false; // Ajout de l'option flatView
   selectedTabIndex: number = 0;
 
   ficheTabs: any[] = [];
@@ -31,6 +36,10 @@ export class ThematicTabsComponent implements OnInit {
     this.initFicheList();
 
     this.thematicSelectService.thematicSelection.subscribe((activeThemeList: any[]) => {
+<<<<<<< HEAD
+=======
+      activeThemeList = ['biodiversite', 'monument-historique'];
+>>>>>>> 4416c01 (fix: Ajout d'une flatview pour la page d'impression)
       activeThemeList.unshift('synthese');
       this.updateActiveTabs(activeThemeList);
     });
@@ -45,18 +54,29 @@ export class ThematicTabsComponent implements OnInit {
 
   }
 
+  hasTab(name: string): boolean {
+    return this.tabsConfig.some(tab => tab.name === name);
+  }
 
   selectTab(event: any) {
-    this.setSelectedTabIndex(event);
-    this.mapContextService.updateLayersVisibility(event);
+    if (!this.flatView) {
+      this.setSelectedTabIndex(event);
+      this.mapContextService.updateLayersVisibility(event);
+    }
   }
 
 
   private updateActiveTabs(activeThemeList: any[]) {
+<<<<<<< HEAD
     this.ficheTabs = THEMATIC_FICHE_LIST.filter((theme) => activeThemeList.includes(theme.name));
     this.selectTab('synthese');
+=======
+    this.tabsConfig = THEMATIC_FICHE_LIST.filter((theme) => activeThemeList.includes(theme.name));
+    if (!this.flatView) {
+      this.selectTab('synthese');
+    }
+>>>>>>> 4416c01 (fix: Ajout d'une flatview pour la page d'impression)
   }
-
 
   private setSelectedTabIndex(tabId: string) {
     let indexModifier = 0;

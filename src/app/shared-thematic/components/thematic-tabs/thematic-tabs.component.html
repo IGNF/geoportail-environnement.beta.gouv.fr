@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 
   @for (ficheTab of ficheTabs; track $index; let first = $first) {
   @if (ficheTab.active) {
   <dsfr-tab [tabId]="ficheTab.name" [label]="ficheTab.label">
+=======
+  <!--
+  <dsfr-tab tabId="tab.name" label="tab.label">
+    <app-fiche-info-view></app-fiche-info-view>
+  </dsfr-tab>
+  -->
+>>>>>>> 4416c01 (fix: Ajout d'une flatview pour la page d'impression)
 
     @if (first) {
     <app-synthese></app-synthese>
@@ -13,4 +21,19 @@
   }
   }
 
+<!-- <ng-template #tabView>
+  <dsfr-tabs [selectedTabIndex]="selectedTabIndex" (tabSelect)="selectTab($event)">
+    <ng-container *ngFor="let tab of tabsConfig; let i = index">
+      <dsfr-tab *ngIf="tab.checked" [tabId]="tab.name" [label]="tab.label">
+        <ng-container [ngSwitch]="tab.name">
+          <app-synthese *ngSwitchCase="'synthese'"></app-synthese>
+          <p *ngSwitchCase="'agriculture'">TODO: Contenu Agriculture</p>
+          <app-biodiversite *ngSwitchCase="'biodiversite'"></app-biodiversite>
+          <p *ngSwitchCase="'eau'">TODO: Contenu Eau</p>
+          <app-monument-historique *ngSwitchCase="'monument-historique'"></app-monument-historique>
+        </ng-container>
+      </dsfr-tab>
+    </ng-container>
+  </dsfr-tabs>
+</ng-template> -->
 
