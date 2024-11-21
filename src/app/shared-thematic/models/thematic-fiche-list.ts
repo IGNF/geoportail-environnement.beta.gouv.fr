@@ -93,6 +93,12 @@ export const THEMATIC_FICHE_LIST = [
     label: 'Monument Historique',
     title: 'Votre forêt se trouve dans la zone des monuments suivants',
     active: true,
-    layers: []
+    layers: [
+      {
+        title: 'Monuments historiques',
+        group: 'historique',
+        technicalName: 'wfs_sup:assiette_sup_s'
+      },
+    ]
   })
 ];

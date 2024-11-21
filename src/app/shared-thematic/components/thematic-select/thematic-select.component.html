@@ -1,7 +1,7 @@
 <div class="fr-mt-4v fr-mb-4v">
   <dsfr-fieldset legend="Thématiques" hint="Vous pouvez sélectionner plusieurs thématiques." [inline]=true>
     @for(cb of checkboxes; track cb) {
-      <dsfr-form-checkbox *fieldsetElement [label]="cb.label" [value]="cb.checked" (change)="onCheckboxChange($event)"></dsfr-form-checkbox>
+      <dsfr-form-checkbox *fieldsetElement [label]="cb.label" [value]="cb.active" (change)="onCheckboxChange($event)"></dsfr-form-checkbox>
     }
   </dsfr-fieldset>
 </div>

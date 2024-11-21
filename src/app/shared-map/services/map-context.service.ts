@@ -177,7 +177,7 @@ export class MapContextService {
   }
 
   /**
-   * liste des couches thematiques pour lesquels on une réponse avec notre zone forestiere
+   * liste des couches thematiques pour lesquels on a une réponse avec notre zone forestiere
    * @returns 
    */
   getActiveThematicLayers() {

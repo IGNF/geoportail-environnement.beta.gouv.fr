@@ -19,9 +19,7 @@ export class ThematicSelectComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkboxes = THEMATIC_FICHE_LIST.slice(1).map((theme) => {
-      return Object.assign(theme, {
-        checked: theme.active
-      });
+      return Object.assign(theme);
     });
   };
 
@@ -31,7 +29,18 @@ export class ThematicSelectComponent implements OnInit {
     }
     let label = event.target.labels[0].textContent;
 
-    this.thematicSelectService.updateThematics([]);
+    let thematics : any[] = [];
+
+    this.checkboxes.forEach((theme) => {
+      if(theme.label == label) {
+        theme.active = !theme.active;
+      }
+      if(theme.active) {
+        thematics.push(theme.name);
+      }
+    })
+
+    this.thematicSelectService.updateThematics(thematics);
     this.select.emit(event);
   };
 

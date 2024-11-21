@@ -5,12 +5,12 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class ThematicSelectService {
 
-  thematicSelection: EventEmitter<any> = new EventEmitter<any>();
+  thematicSelection: EventEmitter<any> = new EventEmitter<any>(); //event pour les checkboxes
 
   constructor() {}
 
   updateThematics(thematics: any) {
-    this.thematicSelection.next(thematics);
+    this.thematicSelection.emit(thematics);
   }
 
 }
