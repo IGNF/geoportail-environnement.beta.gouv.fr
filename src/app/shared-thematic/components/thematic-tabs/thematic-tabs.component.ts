@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { delay, zip } from 'rxjs';
-
+import { zip } from 'rxjs';
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { GeoplateformeWfsService, LON_LAT_ORDER } from '../../services/geoplateforme-wfs.service';
+import { FicheInfoFeatureService } from '../../services/fiche-info-feature.service';
 import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
 import { MAP_BIODIVERISTE_LAYER_GROUP } from '../../models/map-thematic-layers.enum';
 import { environment } from '../../../../environments/environment';
@@ -24,7 +24,8 @@ export class ThematicTabsComponent implements OnInit {
   constructor(
     private thematicSelectService: ThematicSelectService,
     private mapContextService: MapContextService,
-    private geoplateformeWfsService: GeoplateformeWfsService
+    private geoplateformeWfsService: GeoplateformeWfsService,
+    private ficheInfoFeatureService: FicheInfoFeatureService
   ) { }
 
   ngOnInit() {
@@ -36,33 +37,12 @@ export class ThematicTabsComponent implements OnInit {
       this.updateActiveTabs(activeThemeList);
     });
 
-
-    const maForet = this.mapContextService.getMaForet();
-
     //requêtes
-    const requests = MAP_BIODIVERISTE_LAYER_GROUP.getLayersArray().map((layer) => {
-      return layer.get('technicalName');
-    }).map((layername) => {
-      return this.geoplateformeWfsService
-        .buildRequest()
-        .fromLayer(layername)
-        .intersectCollection(maForet, 'geom', !LON_LAT_ORDER)
-        .getRequest();
-    });
+    const requests = this.ficheInfoFeatureService.getrequests();
 
-    const monumentsRequest = this.geoplateformeWfsService
-      .buildRequest()
-      .fromLayer('wfs_sup:assiette_sup_s')
-      .filterSupType('ac1')
-      .intersectCollection(maForet)
-      .getRequest();
-
-    requests.push(monumentsRequest);
-
-    const observableRequest = requests.map((request) => this.geoplateformeWfsService.getFeatures(request));
+    const observableRequest = this.ficheInfoFeatureService.getObservables(requests);
 
     zip(observableRequest).subscribe((responses: any[]) => {
-      // const features = this.parseFeatures(features);
       let features = responses.reduce((collection, response) => {
         if (response.features) {
           collection.push(...response.features);
@@ -73,7 +53,6 @@ export class ThematicTabsComponent implements OnInit {
       this.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
       this.responseFeatures = this.parseFeatures(features);
-      // this.ficheTabs = THEMATIC_FICHE_LIST;
       this.initFicheList();
       this.updateFiche();
     });

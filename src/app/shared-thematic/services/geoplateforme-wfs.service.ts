@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { WfsRequest } from '../models/wfs-request';
 import { toLonLat } from 'ol/proj';

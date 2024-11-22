@@ -4,26 +4,7 @@
 
 @for (layer of fiche.layers; track layer) {
 
-@if (layer.features && layer.features.length > 0) {
-
-<p>{{ layer.title }}</p>
-<ul>
-  @for (feature of layer.features; track feature) {
-
-  @if (layer.link !== "") {
-  <li>
-    <a [href]="feature.link" target="_blank">{{ feature.name }}</a>
-  </li>
-  } @else {
-  <li>{{ feature.name }}</li>
-  }
-
-  }
-</ul>
-
-<app-reglementation-view></app-reglementation-view>
-
-}
+  <app-layer-info-view [layer]="layer"></app-layer-info-view>
 
 }
 
