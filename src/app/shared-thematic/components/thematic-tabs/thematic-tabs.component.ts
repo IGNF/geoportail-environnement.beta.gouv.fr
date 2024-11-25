@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { zip } from 'rxjs';
+
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
-import { GeoplateformeWfsService, LON_LAT_ORDER } from '../../services/geoplateforme-wfs.service';
+import { GeoplateformeWfsService } from '../../services/geoplateforme-wfs.service';
 import { FicheInfoFeatureService } from '../../services/fiche-info-feature.service';
 import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
-import { MAP_BIODIVERISTE_LAYER_GROUP } from '../../models/map-thematic-layers.enum';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -22,10 +22,9 @@ export class ThematicTabsComponent implements OnInit {
   responseFeatures: any[] = [];
 
   constructor(
+    private ficheInfoFeatureService: FicheInfoFeatureService,
     private thematicSelectService: ThematicSelectService,
-    private mapContextService: MapContextService,
-    private geoplateformeWfsService: GeoplateformeWfsService,
-    private ficheInfoFeatureService: FicheInfoFeatureService
+    private mapContextService: MapContextService
   ) { }
 
   ngOnInit() {
@@ -37,22 +36,10 @@ export class ThematicTabsComponent implements OnInit {
       this.updateActiveTabs(activeThemeList);
     });
 
-    //requêtes
-    const requests = this.ficheInfoFeatureService.getrequests();
-
-    const observableRequest = this.ficheInfoFeatureService.getObservables(requests);
-
-    zip(observableRequest).subscribe((responses: any[]) => {
-      let features = responses.reduce((collection, response) => {
-        if (response.features) {
-          collection.push(...response.features);
-        }
-        return collection;
-      }, []);
-
+    this.ficheInfoFeatureService.listFicheFeatures().subscribe((features: any[]) => {
+      this.responseFeatures = features;
       this.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
-      this.responseFeatures = this.parseFeatures(features);
       this.initFicheList();
       this.updateFiche();
     });
@@ -64,6 +51,7 @@ export class ThematicTabsComponent implements OnInit {
     this.setSelectedTabIndex(event);
     this.mapContextService.updateLayersVisibility(event);
   }
+
 
   private updateActiveTabs(activeThemeList: any[]) {
     this.ficheTabs = THEMATIC_FICHE_LIST.filter((theme) => activeThemeList.includes(theme.name));
@@ -82,33 +70,6 @@ export class ThematicTabsComponent implements OnInit {
     }
   }
 
-  private parseFeatures(features: any): any[] {
-    return features.map((feature: any) => {
-      const id = feature.id;
-      const layer = this.parseLayerFromId(id);
-      const properties = feature.properties;
-      let link;
-      if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier']) {
-        link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${properties['fichier']}`;
-      } else {
-        link = properties.url;
-      }
-      return {
-        id: id,
-        layer: layer,
-        name: properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt']),
-        link: properties.url
-      };
-    });
-  }
-
-  private parseLayerFromId(id: string) {
-    return id.split('.')[0];
-  }
-
-  private parseLayerFromTechnicalName(technicalName: string) {
-    return technicalName.split(':')[1];
-  }
 
   private initFicheList() {
     this.ficheTabs = THEMATIC_FICHE_LIST.map((fiche) => {
@@ -119,14 +80,6 @@ export class ThematicTabsComponent implements OnInit {
     });
   }
 
-  private updateFicheLayer(layer: any) {
-    layer.features = [];
-    layer.features = this.responseFeatures.filter((feature) => {
-      const id = feature.id;
-      return this.parseLayerFromTechnicalName(layer.technicalName) === this.parseLayerFromId(id);
-    });
-    return layer;
-  }
 
   private updateFiche() {
     this.ficheTabs = this.ficheTabs.map((fiche) => {
@@ -135,9 +88,19 @@ export class ThematicTabsComponent implements OnInit {
     });
   }
 
+
+  private updateFicheLayer(layer: any) {
+    layer.features = [];
+    layer.features = this.responseFeatures.filter((feature) => {
+      return this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer;
+    });
+    return layer;
+  }
+
+
   private updateActiveThematicLayersFromFeatures(features: any) {
     for (let i = 0; i < features.length; i++) {
-      const layer = this.parseLayerFromId(features[i].id);
+      const layer = features[i].layer;
       switch (layer) {
         case 'assiette_sup_s':
           if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'monument_historique', name: "assiette_sup_s" })) {
@@ -152,22 +115,9 @@ export class ThematicTabsComponent implements OnInit {
     }
   }
 
-  // TODO a deplacer dans une pipe
-  private forceUtfEncoded(encodedErrorStr: string): string {
-    return encodedErrorStr.replace(/Ã©/g, 'é')
-      .replace(/Ã¨/g, 'è')
-      .replace(/Ã/g, 'à')
-      .replace(/Ã¯/g, 'ï')
-      .replace(/à´/g, 'ô')
-      .replace(/Ã§/g, 'ç')
-      .replace(/Ãª/g, 'ê')
-      .replace(/àª/g, 'ê')
-      .replace(/Ã¹/g, 'ù')
-      .replace(/Ã¦/g, 'æ')
-      .replace(/Å/g, 'œ')
-      .replace(/Ã«/g, 'ë')
-      .replace(/Ã¼/g, 'ü')
-      .replace(/à¢/g, 'â');
+
+  private parseLayerFromTechnicalName(technicalName: string) {
+    return technicalName.split(':')[1];
   }
 
 }

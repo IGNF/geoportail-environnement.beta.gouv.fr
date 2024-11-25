@@ -10,7 +10,7 @@ export const THEMATIC_FICHE_LIST = [
   new FicheInfo().deserialise({
     name: 'biodiversite',
     label: 'Biodiversité',
-    title: 'Votre forêt se trouve sur les sites suivants',
+    title: 'Votre forêt se trouve t-elle sur des zones de biodiversité ?',
     active: true,
     layers: [
       {
@@ -91,7 +91,7 @@ export const THEMATIC_FICHE_LIST = [
   new FicheInfo().deserialise({
     name: 'monument-historique',
     label: 'Monument Historique',
-    title: 'Votre forêt se trouve dans la zone des monuments suivants',
+    title: 'Votre forêt se trouve t-elle sur des zones patrimonial ?',
     active: true,
     layers: [
       {
