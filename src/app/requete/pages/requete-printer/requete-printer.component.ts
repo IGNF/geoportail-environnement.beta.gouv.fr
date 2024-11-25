@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
+import { ThematicTabsComponent } from '../../../shared-thematic/components/thematic-tabs/thematic-tabs.component';
 
 @Component({
   selector: 'app-requete-printer',
@@ -8,6 +9,7 @@ import { MapContextService } from '../../../shared-map/services/map-context.serv
   styleUrl: './requete-printer.component.css',
 })
 export class RequetePrinterComponent implements OnInit, AfterViewInit {
+  @ViewChild(ThematicTabsComponent) thematicTabs!: ThematicTabsComponent;
   forestId: string = '';
 
   constructor(
