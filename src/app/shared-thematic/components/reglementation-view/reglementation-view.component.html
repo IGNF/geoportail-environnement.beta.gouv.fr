@@ -1,1 +1,8 @@
-<p>reglementation-view works!</p>
+@if (reglementation) {
+<p>
+  Votre forêt est présente sur une zone de {{ reglementation }}.
+  En cas de coupe veuillez <i>recommandation à construire</i>
+</p>
+} @else {
+<p>Aucune reglementation ou recommandation.</p>
+}

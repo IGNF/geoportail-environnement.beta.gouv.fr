@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-reglementation-view',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './reglementation-view.component.css'
 })
 export class ReglementationViewComponent {
+
+  @Input() reglementation!: any;
+
+  constructor() {}
 
 }

@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { GeoplateformeWfsService } from './geoplateforme-wfs.service';
 import { appConfig } from '../../app.config';
 
