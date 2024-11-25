@@ -26,6 +26,7 @@ export class MapContextService {
   private map?: Map; // Instance unique de la carte
   mapLoaded: EventEmitter<any> = new EventEmitter<any>();
   private activeThematicLayers: any[] = [];
+  private clones: Map[] = []; // Liste des clones de cartes
 
   constructor() { }
 
@@ -37,6 +38,11 @@ export class MapContextService {
   // Vérifier si une carte est déjà chargée
   isMapLoaded(): boolean {
     return !!this.map;
+  }
+
+  // Générer dynamiquement un ID unique pour un clone
+  generateCloneId(): string {
+    return `mapClone-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   // Créer ou réaffecter la carte
@@ -74,6 +80,46 @@ export class MapContextService {
       this.map.setTarget(undefined); // Libère la carte de sa cible DOM
     }
   }
+
+  // Ajouter une carte situation, clone de la map origine
+  createSituationMap(idClone: string, layersToLoad: any[]): Map {
+    const clone = new Map({
+      view: new View({
+        center: [0, 0],
+        zoom: 1,
+      }),
+      layers: layersToLoad, // Couches spécifiques à charger dans ce clone
+      target: idClone,
+    });
+
+    clone.addControl(new LayerSwitcher());
+
+    this.clones.push(clone); // Ajouter le clone à la liste
+    return clone;
+  }
+
+  // Obtenir la liste des clones
+  getClones(): Map[] {
+    return this.clones;
+  }
+
+  // Détruire un clone spécifique
+  destroyClone(idClone: string): void {
+    const index = this.clones.findIndex((clone) => clone.getTarget() === idClone);
+    if (index > -1) {
+      const clone = this.clones[index];
+      clone.setTarget(undefined); // Libère le DOM lié
+      this.clones.splice(index, 1); // Supprime de la liste
+    }
+  }
+  // Détruire toutes les cartes clones
+  destroyAllClones(): void {
+    this.clones.forEach((clone) => {
+      clone.setTarget(undefined); // Libère le DOM lié
+    });
+    this.clones = []; // Réinitialise la liste des clones
+  }
+
   setTarget(elementId: string) {
     if (this.map) {
       this.map.setTarget(elementId);
@@ -161,6 +207,15 @@ export class MapContextService {
           continue;
         }
       }
+    });
+  }
+  
+  // Méthode mise à jour des couches pour un clone ou la carte principale
+  updateLayersForMap(map: Map, layersToLoad: any[]): void {
+    const currentLayers = map.getLayers();
+    currentLayers.clear(); // Supprime toutes les couches existantes
+    layersToLoad.forEach((layer) => {
+      map.addLayer(layer); // Ajoute les nouvelles couches
     });
   }
 
