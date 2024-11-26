@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
 import { HomeComponent } from './home.component';
@@ -12,6 +13,7 @@ import { SharedThematicModule } from '../../shared-thematic/shared-thematic.modu
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,16 +29,23 @@ describe('HomeComponent', () => {
         ReactiveFormsModule,
         SharedThematicModule
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
     expect(true).toBeTruthy();
   });
+
+  it('should navigate to /requete/nouvelle', () => {
+    spyOn(router, 'navigate');
+    component.newRequete();
+    expect(router.navigate).toHaveBeenCalledWith(['/', 'requete', 'nouvelle']);
+  });
+
 });
