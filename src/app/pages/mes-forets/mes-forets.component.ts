@@ -26,10 +26,10 @@ export class MesForetsComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildBreadcrumb();
-    this.foretService.list().pipe( (response) => {
-      console.log(response)
+    this.foretService.list().subscribe((forets) => {
+      console.log('subscribe((forets)', forets);
+      this.foretCards = forets.map((foret) => this.cardTransformerService.fromForet(foret));
     });
-    
 
     // this.foretService.list().pipe(
     //   map((forets) => {

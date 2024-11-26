@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
+
 import { environment } from '../../../environments/environment';
-import { ApiService } from '../../shared/services/api.service';
-import { Observable } from 'rxjs';
+import { TokenService } from '../../shared/services/token.service';
+import { LoginService } from '../../shared/services/login.service';
+
+const DEFAULT_HEADER_TOOLS_LINKS = [
+  { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' }
+];
 
 @Component({
   selector: 'app-header',
@@ -9,7 +14,6 @@ import { Observable } from 'rxjs';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
 
   serviceTitle = 'Foreg';
 
@@ -19,45 +23,39 @@ export class HeaderComponent {
 
   operatorImagePath = 'img/foreg-icon.png';
 
-  // boutons du header toujours affichés
-  headerToolsLinks: any = [
-    { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' },
-  ];
+  headerToolsLinks: any = DEFAULT_HEADER_TOOLS_LINKS;
 
   menuHeader: any = [];
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private tokenService: TokenService,
+    private loginService: LoginService
+  ) { }
 
   searchSelect(event: any) { }
 
   ngOnInit() {
-    this.apiService.getMe().subscribe((response) => {
-      console.log(response);
-      if (response.email){
-        // connecté
-        this.headerToolsLinks.push(
-          { label: response.email, route: '#', icon: 'fr-icon-lock-line' }
-        );
-      } else {
-        // non connecté
-        this.headerToolsLinks.push(
-          { label: 'Connexion', icon: 'fr-btn--account', link: environment.loginUrl, routerLinkActive: 'class-active' },
-        );
-      }
-    });
-      // this.apiService.getMe( (response: any) => {
-      //   if (response.error){
-      //     // non connecté
-      //     this.headerToolsLinks.push(
-      //       { label: 'Connexion', icon: 'fr-btn--account', link: environment.loginUrl, routerLinkActive: 'class-active' },
-      //     );
-      //   } else {
-      //     // connecté
-      //     this.headerToolsLinks.push(
-      //       { label: response.email, route: '#', icon: 'fr-icon-lock-line' }
-      //     );
-      //   }
-      // });
+    // TODO subscribe to change user event
+    this.headerToolsLinks = this.logoutHeadersToolsLinks();
+    if (this.tokenService.hasToken()) {
+      this.loginService.getUserInfo().subscribe((user: any) => {
+        this.headerToolsLinks = this.connectedHeadersToolsLinks(user);
+      });
+    }
+  }
+
+  private connectedHeadersToolsLinks(user: any) {
+    return [
+      { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' },
+      { label: user.email, routerLink: '/mes-forets', routerLinkActive: 'class-active', icon: 'fr-icon-lock-line' }
+    ];
+  }
+
+  private logoutHeadersToolsLinks() {
+    return [
+      { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' },
+      { label: 'Connexion', icon: 'fr-btn--account', link: environment.loginUrl, routerLinkActive: 'class-active' }
+    ];
   }
 
 }

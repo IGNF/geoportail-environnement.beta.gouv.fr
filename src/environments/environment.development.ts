@@ -2,7 +2,9 @@ export const environment = {
   production: false,
   geoplateformeWfsUrl: 'https://data.geopf.fr/wfs/ows',
   geoportailUrbanismeDocumentsUrl: 'https://data.geopf.fr/annexes/gpu/documents',
-  apiUrl: 'http://localhost.ign.fr/foreg-api/api/api',
-  loginUrl: 'http://localhost/foreg-api/api/login',
-  logoutUrl: 'http://localhost/foreg-api/api/logout'
+  localStorageTokenItem: 'GPE@token',
+  localStorageRefreshTokenItem: 'GPE@refresh_token',
+  apiUrl: 'http://localhost:8000/api/api',
+  loginUrl: 'http://localhost:8000/api/login',
+  logoutUrl: 'http://localhost:8000/api/logout'
 };
