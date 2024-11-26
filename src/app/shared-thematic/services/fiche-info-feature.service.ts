@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, zip } from 'rxjs';
 import { environment } from '../../../environments/environment';
-
 import { THEMATIC_FICHE_LIST } from '../models/thematic-fiche-list';
 import { GeoplateformeWfsService, LON_LAT_ORDER } from './geoplateforme-wfs.service';
 import { MapContextService } from '../../shared-map/services/map-context.service';
@@ -74,7 +73,13 @@ export class FicheInfoFeatureService {
     }
 
     if (layer.title === 'Monuments historiques') {
-      request.filterSupType('ac1');
+      request.filterByAttribute('suptype', 'ac1');
+      request.filterByAttribute('typeass', 'Périmètre des abords');
+    }
+
+    if(layer.title === 'Espaces boisés classés') {
+      request.filterByAttribute('typepsc', '01');
+      request.filterByAttributeInValues('stypepsc', ['00', '01', '02', '03']);
     }
 
     return request.getRequest();
@@ -91,17 +96,18 @@ export class FicheInfoFeatureService {
     const layer = this.parseLayerFromId(id);
     const properties = feature.properties;
     let link;
-    if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier']) {
-      link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${properties['fichier']}`;
+    if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier'] || properties['nomfic']) {
+      let fichier = properties['ficier']?properties['ficier']:properties['nomfic'];
+      link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${fichier}`;
     } else {
       link = properties.url;
     }
-    const name = properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt']);
+    const name = properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt'] || properties['idurba']);
     const newFeature = Object.assign(feature.properties, {
       id: id,
       layer: layer,
       name: name,
-      link: properties.url
+      link: link
     });
     return newFeature;
   }

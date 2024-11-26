@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { zip } from 'rxjs';
-
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
-import { GeoplateformeWfsService } from '../../services/geoplateforme-wfs.service';
 import { FicheInfoFeatureService } from '../../services/fiche-info-feature.service';
 import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
-import { environment } from '../../../../environments/environment';
-
 @Component({
   selector: 'app-thematic-tabs',
   templateUrl: './thematic-tabs.component.html',
@@ -37,7 +32,7 @@ export class ThematicTabsComponent implements OnInit {
     });
 
     this.ficheInfoFeatureService.listFicheFeatures().subscribe((features: any[]) => {
-      this.responseFeatures = features;
+      this.responseFeatures = this.deleteRedundantFeatures(features);
       this.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
       this.initFicheList();
@@ -113,6 +108,16 @@ export class ThematicTabsComponent implements OnInit {
           }
       }
     }
+  }
+
+  private deleteRedundantFeatures(features : any[]) : any[]{
+    let res : any[] = [];
+    features.forEach((feature) => {
+      if(!res.filter((elem) => feature.layer == elem.layer && feature.name == elem.name && feature.link == elem.link).length) {
+        res.push(feature);
+      }
+    })
+    return res;
   }
 
 
