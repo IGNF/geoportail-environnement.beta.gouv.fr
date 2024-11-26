@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { FicheInfoFeatureService } from '../../services/fiche-info-feature.service';
@@ -13,8 +13,7 @@ import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
 })
   
 export class ThematicListComponent {
-  
-  @Input() flatview: boolean = true; // Ajout de l'option flatView
+
   selectedTabIndex: number = 0;
 
   ficheTabs: any[] = [];
@@ -41,7 +40,7 @@ export class ThematicListComponent {
       this.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
       this.initFicheList();
-      this.updateFiche();
+      this.updateFicheList();
     });
 
   }
@@ -81,15 +80,16 @@ export class ThematicListComponent {
   }
 
 
-  private updateFiche() {
+  private updateFicheList() {
     this.ficheTabs = this.ficheTabs.map((fiche) => {
-      fiche.layers = fiche.layers.map((layer: any) => this.updateFicheLayer(layer));
+      fiche.layers = fiche.layers.map((layer: any) => this.updateFicheLayerList(layer));
       return fiche;
     });
   }
 
 
-  private updateFicheLayer(layer: any) {
+  private updateFicheLayerList(layer: any) {
+    layer.flatview = true;
     layer.features = [];
     layer.features = this.responseFeatures.filter((feature) => {
       return this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer;

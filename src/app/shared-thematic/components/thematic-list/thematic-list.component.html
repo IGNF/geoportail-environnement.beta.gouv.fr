@@ -1,17 +1,11 @@
-<dsfr-tabs [selectedTabIndex]="selectedTabIndex" (tabSelect)="selectTab($event)">
-
-  @for (ficheTab of ficheTabs; track $index; let first = $first) {
+@for (ficheTab of ficheTabs; track $index; let first = $first) {
   @if (ficheTab.active) {
-  <dsfr-tab [tabId]="ficheTab.name" [label]="ficheTab.label">
-
-    @if (first) {
-    <app-synthese></app-synthese>
-    } @else {
-    <app-fiche-info-view [fiche]="ficheTab"></app-fiche-info-view>
-    }
-
-  </dsfr-tab>
+    <div>
+      @if (first) {
+        <app-synthese></app-synthese>
+      } @else {
+        <app-fiche-info-view [fiche]="ficheTab"></app-fiche-info-view>
+      }
+    </div>
   }
-  }
-
-</dsfr-tabs>
+}

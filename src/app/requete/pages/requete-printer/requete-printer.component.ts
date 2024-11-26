@@ -7,8 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrl: './requete-printer.component.css',
 })
 export class RequetePrinterComponent implements OnInit {
-  @Input() flatview: boolean = true;
-  forestId: string = '';
 
   constructor( ) {}
 
