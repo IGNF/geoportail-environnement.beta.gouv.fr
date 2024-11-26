@@ -11,10 +11,8 @@ import { Vector } from 'ol/source';
 
 import { Feature } from 'ol';
 import Geometry  from 'ol/geom/Geometry';
-import Polygon from 'ol/geom/Polygon';
-import MultiPolygon from 'ol/geom/MultiPolygon';
-import { boundingExtent, extend } from 'ol/extent';
-import { getCenter } from 'ol/extent';
+import { extend } from 'ol/extent';
+
 
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche-list';
@@ -319,5 +317,4 @@ export class MapContextService {
       console.warn('No valid global extent found.');
     }
   }
-
 }

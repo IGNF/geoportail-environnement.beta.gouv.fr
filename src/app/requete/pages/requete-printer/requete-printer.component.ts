@@ -1,30 +1,18 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MapContextService } from '../../../shared-map/services/map-context.service';
-import { ThematicTabsComponent } from '../../../shared-thematic/components/thematic-tabs/thematic-tabs.component';
+import { Component, OnInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-requete-printer',
   templateUrl: './requete-printer.component.html',
   styleUrl: './requete-printer.component.css',
 })
-export class RequetePrinterComponent implements OnInit, AfterViewInit {
-  @ViewChild(ThematicTabsComponent) thematicTabs!: ThematicTabsComponent;
+export class RequetePrinterComponent implements OnInit {
+  @Input() flatview: boolean = true;
   forestId: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private mapContextService: MapContextService
-  ) {}
+  constructor( ) {}
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.forestId = params['forestId'] || '';
-    });
-  }
+  ngOnInit(): void { }
 
-  ngAfterViewInit(): void {
-    this.mapContextService.setTarget('map');
-    this.mapContextService.centerOnDessin();
-  }
+
 }

@@ -20,6 +20,7 @@ import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
 import { ExtendDatePipe } from './shared/pipes/extend-date.pipe';
 import { SimplePageComponent } from './pages/simple-page/simple-page.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

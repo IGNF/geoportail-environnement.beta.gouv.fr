@@ -4,9 +4,11 @@ import { SharedDesignDsfrModule } from '../shared-design-dsfr/shared-design-dsfr
 import { SyntheseComponent } from './components/synthese/synthese.component';
 import { ThematicSelectComponent } from './components/thematic-select/thematic-select.component';
 import { ThematicTabsComponent } from './components/thematic-tabs/thematic-tabs.component';
+import { ThematicListComponent } from './components/thematic-list/thematic-list.component';
 import { FicheInfoViewComponent } from './components/fiche-info-view/fiche-info-view.component';
 import { LayerInfoViewComponent } from './components/layer-info-view/layer-info-view.component';
 import { ReglementationViewComponent } from './components/reglementation-view/reglementation-view.component';
+
 
 
 @NgModule({
@@ -14,6 +16,7 @@ import { ReglementationViewComponent } from './components/reglementation-view/re
     SyntheseComponent,
     ThematicSelectComponent,
     ThematicTabsComponent,
+    ThematicListComponent,
     FicheInfoViewComponent,
     LayerInfoViewComponent,
     ReglementationViewComponent
@@ -24,7 +27,8 @@ import { ReglementationViewComponent } from './components/reglementation-view/re
   ],
   exports: [
     ThematicSelectComponent,
-    ThematicTabsComponent
+    ThematicTabsComponent,
+    ThematicListComponent
   ]
 })
 export class SharedThematicModule { }

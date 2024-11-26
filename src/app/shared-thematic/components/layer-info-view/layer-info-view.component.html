@@ -6,7 +6,12 @@
 
   <li>
     @if (layer.link !== "") {
-    <a [href]="feature.link" target="_blank">{{ feature.name }}</a>
+      @if (flatview == true){
+        <div id="map-container-{{ feature.id }}" ></div> <!--Id générer par service map -> generateCloneId() -->
+        <p>TESING</p>
+        <!-- <app-map-viewer></app-map-viewer> -->
+      }
+      <a [href]="feature.link" target="_blank">{{ feature.name }}</a>
     } @else {
     {{ feature.name }}
     }

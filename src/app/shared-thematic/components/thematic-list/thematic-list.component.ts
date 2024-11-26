@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { FicheInfoFeatureService } from '../../services/fiche-info-feature.service';
 import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
 
-
 @Component({
-  selector: 'app-thematic-tabs',
-  templateUrl: './thematic-tabs.component.html',
-  styleUrl: './thematic-tabs.component.css'
-})
-export class ThematicTabsComponent implements OnInit {
 
+  selector: 'app-thematic-list',
+  templateUrl: './thematic-list.component.html',
+  styleUrl: './thematic-list.component.css'
+
+})
+  
+export class ThematicListComponent {
+  
+  @Input() flatview: boolean = true; // Ajout de l'option flatView
   selectedTabIndex: number = 0;
 
   ficheTabs: any[] = [];
@@ -26,7 +28,7 @@ export class ThematicTabsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    
     this.initFicheList();
 
     this.thematicSelectService.thematicSelection.subscribe((activeThemeList: any[]) => {
@@ -119,3 +121,5 @@ export class ThematicTabsComponent implements OnInit {
   }
 
 }
+
+

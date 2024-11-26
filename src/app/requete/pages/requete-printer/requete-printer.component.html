@@ -1,12 +1,1 @@
-<div class="fr-container">
-  <h1>Votre forêt<span *ngIf="forestId"> - {{ forestId }}</span></h1>
-  <div class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-12 fr-col-lg-6">
-      <app-map-viewer></app-map-viewer>
-    </div>
-    <div class="fr-col-12 fr-col-lg-6">
-      <app-thematic-tabs [flatView]="true"></app-thematic-tabs>
-    </div>
-  </div>
-</div>
-
+<app-thematic-list [flatview]="flatview"></app-thematic-list>
