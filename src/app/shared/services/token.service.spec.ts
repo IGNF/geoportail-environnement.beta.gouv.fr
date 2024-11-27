@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ForetService } from './foret.service';
+import { TokenService } from './token.service';
 import { appConfig } from '../../app.config';
 
-describe('ForetService', () => {
-  let service: ForetService;
+describe('TokenService', () => {
+  let service: TokenService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('ForetService', () => {
       ],
       providers: appConfig.providers
     });
-    service = TestBed.inject(ForetService);
+    service = TestBed.inject(TokenService);
   });
 
   it('should be created', () => {

@@ -6,6 +6,17 @@
 
   <h1>Mes Forets</h1>
 
+  @if (subcribed) {
+  <p>Liste des forêts sauvegardé sur votre compte <i>carte.gouv.fr</i></p>
+  } @else {
+  <p>
+    Liste des forêts sauvegardé sur le cache de votre navigateur.
+    Charger et enregistrer vos forêts sur votre compte
+    <a [href]="loginUrl" target="_blank">carte.gouv.fr</a>
+    pour les retrouver sur d'autre postes.
+  </p>
+  }
+
   <div class="fr-grid-row fr-grid-row--gutters fr-mb-4v">
 
     @for(foret of foretCards; track foret.id) {

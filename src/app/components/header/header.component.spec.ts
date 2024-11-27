@@ -1,14 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+
 import { HeaderComponent } from './header.component';
 import { SharedDesignDsfrModule } from '../../shared-design-dsfr/shared-design-dsfr.module';
-import { RouterModule } from '@angular/router'; 
-import { ActivatedRoute } from '@angular/router';
-
-
-class ActivatedRouteStub {
-  // Simuler des propriétés utilisées dans le composant
-  params = { subscribe: (fn: (params: any) => void) => fn({}) }; 
-}
+import { appConfig } from '../../app.config';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -21,11 +16,8 @@ describe('HeaderComponent', () => {
         SharedDesignDsfrModule,
         RouterModule
       ],
-      providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub } 
-      ]
-    })
-    .compileComponents();
+      providers: appConfig.providers
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
