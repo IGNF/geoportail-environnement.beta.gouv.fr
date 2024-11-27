@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ThematicListComponent } from '../../../shared-thematic/components/thematic-list/thematic-list.component';
 
-import { RequetePrinterComponent } from './requete-printer.component';
 
-describe('RequetePrinterComponent', () => {
-  let component: RequetePrinterComponent;
-  let fixture: ComponentFixture<RequetePrinterComponent>;
+describe('ThematicListComponent', () => {
+  let component: ThematicListComponent;
+  let fixture: ComponentFixture<ThematicListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RequetePrinterComponent]
-    })
-    .compileComponents();
+      declarations: [ThematicListComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(RequetePrinterComponent);
+    fixture = TestBed.createComponent(ThematicListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
