@@ -89,16 +89,21 @@ export const THEMATIC_FICHE_LIST = [
     ]
   }),
   new FicheInfo().deserialise({
-    name: 'monument-historique',
-    label: 'Monument Historique',
+    name: 'patrimoine',
+    label: 'Patrimoine',
     title: 'Votre forêt se trouve t-elle sur des zones patrimonial ?',
     active: true,
     layers: [
       {
         title: 'Monuments historiques',
-        group: 'historique',
+        group: 'patrimoine',
         technicalName: 'wfs_sup:assiette_sup_s'
       },
+      {
+        title: 'Espaces boisés classés',
+        group: 'patrimoine',
+        technicalName: 'wfs_du:prescription_surf'
+      }
     ]
   })
 ];

@@ -42,9 +42,19 @@ export class GeoplateformeWfsService {
     return this;
   }
 
-  filterSupType(subtype: string): GeoplateformeWfsService {
-    this.request.cqlFilters.push(`suptype='${subtype}'`);
+  filterByAttribute(attribute : string, value: string): GeoplateformeWfsService {
+    this.request.cqlFilters.push(`${attribute}='${value}'`);
     return this;
+  }
+
+  filterByAttributeInValues (attribute : string, values : string[]) {
+    let res = `${attribute} IN (`;
+    for(let i = 0; i < values.length; i++) {
+      res += `'${values[i]}', `
+    }
+    res = res.replace(/, $/, '');
+    res += ')';
+    return this.request.cqlFilters.push(res);
   }
 
   intersectCollection(features: any[], geometryName: string = GEOMETRY_NAME, lonLatOrder: boolean = LON_LAT_ORDER): GeoplateformeWfsService {

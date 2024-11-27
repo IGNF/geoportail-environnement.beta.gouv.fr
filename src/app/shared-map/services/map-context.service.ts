@@ -9,7 +9,7 @@ import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
 
-import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
+import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche-list';
 
 @Injectable({
@@ -129,7 +129,7 @@ export class MapContextService {
       }
     }
 
-    [MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP].forEach((newlayer) => {
+    [MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP].forEach((newlayer) => {
       const group = newlayer.get('group') || 'no-group';
       for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
         if (group === THEMATIC_FICHE_LIST[i].name && THEMATIC_FICHE_LIST[i].active) {
