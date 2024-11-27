@@ -17,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptorsFromDi()
     ),
-    { provide: HTTP_INTERCEPTORS, useClass: AppTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AppTokenInterceptor, multi: true }
   ]
 };

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs';
-import { INTERCEPT } from '../../core/interceptors/app-token.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +10,7 @@ import { INTERCEPT } from '../../core/interceptors/app-token.interceptor';
 export class TokenService {
 
   private token: string = '';
+
   private refreshToken: string = '';
 
   constructor(

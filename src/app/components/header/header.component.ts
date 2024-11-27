@@ -54,7 +54,7 @@ export class HeaderComponent {
   private logoutHeadersToolsLinks() {
     return [
       { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' },
-      { label: 'Connexion', icon: 'fr-btn--account', link: environment.loginUrl, routerLinkActive: 'class-active' }
+      { label: 'Connexion', icon: 'fr-btn--account', link: environment.loginUrl, target: '_blank', routerLinkActive: 'class-active' }
     ];
   }
 

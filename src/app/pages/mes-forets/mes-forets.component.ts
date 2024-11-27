@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { catchError } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
 import { ForetService } from '../../shared/services/foret.service';
 import { CardTransformerService } from '../../shared-design-dsfr/transformers/card-transformer.service';
 import { BreadcrumbTransformerService } from '../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
@@ -17,6 +18,10 @@ export class MesForetsComponent implements OnInit {
 
   breadcrumb: any;
 
+  subcribed: boolean = true;
+
+  loginUrl: string = environment.loginUrl;
+
   constructor(
     private breadcrumbTransformerService: BreadcrumbTransformerService,
     private cardTransformerService: CardTransformerService,
@@ -26,17 +31,16 @@ export class MesForetsComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildBreadcrumb();
-    this.foretService.list().subscribe((forets) => {
+    this.foretService.list().pipe(
+      catchError((error) => {
+        console.error('error', error);
+        this.subcribed = false;
+        return this.foretService.mockList();
+      })
+    ).subscribe((forets) => {
       console.log('subscribe((forets)', forets);
       this.foretCards = forets.map((foret) => this.cardTransformerService.fromForet(foret));
     });
-
-    // this.foretService.list().pipe(
-    //   map((forets) => {
-    //     console.log('map((forets)');
-    //     this.foretCards = forets.map((foret) => this.cardTransformerService.fromForet(foret));
-    //   })
-    // ).subscribe();
   }
 
   goToRequete(foretTitle: string) {
