@@ -408,14 +408,14 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
   ]
 });
 
-export const MAP_MONUMENTS_LAYER_GROUP = new LayerGroup({
+export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
   properties: {
-    title: 'Monument Historique',
-    group: 'monument-historique'
+    title: 'Patrimoine',
+    group: 'patrimoine'
   },
   layers: [
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'monument-historique')?.layers?.find((l) => l.technicalName === 'wfs_sup:assiette_sup_s'),
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_sup:assiette_sup_s'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -432,9 +432,33 @@ export const MAP_MONUMENTS_LAYER_GROUP = new LayerGroup({
         params: {
           'LAYERS': 'monument_historique',
           'FORMAT': 'image/png',
-          'VERSION': '1.3.0'
+          'VERSION': '1.3.0',
+          'cql_filter': "suptype = 'ac1' AND typeass = 'Périmètre des abords'"
         }
       })
-    })
+    }),
+    new TileLayer({
+      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_du:prescription_surf'),
+      extent: [
+        -20037508.342789244,
+        -44927335.42709704,
+        20037508.342789244,
+        44927335.42709663
+      ],
+      minResolution: 0,
+      maxResolution: 156543.03392804097,
+      source: new TileWMS({
+        url: 'https://data.geopf.fr/wms-v/ows?',
+        projection: 'EPSG:3857',
+        attributions: [],
+        crossOrigin: 'anonymous',
+        params: {
+          'LAYERS': 'prescription',
+          'FORMAT': 'image/png',
+          'VERSION': '1.3.0',
+          'cql_filter': "typepsc = '01' AND stypepsc IN ('00', 01, 02, 03)"
+        }
+      })
+    }),
   ]
 });

@@ -72,4 +72,25 @@ describe('AppComponent', () => {
     expect(title.textContent?.trim()).toContain('Géoportail de l\'environnement');
   });
 
+  it('should set the title and focus on the title element on router events', () => {
+    const mockTitleElement = document.createElement('div');
+    mockTitleElement.id = 'title-page';
+    document.body.appendChild(mockTitleElement);
+
+    spyOn(document, 'getElementById').and.returnValue(mockTitleElement);
+    const focusSpy = spyOn(mockTitleElement, 'focus');
+    spyOnProperty(document, 'title', 'get').and.returnValue('New Title');
+
+    component.ngOnInit();
+    router.navigate(['/']);
+
+    fixture.whenStable().then(() => {
+      expect(component.title).toBe('New Title');
+
+      expect(focusSpy).toHaveBeenCalled();
+    });
+
+    document.body.removeChild(mockTitleElement);
+  });
+
 });

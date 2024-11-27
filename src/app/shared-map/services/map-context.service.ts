@@ -189,7 +189,7 @@ export class MapContextService {
       }
     }
 
-    [MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP].forEach((newlayer) => {
+    [MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP].forEach((newlayer) => {
       const group = newlayer.get('group') || 'no-group';
       for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
         if (group === THEMATIC_FICHE_LIST[i].name && THEMATIC_FICHE_LIST[i].active) {
