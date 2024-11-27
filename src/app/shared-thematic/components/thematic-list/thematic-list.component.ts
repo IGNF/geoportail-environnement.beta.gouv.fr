@@ -5,13 +5,10 @@ import { FicheInfoFeatureService } from '../../services/fiche-info-feature.servi
 import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
 
 @Component({
-
   selector: 'app-thematic-list',
   templateUrl: './thematic-list.component.html',
   styleUrl: './thematic-list.component.css'
-
 })
-  
 export class ThematicListComponent {
 
   selectedTabIndex: number = 0;
@@ -27,7 +24,7 @@ export class ThematicListComponent {
   ) { }
 
   ngOnInit() {
-    
+
     this.initFicheList();
 
     this.thematicSelectService.thematicSelection.subscribe((activeThemeList: any[]) => {
@@ -47,8 +44,8 @@ export class ThematicListComponent {
 
 
   selectTab(event: any) {
-      this.setSelectedTabIndex(event);
-      this.mapContextService.updateLayersVisibility(event);
+    this.setSelectedTabIndex(event);
+    this.mapContextService.updateLayersVisibility(event);
   }
 
 

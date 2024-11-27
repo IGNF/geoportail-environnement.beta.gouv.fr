@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { SharedDesignDsfrModule } from '../shared-design-dsfr/shared-design-dsfr.module';
 import { SyntheseComponent } from './components/synthese/synthese.component';
 import { ThematicSelectComponent } from './components/thematic-select/thematic-select.component';
@@ -9,7 +10,6 @@ import { FicheInfoViewComponent } from './components/fiche-info-view/fiche-info-
 import { LayerInfoViewComponent } from './components/layer-info-view/layer-info-view.component';
 import { ReglementationViewComponent } from './components/reglementation-view/reglementation-view.component';
 import { SharedMapModule } from '../shared-map/shared-map.module';
-
 
 
 @NgModule({
