@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { FicheInfoFeatureService } from '../../services/fiche-info-feature.service';
 import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
 
 @Component({
-  selector: 'app-thematic-tabs',
-  templateUrl: './thematic-tabs.component.html',
-  styleUrl: './thematic-tabs.component.css'
+  selector: 'app-thematic-list',
+  templateUrl: './thematic-list.component.html',
+  styleUrl: './thematic-list.component.css'
 })
-export class ThematicTabsComponent implements OnInit {
+export class ThematicListComponent {
 
   selectedTabIndex: number = 0;
 
@@ -34,19 +33,19 @@ export class ThematicTabsComponent implements OnInit {
     });
 
     this.ficheInfoFeatureService.listFicheFeatures().subscribe((features: any[]) => {
-      this.responseFeatures = this.deleteRedundantFeatures(features);
+      this.responseFeatures = features;
       this.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
       this.initFicheList();
-      this.updateFiche();
+      this.updateFicheList();
     });
 
   }
 
 
   selectTab(event: any) {
-      this.setSelectedTabIndex(event);
-      this.mapContextService.updateLayersVisibility(event);
+    this.setSelectedTabIndex(event);
+    this.mapContextService.updateLayersVisibility(event);
   }
 
 
@@ -78,15 +77,16 @@ export class ThematicTabsComponent implements OnInit {
   }
 
 
-  private updateFiche() {
+  private updateFicheList() {
     this.ficheTabs = this.ficheTabs.map((fiche) => {
-      fiche.layers = fiche.layers.map((layer: any) => this.updateFicheLayer(layer));
+      fiche.layers = fiche.layers.map((layer: any) => this.updateFicheLayerList(layer));
       return fiche;
     });
   }
 
 
-  private updateFicheLayer(layer: any) {
+  private updateFicheLayerList(layer: any) {
+    layer.flatview = true;
     layer.features = [];
     layer.features = this.responseFeatures.filter((feature) => {
       return this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer;
@@ -112,19 +112,11 @@ export class ThematicTabsComponent implements OnInit {
     }
   }
 
-  private deleteRedundantFeatures(features : any[]) : any[]{
-    let res : any[] = [];
-    features.forEach((feature) => {
-      if(!res.filter((elem) => feature.layer == elem.layer && feature.name == elem.name && feature.link == elem.link).length) {
-        res.push(feature);
-      }
-    })
-    return res;
-  }
-
 
   private parseLayerFromTechnicalName(technicalName: string) {
     return technicalName.split(':')[1];
   }
 
 }
+
+

@@ -8,6 +8,7 @@ import { FicheInfo } from '../../models/fiche-info.model';
 export class FicheInfoViewComponent implements OnInit {
 
   @Input() fiche!: FicheInfo;
+  @Input() flatview: boolean = false;
 
   constructor() { }
 

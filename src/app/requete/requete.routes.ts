@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { RequeteNewComponent } from './pages/requete-new/requete-new.component';
+import { RequetePrinterComponent } from './pages/requete-printer/requete-printer.component';
 
 export const requeteRoutes: Routes = [
   {
@@ -12,5 +13,10 @@ export const requeteRoutes: Routes = [
     path: ':id',
     component: RequeteNewComponent,
     title: 'Requête sur ma forêt'
-  }
+  },
+  {
+    path: 'nouvelle/impression',
+    component: RequetePrinterComponent,
+    title: 'Impression'
+  },
 ];

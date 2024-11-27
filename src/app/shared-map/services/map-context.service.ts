@@ -1,14 +1,19 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Feature } from 'ol';
+import LayerGroup from 'ol/layer/Group';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
-import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { Fill, Stroke, Style } from 'ol/style';
 import { Select } from 'ol/interaction';
-import EditBar from 'ol-ext/control/EditBar.js';
-import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
+import Geometry from 'ol/geom/Geometry';
+import { extend } from 'ol/extent';
+import GeoportailLayer from 'ol-ext/layer/Geoportail';
+import EditBar from 'ol-ext/control/EditBar.js';
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 
+import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche-list';
 
@@ -17,23 +22,29 @@ import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche
 })
 export class MapContextService {
 
-  map?: Map;
+  private map?: Map; // Instance unique de la carte
 
   mapLoaded: EventEmitter<any> = new EventEmitter<any>();
 
   private activeThematicLayers: any[] = [];
 
+  private clones: Map[] = []; // Liste des clones de cartes
+
   constructor() { }
 
-  getMap(): Map | any {
+  // Obtenir la carte
+  getMap(): Map | undefined {
     return this.map;
   }
 
-  isMapLoaded() {
-    return this.map || this.map !== null;
+  // Vérifier si une carte est déjà chargée
+  isMapLoaded(): boolean {
+    return !!this.map;
   }
 
-  createMap(elementId: string) {
+  // Créer ou réaffecter la carte
+  createMap(elementId: string): void {
+    // Initialiser une nouvelle carte si elle n'existe pas
     this.map = new Map({
       view: new View({
         center: [0, 0],
@@ -44,17 +55,67 @@ export class MapContextService {
         new VectorLayer({
           source: new Vector(),
           properties: { title: 'Ma Forêt' },
-          zIndex: 1000
-        })
+          zIndex: 1000,
+        }),
       ],
       target: elementId
     });
 
     this.map.addControl(new LayerSwitcher());
 
-    this.map.on('rendercomplete', (event) => this.mapLoaded.next(event));
+    this.map.on('rendercomplete', (event) => this.mapLoaded.emit(event));
   }
 
+  // Détruire la carte (réinitialiser sa cible)
+  destroyMap(): void {
+    if (this.map) {
+      this.map.setTarget(undefined); // Libère la carte de sa cible DOM
+    }
+  }
+
+  // Ajouter une carte situation, clone de la map origine
+  createSituationMap(idClone: string, technicalName: string): Map {
+    // Rechercher la couche correspondant au technicalName
+    const selectedLayer = this.getLayerByTechnicalName(technicalName);
+
+    const layerCopy = new LayerGroup({
+      properties: {
+        title: 'Fonds de carte',
+        group: `base-layer-${idClone}`
+      },
+      layers: [
+        new GeoportailLayer({
+          properties: { title: 'Fond de carte IGN' },
+          layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
+          visible: true
+        }),
+        new GeoportailLayer({
+          properties: { title: 'Cadastre' },
+          minZoom: 14, // visible at zoom levels 14 and below
+          layer: 'CADASTRALPARCELS.PARCELLAIRE_EXPRESS',
+          visible: true
+        })
+      ]
+    })
+
+    const clone = new Map({
+      view: new View({
+        center: [261271, 6249998],
+        zoom: 13,
+      }),
+      layers: [
+        layerCopy,
+        this.getLayerDessin(),
+        selectedLayer
+      ],
+      target: idClone
+    });
+
+    this.clones.push(clone); // Ajouter le clone à la liste
+    return clone;
+  }
+
+  // Outils de dessin, couches, et autres fonctions non modifiées
   addDrawingTools() {
     if (!this.getLayerDessin()) {
       return;
@@ -65,10 +126,9 @@ export class MapContextService {
         color: 'rgba(73,73,232,0.4)',
       }),
       stroke: new Stroke({
-        color: '#3399CC'
-      })
+        color: '#3399CC',
+      }),
     });
-
 
     this.getLayerDessin().setStyle(style);
 
@@ -78,13 +138,13 @@ export class MapContextService {
       }),
       stroke: new Stroke({
         color: '#F44336',
-        width: 4
-      })
+        width: 4,
+      }),
     });
 
     const select = new Select({
       layers: [this.getLayerDessin()],
-      style: selectStyle
+      style: selectStyle,
     });
 
     const editBar = new EditBar({
@@ -100,9 +160,9 @@ export class MapContextService {
         DrawRegular: false,
         Transform: false,
         Split: false,
-        Offset: false
+        Offset: false,
       },
-      source: this.getLayerDessin().getSource()
+      source: this.getLayerDessin().getSource(),
     });
     editBar.setProperties({ name: 'editBar' });
     this.map?.addControl(editBar);
@@ -111,13 +171,13 @@ export class MapContextService {
   removeDrawingTools() {
     let editBar: any;
     this.map?.getControls().forEach((control) => {
-      if (control.get('name') == 'editBar') {
+      if (control.get('name') === 'editBar') {
         editBar = control;
       }
-    })
+    });
 
     this.map?.removeControl(editBar);
-  };
+  }
 
   updateLayers() {
     const layers: any = this.map?.getLayers().getArray();
@@ -137,6 +197,15 @@ export class MapContextService {
           continue;
         }
       }
+    });
+  }
+
+  // Méthode mise à jour des couches pour un clone ou la carte principale
+  updateLayersForMap(map: Map, layersToLoad: any[]): void {
+    const currentLayers = map.getLayers();
+    currentLayers.clear(); // Supprime toutes les couches existantes
+    layersToLoad.forEach((layer) => {
+      map.addLayer(layer); // Ajoute les nouvelles couches
     });
   }
 
@@ -195,6 +264,69 @@ export class MapContextService {
     this.getLayerDessin().getSource().forEachFeature((f: any) => {
       this.getLayerDessin()?.getSource().removeFeature(f);
     });
+  }
+
+  centerOnDessin(map?: Map) {
+    if (!map) {
+      map = this.map;
+    }
+
+    const dessinLayer = this.getLayerDessin();
+    if (!dessinLayer) {
+      console.warn('No dessin layer found.');
+      return;
+    }
+
+    const source = dessinLayer.getSource();
+    const features = source.getFeatures();
+
+    if (features.length === 0) {
+      console.warn('No features in dessin layer.');
+      return;
+    }
+
+    // Initialiser l'extension globale
+    let globalExtent: number[] | null = null;
+
+    // Calculer l'extension globale de toutes les géométries
+    features.forEach((feature: Feature<Geometry>) => {
+      const geometry = feature.getGeometry();
+      if (geometry) {
+        const featureExtent = geometry.getExtent(); // Étendue de la géométrie actuelle
+        if (globalExtent === null) {
+          globalExtent = featureExtent.slice(); // Initialiser l'extension
+        } else {
+          extend(globalExtent, featureExtent); // Étendre l'extension globale
+        }
+      }
+    });
+
+    if (!globalExtent) {
+      console.warn('No valid global extent found.');
+      return;
+    }
+
+    // Centrer la carte et ajuster le zoom pour voir toutes les entités
+    map?.getView().fit(globalExtent, {
+      size: this.map?.getSize(), // Taille de la carte
+      padding: [50, 50, 50, 50], // Espacement autour des entités (en pixels)
+      duration: 500, // Durée de l'animation (en ms)
+      maxZoom: 20, // Facultatif : limite maximale du zoom
+    });
+  }
+
+  /**
+   * Recherche une couche basée sur son technicalName dans les groupes de couches disponibles.
+   * @param technicalName - Le nom technique de la couche à rechercher.
+   * @returns La couche correspondante ou null si aucune n'est trouvée.
+   */
+  private getLayerByTechnicalName(technicalName: string): any {
+    const allLayers = [
+      ...MAP_BIODIVERISTE_LAYER_GROUP.getLayers().getArray(),
+      ...MAP_PATRIMOINE_LAYER_GROUP.getLayers().getArray(),
+    ];
+
+    return allLayers.find((layer) => layer.get('technicalName') === technicalName) || null;
   }
 
 }

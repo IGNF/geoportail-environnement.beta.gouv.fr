@@ -1,9 +1,13 @@
 @if (layer && layer.features && layer.features.length > 0) {
 
 <h4 class="fr-h6">{{ layer.title }}</h4>
+
+@if (displaySituationMap) {
+  <app-map-viewer [id]="map" [situationMap]="displaySituationMap"></app-map-viewer>
+}
+
 <ul>
   @for (feature of layer.features; track feature) {
-
   <li>
     @if (layer.link !== "") {
     <a [href]="feature.link" target="_blank">{{ feature.name }}</a>

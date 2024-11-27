@@ -1,0 +1,11 @@
+@for (ficheTab of ficheTabs; track $index; let first = $first) {
+  @if (ficheTab.active) {
+    <div>
+      @if (first) {
+        <app-synthese></app-synthese>
+      } @else {
+        <app-fiche-info-view [fiche]="ficheTab"></app-fiche-info-view>
+      }
+    </div>
+  }
+}

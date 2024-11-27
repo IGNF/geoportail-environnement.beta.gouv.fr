@@ -1,0 +1,12 @@
+<div class="fr-grid-row fr-grid-row--gutters">
+  @for (tile of exportTiles; track tile) {
+  <div class="fr-col-12 fr-col-lg-6">
+    <dsfr-tile [customBackground]="tile.customBackground" [customBorder]="tile.customBorder"
+      [description]="tile.description" [disabled]="tile.disabled" [downloadDirect]="tile.downloadDirect"
+      [downloadAssessFile]="tile.downloadAssessFile" [enlargeLink]="tile.enlargeLink" [heading]="tile.heading"
+      [headingLevel]="tile.headingLevel" [horizontal]="tile.horizontal" [route]="tile.route" [size]="tile.size"
+      [download]="tile.download" [artworkDirPath]="tile.artworkDirPath" [artworkFilePath]="tile.artworkFilePath"
+      [detail]="tile.detail" (tileSelect)="tileSelect($event)"></dsfr-tile>
+  </div>
+  }
+</div>

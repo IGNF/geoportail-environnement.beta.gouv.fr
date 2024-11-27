@@ -1,4 +1,4 @@
-<div *ngIf="breadcrumb" class="fr-container">
+<div *ngIf="breadcrumb" class="fr-container ">
   <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
 </div>
 
@@ -7,6 +7,10 @@
   <h1>Votre forêt<span *ngIf="forestId"> - {{ forestId }}</span></h1>
 
   <app-requete-stepper [step]="step"></app-requete-stepper>
+
+  <app-requete-stepper-control [step]="step" (previous)="previousStep()"
+    (next)="nextStep()"></app-requete-stepper-control>
+
 
   <div *ngIf="step === 0 || step === 1" class="fr-grid-row fr-mb-4v">
     <div class="fr-col-12 fr-col-lg-6">
@@ -27,14 +31,14 @@
     </div>
 
     <div class="fr-col-12 fr-col-lg-6">
-      <app-thematic-tabs *ngIf="step > 1"></app-thematic-tabs>
+      <app-thematic-tabs *ngIf="step === 2"></app-thematic-tabs>
+      <app-requete-export-list *ngIf="step === 3"></app-requete-export-list>
     </div>
 
   </div>
 
-  <div class="fr-mt-4v">
+  <!-- <div class="fr-mt-4v">
     <app-requete-stepper-control [step]="step" (previous)="previousStep()"
       (next)="nextStep()"></app-requete-stepper-control>
-  </div>
-
+  </div> -->
 </div>
