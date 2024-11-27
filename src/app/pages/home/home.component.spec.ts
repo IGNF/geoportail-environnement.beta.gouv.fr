@@ -39,6 +39,7 @@ describe('HomeComponent', () => {
     router = TestBed.inject(Router);
     location = TestBed.inject(Location);
     fixture.detectChanges();
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
