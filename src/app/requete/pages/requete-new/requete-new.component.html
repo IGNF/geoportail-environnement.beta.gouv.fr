@@ -8,6 +8,10 @@
 
   <app-requete-stepper [step]="step"></app-requete-stepper>
 
+  <app-requete-stepper-control [step]="step" (previous)="previousStep()"
+    (next)="nextStep()"></app-requete-stepper-control>
+
+
   <div *ngIf="step === 0 || step === 1" class="fr-grid-row fr-mb-4v">
     <div class="fr-col-12 fr-col-lg-6">
       <app-geolocalise-form (select)="confirmSelect()"></app-geolocalise-form>
@@ -27,23 +31,14 @@
     </div>
 
     <div class="fr-col-12 fr-col-lg-6">
-      <app-thematic-tabs *ngIf="step > 1"></app-thematic-tabs>
+      <app-thematic-tabs *ngIf="step === 2"></app-thematic-tabs>
+      <app-requete-export-list *ngIf="step === 3"></app-requete-export-list>
     </div>
 
   </div>
 
-  <div class="fr-mt-4v">
+  <!-- <div class="fr-mt-4v">
     <app-requete-stepper-control [step]="step" (previous)="previousStep()"
       (next)="nextStep()"></app-requete-stepper-control>
-
-    <!-- Bouton de redirection impression-->
-    <div class="fr-grid-row fr-mt-4v">
-      <div class="fr-col">
-        <button class="fr-btn" (click)="redirectToPrinter()">
-          Imprimer cette requête
-        </button>
-      </div>
-    </div>  
-  </div>
+  </div> -->
 </div>
-

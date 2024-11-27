@@ -14,7 +14,7 @@ import EditBar from 'ol-ext/control/EditBar.js';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 
 import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
-import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
+import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche-list';
 
 @Injectable({
@@ -323,7 +323,7 @@ export class MapContextService {
   private getLayerByTechnicalName(technicalName: string): any {
     const allLayers = [
       ...MAP_BIODIVERISTE_LAYER_GROUP.getLayers().getArray(),
-      ...MAP_MONUMENTS_LAYER_GROUP.getLayers().getArray(),
+      ...MAP_PATRIMOINE_LAYER_GROUP.getLayers().getArray(),
     ];
 
     return allLayers.find((layer) => layer.get('technicalName') === technicalName) || null;

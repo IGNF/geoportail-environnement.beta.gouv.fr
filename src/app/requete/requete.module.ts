@@ -10,13 +10,15 @@ import { SharedMapModule } from '../shared-map/shared-map.module';
 import { RequeteStepperControlComponent } from './components/requete-stepper-control/requete-stepper-control.component';
 import { SharedThematicModule } from '../shared-thematic/shared-thematic.module';
 import { requeteRoutes } from './requete.routes';
+import { RequeteExportListComponent } from './components/requete-export-list/requete-export-list.component';
 
 @NgModule({
   declarations: [
     RequeteNewComponent,
     RequetePrinterComponent,
     RequeteStepperComponent,
-    RequeteStepperControlComponent
+    RequeteStepperControlComponent,
+    RequeteExportListComponent
   ],
   imports: [
     CommonModule,

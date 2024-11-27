@@ -36,7 +36,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 
 @NgModule({
   declarations: [
-    BreadcrumbComponent
+    BreadcrumbComponent,
   ],
   imports: [
     CommonModule,

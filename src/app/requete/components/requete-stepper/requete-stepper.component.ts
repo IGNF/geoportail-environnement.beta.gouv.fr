@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-const STEPPER_CONFIG = [
+export const STEPPER_CONFIG = [
   { currentStep: 1, currentStepTitle: 'Localiser la forêt', nextStepTitle: 'Préciser le périmètre de la forêt' },
   { currentStep: 2, currentStepTitle: 'Préciser le périmètre', nextStepTitle: 'Sélectionner les informations' },
   { currentStep: 3, currentStepTitle: 'Sélectionnez les informations', nextStepTitle: 'Exporter les informations' },
