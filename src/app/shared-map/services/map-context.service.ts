@@ -80,13 +80,16 @@ export class MapContextService {
   }
 
   // Ajouter une carte situation, clone de la map origine
-  createSituationMap(idClone: string, layersToLoad: any[]): Map {
+  createSituationMap(idClone: string, technicalName: string): Map {
+    // Rechercher la couche correspondant au technicalName
+    const selectedLayer = this.getLayerByTechnicalName(technicalName);
+
     const clone = new Map({
       view: new View({
         center: [0, 0],
         zoom: 1,
       }),
-      layers: layersToLoad, // Couches spécifiques à charger dans ce clone
+      layers: selectedLayer, // Couches spécifiques à charger dans ce clone
       target: idClone,
     });
 
@@ -317,4 +320,19 @@ export class MapContextService {
       console.warn('No valid global extent found.');
     }
   }
+
+  /**
+   * Recherche une couche basée sur son technicalName dans les groupes de couches disponibles.
+   * @param technicalName - Le nom technique de la couche à rechercher.
+   * @returns La couche correspondante ou null si aucune n'est trouvée.
+   */
+  private getLayerByTechnicalName(technicalName: string): any {
+    const allLayers = [
+      ...MAP_BIODIVERISTE_LAYER_GROUP.getLayers().getArray(),
+      ...MAP_MONUMENTS_LAYER_GROUP.getLayers().getArray(),
+    ];
+
+    return allLayers.find((layer) => layer.get('technicalName') === technicalName) || null;
+  }
+  
 }

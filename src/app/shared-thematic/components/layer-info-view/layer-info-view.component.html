@@ -2,9 +2,7 @@
 
 <h4 class="fr-h6">{{ layer.title }}</h4>
 @if (layer.flatview){
-  <div [id]="map" class="map"></div> <!--Id générer par service map -> generateCloneId() -->
-  <p>TESING</p>
-  <!-- <app-map-viewer></app-map-viewer> -->
+  <div [id]="map" class="map"></div> 
 }
 <ul>
   @for (feature of layer.features; track feature) {
