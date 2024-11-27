@@ -1,19 +1,19 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Feature } from 'ol';
+import LayerGroup from 'ol/layer/Group';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
-import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import { Fill, Stroke, Style } from 'ol/style';
 import { Select } from 'ol/interaction';
-import EditBar from 'ol-ext/control/EditBar.js';
-import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
-
-import { Feature } from 'ol';
-import Geometry  from 'ol/geom/Geometry';
+import Geometry from 'ol/geom/Geometry';
 import { extend } from 'ol/extent';
+import GeoportailLayer from 'ol-ext/layer/Geoportail';
+import EditBar from 'ol-ext/control/EditBar.js';
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 
-
+import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_MONUMENTS_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche-list';
 
@@ -21,9 +21,13 @@ import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche
   providedIn: 'root'
 })
 export class MapContextService {
+
   private map?: Map; // Instance unique de la carte
+
   mapLoaded: EventEmitter<any> = new EventEmitter<any>();
+
   private activeThematicLayers: any[] = [];
+
   private clones: Map[] = []; // Liste des clones de cartes
 
   constructor() { }
@@ -38,38 +42,28 @@ export class MapContextService {
     return !!this.map;
   }
 
-  // Générer dynamiquement un ID unique pour un clone
-  generateCloneId(): string {
-    return `mapClone-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-  }
-
   // Créer ou réaffecter la carte
   createMap(elementId: string): void {
-    if (!this.map) {
-      // Initialiser une nouvelle carte si elle n'existe pas
-      this.map = new Map({
-        view: new View({
-          center: [0, 0],
-          zoom: 1,
+    // Initialiser une nouvelle carte si elle n'existe pas
+    this.map = new Map({
+      view: new View({
+        center: [0, 0],
+        zoom: 1,
+      }),
+      layers: [
+        MAP_DEFAULT_LAYER_GROUP,
+        new VectorLayer({
+          source: new Vector(),
+          properties: { title: 'Ma Forêt' },
+          zIndex: 1000,
         }),
-        layers: [
-          MAP_DEFAULT_LAYER_GROUP,
-          new VectorLayer({
-            source: new Vector(),
-            properties: { title: 'Ma Forêt' },
-            zIndex: 1000,
-          }),
-        ],
-        target: elementId,
-      });
+      ],
+      target: elementId
+    });
 
-      this.map.addControl(new LayerSwitcher());
+    this.map.addControl(new LayerSwitcher());
 
-      this.map.on('rendercomplete', (event) => this.mapLoaded.emit(event));
-    } else {
-      // Réutiliser la carte existante
-      this.map.setTarget(elementId);
-    }
+    this.map.on('rendercomplete', (event) => this.mapLoaded.emit(event));
   }
 
   // Détruire la carte (réinitialiser sa cible)
@@ -84,48 +78,43 @@ export class MapContextService {
     // Rechercher la couche correspondant au technicalName
     const selectedLayer = this.getLayerByTechnicalName(technicalName);
 
+    const layerCopy = new LayerGroup({
+      properties: {
+        title: 'Fonds de carte',
+        group: `base-layer-${idClone}`
+      },
+      layers: [
+        new GeoportailLayer({
+          properties: { title: 'Fond de carte IGN' },
+          layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
+          visible: true
+        }),
+        new GeoportailLayer({
+          properties: { title: 'Cadastre' },
+          minZoom: 14, // visible at zoom levels 14 and below
+          layer: 'CADASTRALPARCELS.PARCELLAIRE_EXPRESS',
+          visible: true
+        })
+      ]
+    })
+
     const clone = new Map({
       view: new View({
-        center: [0, 0],
-        zoom: 1,
+        center: [261271, 6249998],
+        zoom: 13,
       }),
-      layers: selectedLayer, // Couches spécifiques à charger dans ce clone
-      target: idClone,
+      layers: [
+        layerCopy,
+        this.getLayerDessin(),
+        selectedLayer
+      ],
+      target: idClone
     });
-
-    clone.addControl(new LayerSwitcher());
 
     this.clones.push(clone); // Ajouter le clone à la liste
     return clone;
   }
 
-  // Obtenir la liste des clones
-  getClones(): Map[] {
-    return this.clones;
-  }
-
-  // Détruire un clone spécifique
-  destroyClone(idClone: string): void {
-    const index = this.clones.findIndex((clone) => clone.getTarget() === idClone);
-    if (index > -1) {
-      const clone = this.clones[index];
-      clone.setTarget(undefined); // Libère le DOM lié
-      this.clones.splice(index, 1); // Supprime de la liste
-    }
-  }
-  // Détruire toutes les cartes clones
-  destroyAllClones(): void {
-    this.clones.forEach((clone) => {
-      clone.setTarget(undefined); // Libère le DOM lié
-    });
-    this.clones = []; // Réinitialise la liste des clones
-  }
-
-  setTarget(elementId: string) {
-    if (this.map) {
-      this.map.setTarget(elementId);
-    }
-  }
   // Outils de dessin, couches, et autres fonctions non modifiées
   addDrawingTools() {
     if (!this.getLayerDessin()) {
@@ -210,7 +199,7 @@ export class MapContextService {
       }
     });
   }
-  
+
   // Méthode mise à jour des couches pour un clone ou la carte principale
   updateLayersForMap(map: Map, layersToLoad: any[]): void {
     const currentLayers = map.getLayers();
@@ -276,8 +265,12 @@ export class MapContextService {
       this.getLayerDessin()?.getSource().removeFeature(f);
     });
   }
-  
-  centerOnDessin() {
+
+  centerOnDessin(map?: Map) {
+    if (!map) {
+      map = this.map;
+    }
+
     const dessinLayer = this.getLayerDessin();
     if (!dessinLayer) {
       console.warn('No dessin layer found.');
@@ -308,17 +301,18 @@ export class MapContextService {
       }
     });
 
-    if (globalExtent) {
-      // Centrer la carte et ajuster le zoom pour voir toutes les entités
-      this.map?.getView().fit(globalExtent, {
-        size: this.map?.getSize(), // Taille de la carte
-        padding: [50, 50, 50, 50], // Espacement autour des entités (en pixels)
-        duration: 500, // Durée de l'animation (en ms)
-        maxZoom: 20, // Facultatif : limite maximale du zoom
-      });
-    } else {
+    if (!globalExtent) {
       console.warn('No valid global extent found.');
+      return;
     }
+
+    // Centrer la carte et ajuster le zoom pour voir toutes les entités
+    map?.getView().fit(globalExtent, {
+      size: this.map?.getSize(), // Taille de la carte
+      padding: [50, 50, 50, 50], // Espacement autour des entités (en pixels)
+      duration: 500, // Durée de l'animation (en ms)
+      maxZoom: 20, // Facultatif : limite maximale du zoom
+    });
   }
 
   /**
@@ -334,5 +328,5 @@ export class MapContextService {
 
     return allLayers.find((layer) => layer.get('technicalName') === technicalName) || null;
   }
-  
+
 }

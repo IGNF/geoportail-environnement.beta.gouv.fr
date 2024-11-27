@@ -36,8 +36,6 @@ export class RequeteNewComponent implements OnInit {
         this.buildBreadcrumb();
       })
     ).subscribe();
-
-    this.mapContextService.createMap('map');
   }
 
   ngOnDestroy(): void {

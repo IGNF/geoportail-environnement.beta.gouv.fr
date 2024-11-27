@@ -8,6 +8,7 @@ import { ThematicListComponent } from './components/thematic-list/thematic-list.
 import { FicheInfoViewComponent } from './components/fiche-info-view/fiche-info-view.component';
 import { LayerInfoViewComponent } from './components/layer-info-view/layer-info-view.component';
 import { ReglementationViewComponent } from './components/reglementation-view/reglementation-view.component';
+import { SharedMapModule } from '../shared-map/shared-map.module';
 
 
 
@@ -24,6 +25,7 @@ import { ReglementationViewComponent } from './components/reglementation-view/re
   imports: [
     CommonModule,
     SharedDesignDsfrModule,
+    SharedMapModule,
   ],
   exports: [
     ThematicSelectComponent,
