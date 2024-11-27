@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -38,7 +39,7 @@ export class FooterComponent {
     { label: 'Mentions légales', route: 'mentions-legales' },
     { label: 'Données personnelles', route: 'donnees-a-caractere-personnel' },
     { label: 'Gestion des cookies', route: 'cookies-et-statistiques' },
-    { label: 'Plan du site', route: '' }
+    { label: 'Plan du site', route: 'plan-du-site' }
   ];
 
   reboundLinks: any = [];
@@ -48,10 +49,12 @@ export class FooterComponent {
     les contenus de ce site sont proposés sous license etalab-2.0
   `;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   linkSelect(event: any) { 
-    window.location.href = event;
+    this.router.navigate(['/', event]);
   }
 
 }
