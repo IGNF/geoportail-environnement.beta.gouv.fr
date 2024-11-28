@@ -11,13 +11,12 @@ export const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'requete',
-    loadChildren: () => import('./requete/requete.module').then(m => m.RequeteModule)
+    path: 'accueil',
+    component: HomeComponent
   },
   {
-    path: 'login',
-    component: MesForetsComponent,
-    title: 'Mes Forêts'
+    path: 'requete',
+    loadChildren: () => import('./requete/requete.module').then(m => m.RequeteModule)
   },
   {
     path: 'mes-forets',

@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
@@ -13,23 +11,15 @@ export class TokenService {
 
   private refreshToken: string = '';
 
-  constructor(
-    private http: HttpClient
-  ) { }
-
-  requestRefreshToken() {
-    const url = `${environment.apiUrl}/token/refresh`;
-    const postBody = { refresh_token: this.getRefreshToken() };
-    return this.http.post(url, postBody, { headers: this.getHeaders() }).pipe(
-      map((response: any) => {
-        const parsedResponse = JSON.parse(response.responseText);
-        this.setToken(parsedResponse.token);
-      })
-    );
-  }
+  constructor() { }
 
   hasToken() {
     return localStorage.getItem(environment.localStorageTokenItem) !== null;
+  }
+
+  removeToken() {
+    localStorage.removeItem(environment.localStorageTokenItem);
+    localStorage.removeItem(environment.localStorageRefreshTokenItem);
   }
 
   getToken() {
@@ -39,6 +29,7 @@ export class TokenService {
 
   setToken(token: string) {
     this.token = token;
+    localStorage.setItem(environment.localStorageTokenItem, this.token);
   }
 
   hasRefreshToken() {
@@ -52,12 +43,7 @@ export class TokenService {
 
   setRefreshToken(refreshToken: string) {
     this.refreshToken = refreshToken;
-  }
-
-  private getHeaders() {
-    return new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    localStorage.setItem(environment.localStorageRefreshTokenItem, this.token);
   }
 
 }

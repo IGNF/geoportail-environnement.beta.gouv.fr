@@ -25,7 +25,11 @@ export class HeaderComponent {
 
   headerToolsLinks: any = DEFAULT_HEADER_TOOLS_LINKS;
 
-  menuHeader: any = [];
+  menuHeader: any = [
+    { label: 'Découvrir', routerLink: '/accueil' },
+    { label: 'Nouvelle requête', routerLink: '/requete/nouvelle' },
+    { label: 'Mes forêts', routerLink: '/mes-forets' },
+  ];
 
   constructor(
     private tokenService: TokenService,

@@ -18,7 +18,7 @@ const EXPORT_TILE_CONFIG = [
     size: 'MD',
     download: false,
     artworkDirPath: 'artwork',
-    artworkFilePath: 'artwork/pictograms/buildings/city-hall.svg',
+    artworkFilePath: 'artwork/pictograms/document/document-download.svg',
     detail: 'Détail (optionnel)'
   },
   {
@@ -36,7 +36,7 @@ const EXPORT_TILE_CONFIG = [
     size: 'MD',
     download: false,
     artworkDirPath: 'artwork',
-    artworkFilePath: 'artwork/pictograms/buildings/city-hall.svg',
+    artworkFilePath: 'artwork/pictograms/document/document.svg',
     detail: 'Détail (optionnel)'
   }
 ];

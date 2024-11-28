@@ -22,14 +22,14 @@ export class ForetService {
 
   list(): Observable<Foret[]> {
     const url = `${this.apiUrl}/forets`;
-    return this.http.get(url, { headers: this.getHeaders(), context: this.getContext() }).pipe(
+    return this.http.get(url, { headers: this.getHeaders(), context: this.getInterceptContext() }).pipe(
       map((response: any) => response?.map((f: any) => new Foret().deserialise(f)))
     );
   }
 
   getForet(id: string): Observable<Foret> {
     const url = `${this.apiUrl}/forets/${id}`;
-    return this.http.get(url, { headers: this.getHeaders(), context: this.getContext() }).pipe(
+    return this.http.get(url, { headers: this.getHeaders(), context: this.getInterceptContext() }).pipe(
       map((response: any) => new Foret().deserialise(response))
     );
   }
@@ -45,7 +45,7 @@ export class ForetService {
     });
   }
 
-  private getContext() {
+  private getInterceptContext() {
     return new HttpContext().set(INTERCEPT, true);
   }
 
