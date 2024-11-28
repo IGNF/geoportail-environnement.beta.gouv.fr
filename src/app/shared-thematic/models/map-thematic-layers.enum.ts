@@ -127,6 +127,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
         20037508.342789244,
         44927335.42709663
       ],
+      minZoom: 12,
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
@@ -422,6 +423,7 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
         20037508.342789244,
         44927335.42709663
       ],
+      minZoom: 11.5,
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
@@ -445,6 +447,7 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
         20037508.342789244,
         44927335.42709663
       ],
+      minZoom: 15.5,
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
