@@ -34,6 +34,11 @@ export class ForetService {
     );
   }
 
+  getMockForet(id: string): Observable<Foret | undefined> {
+    const forests = MOCK_DB_FORETS.map((foretProperties) => new Foret().deserialise(foretProperties));
+    return of(forests.find((foret) => foret.id === id));
+  }
+
   mockList(): Observable<Foret[]> {
     return of([...MOCK_DB_FORETS.map((foretProperties) => new Foret().deserialise(foretProperties))]);
   }

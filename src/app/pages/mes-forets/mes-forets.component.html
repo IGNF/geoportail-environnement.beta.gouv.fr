@@ -25,8 +25,8 @@
         [description]="foret.description" [enlargeLink]="foret.enlargeLink" [hasFooter]="foret.hasFooter"
         [horizontal]="foret.horizontal">
         <dsfr-buttons-group footer inline="always">
-          <dsfr-button label="Voir le détail" (click)="goToRequete(foret.heading)"></dsfr-button>
-          <dsfr-button label="?" variant="secondary"></dsfr-button>
+          <dsfr-button label="Voir le détail" (click)="goToRequete(foret.id)"></dsfr-button>
+          <dsfr-button label="Supprimer" customClass="fr-tag--pink-macaron"></dsfr-button>
         </dsfr-buttons-group>
       </dsfr-card>
     </div>

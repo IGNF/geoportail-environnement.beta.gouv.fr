@@ -24,8 +24,6 @@ export class AppTokenInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
-    console.log('[AppTokenInterceptor]', 'intercept', request.url);
-
     if (this.hasToken()) {
       request = this.addToken(request);
     }

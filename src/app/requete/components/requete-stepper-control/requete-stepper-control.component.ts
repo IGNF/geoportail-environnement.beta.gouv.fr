@@ -14,6 +14,8 @@ export class RequeteStepperControlComponent implements OnChanges {
 
   @Output() previous: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   previousButtonLabel = 'Précédent';
 
   nextButtonLabel = 'Suivant';
@@ -39,8 +41,8 @@ export class RequeteStepperControlComponent implements OnChanges {
   }
 
 
-  save() {
-    alert('[TODO][FONCTION NEXISTE PAS] Sauvegarde effectuée');
+  emitSave() {
+    this.save.emit(true);
   }
 
 

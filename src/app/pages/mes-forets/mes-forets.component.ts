@@ -29,23 +29,29 @@ export class MesForetsComponent implements OnInit {
     private router: Router
   ) { }
 
+
   ngOnInit(): void {
     this.buildBreadcrumb();
-    this.foretService.list().pipe(
-      catchError((error) => {
-        console.error('error', error);
-        this.subcribed = false;
-        return this.foretService.mockList();
-      })
-    ).subscribe((forets) => {
-      console.log('subscribe((forets)', forets);
+
+    this.foretService.mockList().subscribe((forets) => {
       this.foretCards = forets.map((foret) => this.cardTransformerService.fromForet(foret));
     });
+
+    // this.foretService.list().pipe(
+    //   catchError((error) => {
+    //     this.subcribed = false;
+    //     return this.foretService.mockList();
+    //   })
+    // ).subscribe((forets) => {
+    //   this.foretCards = forets.map((foret) => this.cardTransformerService.fromForet(foret));
+    // });
   }
 
-  goToRequete(foretTitle: string) {
-    this.router.navigate(['/', 'requete', foretTitle]);
+
+  goToRequete(foretId: string) {
+    this.router.navigate(['/', 'requete', foretId]);
   }
+
 
   private buildBreadcrumb() {
     this.breadcrumb = this.breadcrumbTransformerService.fromOptions({

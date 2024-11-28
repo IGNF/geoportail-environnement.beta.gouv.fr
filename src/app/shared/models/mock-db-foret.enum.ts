@@ -1,24 +1,54 @@
 export const MOCK_DB_FORETS = [
   {
-    id: 1,
-    name: 'Ma foret',
+    id: '646e3793415f259be58fb730',
+    name: 'Zaminarteko borda',
+    adresse: {
+      commune: 'Ayherre',
+      codePostal: 64240,
+      lieudit: 'Zahara',
+    },
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec gravida justo. Morbi ullamcorper ullamcorper eros, ac ultricies turpis gravida quis.',
-    tags: ['tag 1', 'tag 1bis'],
-    imgUrl: 'https://cdn.sortiraparis.com/images/80/98390/934396-je-s-appelle-groot-une-bande-annonce-pour-la-saison-2-disponible-en-septembre-sur-disney.jpg',
+    tags: ['Biodiversité', 'Patrimoine'],
+    imgUrl: '/img/foret_placeholder.png',
     area: 23,
     createdAt: new Date(),
     updatedAt: new Date(),
-    parcels: ['parcelle 1', 'parcelle 1bis']
+    parcels: ['parcelle 1', 'parcelle 1bis'],
+    geometry: {
+      'type': 'FeatureCollection',
+      'features': [{
+        'type': 'Feature',
+        'geometry': {
+          'type': 'Polygon',
+          'coordinates': [[[266519.3795145552, 6246211.478651401], [268220.1033939004, 6243517.073404348], [270379.4494429566, 6246039.495337759], [267379.2960827634, 6247625.563674676], [266519.3795145552, 6246211.478651401]]]
+        }, 'properties': null
+      }]
+    }
   },
   {
-    id: 2,
-    name: 'Ma 2e foret',
+    id: '646dd8cc415f259be58fb17b',
+    name: 'Tombe-boucs',
+    adresse: {
+      commune: 'Laparade',
+      codePostal: 64240,
+      lieudit: 'D249, le plet',
+    },
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec gravida justo. Morbi ullamcorper ullamcorper eros, ac ultricies turpis gravida quis.',
-    tags: ['tag 2', 'tag 2bis'],
-    imgUrl: 'https://cdn.sortiraparis.com/images/80/98390/934396-je-s-appelle-groot-une-bande-annonce-pour-la-saison-2-disponible-en-septembre-sur-disney.jpg',
-    area: 23,
+    tags: ['Patrimoine'],
+    imgUrl: '/img/foret_placeholder.png',
+    area: 2.8,
     createdAt: new Date(),
     updatedAt: new Date(),
-    parcels: ['parcelle 2', 'parcelle 2bis']
+    parcels: ['parcelle 2', 'parcelle 2bis'],
+    geometry: {
+      'type': 'FeatureCollection',
+      'features': [{
+        'type': 'Feature',
+        'geometry': {
+          'type': 'Polygon',
+          'coordinates': [[[266519.3795145552, 6246211.478651401], [268220.1033939004, 6243517.073404348], [270379.4494429566, 6246039.495337759], [267379.2960827634, 6247625.563674676], [266519.3795145552, 6246211.478651401]]]
+        }, 'properties': null
+      }]
+    }
   }
 ];

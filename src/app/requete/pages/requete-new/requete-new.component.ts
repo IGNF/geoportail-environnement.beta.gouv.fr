@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
 import { THEMATIC_LIST } from '../../../shared-thematic/models/thematic-list.enum';
+import { Foret } from '../../../shared/models/foret.model';
 
 @Component({
   selector: 'app-requete-new',
   templateUrl: './requete-new.component.html',
   styleUrl: './requete-new.component.css'
 })
-export class RequeteNewComponent implements OnInit {
+export class RequeteNewComponent implements OnInit, AfterViewInit {
 
-  forestId: string = '';
+  foret?: Foret;
 
   step: number = 0;
 
@@ -26,19 +27,23 @@ export class RequeteNewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.pipe(
-      map((params) => {
-        if (params['id']) {
-          this.forestId = params['id'];
-          this.step = 2;
+
+    this.route.data.pipe(
+      map((response: any) => {
+        if (response && response.data) {
+          this.foret = response.data;
         }
-        this.buildBreadcrumb();
+        this.loadPageComponent();
       })
     ).subscribe();
   }
 
-  ngOnDestroy(): void {
-    this.mapContextService.destroyMap();
+  ngAfterViewInit(): void {
+    this.loadWithForet();
+  }
+
+  saveForet() { 
+    const geoJson = this.mapContextService.maForetToGeoJson();
   }
 
   confirmSelect() {
@@ -83,13 +88,26 @@ export class RequeteNewComponent implements OnInit {
     }
   }
 
+  
   updateThematics() {
     this.mapContextService.updateLayers();
   }
 
+  
+  private loadWithForet() {
+    if (!this.foret) {
+      return;
+    }
+    if (this.foret.geometry) {
+      this.mapContextService.maForetFromGeoJson(this.foret.geometry);
+    }
+    this.step = 1;
+    this.nextStep();
+  }
 
-  private buildBreadcrumb() {
-    const label = this.forestId ? `Requête ${this.forestId}` : 'Nouvelle requête';
+
+  private loadPageComponent() {
+    const label = this.foret ? `Requête ${this.foret}` : 'Nouvelle requête';
     this.breadcrumb = this.breadcrumbTransformerService.fromOptions({
       label: label, route: ''
     });

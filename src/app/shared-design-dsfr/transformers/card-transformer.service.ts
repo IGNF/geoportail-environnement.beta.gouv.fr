@@ -32,7 +32,7 @@ export class CardTransformerService {
       imagePath: foret.imgUrl,
       enlargeLink: false,
       hasFooter: true,
-      horizontal: true
+      horizontal: true,
     };
 
     return foretCard;

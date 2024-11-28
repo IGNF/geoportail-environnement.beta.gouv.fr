@@ -36,7 +36,7 @@ export class LoginService {
       }),
       catchError((error) => {
         if (error.status === 401) {
-          console.warn('[TokenService]', 'refreshAccessToken', 'Votre authentification[refreshToken] est invalide ou expirée.');
+          console.error('[TokenService]', 'refreshAccessToken', 'Votre authentification[refreshToken] est invalide ou expirée.');
           this.logout();
         } else {
           console.error('[TokenService]', 'refreshAccessToken', 'Une erreur serveur est survenue.');

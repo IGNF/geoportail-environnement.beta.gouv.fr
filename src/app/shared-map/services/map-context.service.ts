@@ -12,6 +12,7 @@ import { extend } from 'ol/extent';
 import GeoportailLayer from 'ol-ext/layer/Geoportail';
 import EditBar from 'ol-ext/control/EditBar.js';
 import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+import GeoJSON from 'ol/format/GeoJSON.js';
 
 import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
@@ -259,12 +260,33 @@ export class MapContextService {
     }
     return this.getLayerDessin().getSource().getFeatures();
   }
+  
+
+  maForetFromGeoJson(geoJson: any) {
+    if (!this.getLayerDessin()) {
+      return;
+    }
+    this.getLayerDessin().getSource().clear();
+    this.getLayerDessin().getSource().addFeatures(new GeoJSON().readFeatures(geoJson));
+  }
+
+  maForetToGeoJson() {
+    if (!this.getLayerDessin()) {
+      return null;
+    }
+    const features = this.getLayerDessin().getSource().getFeatures();
+    const geoJson = new GeoJSON().writeFeatures(features);
+    return JSON.parse(geoJson);
+  }
+
 
   resetDessin() {
     this.getLayerDessin().getSource().forEachFeature((f: any) => {
       this.getLayerDessin()?.getSource().removeFeature(f);
     });
   }
+
+  
 
   centerOnDessin(map?: Map) {
     if (!map) {
