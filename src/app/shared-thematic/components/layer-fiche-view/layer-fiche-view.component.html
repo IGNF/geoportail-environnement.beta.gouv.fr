@@ -9,7 +9,7 @@
 <ul>
   @for (feature of layer.features; track feature) {
   <li>
-    @if (layer.link !== "") {
+    @if (feature.link !== "") {
     <a [href]="feature.link" target="_blank">{{ feature.name }}</a>
     } @else {
     {{ feature.name }}
@@ -19,6 +19,6 @@
   }
 </ul>
 
-<app-reglementation-view [reglementation]="layer.title"></app-reglementation-view>
+<app-reglementation-view [layerReference]="layer.title"></app-reglementation-view>
 
 }

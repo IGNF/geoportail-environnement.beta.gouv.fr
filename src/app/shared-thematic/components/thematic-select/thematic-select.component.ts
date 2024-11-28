@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 import { ThematicSelectService } from '../../services/thematic-select.service';
-import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
+import { THEMATIC_LIST } from '../../models/thematic-list.enum';
 
 @Component({
   selector: 'app-thematic-select',
@@ -18,7 +19,7 @@ export class ThematicSelectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.checkboxes = THEMATIC_FICHE_LIST.slice(1).map((theme) => {
+    this.checkboxes = THEMATIC_LIST.slice(1).map((theme) => {
       return Object.assign(theme);
     });
   };

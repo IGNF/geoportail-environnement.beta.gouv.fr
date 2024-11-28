@@ -15,7 +15,7 @@ import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 
 import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
-import { THEMATIC_FICHE_LIST } from '../../shared-thematic/models/thematic-fiche-list';
+import { THEMATIC_LIST } from '../../shared-thematic/models/thematic-list.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -191,8 +191,8 @@ export class MapContextService {
 
     [MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP].forEach((newlayer) => {
       const group = newlayer.get('group') || 'no-group';
-      for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
-        if (group === THEMATIC_FICHE_LIST[i].name && THEMATIC_FICHE_LIST[i].active) {
+      for (let i = 0; i < THEMATIC_LIST.length; i++) {
+        if (group === THEMATIC_LIST[i].name && THEMATIC_LIST[i].active) {
           this.map?.addLayer(newlayer);
           continue;
         }

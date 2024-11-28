@@ -4,7 +4,7 @@ import { map } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
-import { THEMATIC_FICHE_LIST } from '../../../shared-thematic/models/thematic-fiche-list';
+import { THEMATIC_LIST } from '../../../shared-thematic/models/thematic-list.enum';
 
 @Component({
   selector: 'app-requete-new',
@@ -57,8 +57,8 @@ export class RequeteNewComponent implements OnInit {
         return;
       }
       this.mapContextService.removeDrawingTools();
-      for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
-        THEMATIC_FICHE_LIST[i].active = true;
+      for (let i = 0; i < THEMATIC_LIST.length; i++) {
+        THEMATIC_LIST[i].active = true;
       }
       this.mapContextService.updateLayers();
     }
@@ -76,8 +76,8 @@ export class RequeteNewComponent implements OnInit {
         for (let i = this.mapContextService.getActiveThematicLayers().length; i >= 0; i--) {
           this.mapContextService.getActiveThematicLayers().pop();
         }
-        for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
-          THEMATIC_FICHE_LIST[i].active = false;
+        for (let i = 0; i < THEMATIC_LIST.length; i++) {
+          THEMATIC_LIST[i].active = false;
         }
         this.mapContextService.updateLayers();
     }

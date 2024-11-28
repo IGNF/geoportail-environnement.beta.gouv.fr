@@ -1,13 +1,13 @@
 <dsfr-tabs [selectedTabIndex]="selectedTabIndex" (tabSelect)="selectTab($event)">
 
-  @for (ficheTab of ficheTabs; track $index; let first = $first) {
-  @if (ficheTab.active) {
-  <dsfr-tab [tabId]="ficheTab.name" [label]="ficheTab.label">
+  @for (thematicTab of thematicTabs; track $index; let first = $first) {
+  @if (thematicTab.active) {
+  <dsfr-tab [tabId]="thematicTab.name" [label]="thematicTab.label">
 
     @if (first) {
     <app-synthese></app-synthese>
     } @else {
-    <app-fiche-info-view [fiche]="ficheTab"></app-fiche-info-view>
+    <app-thematic-view [thematic]="thematicTab"></app-thematic-view>
     }
 
   </dsfr-tab>

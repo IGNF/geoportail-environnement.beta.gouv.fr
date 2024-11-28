@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, zip } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { THEMATIC_FICHE_LIST } from '../models/thematic-fiche-list';
 import { GeoplateformeWfsService, LON_LAT_ORDER } from './geoplateforme-wfs.service';
 import { MapContextService } from '../../shared-map/services/map-context.service';
-import { FicheInfo } from '../models/fiche-info.model';
 import { WfsRequest } from '../models/wfs-request';
+import { THEMATIC_LIST } from '../models/thematic-list.enum';
+import { Thematic } from '../models/thematic.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FicheInfoFeatureService {
+export class ThematicFeatureService {
 
   constructor(
     private geoplateformeWfsService: GeoplateformeWfsService,
@@ -19,11 +19,11 @@ export class FicheInfoFeatureService {
 
 
   /**
-   * Get all features from all FicheInfos
+   * Get all features from all Thematics
    * @returns 
    */
   listFicheFeatures(): Observable<any[]> {
-    return zip(THEMATIC_FICHE_LIST.filter(fiche => fiche.layers).reduce((request: Observable<any>[], fiche) => {
+    return zip(THEMATIC_LIST.filter(fiche => fiche.layers).reduce((request: Observable<any>[], fiche) => {
       request = [...request, ...this.getFicheFeatures(fiche)];
       return request;
     }, [])).pipe(
@@ -38,12 +38,12 @@ export class FicheInfoFeatureService {
   }
 
   /**
-   * Get all features from one FicheInfo
-   * @param ficheinfo 
+   * Get all features from one Thematic
+   * @param thematic 
    * @returns 
    */
-  getFicheFeatures(ficheInfo: FicheInfo): Observable<any>[] {
-    const requests = ficheInfo.layers.map((layer) => this.buildRequest(layer));
+  getFicheFeatures(thematic: Thematic): Observable<any>[] {
+    const requests = thematic.layers.map((layer) => this.buildRequest(layer));
     return requests.map((request) => {
       return this.geoplateformeWfsService.getFeatures(request).pipe(
         map((response) => {

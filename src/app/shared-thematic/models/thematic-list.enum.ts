@@ -1,13 +1,13 @@
-import { FicheInfo } from "./fiche-info.model";
+import { Thematic } from "./thematic.model";
 
-export const THEMATIC_FICHE_LIST = [
-  new FicheInfo().deserialise({
+export const THEMATIC_LIST = [
+  new Thematic().deserialise({
     name: 'synthese',
     label: 'Synthèse',
     title: 'Synthèse',
     active: true
   }),
-  new FicheInfo().deserialise({
+  new Thematic().deserialise({
     name: 'biodiversite',
     label: 'Biodiversité',
     title: 'Votre forêt se trouve t-elle sur des zones de biodiversité ?',
@@ -88,7 +88,7 @@ export const THEMATIC_FICHE_LIST = [
       }
     ]
   }),
-  new FicheInfo().deserialise({
+  new Thematic().deserialise({
     name: 'patrimoine',
     label: 'Patrimoine',
     title: 'Votre forêt se trouve t-elle sur des zones patrimonial ?',

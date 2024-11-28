@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+
 import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
-import { FicheInfoFeatureService } from '../../services/fiche-info-feature.service';
-import { THEMATIC_FICHE_LIST } from '../../models/thematic-fiche-list';
+import { ThematicFeatureService } from '../../services/fiche-info-feature.service';
+import { THEMATIC_LIST } from '../../models/thematic-list.enum';
 
 @Component({
   selector: 'app-thematic-list',
@@ -13,12 +14,12 @@ export class ThematicListComponent {
 
   selectedTabIndex: number = 0;
 
-  ficheTabs: any[] = [];
+  thematics: any[] = [];
 
   responseFeatures: any[] = [];
 
   constructor(
-    private ficheInfoFeatureService: FicheInfoFeatureService,
+    private thematicFeatureService: ThematicFeatureService,
     private thematicSelectService: ThematicSelectService,
     private mapContextService: MapContextService
   ) { }
@@ -32,7 +33,7 @@ export class ThematicListComponent {
       this.updateActiveTabs(activeThemeList);
     });
 
-    this.ficheInfoFeatureService.listFicheFeatures().subscribe((features: any[]) => {
+    this.thematicFeatureService.listFicheFeatures().subscribe((features: any[]) => {
       this.responseFeatures = features;
       this.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
@@ -50,17 +51,17 @@ export class ThematicListComponent {
 
 
   private updateActiveTabs(activeThemeList: any[]) {
-    this.ficheTabs = THEMATIC_FICHE_LIST.filter((theme) => activeThemeList.includes(theme.name));
+    this.thematics = THEMATIC_LIST.filter((theme) => activeThemeList.includes(theme.name));
     this.selectTab('synthese');
   }
 
 
   private setSelectedTabIndex(tabId: string) {
     let indexModifier = 0;
-    for (let i = 0; i < THEMATIC_FICHE_LIST.length; i++) {
-      if (THEMATIC_FICHE_LIST[i].name === tabId) {
+    for (let i = 0; i < THEMATIC_LIST.length; i++) {
+      if (THEMATIC_LIST[i].name === tabId) {
         this.selectedTabIndex = i - indexModifier;
-      } else if (!THEMATIC_FICHE_LIST[i].active) {
+      } else if (!THEMATIC_LIST[i].active) {
         indexModifier++;
       }
     }
@@ -68,19 +69,19 @@ export class ThematicListComponent {
 
 
   private initFicheList() {
-    this.ficheTabs = THEMATIC_FICHE_LIST.map((fiche) => {
-      if (!fiche.layers) {
-        fiche.layers = [];
+    this.thematics = THEMATIC_LIST.map((thematic) => {
+      if (!thematic.layers) {
+        thematic.layers = [];
       }
-      return fiche;
+      return thematic;
     });
   }
 
 
   private updateFicheList() {
-    this.ficheTabs = this.ficheTabs.map((fiche) => {
-      fiche.layers = fiche.layers.map((layer: any) => this.updateFicheLayerList(layer));
-      return fiche;
+    this.thematics = this.thematics.map((thematic) => {
+      thematic.layers = thematic.layers.map((layer: any) => this.updateFicheLayerList(layer));
+      return thematic;
     });
   }
 

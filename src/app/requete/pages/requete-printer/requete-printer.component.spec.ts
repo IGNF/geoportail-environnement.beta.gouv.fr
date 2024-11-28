@@ -7,9 +7,9 @@ import { ThematicListComponent } from '../../../shared-thematic/components/thema
 import { SharedDesignDsfrModule } from '../../../shared-design-dsfr/shared-design-dsfr.module';
 import { SharedMapModule } from '../../../shared-map/shared-map.module';
 import { SyntheseComponent } from '../../../shared-thematic/components/synthese/synthese.component';
-import { FicheInfoViewComponent } from '../../../shared-thematic/components/fiche-info-view/fiche-info-view.component';
-import { LayerInfoViewComponent } from '../../../shared-thematic/components/layer-info-view/layer-info-view.component';
 import { MapViewerComponent } from '../../../shared-map/components/map-viewer/map-viewer.component';
+import { ThematicViewComponent } from '../../../shared-thematic/components/thematic-view/thematic-view.component';
+import { LayerInfoViewComponent } from '../../../shared-thematic/components/layer-fiche-view/layer-fiche-view.component';
 
 
 describe('RequetePrinterComponent', () => {
@@ -22,7 +22,7 @@ describe('RequetePrinterComponent', () => {
         RequetePrinterComponent,
         ThematicListComponent,
         SyntheseComponent,
-        FicheInfoViewComponent,
+        ThematicViewComponent,
         LayerInfoViewComponent,
         MapViewerComponent
       ],

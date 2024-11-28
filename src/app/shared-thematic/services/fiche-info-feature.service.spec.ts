@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { appConfig } from '../../app.config';
-import { FicheInfoFeatureService } from './fiche-info-feature.service';
+import { ThematicFeatureService } from './fiche-info-feature.service';
 
 describe('ThematicSelectService', () => {
-  let service: FicheInfoFeatureService;
+  let service: ThematicFeatureService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers : appConfig.providers
     });
-    service = TestBed.inject(FicheInfoFeatureService);
+    service = TestBed.inject(ThematicFeatureService);
   });
 
   it('should be created', () => {

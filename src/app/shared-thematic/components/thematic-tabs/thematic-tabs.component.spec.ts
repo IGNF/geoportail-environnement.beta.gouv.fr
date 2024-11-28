@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedDesignDsfrModule } from '../../../shared-design-dsfr/shared-design-dsfr.module';
 import { ThematicTabsComponent } from './thematic-tabs.component';
 import { SyntheseComponent } from '../synthese/synthese.component';
-import { FicheInfoViewComponent } from '../fiche-info-view/fiche-info-view.component';
-import { LayerInfoViewComponent } from '../layer-info-view/layer-info-view.component';
 import { appConfig } from '../../../app.config';
+import { ThematicViewComponent } from '../thematic-view/thematic-view.component';
+import { LayerInfoViewComponent } from '../layer-fiche-view/layer-fiche-view.component';
 
 
 describe('ThematicTabsComponent', () => {
@@ -13,11 +13,16 @@ describe('ThematicTabsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ThematicTabsComponent, SyntheseComponent, FicheInfoViewComponent, LayerInfoViewComponent],
+      declarations: [
+        ThematicTabsComponent,
+        SyntheseComponent,
+        ThematicViewComponent,
+        LayerInfoViewComponent
+      ],
       imports: [SharedDesignDsfrModule],
       providers: appConfig.providers
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ThematicTabsComponent);
     component = fixture.componentInstance;

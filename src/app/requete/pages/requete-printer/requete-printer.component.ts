@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-requete-printer',
@@ -11,6 +10,5 @@ export class RequetePrinterComponent implements OnInit {
   constructor( ) {}
 
   ngOnInit(): void { }
-
 
 }

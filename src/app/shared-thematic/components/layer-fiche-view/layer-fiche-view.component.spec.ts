@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FicheInfoViewComponent } from './fiche-info-view.component';
 import { appConfig } from '../../../app.config';
+import { LayerInfoViewComponent } from './layer-fiche-view.component';
 
-describe('FicheInfoViewComponent', () => {
-  let component: FicheInfoViewComponent;
-  let fixture: ComponentFixture<FicheInfoViewComponent>;
+describe('ThematicViewComponent', () => {
+  let component: LayerInfoViewComponent;
+  let fixture: ComponentFixture<LayerInfoViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FicheInfoViewComponent],
+      declarations: [LayerInfoViewComponent],
       providers: appConfig.providers
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FicheInfoViewComponent);
+    fixture = TestBed.createComponent(LayerInfoViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

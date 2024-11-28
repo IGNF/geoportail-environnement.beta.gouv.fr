@@ -1,10 +1,10 @@
-@for (ficheTab of ficheTabs; track $index; let first = $first) {
-  @if (ficheTab.active) {
+@for (thematic of thematics; track $index; let first = $first) {
+  @if (thematic.active) {
     <div>
       @if (first) {
         <app-synthese></app-synthese>
       } @else {
-        <app-fiche-info-view [fiche]="ficheTab"></app-fiche-info-view>
+        <app-thematic-view [thematic]="thematic"></app-thematic-view>
       }
     </div>
   }

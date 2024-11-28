@@ -1,0 +1,11 @@
+@if (thematic) {
+
+<h3 class="fr-h6">{{ thematic.title }}</h3>
+
+@for (layer of thematic.layers; track layer) {
+
+  <app-layer-fiche-view [layer]="layer" [displaySituationMap]="layer.flatview"></app-layer-fiche-view>
+
+}
+
+}

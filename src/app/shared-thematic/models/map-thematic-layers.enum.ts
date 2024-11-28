@@ -1,7 +1,8 @@
 import TileLayer from 'ol/layer/Tile';
 import { TileWMS } from 'ol/source';
 import LayerGroup from 'ol/layer/Group';
-import { THEMATIC_FICHE_LIST } from './thematic-fiche-list';
+
+import { THEMATIC_LIST } from './thematic-list.enum';
 
 export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
   properties: {
@@ -10,7 +11,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
   },
   layers: [
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CONSERVATOIRES:cen'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CONSERVATOIRES:cen'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -32,7 +33,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -54,7 +55,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -76,7 +77,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNCF:rncfs'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNCF:rncfs'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -98,7 +99,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RB:rb'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RB:rb'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -120,7 +121,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APLG:aplg'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APLG:aplg'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -143,7 +144,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.RN.PERIMETER:pprnn'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.RN.PERIMETER:pprnn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -165,7 +166,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDSITES.MNHN.RESERVES-REGIONALES:rnr'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDSITES.MNHN.RESERVES-REGIONALES:rnr'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -187,7 +188,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNN:rnn'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNN:rnn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -209,7 +210,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNC:rnc'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNC:rnc'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -231,7 +232,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APB:apb'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APB:apb'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -253,7 +254,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APHN:aphn'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APHN:aphn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -275,7 +276,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APG:apg'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APG:apg'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -297,7 +298,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PN:pn'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PN:pn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -319,7 +320,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.SIC:sic'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.SIC:sic'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -341,7 +342,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZPS:zps'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZPS:zps'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -363,7 +364,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZNIEFF2:znieff2'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZNIEFF2:znieff2'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -385,7 +386,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZNIEFF1:znieff1'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZNIEFF1:znieff1'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -416,7 +417,7 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
   },
   layers: [
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_sup:assiette_sup_s'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_sup:assiette_sup_s'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -440,7 +441,7 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_FICHE_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_du:prescription_surf'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_du:prescription_surf'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
