@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, zip } from 'rxjs';
 import { environment } from '../../../environments/environment';
+
 import { GeoplateformeWfsService, LON_LAT_ORDER } from './geoplateforme-wfs.service';
 import { MapContextService } from '../../shared-map/services/map-context.service';
 import { WfsRequest } from '../models/wfs-request';
@@ -12,6 +13,7 @@ import { Thematic } from '../models/thematic.model';
 })
 export class ThematicFeatureService {
 
+
   constructor(
     private geoplateformeWfsService: GeoplateformeWfsService,
     private mapContextService: MapContextService
@@ -22,9 +24,9 @@ export class ThematicFeatureService {
    * Get all features from all Thematics
    * @returns 
    */
-  listFicheFeatures(): Observable<any[]> {
+  listThematicsFeatures(): Observable<any[]> {
     return zip(THEMATIC_LIST.filter(fiche => fiche.layers).reduce((request: Observable<any>[], fiche) => {
-      request = [...request, ...this.getFicheFeatures(fiche)];
+      request = [...request, ...this.getThematicFeatures(fiche)];
       return request;
     }, [])).pipe(
       map((featuresByThematics) => {
@@ -42,15 +44,11 @@ export class ThematicFeatureService {
    * @param thematic 
    * @returns 
    */
-  getFicheFeatures(thematic: Thematic): Observable<any>[] {
+  getThematicFeatures(thematic: Thematic): Observable<any>[] {
     const requests = thematic.layers.map((layer) => this.buildRequest(layer));
     return requests.map((request) => {
       return this.geoplateformeWfsService.getFeatures(request).pipe(
-        map((response) => {
-          const features = response.features || [];
-          return features.map((feature: any) => this.parseFeature(feature))
-            .filter((feature: any) => this.filterFeature(feature));
-        })
+        map((response) => this.parseFeatureCollection(response))
       )
     });
   }
@@ -77,12 +75,25 @@ export class ThematicFeatureService {
       request.filterByAttribute('typeass', 'Périmètre des abords');
     }
 
-    if(layer.title === 'Espaces boisés classés') {
+    if (layer.title === 'Espaces boisés classés') {
       request.filterByAttribute('typepsc', '01');
       request.filterByAttributeInValues('stypepsc', ['00', '01', '02', '03']);
     }
 
     return request.getRequest();
+  }
+
+
+  private parseFeatureCollection(featureCollection: any) {
+    const features = featureCollection.features || [];
+    return features.map((feature: any) => this.parseFeature(feature))
+      .filter((feature: any) => this.filterFeature(feature))
+      .reduce((uniqueFeatures: any[], feature: any) => {
+        if (!uniqueFeatures.find((u) => this.isSameFeature(u, feature))) {
+          uniqueFeatures.push(feature);
+        }
+        return uniqueFeatures;
+      }, []);
   }
 
 
@@ -97,7 +108,7 @@ export class ThematicFeatureService {
     const properties = feature.properties;
     let link;
     if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier'] || properties['nomfic']) {
-      let fichier = properties['ficier']?properties['ficier']:properties['nomfic'];
+      let fichier = properties['ficier'] ? properties['ficier'] : properties['nomfic'];
       link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${fichier}`;
     } else {
       link = properties.url;
@@ -125,6 +136,13 @@ export class ThematicFeatureService {
   }
 
 
+  private isSameFeature(featureA: any, featureB: any): boolean {
+    return featureA.layer === featureB.layer
+      && featureA.name === featureB.name
+      && featureA.link === featureB.link;
+  }
+
+
   private parseLayerFromId(id: string) {
     return id.split('.')[0];
   }
@@ -146,6 +164,5 @@ export class ThematicFeatureService {
       .replace(/Ã¼/g, 'ü')
       .replace(/à¢/g, 'â');
   }
-
 
 }

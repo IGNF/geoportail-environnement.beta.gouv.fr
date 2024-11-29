@@ -16,10 +16,6 @@ export class ThematicTabsComponent implements OnInit {
 
   thematicTabs: any[] = [];
 
-  responseFeatures: any[] = [];
-
-  flatview: boolean = false;
-
   constructor(
     private thematicFeatureService: ThematicFeatureService,
     private thematicSelectService: ThematicSelectService,
@@ -35,30 +31,17 @@ export class ThematicTabsComponent implements OnInit {
       this.thematicTabs = this.thematicSharedService.updateActiveTabs(activeThemeList);
     });
 
-    this.thematicFeatureService.listFicheFeatures().subscribe((features: any[]) => {
-      this.responseFeatures = this.deleteRedundantFeatures(features);
+    this.thematicFeatureService.listThematicsFeatures().subscribe((features: any[]) => {
       this.thematicSharedService.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
-      this.thematicTabs = this.thematicSharedService.updateThematicFeatures(this.thematicTabs, this.responseFeatures, this.flatview)
+      this.thematicTabs = this.thematicSharedService.updateThematicFeatures(this.thematicTabs, features)
     });
 
   }
 
-
   selectTab(event: any) {
-      this.thematicSharedService.setSelectedTabIndex(event);
-      this.mapContextService.updateLayersVisibility(event);
-  }
-
-
-  private deleteRedundantFeatures(features : any[]) : any[]{
-    let res : any[] = [];
-    features.forEach((feature) => {
-      if(!res.filter((elem) => feature.layer == elem.layer && feature.name == elem.name && feature.link == elem.link).length) {
-        res.push(feature);
-      }
-    })
-    return res;
+    this.thematicSharedService.setSelectedTabIndex(event);
+    this.mapContextService.updateLayersVisibility(event);
   }
 
 }

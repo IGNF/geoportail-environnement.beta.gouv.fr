@@ -6,7 +6,7 @@
 
   <h1>
     Votre forêt
-    @if (foret) {
+    @if (foret && foret.name) {
       <span> - {{ foret.name }}</span>
     }
   </h1>

@@ -6,7 +6,10 @@ import { THEMATIC_LIST } from '../models/thematic-list.enum';
   providedIn: 'root',
 })
 export class ThematicSharedService {
-  constructor(private mapContextService: MapContextService) {}
+
+  constructor(
+    private mapContextService: MapContextService
+  ) { }
 
   updateActiveTabs(activeThemeList: string[]): any[] {
     return THEMATIC_LIST.filter((theme) => activeThemeList.includes(theme.name));
@@ -21,7 +24,8 @@ export class ThematicSharedService {
         indexModifier++;
       }
     }
-    return 0; // Default index if not found
+    // Default index if not found
+    return 0;
   }
 
   initThematicList(): any[] {
@@ -33,23 +37,25 @@ export class ThematicSharedService {
     });
   }
 
-    
-    updateThematicFeatures( thematics: any[], features: any[], flatview: boolean ): any[] {
-    return thematics.map((thematic) => {
-        thematic.layers = thematic.layers.map((layer: any) => 
-        this.updateLayerFeatures(layer, features, flatview)
-        );
-        return thematic;
-    });
-    }
 
-    updateLayerFeatures(layer: any, features: any[], flatview: boolean): any {
-    layer.flatview = flatview; // Paramètre dynamique pour flatview
+  updateThematicFeatures(thematics: any[], features: any[], displaySituationMap: boolean = false): any[] {
+    return thematics.map((thematic) => {
+      thematic.layers = thematic.layers.map((layer: any) =>
+        this.updateLayerFeatures(layer, features, displaySituationMap)
+      );
+      return thematic;
+    });
+  }
+
+
+  updateLayerFeatures(layer: any, features: any[], displaySituationMap: boolean): any {
+    // Parametre dynamique pour flatview/displaySituationMap
+    layer.flatview = displaySituationMap;
     layer.features = features.filter(
-        (feature) => this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer
+      (feature) => this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer
     );
     return layer;
-    }
+  }
 
 
   updateActiveThematicLayersFromFeatures(features: any[]): void {

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ThematicSelectService } from '../../services/thematic-select.service';
+
+import { Thematic } from '../../models/thematic.model';
 import { ThematicSharedService } from '../../services/thematic-shared.service';
-import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { ThematicFeatureService } from '../../services/fiche-info-feature.service';
+import { map } from 'rxjs';
+
+const DISPLAY_SITUATION_MAP = true;
 
 @Component({
   selector: 'app-thematic-list',
@@ -10,37 +13,22 @@ import { ThematicFeatureService } from '../../services/fiche-info-feature.servic
   styleUrl: './thematic-list.component.css'
 })
 export class ThematicListComponent implements OnInit {
-  selectedTabIndex: number = 0;
-  thematics: any[] = [];
-  responseFeatures: any[] = [];
-  flatview: boolean = true;
+
+  thematics: Thematic[] = [];
 
   constructor(
-    private thematicSharedService: ThematicSharedService,
     private thematicFeatureService: ThematicFeatureService,
-    private thematicSelectService: ThematicSelectService,
-    private mapContextService: MapContextService
-  ) {}
+    private thematicSharedService: ThematicSharedService
+  ) { }
 
   ngOnInit() {
     this.thematics = this.thematicSharedService.initThematicList();
 
-    this.thematicSelectService.thematicSelection.subscribe((activeThemeList: string[]) => {
-      activeThemeList.unshift('synthese');
-      this.thematics = this.thematicSharedService.updateActiveTabs(activeThemeList);
-      this.selectTab('synthese');
-    });
-
-    this.thematicFeatureService.listFicheFeatures().subscribe((features: any[]) => {
-      this.responseFeatures = features;
-      this.thematicSharedService.updateActiveThematicLayersFromFeatures(features);
-      this.mapContextService.updateLayersVisibility('synthese');
-      this.thematics = this.thematicSharedService.updateThematicFeatures(this.thematics, features, this.flatview);
-    });
+    this.thematicFeatureService.listThematicsFeatures().pipe(
+      map((features: any[]) => {
+        this.thematics = this.thematicSharedService.updateThematicFeatures(this.thematics, features, DISPLAY_SITUATION_MAP);
+      })
+    ).subscribe();
   }
 
-  selectTab(tabId: string) {
-    this.selectedTabIndex = this.thematicSharedService.setSelectedTabIndex(tabId);
-    this.mapContextService.updateLayersVisibility(tabId);
-  }
 }
