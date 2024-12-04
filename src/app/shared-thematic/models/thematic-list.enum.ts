@@ -66,7 +66,11 @@ export const THEMATIC_LIST = [
         group: 'biodiversite',
         technicalName: 'PROTECTEDAREAS.APG:apg'
       }, {
-        title: 'Parcs Nationaux',
+        title: 'Coeurs de parcs nationaux',
+        group: 'biodiversite',
+        technicalName: 'PROTECTEDAREAS.PN:pn'
+      }, {
+        title: 'Zones d\'adhésion de parcs nationaux',
         group: 'biodiversite',
         technicalName: 'PROTECTEDAREAS.PN:pn'
       }, {

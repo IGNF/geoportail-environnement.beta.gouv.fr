@@ -55,7 +55,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PNR:pnr'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -298,7 +298,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PN:pn'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PN:pn' && l.title === 'Coeurs de parcs nationaux'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -315,7 +315,31 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
         params: {
           'LAYERS': 'PROTECTEDAREAS.PN',
           'FORMAT': 'image/png',
-          'VERSION': '1.3.0'
+          'VERSION': '1.3.0',
+          'cql_filter': "zone = 'Coeur'"
+        },
+      })
+    }),
+    new TileLayer({
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PN:pn' && l.title === 'Zones d\'adhésion de parcs nationaux'),
+      extent: [
+        -20037508.342789244,
+        -44927335.42709704,
+        20037508.342789244,
+        44927335.42709663
+      ],
+      minResolution: 0,
+      maxResolution: 156543.03392804097,
+      source: new TileWMS({
+        url: 'https://data.geopf.fr/wms-r/ows?',
+        projection: 'EPSG:3857',
+        attributions: [],
+        crossOrigin: 'anonymous',
+        params: {
+          'LAYERS': 'PROTECTEDAREAS.PN',
+          'FORMAT': 'image/png',
+          'VERSION': '1.3.0',
+          'cql_filter': "zone = 'Adhesion'"
         },
       })
     }),
