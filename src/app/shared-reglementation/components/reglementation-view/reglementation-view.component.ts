@@ -17,9 +17,8 @@ export class ReglementationViewComponent implements OnInit {
 
   ngOnInit() {
     if (!this.reglementation) {
-      this.reglementation = REGLEMENTATION_LIST[0];
+      this.reglementation = REGLEMENTATION_LIST.filter(reglement => reglement.layerName === this.layerReference)[0];
     }
-    // todo rechercher reglementation par reference
   }
 
 }

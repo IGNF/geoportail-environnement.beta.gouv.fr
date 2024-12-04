@@ -2,12 +2,16 @@
 <div [innerHTML]="reglementation.description"></div>
 <div [innerHTML]="reglementation.impactReglementaire"></div>
 <div [innerHTML]="reglementation.impactProcedure"></div>
-<p>
-  <a [href]="reglementation.referenceUrl">Accès référence réglementaire</a>
-</p>
-<p>
-  Point de concat {{ reglementation.contact }}.
-</p>
+  @if(reglementation.referenceUrl){
+    <p>
+      <a [href]="reglementation.referenceUrl">Accès référence réglementaire</a>
+    </p>
+  }
+  @if(reglementation.contact) {
+    <p>
+      Point de contact : {{ reglementation.contact }}.
+    </p>
+  }
 } @else {
 <p>Aucune reglementation ou recommandation.</p>
 }
