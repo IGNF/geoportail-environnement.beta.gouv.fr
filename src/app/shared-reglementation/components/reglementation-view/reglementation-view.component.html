@@ -1,17 +1,20 @@
 @if (reglementation) {
+
 <div [innerHTML]="reglementation.description"></div>
 <div [innerHTML]="reglementation.impactReglementaire"></div>
 <div [innerHTML]="reglementation.impactProcedure"></div>
-  @if(reglementation.referenceUrl){
-    <p>
-      <a [href]="reglementation.referenceUrl">Accès référence réglementaire</a>
-    </p>
-  }
-  @if(reglementation.contact) {
-    <p>
-      Point de contact : {{ reglementation.contact }}.
-    </p>
-  }
+
+@if(reglementation.referenceUrl){
+<p>
+  <a [href]="reglementation.referenceUrl" target="_blank">Consulter la référence réglementaire</a>
+</p>
+}
+@if(reglementation.contact) {
+<p>
+  Pour vos procédures vueillez contacter <b>{{ reglementation.contact }}</b>.
+</p>
+}
+
 } @else {
 <p>Aucune reglementation ou recommandation.</p>
 }

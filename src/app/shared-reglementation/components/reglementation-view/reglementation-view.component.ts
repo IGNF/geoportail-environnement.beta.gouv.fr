@@ -13,11 +13,11 @@ export class ReglementationViewComponent implements OnInit {
 
   @Input() reglementation?: Reglementation;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     if (!this.reglementation) {
-      this.reglementation = REGLEMENTATION_LIST.filter(reglement => reglement.layerName === this.layerReference)[0];
+      this.reglementation = REGLEMENTATION_LIST.find(reglement => reglement.layerName === this.layerReference);
     }
   }
 

@@ -5,7 +5,7 @@
 <app-reglementation-view [layerReference]="layer.title"></app-reglementation-view>
 
 @if (displaySituationMap) {
-  <app-map-viewer [id]="map" [situationMap]="displaySituationMap"></app-map-viewer>
+<app-map-viewer [id]="map" [situationMap]="displaySituationMap"></app-map-viewer>
 }
 
 <ul>
@@ -20,6 +20,11 @@
 
   }
 </ul>
-<br>
+
+<!-- <dsfr-tags-group>
+  @for (feature of layer.features; track feature) {
+  <dsfr-tag [label]="feature.name" [route]="" (click)="openTab(feature.link)"></dsfr-tag>
+  }
+</dsfr-tags-group> -->
 
 }
