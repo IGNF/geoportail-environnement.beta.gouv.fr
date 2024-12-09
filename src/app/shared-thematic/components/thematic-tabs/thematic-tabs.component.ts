@@ -92,7 +92,15 @@ export class ThematicTabsComponent implements OnInit {
     layer.flatview = false;
     layer.features = [];
     layer.features = this.responseFeatures.filter((feature) => {
-      return this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer;
+      if(this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer) {
+        if(layer.title === 'Coeurs de parcs nationaux' && feature.zone != 'Coeur') {
+          return false
+        } else if(layer.title === 'Zones d\'adhésion de parcs nationaux' && feature.zone != 'Adhesion') {
+          return false
+        }
+        return true
+      }
+      return false;
     });
     return layer;
   }
@@ -103,8 +111,13 @@ export class ThematicTabsComponent implements OnInit {
       const layer = features[i].layer;
       switch (layer) {
         case 'assiette_sup_s':
-          if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'monument_historique', name: "assiette_sup_s" })) {
-            this.mapContextService.getActiveThematicLayers().push({ theme: 'monument_historique', name: "assiette_sup_s" });
+          if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'patrimoine', name: "assiette_sup_s" })) {
+            this.mapContextService.getActiveThematicLayers().push({ theme: 'patrimoine', name: "assiette_sup_s" });
+          }
+          break;
+        case 'prescription_surf':
+          if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'patrimoine', name: "prescription_surf" })) {
+            this.mapContextService.getActiveThematicLayers().push({ theme: 'patrimoine', name: "prescription_surf" });
           }
           break;
         default:

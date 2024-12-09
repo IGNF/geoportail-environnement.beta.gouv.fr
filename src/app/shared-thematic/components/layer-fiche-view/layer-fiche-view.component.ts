@@ -21,6 +21,11 @@ export class LayerInfoViewComponent implements OnChanges {
     this.prepareMap();
   }
 
+  openTab(link: string) {
+    const windowReference: any = window;
+    windowReference.open(link, '_blank').focus();
+  }
+
   private prepareMap() {
     if (this.layer && this.displaySituationMap) {
       this.map = this.layer.technicalName;

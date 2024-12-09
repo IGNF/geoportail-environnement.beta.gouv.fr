@@ -48,8 +48,7 @@ export class ThematicFeatureService {
       return this.geoplateformeWfsService.getFeatures(request).pipe(
         map((response) => {
           const features = response.features || [];
-          return features.map((feature: any) => this.parseFeature(feature))
-            .filter((feature: any) => this.filterFeature(feature));
+          return features.map((feature: any) => this.parseFeature(feature));
         })
       )
     });
@@ -77,6 +76,14 @@ export class ThematicFeatureService {
       request.filterByAttribute('typeass', 'Périmètre des abords');
     }
 
+    if(layer.title === 'Coeurs de parcs nationaux') {
+      request.filterByAttribute('zone', 'Coeur');
+    }
+
+    if(layer.title === 'Zones d\'adhésion de parcs nationaux') {
+      request.filterByAttribute('zone', 'Adhesion');
+    }
+
     if(layer.title === 'Espaces boisés classés') {
       request.filterByAttribute('typepsc', '01');
       request.filterByAttributeInValues('stypepsc', ['00', '01', '02', '03']);
@@ -96,8 +103,9 @@ export class ThematicFeatureService {
     const layer = this.parseLayerFromId(id);
     const properties = feature.properties;
     let link;
+    let zone = properties['zone'] ||'';
     if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier'] || properties['nomfic']) {
-      let fichier = properties['ficier']?properties['ficier']:properties['nomfic'];
+      let fichier = properties['fichier']?properties['fichier']:properties['nomfic'];
       link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${fichier}`;
     } else {
       link = properties.url;
@@ -107,21 +115,10 @@ export class ThematicFeatureService {
       id: id,
       layer: layer,
       name: name,
-      link: link
+      link: link,
+      zone: zone
     });
     return newFeature;
-  }
-
-  /**
-   * Cas particuliers selon les couches, pour les AC1 'Monuments historique' on ne garde que les abords
-   * @param feature 
-   * @returns boolean
-   */
-  private filterFeature(feature: any): boolean {
-    if (feature.suptype === 'ac1' && feature.typeass !== 'Périmètre des abords') {
-      return false;
-    }
-    return true;
   }
 
 
