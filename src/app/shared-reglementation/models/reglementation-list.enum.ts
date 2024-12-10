@@ -5,7 +5,7 @@ export const REGLEMENTATION_LIST = [
     thematicName: 'Biodiversité',
     layerName: 'Natura 2000 Habitats',
     title: 'Sites Natura 2000 au titre de la Directive Habitats',
-    description: '<p>Espace désigné à l\'échelle européenne pour  la rareté ou la fragilité des habitats et des espèces animales et végétales qu’il abrite.</p>',
+    description: '<p>Espace désigné à l\'échelle européenne pour  la rareté ou la fragilité des habitats et des espèces animales et végétales qu\'il abrite.</p>',
     impactReglementaire: '<p>Les créations de voies forestières, de places de dépôt de bois et les premiers boisements sont susceptibles d\'être soumis à une évaluation des incidences.</p><p>Elle doit également être réalisée pour tous autres travaux (notamment les coupes), s\'ils sont soumis à une autorisation administrative.</p>',
     impactProcedure: '<p>L\'évaluation des incidences a pour but de déterminer si le projet peut avoir un impact significatif sur les habitats, les espèces végétales et les espèces animales ayant justifié la désignation du site Natura 2000. </p>',
     referenceUrl: 'https://www.natura2000.fr/',
@@ -16,7 +16,7 @@ export const REGLEMENTATION_LIST = [
     layerName: 'Natura 2000 Oiseaux',
     title: 'Sites Natura 2000 au titre de la Directive Oiseaux',
     description: '<p>Espace désigné à l\'échelle européenne pour son intérêt dans la reproduction, de migration et d\'hivernage d\'espèces d\'oiseaux.</p>',
-    impactReglementaire: '<p>Les créations de voies forestières, de places de dépôt de bois et les premiers boisements d’une surface supérieure à 1 ha,  doivent faire l\'objet d\'une une évaluation des incidences.</p><p> Elle doit également être réalisée pour tous autres travaux (notamment les coupes), s\'ils sont soumis à une autorisation administrative.</p>',
+    impactReglementaire: '<p>Les créations de voies forestières, de places de dépôt de bois et les premiers boisements d\'une surface supérieure à 1 ha,  doivent faire l\'objet d\'une une évaluation des incidences.</p><p> Elle doit également être réalisée pour tous autres travaux (notamment les coupes), s\'ils sont soumis à une autorisation administrative.</p>',
     impactProcedure: '<p>L\'évaluation des incidences a pour but de déterminer si le projet peut avoir un impact significatif sur les habitats, les espèces végétales et les espèces animales ayant justifié la désignation du site Natura 2000. </p>',
     referenceUrl: 'https://www.natura2000.fr/',
     contact: 'Direction départementale des territoires'
@@ -65,7 +65,7 @@ export const REGLEMENTATION_LIST = [
     thematicName: 'Biodiversité',
     layerName: 'Biotopes d\'espèces protégées',
     title: 'Arrêtés de protection de biotope',
-    description: '<p>Les arrêtés de protection de biotope visent à protéger les habitats nécessaires à l\'alimentation, à la reproduction, au repos ou à la survie d\'espèces protégées. Il concernent souvent des milieux très remarques, sur des surfaces limitées.</p>',
+    description: '<p>Les arrêtés de protection de biotope visent à protéger les habitats nécessaires à l\'alimentation, à la reproduction, au repos ou à la survie d\'espèces protégées. Il concernent souvent des milieux très remarqués, sur des surfaces limitées.</p>',
     impactReglementaire: '<p>Une règlementation spécifique à chaque espace est applicable.</p>',
     impactProcedure: '<p>Les activités forestières peuvent être règlementées. La présence probable d\'espèces protégées nécessite une grande prudence avant tous travaux ou exploitation.</p>',
     referenceUrl: '',
@@ -195,7 +195,7 @@ export const REGLEMENTATION_LIST = [
     thematicName: 'Patrimoine',
     layerName: 'Monuments historiques',
     title: 'Protection des abords des monuments historiques ( Périmètre délimité des abords ou abords de 500m)',
-    description: '<p>Un monument historique classé est un immeuble protégé pour son intérêt  notamment du point de vue artistique, historique, scientifique,légendaire ou pittoresque. Aux abords de ce monument, un périmètre de protecion est destiné à garantir le caractère paysager des abords.</p>',
+    description: '<p>Un monument historique est un immeuble protégé pour son intérêt protégé ou dont la préservation présente un intérêt du point de vue de l\'architecture ou de l\'histoire . Aux abords de ce monument, un périmètre de protecion est destiné à garantir le caractère paysager des abords.</p>',
     impactReglementaire: '<p>Les travaux susceptibles de modifier le paysage aux abords des monuments historiques sont sous à autorisation. C\'est le cas notamment des coupes ou des créations de voiries forestière.</p>',
     impactProcedure: '<p>Si les travaux se situent également en site classé ou nécessitent une autre autorisation (se rapprocher de la DDT), l\'architecte des bâtiments de France sera consulté par le service qui instruira l\'autorisation.</p><p> Sinon, une demande d\'autorisation est à déposer en mairie. Il ets recommandé de contacter auparant l\'UDAP pour avoir son avis.</p>',
     referenceUrl: '',
@@ -210,5 +210,5 @@ export const REGLEMENTATION_LIST = [
     impactProcedure: '<p>La déclaration de coupe est à envoyer en mairie du lieu de la coupe, à l\'aide du formulaire Cerfa n° 13404 en cochant "Coupe et abattage d\'arbres" en page 4.</p>',
     referenceUrl: 'https://www.service-public.fr/particuliers/vosdroits/R11646',
     contact: 'Mairie de la commune de situation'
-  }),
+  })
 ];

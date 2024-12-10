@@ -83,6 +83,7 @@ export class ThematicTabsComponent implements OnInit {
   private updateFiche() {
     this.thematicTabs = this.thematicTabs.map((fiche) => {
       fiche.layers = fiche.layers.map((layer: LayerFiche) => this.updateFicheLayer(layer));
+      fiche.setHasFeature();
       return fiche;
     });
   }
@@ -93,9 +94,9 @@ export class ThematicTabsComponent implements OnInit {
     layer.features = [];
     layer.features = this.responseFeatures.filter((feature) => {
       if(this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer) {
-        if(layer.title === 'Coeurs de parcs nationaux' && feature.zone != 'Coeur') {
-          return false
-        } else if(layer.title === 'Zones d\'adhésion de parcs nationaux' && feature.zone != 'Adhesion') {
+        if((layer.title === 'Coeurs de parcs nationaux' && feature.zone != 'Coeur') ||
+            (layer.title === 'Zones d\'adhésion de parcs nationaux' && feature.zone != 'Adhesion')
+          ) {
           return false
         }
         return true
