@@ -166,6 +166,11 @@ export class MapContextService {
       source: this.getLayerDessin().getSource(),
     });
     editBar.setProperties({ name: 'editBar' });
+    let controls : any = editBar.getControls();
+    controls[0].setTitle('Sélectionner un objet');
+    controls[0].getSubBar().getControls()[0].setTitle('Supprimer l\'objet sélectionné')
+    controls[1].setTitle('Dessiner un polygone');
+    controls[2].setTitle('Délimiter un trou dans un polygone');
     this.map?.addControl(editBar);
   }
 
