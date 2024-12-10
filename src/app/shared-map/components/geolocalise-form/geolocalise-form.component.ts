@@ -43,7 +43,8 @@ export class GeolocaliseFormComponent implements OnInit {
         type: 'StreetAddress', //Par defaut StreetAddress,PositionOfInterest
         target: 'location',
         maxItems: 3,
-        className: 'fr-input-wrap fr-input-wrap--addon'
+        className: 'fr-input-wrap fr-input-wrap--addon',
+        placeholder: 'Rechercher...'
       });
       map.addControl(searchControl);
 
