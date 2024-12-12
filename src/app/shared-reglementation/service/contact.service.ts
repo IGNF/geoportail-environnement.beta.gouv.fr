@@ -1,0 +1,89 @@
+import { Injectable } from '@angular/core';
+import { ApiAnnuaireRequest } from '../models/api-annuaire-request';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
+import { GeoplateformeWfsService } from '../../shared-thematic/services/geoplateforme-wfs.service';
+import { MapContextService } from '../../shared-map/services/map-context.service';
+
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ContactService {
+
+  private url: string = environment.apiAnnuaireUrl;
+
+  private request!: ApiAnnuaireRequest;
+
+  private headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
+
+  constructor(
+    private httpClient: HttpClient,
+    private geoplateformeService: GeoplateformeWfsService,
+    private mapContextService: MapContextService
+  ) { }
+
+
+  getInseeCode(layer: string) : Observable<any>{
+    const maForet = this.mapContextService.getMaForet();
+    let wfsReq = this.geoplateformeService.buildRequest().fromLayer(layer);
+    wfsReq.intersectCollection(maForet, 'geometrie');
+    return this.geoplateformeService.getFeatures(wfsReq.getRequest()).pipe(
+      map((response) => {
+        const features = response.features || [];
+        return features;
+      })
+    )
+  }
+
+  getContact(contactReference: string, codeInsee: string) : Observable<any> {
+    this.buildRequest();
+    this.filterByName(contactReference);
+    this.filterByInseeCode(codeInsee);
+    return this.getFeatures().pipe(
+      map((response) => {
+        const features = response.results || [];
+        return features.map((feature: any) => this.parseFeature(feature));
+      })
+    )
+  }
+
+  private buildRequest() {
+    this.request = new ApiAnnuaireRequest().deserialise({});
+    return this;
+  }
+
+  private filterByName(name : string) {
+    this.request.where.push('nom LIKE \' ' + name + '\'');
+  }
+
+  private filterByInseeCode(inseeCode : string) {
+    this.request.where.push('startswith(code_insee_commune, \'' + inseeCode + '\')');
+  }
+
+  private getFeatures() : Observable<any>{
+    return this.httpClient.get(this.toQueryParams(this.request), { headers: this.headers });
+  }
+
+  private toQueryParams(request: ApiAnnuaireRequest): string {
+    const serialiseRequest = request.serialise();
+    const queryParams = Object.keys(serialiseRequest).map(key => `${key}=${serialiseRequest[key]}`).join('&');
+    return `${this.url}?${queryParams}`;
+  }
+
+  private parseFeature(feature : any) {;
+    let adresse = JSON.parse(feature.adresse)[0];
+    return {name: feature.nom,
+      address: adresse.numero_voie + " " + adresse.complement1 + " " + adresse.complement2 + " " + adresse.code_postal + " " + adresse.nom_commune,
+      website: JSON.parse(feature.site_internet)[0].valeur,
+      mail: feature.adresse_courriel,
+      contactForm : feature.formulaire_contact,
+      tel: JSON.parse(feature.telephone)[0].valeur
+     }
+  }
+
+}

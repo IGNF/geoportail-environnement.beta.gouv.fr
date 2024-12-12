@@ -9,10 +9,8 @@
   <a [href]="reglementation.referenceUrl" target="_blank">Consulter la référence réglementaire</a>
 </p>
 }
-@if(reglementation.contact) {
-<p>
-  Pour vos procédures vueillez contacter <b>{{ reglementation.contact }}</b>.
-</p>
+@if(reglementation.contactReference) {
+  <app-contact-view [contactReference]="reglementation.contactReference" [contactReferenceLayer]="reglementation.contactReferenceLayer"></app-contact-view>
 }
 
 } @else {
