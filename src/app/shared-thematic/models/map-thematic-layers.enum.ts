@@ -441,7 +441,7 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
   },
   layers: [
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_sup:assiette_sup_s'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_sup:assiette_sup_s' && l.title === 'Monuments historiques'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -461,6 +461,30 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
           'FORMAT': 'image/png',
           'VERSION': '1.3.0',
           'cql_filter': "suptype = 'ac1' AND typeass = 'Périmètre des abords'"
+        }
+      })
+    }),
+    new TileLayer({
+      properties: THEMATIC_LIST.find((g) => g.name === 'patrimoine')?.layers?.find((l) => l.technicalName === 'wfs_sup:assiette_sup_s' && l.title === 'Sites inscrits et classés'),
+      extent: [
+        -20037508.342789244,
+        -44927335.42709704,
+        20037508.342789244,
+        44927335.42709663
+      ],
+      minZoom: 11.5,
+      minResolution: 0,
+      maxResolution: 156543.03392804097,
+      source: new TileWMS({
+        url: 'https://data.geopf.fr/wms-v/ows?',
+        projection: 'EPSG:3857',
+        attributions: [],
+        crossOrigin: 'anonymous',
+        params: {
+          'LAYERS': 'monument_naturel_site',
+          'FORMAT': 'image/png',
+          'VERSION': '1.3.0',
+          'cql_filter': "suptype = 'ac2'"
         }
       })
     }),

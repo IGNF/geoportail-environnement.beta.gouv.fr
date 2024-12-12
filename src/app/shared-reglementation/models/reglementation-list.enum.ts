@@ -195,11 +195,21 @@ export const REGLEMENTATION_LIST = [
     thematicName: 'Patrimoine',
     layerName: 'Monuments historiques',
     title: 'Protection des abords des monuments historiques ( Périmètre délimité des abords ou abords de 500m)',
-    description: '<p>Un monument historique classé est un immeuble protégé pour son intérêt  notamment du point de vue artistique, historique, scientifique,légendaire ou pittoresque. Aux abords de ce monument, un périmètre de protecion est destiné à garantir le caractère paysager des abords.</p>',
+    description: '<p>Un monument historique est un immeuble protégé pour son intérêt protégé ou dont la préservation présente un intérêt du point de vue de l\'architecture ou de l\'histoire . Aux abords de ce monument, un périmètre de protecion est destiné à garantir le caractère paysager des abords.</p>',
     impactReglementaire: '<p>Les travaux susceptibles de modifier le paysage aux abords des monuments historiques sont sous à autorisation. C\'est le cas notamment des coupes ou des créations de voiries forestière.</p>',
     impactProcedure: '<p>Si les travaux se situent également en site classé ou nécessitent une autre autorisation (se rapprocher de la DDT), l\'architecte des bâtiments de France sera consulté par le service qui instruira l\'autorisation.</p><p> Sinon, une demande d\'autorisation est à déposer en mairie. Il ets recommandé de contacter auparant l\'UDAP pour avoir son avis.</p>',
     referenceUrl: '',
     contact: 'UDAP du département'
+  }),
+  new Reglementation().deserialise({
+    thematicName: 'Patrimoine',
+    layerName: 'Sites inscrits et classés',
+    title: 'Sites inscrits et classés',
+    description: '<p> Les sites inscrits sont des sites présentant un intérêt général, notamment du point de vue artistique, historique, scientifique,légendaire ou pittoresque.</p><p> Les sites classés sont des sites remarquables, dans lesquels le caractère paysager est rigoureusement protégé.</p>',
+    impactReglementaire: '<p> Pour les sites inscrits, les travaux   modifiant l\'aspect du site, notamment les coupes ou les créations de desserte, doivent faire l\'objet d\'une déclaration préalable.</p><p> Pour les sites classés, les travaux modifiant l\'aspect du site, notamment les coupes ou les créations de desserte, doivent faire l\'objet d\'une autorisation spéciale.</p>',
+    impactProcedure: '<p>Pour les sites inscrits, une déclaration est à faire 4 mois au moins avant les travaux auprès de l\'unité départementale de l\'architecture et du patrimoine.</p><p> Pour les sites classés, il est recommandé de prendre contact au préalable avec l\'architecte des bâtiments de France pour faciliter la procédure.</p>',
+    referenceUrl: '',
+    contact: 'Pour les sites inscrits, Direction départementale des territoires. Pour les sites classés, UDAP du département'
   }),
   new Reglementation().deserialise({
     thematicName: 'Patrimoine',
@@ -210,5 +220,5 @@ export const REGLEMENTATION_LIST = [
     impactProcedure: '<p>La déclaration de coupe est à envoyer en mairie du lieu de la coupe, à l\'aide du formulaire Cerfa n° 13404 en cochant "Coupe et abattage d\'arbres" en page 4.</p>',
     referenceUrl: 'https://www.service-public.fr/particuliers/vosdroits/R11646',
     contact: 'Mairie de la commune de situation'
-  }),
+  })
 ];
