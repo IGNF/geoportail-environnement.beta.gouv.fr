@@ -2,7 +2,7 @@
   @if (thematic.active) {
     <div>
       @if (first) {
-        <app-synthese></app-synthese>
+        <app-synthese [features]="responseFeatures"></app-synthese>
       } @else {
         <app-thematic-view [thematic]="thematic"></app-thematic-view>
       }

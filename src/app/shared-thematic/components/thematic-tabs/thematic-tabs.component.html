@@ -5,7 +5,7 @@
     <dsfr-tab [tabId]="thematicTab.name" [label]="thematicTab.label">
 
       @if (first) {
-      <app-synthese></app-synthese>
+      <app-synthese [features]="responseFeatures" [thematicTabs]="thematicTabs"></app-synthese>
       } @else {
       <app-thematic-view [thematic]="thematicTab"></app-thematic-view>
       }
