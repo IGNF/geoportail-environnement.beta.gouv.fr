@@ -93,9 +93,11 @@ export class ThematicTabsComponent implements OnInit {
     layer.features = [];
     layer.features = this.responseFeatures.filter((feature) => {
       if(this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer) {
-        if(layer.title === 'Coeurs de parcs nationaux' && feature.zone != 'Coeur') {
-          return false
-        } else if(layer.title === 'Zones d\'adhésion de parcs nationaux' && feature.zone != 'Adhesion') {
+        if((layer.title === 'Coeurs de parcs nationaux' && feature.zone != 'Coeur') ||
+            (layer.title === 'Zones d\'adhésion de parcs nationaux' && feature.zone != 'Adhesion') ||
+            (layer.title === 'Monuments historiques' && feature.suptype != 'ac1') ||
+            (layer.title === 'Sites inscrits et classés' && feature.suptype != 'ac2')
+          ) {
           return false
         }
         return true

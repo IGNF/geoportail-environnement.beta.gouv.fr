@@ -21,7 +21,7 @@ export class Reglementation implements Serializable {
   // must be http URI
   referenceUrl: string = '';
 
-  contactReference: string = '';
+  contactReference: string[] = [];
 
   contactReferenceLayer: string = '';
 

@@ -104,6 +104,11 @@ export const THEMATIC_LIST = [
         technicalName: 'wfs_sup:assiette_sup_s'
       },
       {
+        title: 'Sites inscrits et classés',
+        group: 'patrimoine',
+        technicalName: 'wfs_sup:assiette_sup_s'
+      },
+      {
         title: 'Espaces boisés classés',
         group: 'patrimoine',
         technicalName: 'wfs_du:prescription_surf'

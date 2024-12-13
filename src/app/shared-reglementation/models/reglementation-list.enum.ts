@@ -9,7 +9,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Les créations de voies forestières, de places de dépôt de bois et les premiers boisements sont susceptibles d\'être soumis à une évaluation des incidences.</p><p>Elle doit également être réalisée pour tous autres travaux (notamment les coupes), s\'ils sont soumis à une autorisation administrative.</p>',
     impactProcedure: '<p>L\'évaluation des incidences a pour but de déterminer si le projet peut avoir un impact significatif sur les habitats, les espèces végétales et les espèces animales ayant justifié la désignation du site Natura 2000. </p>',
     referenceUrl: 'https://www.natura2000.fr/',
-    contactReference: 'Direction départementale des territoires',
+    contactReference: ['Direction départementale des territoires'],
     contactReferenceLayer: 'BDTOPO_V3:departement'
   }),
   new Reglementation().deserialise({
@@ -20,7 +20,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Les créations de voies forestières, de places de dépôt de bois et les premiers boisements d\'une surface supérieure à 1 ha,  doivent faire l\'objet d\'une une évaluation des incidences.</p><p> Elle doit également être réalisée pour tous autres travaux (notamment les coupes), s\'ils sont soumis à une autorisation administrative.</p>',
     impactProcedure: '<p>L\'évaluation des incidences a pour but de déterminer si le projet peut avoir un impact significatif sur les habitats, les espèces végétales et les espèces animales ayant justifié la désignation du site Natura 2000. </p>',
     referenceUrl: 'https://www.natura2000.fr/',
-    contactReference: 'Direction départementale des territoires',
+    contactReference: ['Direction départementale des territoires'],
     contactReferenceLayer: 'BDTOPO_V3:departement'
   }),
   new Reglementation().deserialise({
@@ -31,7 +31,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Une réglementation spécifique à chaque parc national, encadre la bonne pratique des activités humaines dans le cœur afin qu\'elles aient le moins d\'impacts possibles sur les milieux naturels et la biodiversité.</p>',
     impactProcedure: '<p>La circulation, les travaux, l\'exploitation forestière sont généralement règlementés. Avant toute intervention, consulter l\'équipe du parc national.</p>',
     referenceUrl: 'https://www.parcsnationaux.fr/fr/des-decouvertes/les-parcs-nationaux-de-france/reglementation-dans-les-parcs-nationaux-de-France',
-    contactReference: 'Parc national concerné',
+    contactReference: ['Parc national'],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -42,7 +42,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Sauf décision locale particulière, cette zone du Parc national n\'est pas soumise à une réglementation environnementale particulière.</p>',
     impactProcedure: '<p>Ce zonage n\'implique pas de formalité particulière.</p>',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -53,7 +53,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Une règlementation spécifique à chaque espace est applicable.</p>',
     impactProcedure: '<p>La gestion forestière courante n\'est généralement pas impactée si elle ne porte pas atteinte aux éléments géologiques.</p>',
     referenceUrl: '',
-    contactReference: 'Direction départementale des territoires',
+    contactReference: ['Direction départementale des territoires'],
     contactReferenceLayer: 'BDTOPO_V3:departement'
   }),
   new Reglementation().deserialise({
@@ -64,7 +64,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Une règlementation spécifique à chaque espace est applicable.</p>',
     impactProcedure: '<p>Les activités forestières peuvent être règlementées. La présence d"habitats naturels patrimoniaux nécessite une grande prudence avant tous travaux ou exploitation.</p>',
     referenceUrl: '',
-    contactReference: 'Direction départementale des territoires',
+    contactReference: ['Direction départementale des territoires'],
     contactReferenceLayer: 'BDTOPO_V3:departement'
   }),
   new Reglementation().deserialise({
@@ -75,7 +75,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Une règlementation spécifique à chaque espace est applicable.</p>',
     impactProcedure: '<p>Les activités forestières peuvent être règlementées. La présence probable d\'espèces protégées nécessite une grande prudence avant tous travaux ou exploitation.</p>',
     referenceUrl: '',
-    contactReference: 'Direction départementale des territoires',
+    contactReference: ['Direction départementale des territoires'],
     contactReferenceLayer: 'BDTOPO_V3:departement'
   }),
   new Reglementation().deserialise({
@@ -86,7 +86,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Les travaux, la circulation et les activités forestières peuvent faire l\'objet d\'une règlementation, adaptée à chaque réserve.</p>',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: 'Le gestionnaire de la réserve',
+    contactReference: ['Réserve naturelle de Corse'],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -97,7 +97,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Les travaux, la circulation et les activités forestières peuvent faire l\'objet d\'une règlementation, adaptée à chaque réserve.</p>',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: 'Le gestionnaire de la réserve',
+    contactReference: ['Réserve naturelle nationale'],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -108,7 +108,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Les travaux, la circulation et les activités forestières peuvent faire l\'objet d\'une règlementation, adaptée à chaque réserve.</p>',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: 'Le gestionnaire de la réserve',
+    contactReference: ['Réserve naturelle régionale'],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -119,7 +119,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -130,7 +130,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -141,7 +141,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -152,7 +152,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -163,7 +163,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Le droit commun est le même dans le territoire du parc naturel régional qu\'ailleurs. Il n\'a pas d\'impact règlementaire spécifique pour les travaux forestiers.</p>',
     impactProcedure: '<p>Ce zonage n\'implique pas de formalité particulière.</p>',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -174,7 +174,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -185,7 +185,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '',
     impactProcedure: '',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -196,7 +196,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Inventaire informatif ne générant pas de contraintes règlementaires. Cependant ce zonage traduit la possible présence d\'espèces animales et végétales remarquables pouvant faire l\'objet d\'un dispositif de protection.</p>',
     impactProcedure: '<p>A prendre en compte lors de la planification de la gestion ou en cas de réalisation de travaux, notamment si le terrain présente des milieux spécifiques comme des tourbières, des mares, des cours d\'eau etc.</p>',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
@@ -207,18 +207,29 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Inventaire informatif ne générant pas de contraintes règlementaires. Cependant ce zonage traduit la possible présence d\'espèces animales et végétales remarquables pouvant faire l\'objet d\'un dispositif de protection.</p>',
     impactProcedure: '<p>A prendre en compte lors de la planification de la gestion ou en cas de réalisation de travaux, notamment si le terrain présente des milieux spécifiques comme des tourbières, des mares, des cours d\'eau etc.</p>',
     referenceUrl: '',
-    contactReference: '',
+    contactReference: [],
     contactReferenceLayer: ''
   }),
   new Reglementation().deserialise({
     thematicName: 'Patrimoine',
     layerName: 'Monuments historiques',
     title: 'Protection des abords des monuments historiques ( Périmètre délimité des abords ou abords de 500m)',
-    description: '<p>Un monument historique classé est un immeuble protégé pour son intérêt  notamment du point de vue artistique, historique, scientifique,légendaire ou pittoresque. Aux abords de ce monument, un périmètre de protecion est destiné à garantir le caractère paysager des abords.</p>',
+    description: '<p>Un monument historique est un immeuble protégé pour son intérêt protégé ou dont la préservation présente un intérêt du point de vue de l\'architecture ou de l\'histoire . Aux abords de ce monument, un périmètre de protecion est destiné à garantir le caractère paysager des abords.</p>',
     impactReglementaire: '<p>Les travaux susceptibles de modifier le paysage aux abords des monuments historiques sont sous à autorisation. C\'est le cas notamment des coupes ou des créations de voiries forestière.</p>',
     impactProcedure: '<p>Si les travaux se situent également en site classé ou nécessitent une autre autorisation (se rapprocher de la DDT), l\'architecte des bâtiments de France sera consulté par le service qui instruira l\'autorisation.</p><p> Sinon, une demande d\'autorisation est à déposer en mairie. Il ets recommandé de contacter auparant l\'UDAP pour avoir son avis.</p>',
     referenceUrl: '',
-    contactReference: 'UDAP',
+    contactReference: ['UDAP'],
+    contactReferenceLayer: 'BDTOPO_V3:departement'
+  }),
+  new Reglementation().deserialise({
+    thematicName: 'Patrimoine',
+    layerName: 'Sites inscrits et classés',
+    title: 'Sites inscrits et classés',
+    description: '<p> Les sites inscrits sont des sites présentant un intérêt général, notamment du point de vue artistique, historique, scientifique,légendaire ou pittoresque.</p><p> Les sites classés sont des sites remarquables, dans lesquels le caractère paysager est rigoureusement protégé.</p>',
+    impactReglementaire: '<p> Pour les sites inscrits, les travaux   modifiant l\'aspect du site, notamment les coupes ou les créations de desserte, doivent faire l\'objet d\'une déclaration préalable.</p><p> Pour les sites classés, les travaux modifiant l\'aspect du site, notamment les coupes ou les créations de desserte, doivent faire l\'objet d\'une autorisation spéciale.</p>',
+    impactProcedure: '<p>Pour les sites inscrits, une déclaration est à faire 4 mois au moins avant les travaux auprès de l\'unité départementale de l\'architecture et du patrimoine.</p><p> Pour les sites classés, il est recommandé de prendre contact au préalable avec l\'architecte des bâtiments de France pour faciliter la procédure.</p>',
+    referenceUrl: '',
+    contactReference: ['UDAP', 'Direction départementale des territoires'],
     contactReferenceLayer: 'BDTOPO_V3:departement'
   }),
   new Reglementation().deserialise({
@@ -229,7 +240,7 @@ export const REGLEMENTATION_LIST = [
     impactReglementaire: '<p>Les terrains ne peuvent changer d\'affectation : ils doivent rester forestier. Il ne peut donc y avoir de défrichement. Les coupes qui ne sont pas prévues dans un plan simple de gestion doivent faire l\'objet d\'une déclaration préalable.</p>',
     impactProcedure: '<p>La déclaration de coupe est à envoyer en mairie du lieu de la coupe, à l\'aide du formulaire Cerfa n° 13404 en cochant "Coupe et abattage d\'arbres" en page 4.</p>',
     referenceUrl: 'https://www.service-public.fr/particuliers/vosdroits/R11646',
-    contactReference: 'Mairie',
+    contactReference: ['Mairie'],
     contactReferenceLayer: 'BDTOPO_V3:commune'
-  }),
+  })
 ];

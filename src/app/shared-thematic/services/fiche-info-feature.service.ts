@@ -76,6 +76,10 @@ export class ThematicFeatureService {
       request.filterByAttribute('typeass', 'Périmètre des abords');
     }
 
+    if (layer.title === 'Sites inscrits et classés') {
+      request.filterByAttribute('suptype', 'ac2');
+    }
+
     if(layer.title === 'Coeurs de parcs nationaux') {
       request.filterByAttribute('zone', 'Coeur');
     }
@@ -110,6 +114,7 @@ export class ThematicFeatureService {
     } else {
       link = properties.url;
     }
+    console.log(properties);
     const name = properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt'] || properties['idurba']);
     const newFeature = Object.assign(feature.properties, {
       id: id,

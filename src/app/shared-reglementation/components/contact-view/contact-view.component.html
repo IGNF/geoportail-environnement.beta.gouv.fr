@@ -1,15 +1,16 @@
 @if (contact) {
   <b>Contacts :</b>
   <p>{{contact.name}}</p>
-  <p>Adresse : {{contact.address}}</p>
-  <p>Site internet : <a href = {{contact.website}} target = '_blank'>{{contact.website}}</a></p>
-  @if(contact.mail) {
-    <p>Courriel : {{contact.mail}}</p>
-  }
-  @if(contact.contactForm) {
-    <p>Formulaire de contact : <a href = {{contact.contactForm}} target = '_blank'>{{contact.contactForm}}</a></p>
-  }
-  
-  <p>Téléphone : {{contact.tel}}</p>
+  <ul>
+    <li>Adresse : {{contact.address}}</li>
+    <li>Site internet : <a href = {{contact.website}} target = '_blank'>{{contact.website}}</a></li>
+    @if(contact.mail) {
+      <li>Courriel : <a href = {{contact.mail}} target = '_blank'>{{contact.mail}}</a></li>
+    }
+    @if(contact.contactForm) {
+      <li>Formulaire de contact : <a href = {{contact.contactForm}} target = '_blank'>{{contact.contactForm}}</a></li>
+    }
+    <li>Téléphone : {{contact.tel}}</li>
+  </ul>
 } 
 
