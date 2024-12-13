@@ -508,7 +508,7 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
           'LAYERS': 'prescription',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0',
-          'cql_filter': "typepsc = '01' AND stypepsc IN ('00', 01, 02, 03)"
+          'cql_filter': "typepsc = '01' AND stypepsc IN ('00', '01', '02', '03')"
         }
       })
     }),
