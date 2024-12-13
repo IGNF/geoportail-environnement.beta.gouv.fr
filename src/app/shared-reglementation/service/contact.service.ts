@@ -52,14 +52,15 @@ export class ContactService {
     )
   }
 
-  getContacts(contactReference: string[], inseeCode: string) : Observable<any> {
+  getContacts(contactReference: string[], inseeCode: string[]) : Observable<any> {
     let requestArray : Observable<any>[] = [];
     for(let i = 0; i < contactReference.length; i++) {
-      requestArray.push(this.getContact(contactReference[i], inseeCode))
+      for(let j = 0; j < inseeCode.length; j++) {
+        requestArray.push(this.getContact(contactReference[i], inseeCode[j]))
+      }
     }
-    return zip(requestArray).pipe(map((contactByref) => {
-      console.log(contactByref);
-      return contactByref;
+    return zip(requestArray).pipe(map((contact) => {
+      return contact;
     }));
   }
 
@@ -87,13 +88,13 @@ export class ContactService {
   }
 
   private parseFeature(feature : any) {;
-    let adresse = JSON.parse(feature.adresse)[0];
+    let adresse = feature.adresse?JSON.parse(feature.adresse)[0]:'';
     return {name: feature.nom,
       address: adresse.numero_voie + " " + adresse.complement1 + " " + adresse.complement2 + " " + adresse.code_postal + " " + adresse.nom_commune,
-      website: JSON.parse(feature.site_internet)[0].valeur,
+      website: feature.site_internet?JSON.parse(feature.site_internet)[0].valeur:'',
       mail: feature.adresse_courriel,
       contactForm : feature.formulaire_contact,
-      tel: JSON.parse(feature.telephone)[0].valeur
+      tel: feature.telephone?JSON.parse(feature.telephone)[0].valeur:''
      }
   }
 

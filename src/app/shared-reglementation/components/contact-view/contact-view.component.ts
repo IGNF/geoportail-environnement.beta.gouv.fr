@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Contact } from '../../models/contact.model';
 import { ContactService } from '../../service/contact.service';
-import { map, Observable, zip } from 'rxjs';
 
 @Component({
   selector: 'app-contact-view',
@@ -23,12 +22,10 @@ export class ContactViewComponent implements OnInit {
   ngOnInit() {
     if(this.contactReferenceLayer && this.contactReference.length) {
       this.contactService.getInseeCode(this.contactReferenceLayer).subscribe((response) => {
-        let inseeCode = response[0].properties.code_insee;
+        let inseeCodeArray = response.map((resp:any) => resp.properties.code_insee);
 
-        this.contactService.getContacts(this.contactReference, inseeCode).subscribe((response) => {
-          console.log(response);
+        this.contactService.getContacts(this.contactReference, inseeCodeArray).subscribe((response) => {
           this.contacts = response.filter((resp:any) => resp[0]).map((resp:any) => new Contact().deserialise(resp[0]))
-          console.log(this.contacts);
         });
       });
     }
