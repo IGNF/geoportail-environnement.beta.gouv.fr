@@ -76,6 +76,10 @@ export class ThematicFeatureService {
       request.filterByAttribute('typeass', 'Périmètre des abords');
     }
 
+    if (layer.title === 'Sites inscrits et classés') {
+      request.filterByAttribute('suptype', 'ac2');
+    }
+
     if(layer.title === 'Coeurs de parcs nationaux') {
       request.filterByAttribute('zone', 'Coeur');
     }
