@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiAnnuaireRequest } from '../models/api-annuaire-request';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, zip } from 'rxjs';
 import { GeoplateformeWfsService } from '../../shared-thematic/services/geoplateforme-wfs.service';
 import { MapContextService } from '../../shared-map/services/map-context.service';
 
@@ -40,16 +40,27 @@ export class ContactService {
     )
   }
 
-  getContact(contactReference: string, codeInsee: string) : Observable<any> {
+  private getContact(contactReference: string, inseeCode: string) : Observable<any> {
     this.buildRequest();
     this.filterByName(contactReference);
-    this.filterByInseeCode(codeInsee);
+    this.filterByInseeCode(inseeCode);
     return this.getFeatures().pipe(
       map((response) => {
         const features = response.results || [];
         return features.map((feature: any) => this.parseFeature(feature));
       })
     )
+  }
+
+  getContacts(contactReference: string[], inseeCode: string) : Observable<any> {
+    let requestArray : Observable<any>[] = [];
+    for(let i = 0; i < contactReference.length; i++) {
+      requestArray.push(this.getContact(contactReference[i], inseeCode))
+    }
+    return zip(requestArray).pipe(map((contactByref) => {
+      console.log(contactByref);
+      return contactByref;
+    }));
   }
 
   private buildRequest() {

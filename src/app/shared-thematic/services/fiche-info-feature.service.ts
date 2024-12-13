@@ -114,7 +114,6 @@ export class ThematicFeatureService {
     } else {
       link = properties.url;
     }
-    console.log(properties);
     const name = properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt'] || properties['idurba']);
     const newFeature = Object.assign(feature.properties, {
       id: id,

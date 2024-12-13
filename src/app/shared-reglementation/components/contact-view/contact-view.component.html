@@ -1,6 +1,7 @@
-@if (contact) {
+@if (contacts) {
   <b>Contacts :</b>
-  <p>{{contact.name}}</p>
+  @for(contact of contacts; track $index){
+    <p>{{contact.name}}</p>
   <ul>
     <li>Adresse : {{contact.address}}</li>
     <li>Site internet : <a href = {{contact.website}} target = '_blank'>{{contact.website}}</a></li>
@@ -12,5 +13,6 @@
     }
     <li>Téléphone : {{contact.tel}}</li>
   </ul>
+  }
 } 
 

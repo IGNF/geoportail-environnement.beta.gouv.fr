@@ -14,7 +14,7 @@ export class ContactViewComponent implements OnInit {
 
   @Input() contactReferenceLayer: string = '';
 
-  @Input() contact?: Contact;
+  @Input() contacts?: Contact[];
 
   constructor(
     private contactService: ContactService
@@ -24,30 +24,14 @@ export class ContactViewComponent implements OnInit {
     if(this.contactReferenceLayer && this.contactReference.length) {
       this.contactService.getInseeCode(this.contactReferenceLayer).subscribe((response) => {
         let inseeCode = response[0].properties.code_insee;
-        this.contactService.getContact(this.contactReference[0], inseeCode).subscribe((response) => {
-          this.contact = new Contact().deserialise(response[0]);
-        })
+
+        this.contactService.getContacts(this.contactReference, inseeCode).subscribe((response) => {
+          console.log(response);
+          this.contacts = response.filter((resp:any) => resp[0]).map((resp:any) => new Contact().deserialise(resp[0]))
+          console.log(this.contacts);
+        });
       });
     }
-
-    // if(this.contactReferenceLayer && this.contactReference.length) {
-    //   this.contactService.getInseeCode(this.contactReferenceLayer).subscribe((response) => {
-    //     let inseeCode = response[0].properties.code_insee;
-
-    //     let request : Observable<any>[] = [];
-    //     for(let i = 0; i < this.contactReference.length; i++) {
-    //       request.push(this.contactService.getContact(this.contactReference[i], inseeCode))
-    //     }
-
-    //     zip(request).pipe(map((contactByref) => {
-    //       console.log(contactByref);
-    //     }));
-
-    //     // this.contactService.getContact(this.contactReference[0], inseeCode).subscribe((response) => {
-    //     //   this.contact = new Contact().deserialise(response[0]);
-    //     // })
-    //   });
-    // }
   }
 
 }
