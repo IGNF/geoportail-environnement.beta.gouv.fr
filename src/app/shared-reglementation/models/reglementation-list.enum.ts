@@ -234,6 +234,16 @@ export const REGLEMENTATION_LIST = [
   }),
   new Reglementation().deserialise({
     thematicName: 'Patrimoine',
+    layerName: 'Sites inscrits et classés',
+    title: 'Sites inscrits et classés',
+    description: '<p> Les sites inscrits sont des sites présentant un intérêt général, notamment du point de vue artistique, historique, scientifique,légendaire ou pittoresque.</p><p> Les sites classés sont des sites remarquables, dans lesquels le caractère paysager est rigoureusement protégé.</p>',
+    impactReglementaire: '<p> Pour les sites inscrits, les travaux   modifiant l\'aspect du site, notamment les coupes ou les créations de desserte, doivent faire l\'objet d\'une déclaration préalable.</p><p> Pour les sites classés, les travaux modifiant l\'aspect du site, notamment les coupes ou les créations de desserte, doivent faire l\'objet d\'une autorisation spéciale.</p>',
+    impactProcedure: '<p>Pour les sites inscrits, une déclaration est à faire 4 mois au moins avant les travaux auprès de l\'unité départementale de l\'architecture et du patrimoine.</p><p> Pour les sites classés, il est recommandé de prendre contact au préalable avec l\'architecte des bâtiments de France pour faciliter la procédure.</p>',
+    referenceUrl: '',
+    contact: 'Pour les sites inscrits, Direction départementale des territoires. Pour les sites classés, UDAP du département'
+  }),
+  new Reglementation().deserialise({
+    thematicName: 'Patrimoine',
     layerName: 'Espaces boisés classés',
     title: 'Espaces boisés classés au PLU au titre du  L.113-1 CU',
     description: '<p>Les espaces boisés classés  à conserver, à protéger ou à créer sont définis dans le plan local d\'urbanisme de la commune. Ils sont destinés à maintenir le paysage, réaliser des coulées vertes, protéger contre les risques naturels etc. </p>',
