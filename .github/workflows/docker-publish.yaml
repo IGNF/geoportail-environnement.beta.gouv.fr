@@ -1,4 +1,7 @@
 on:
+  push:
+    tags:
+      - 'v*.*.*' # Se déclenche uniquement pour les tags au format vx.x.x
   workflow_dispatch:
     inputs:
       version:
@@ -18,6 +21,18 @@ jobs:
       packages: write
 
     steps:
+      - name: Set version for build
+        id: set_version
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            VERSION="${{ github.event.inputs.version }}"
+          elif [[ "${{ github.ref_type }}" == "tag" ]]; then
+            VERSION="${{ github.ref_name }}"
+          else
+            echo "Error: Unsupported event type"
+            exit 1
+          fi
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
       - name: Validate version input
         id: validate_version
         run: |

@@ -11,6 +11,8 @@ export class Thematic implements Serializable {
 
   layers: LayerFiche[] = [];
 
+  hasFeature : boolean = false;
+
   // uniquement a l'execution du front (permet de suivre la sélection par l'utilisateur)
   active: boolean = true;
 
@@ -40,6 +42,19 @@ export class Thematic implements Serializable {
       active: this.active,
       layers: layers
     };
+  }
+
+  setHasFeature() {
+    let res = false;
+
+    for(let i = 0; i < this.layers.length; i++) {
+      if(this.layers[i].features.length) {
+        res = true;
+        break;
+      }
+    }
+
+    this.hasFeature = res;
   }
 
 }
