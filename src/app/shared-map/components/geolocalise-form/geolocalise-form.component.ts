@@ -40,9 +40,11 @@ export class GeolocaliseFormComponent implements OnInit {
     const map = this.mapContextService.getMap();
     if (map) {
       const searchControl = new SearchGeoportail({
+        type: 'StreetAddress', //Par defaut StreetAddress,PositionOfInterest
         target: 'location',
         maxItems: 3,
-        className: 'fr-input-wrap fr-input-wrap--addon'
+        className: 'fr-input-wrap fr-input-wrap--addon',
+        placeholder: 'Rechercher...'
       });
       map.addControl(searchControl);
 

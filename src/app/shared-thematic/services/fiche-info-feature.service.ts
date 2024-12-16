@@ -77,7 +77,7 @@ export class ThematicFeatureService {
     }
 
     if (layer.title === 'Sites inscrits et classés') {
-      request.filterByAttribute('suptype', 'ac2');  
+      request.filterByAttribute('suptype', 'ac2');
     }
 
     if(layer.title === 'Coeurs de parcs nationaux') {
