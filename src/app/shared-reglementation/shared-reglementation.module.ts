@@ -7,7 +7,7 @@ import { ReglementationViewComponent } from './components/reglementation-view/re
 @NgModule({
   declarations: [
     ReglementationViewComponent,
-    ContactViewComponent
+    ContactViewComponent,
   ],
   imports: [
     CommonModule

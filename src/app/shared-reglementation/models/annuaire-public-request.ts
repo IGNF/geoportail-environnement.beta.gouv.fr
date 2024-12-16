@@ -1,6 +1,6 @@
-import { Serializable } from "../../core/models/serializable.model";
+import { Serializable } from '../../core/models/serializable.model';
 
-export class ApiAnnuaireRequest implements Serializable {
+export class AnnuairePublicRequest implements Serializable {
 
   where: string[] = [];
 
@@ -11,13 +11,11 @@ export class ApiAnnuaireRequest implements Serializable {
     return this;
   }
 
-
   serialise(): any {
     const filter = this.where.join(' AND ');
     return {
       where: filter
     };
   }
-
 
 }

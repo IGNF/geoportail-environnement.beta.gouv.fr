@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { map, switchMap } from 'rxjs';
+
 import { Contact } from '../../models/contact.model';
-import { ContactService } from '../../service/contact.service';
+import { InseeService } from '../../services/insee.service';
+import { AnnuairePublicService } from '../../services/annuaire-public.service';
 
 @Component({
   selector: 'app-contact-view',
@@ -13,22 +16,23 @@ export class ContactViewComponent implements OnInit {
 
   @Input() contactReferenceLayer: string = '';
 
-  @Input() contacts?: Contact[];
+  contacts!: Contact[];
 
   constructor(
-    private contactService: ContactService
+    private inseeService: InseeService,
+    private annuairePublicService: AnnuairePublicService
   ) { }
 
   ngOnInit() {
-    if(this.contactReferenceLayer && this.contactReference.length) {
-      this.contactService.getInseeCode(this.contactReferenceLayer).subscribe((response) => {
-        let inseeCodeArray = response.map((resp:any) => resp.properties.code_insee);
-
-        this.contactService.getContacts(this.contactReference, inseeCodeArray).subscribe((response) => {
-          this.contacts = response.filter((resp:any) => resp[0]).map((resp:any) => new Contact().deserialise(resp[0]))
-        });
-      });
+    if (!(this.contactReferenceLayer && this.contactReference.length)) {
+      return;
     }
+    this.inseeService.reverseGeocadageInsee(this.contactReferenceLayer).pipe(
+      switchMap((inseeList) => this.annuairePublicService.getContacts(this.contactReference, inseeList)),
+      map((contacts: any) => {
+        this.contacts = contacts;
+      })
+    ).subscribe();
   }
 
 }

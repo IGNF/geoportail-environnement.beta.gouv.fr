@@ -12,18 +12,22 @@ export class Contact implements Serializable {
 
   contactForm: string = '';
   
-  tel	: string = '';
+  telephone: string = '';
   
   constructor() { }
 
   deserialise(input: any) {
+    const adresse = input.adresse ? JSON.parse(input.adresse)[0] : '';
+    const adresseString = `${adresse.numero_voie} ${adresse.complement1} ${adresse.complement2} ${adresse.code_postal} ${adresse.nom_commune}`;
+    const website = input.site_internet ? JSON.parse(input.site_internet)[0].valeur : '';
+    const telephone = input.telephone ? JSON.parse(input.telephone)[0].valeur : '';
     Object.assign(this, {
-      name: input.name,
-      address: input.address,
-      website: input.website,
-      mail: input.mail,
-      contactForm : input.contactForm,
-      tel: input.tel
+      name: input.nom,
+      address: adresseString,
+      website: website,
+      mail: input.adresse_courriel,
+      contactForm : input.formulaire_contact,
+      telephone: telephone
     });
     return this;
   }
@@ -35,7 +39,7 @@ export class Contact implements Serializable {
       website: this.website,
       mail: this.mail,
       contactForm : this.contactForm,
-      tel: this.tel
+      telephone: this.telephone
     };
   }
 

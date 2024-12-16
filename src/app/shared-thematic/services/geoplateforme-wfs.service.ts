@@ -42,14 +42,14 @@ export class GeoplateformeWfsService {
     return this;
   }
 
-  filterByAttribute(attribute : string, value: string): GeoplateformeWfsService {
+  filterByAttribute(attribute: string, value: string): GeoplateformeWfsService {
     this.request.cqlFilters.push(`${attribute}='${value}'`);
     return this;
   }
 
-  filterByAttributeInValues (attribute : string, values : string[]) {
+  filterByAttributeInValues(attribute: string, values: string[]) {
     let res = `${attribute} IN (`;
-    for(let i = 0; i < values.length; i++) {
+    for (let i = 0; i < values.length; i++) {
       res += `'${values[i]}', `
     }
     res = res.replace(/, $/, '');
