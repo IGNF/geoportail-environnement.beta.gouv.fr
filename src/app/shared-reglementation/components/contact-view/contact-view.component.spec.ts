@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { appConfig } from '../../../app.config';
-import { ReglementationViewComponent } from './reglementation-view.component';
+import { ContactViewComponent } from './contact-view.component';
 
 describe('ReglementationViewComponent', () => {
-  let component: ReglementationViewComponent;
-  let fixture: ComponentFixture<ReglementationViewComponent>;
+  let component: ContactViewComponent;
+  let fixture: ComponentFixture<ContactViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ReglementationViewComponent],
+      declarations: [ContactViewComponent],
       providers: appConfig.providers
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReglementationViewComponent);
+    fixture = TestBed.createComponent(ContactViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,8 +2,6 @@
 
 <h4 class="fr-h6">{{ layer.title }}</h4>
 
-<app-reglementation-view [layerReference]="layer.title"></app-reglementation-view>
-
 @if (displaySituationMap) {
 <app-map-viewer [id]="map" [situationMap]="displaySituationMap"></app-map-viewer>
 }
@@ -20,6 +18,9 @@
 
   }
 </ul>
+
+<app-reglementation-view [layerReference]="layer.title"></app-reglementation-view>
+
 
 <!-- <dsfr-tags-group>
   @for (feature of layer.features; track feature) {

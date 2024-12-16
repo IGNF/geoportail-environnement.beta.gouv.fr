@@ -1,4 +1,5 @@
 import { Serializable } from '../../core/models/serializable.model';
+import { Contact } from './contact.model';
 
 export class Reglementation implements Serializable {
 
@@ -19,8 +20,10 @@ export class Reglementation implements Serializable {
   
   // must be http URI
   referenceUrl: string = '';
-  
-  contact: string = '';
+
+  contactReference: string[] = [];
+
+  contactReferenceLayer: string = '';
 
   constructor() { }
 
@@ -33,7 +36,8 @@ export class Reglementation implements Serializable {
       impactReglementaire: input.impactReglementaire,
       impactProcedure: input.impactProcedure,
       referenceUrl: input.referenceUrl,
-      contact: input.contact
+      contactReference: input.contactReference,
+      contactReferenceLayer: input.contactReferenceLayer
     });
     return this;
   }
@@ -47,7 +51,8 @@ export class Reglementation implements Serializable {
       impactReglementaire: this.impactReglementaire,
       impactProcedure: this.impactProcedure,
       referenceUrl: this.referenceUrl,
-      contact: this.contact
+      contactReference: this.contactReference,
+      contactReferenceLayer: this.contactReferenceLayer
     };
   }
 
