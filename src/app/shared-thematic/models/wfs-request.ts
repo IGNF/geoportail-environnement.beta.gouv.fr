@@ -3,12 +3,19 @@ import { Serializable } from "../../core/models/serializable.model";
 export class WfsRequest implements Serializable {
 
   service: string = 'WFS';
+
   version: string = '2.0.0';
+
   request: string = 'GetFeature';
+
   srsName: string = 'CRS:84';
+
   outputFormat: string = 'application/json';
+
   maxFeatures: number = 50;
+
   typeName: string = '';
+
   cqlFilters: string[] = [];
 
   deserialise(input: any) {
@@ -25,7 +32,6 @@ export class WfsRequest implements Serializable {
     return this;
   }
 
-
   serialise(): any {
     const filter = this.cqlFilters.join(' AND ');
     return {
@@ -39,6 +45,5 @@ export class WfsRequest implements Serializable {
       cql_filter: filter
     };
   }
-
 
 }

@@ -83,6 +83,7 @@ export class ThematicTabsComponent implements OnInit {
   private updateFiche() {
     this.thematicTabs = this.thematicTabs.map((fiche) => {
       fiche.layers = fiche.layers.map((layer: LayerFiche) => this.updateFicheLayer(layer));
+      fiche.setHasFeature();
       return fiche;
     });
   }
