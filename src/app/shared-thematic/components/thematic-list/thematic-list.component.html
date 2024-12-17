@@ -1,11 +1,11 @@
+<app-synthese [thematics]="thematics"></app-synthese>
+
 @for (thematic of thematics; track $index; let first = $first) {
   @if (thematic.active) {
-    <div>
       @if (first) {
-        <app-synthese [features]="responseFeatures"></app-synthese>
+
       } @else {
-        <app-thematic-view [thematic]="thematic"></app-thematic-view>
+      <app-thematic-view [thematic]="thematic"></app-thematic-view>
       }
-    </div>
   }
 }

@@ -6,7 +6,7 @@
 
   <h1>
     Votre forêt
-    @if (foret) {
+    @if (foret && foret.name) {
       <span> - {{ foret.name }}</span>
     }
   </h1>
@@ -19,12 +19,6 @@
   <div *ngIf="step === 0 || step === 1" class="fr-grid-row fr-mb-4v">
     <div class="fr-col-12 fr-col-lg-6">
       <app-geolocalise-form (select)="confirmSelect()"></app-geolocalise-form>
-    </div>
-  </div>
-
-  <div class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-12 fr-col-lg-6">
-      <app-thematic-select *ngIf="step > 1" (select)="updateThematics()"></app-thematic-select>
     </div>
   </div>
 

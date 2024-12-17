@@ -1,17 +1,19 @@
-<dsfr-tabs [selectedTabIndex]="selectedTabIndex" (tabSelect)="selectTab($event)">
+@if (thematics && thematics.length > 0) {
+  <dsfr-tabs [selectedTabIndex]="selectedTabIndex">
 
-  @for (thematicTab of thematicTabs; track $index; let first = $first) {
-    @if (thematicTab.active) {
-    <dsfr-tab [tabId]="thematicTab.name" [label]="thematicTab.label">
-
-      @if (first) {
-      <app-synthese [features]="responseFeatures" [thematicTabs]="thematicTabs"></app-synthese>
-      } @else {
-      <app-thematic-view [thematic]="thematicTab"></app-thematic-view>
+    @for (thematic of thematics; track $index; let first = $first) {
+      @if (thematic.active) {
+      <dsfr-tab [tabId]="thematic.name" [label]="thematic.label">
+  
+        @if (first) {
+        <app-synthese [thematics]="thematics"></app-synthese>
+        } @else {
+        <app-thematic-view [thematic]="thematic"></app-thematic-view>
+        }
+  
+      </dsfr-tab>
       }
-
-    </dsfr-tab>
     }
-  }
-
-</dsfr-tabs>
+  
+  </dsfr-tabs>
+}

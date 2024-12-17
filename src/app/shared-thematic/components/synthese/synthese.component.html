@@ -1,4 +1,4 @@
-@if(noFeatureAtAll) {
+@if(noFeatures) {
 
 <p>
   Pour le périmètre saisi, aucun zonage à caractère environnemental ou patrimonial
@@ -24,14 +24,14 @@
   </li>
 </ul>
 
-@for (thematicTab of thematicTabs; track $index; let first = $first) {
+@for (thematic of thematics; track $index; let first = $first) {
 
 @if (!first) {
-<h3 class="fr-h6">{{thematicTab.label}}</h3>
-@if (thematicTab.hasFeature) {
+<h3 class="fr-h6">{{thematic.label}}</h3>
+@if (checkThematicFeatures(thematic)) {
 <p>Le périmètre saisi est concerné par les zones suivantes :</p>
 <ul>
-  @for (layer of thematicTab.layers; track $index) {
+  @for (layer of thematic.layers; track $index) {
   @if (layer.features.length) {
   <li>{{layer.title}}</li>
   }
@@ -39,7 +39,7 @@
 </ul>
 }
 @else {
-@if (thematicTab.name === 'biodiversite') {
+@if (thematic.name === 'biodiversite') {
 <p>
   Pour le périmètre saisi, aucun zonage à caractère environnemental
   n'a été identifié parmi ceux intégrés à l'outil FOREG.

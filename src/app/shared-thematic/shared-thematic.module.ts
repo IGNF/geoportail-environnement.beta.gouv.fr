@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { SharedDesignDsfrModule } from '../shared-design-dsfr/shared-design-dsfr.module';
 import { SyntheseComponent } from './components/synthese/synthese.component';
-import { ThematicSelectComponent } from './components/thematic-select/thematic-select.component';
 import { ThematicTabsComponent } from './components/thematic-tabs/thematic-tabs.component';
 import { ThematicListComponent } from './components/thematic-list/thematic-list.component';
 import { SharedMapModule } from '../shared-map/shared-map.module';
@@ -15,7 +14,6 @@ import { LayerInfoViewComponent } from './components/layer-fiche-view/layer-fich
 @NgModule({
   declarations: [
     SyntheseComponent,
-    ThematicSelectComponent,
     ThematicTabsComponent,
     ThematicListComponent,
     ThematicViewComponent,
@@ -28,7 +26,6 @@ import { LayerInfoViewComponent } from './components/layer-fiche-view/layer-fich
     SharedReglementationModule
   ],
   exports: [
-    ThematicSelectComponent,
     ThematicTabsComponent,
     ThematicListComponent
   ]

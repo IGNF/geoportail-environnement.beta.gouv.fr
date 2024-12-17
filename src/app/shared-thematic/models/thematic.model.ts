@@ -44,17 +44,4 @@ export class Thematic implements Serializable {
     };
   }
 
-  setHasFeature() {
-    let res = false;
-
-    for(let i = 0; i < this.layers.length; i++) {
-      if(this.layers[i].features.length) {
-        res = true;
-        break;
-      }
-    }
-
-    this.hasFeature = res;
-  }
-
 }

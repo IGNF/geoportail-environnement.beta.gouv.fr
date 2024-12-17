@@ -1,16 +1,16 @@
 @if (thematic) {
 
-<h3 class="fr-h6">{{ thematic.title }}</h3>
+  <h3 class="fr-h6">{{ thematic.title }}</h3>
 
-@if(!thematic.hasFeature) {
-  <p>Pour le périmètre saisi, aucun élément n'a été identifié parmi ceux intégrés à l'outil FOREG pour cette thématique.</p>
-  <p>La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi est concerné par d'autres réglementations sur cette thématique.</p>
-}
+  @if (noFeatures) {
+    <p>Pour le périmètre saisi, aucun élément n'a été identifié parmi ceux intégrés à l'outil FOREG pour cette thématique.</p>
+    <p>La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi est concerné par d'autres réglementations sur cette thématique.</p>
+  }
 
-@for (layer of thematic.layers; track layer) {
+  @for (layer of thematic.layers; track layer) {
 
-  <app-layer-fiche-view [layer]="layer" [displaySituationMap]="layer.flatview"></app-layer-fiche-view>
+    <app-layer-fiche-view [layer]="layer" [displaySituationMap]="layer.displaySituationMap"></app-layer-fiche-view>
 
-}
+  }
 
 }

@@ -11,7 +11,7 @@ export class LayerFiche implements Serializable {
   features: any[] = [];
 
   // uniquement a l'execution du front (permet de suivre l'affichage d'une carte de situation)
-  flatview: boolean = false;
+  displaySituationMap: boolean = false;
 
   constructor() { }
 
@@ -20,7 +20,7 @@ export class LayerFiche implements Serializable {
       title: input.title,
       group: input.group,
       technicalName: input.technicalName,
-      flatview: input.flatview || false,
+      displaySituationMap: input.displaySituationMap || false,
       features: input.features || []
     });
     return this;
@@ -31,7 +31,7 @@ export class LayerFiche implements Serializable {
       title: this.title,
       group: this.group,
       technicalName: this.technicalName,
-      flatview: this.flatview,
+      displaySituationMap: this.displaySituationMap,
       features: this.features
     };
   }

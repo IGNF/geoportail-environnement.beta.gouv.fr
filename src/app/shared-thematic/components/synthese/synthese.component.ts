@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Thematic } from '../../models/thematic.model';
 
 @Component({
   selector: 'app-synthese',
@@ -7,11 +8,9 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 })
 export class SyntheseComponent implements OnInit, OnChanges {
 
-  @Input() features!: any[];
+  @Input() thematics!: Thematic[];
 
-  @Input() thematicTabs!: any[];
-
-  noFeatureAtAll: boolean = false;  
+  noFeatures: boolean = false;  
 
   constructor() { }
 
@@ -19,7 +18,17 @@ export class SyntheseComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.noFeatureAtAll = this.thematicTabs && !this.thematicTabs[1].hasFeature && !this.thematicTabs[2].hasFeature;
+    if (this.thematics) {
+      this.checkFeatures();
+    }
+  }
+
+  private checkFeatures() {
+    this.noFeatures = this.thematics.map(t => t.layers).flat().map((l) => l.features).flat().length === 0;
+  }
+
+  checkThematicFeatures(thematic: Thematic) {
+    return thematic.layers.map((l) => l.features).flat().length > 0;
   }
 
 }

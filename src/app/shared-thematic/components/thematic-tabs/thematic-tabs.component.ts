@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ThematicSelectService } from '../../services/thematic-select.service';
 import { MapContextService } from '../../../shared-map/services/map-context.service';
-import { ThematicFeatureService } from '../../services/fiche-info-feature.service';
 import { THEMATIC_LIST } from '../../models/thematic-list.enum';
 import { Thematic } from '../../models/thematic.model';
 import { LayerFiche } from '../../models/layer-fiche.model';
+import { ThematicFeatureService } from '../../services/thematic-feature.service';
 
 @Component({
   selector: 'app-thematic-tabs',
@@ -16,89 +15,57 @@ export class ThematicTabsComponent implements OnInit {
 
   selectedTabIndex: number = 0;
 
-  thematicTabs: Thematic[] = [];
+  thematics: Thematic[] = [];
 
   responseFeatures: any[] = [];
 
   constructor(
     private thematicFeatureService: ThematicFeatureService,
-    private thematicSelectService: ThematicSelectService,
     private mapContextService: MapContextService
   ) { }
 
+  
   ngOnInit() {
 
-    this.initFicheList();
+    this.thematicFeatureService.listAllFeatures().subscribe((features: any[]) => {
+      this.thematics = this.thematicFeatureService.joinThematicsFeatures(features);
 
-    this.thematicSelectService.thematicSelection.subscribe((activeThemeList: any[]) => {
-      activeThemeList.unshift('synthese');
-      this.updateActiveTabs(activeThemeList);
-    });
-
-    this.thematicFeatureService.listFicheFeatures().subscribe((features: any[]) => {
       this.responseFeatures = this.deleteRedundantFeatures(features);
       this.updateActiveThematicLayersFromFeatures(features);
       this.mapContextService.updateLayersVisibility('synthese');
-      this.initFicheList();
-      this.updateFiche();
     });
 
   }
 
 
   selectTab(event: any) {
-      this.setSelectedTabIndex(event);
-      this.mapContextService.updateLayersVisibility(event);
+    this.selectedTabIndex = event;
+    this.mapContextService.updateLayersVisibility(event);
   }
 
 
-  private updateActiveTabs(activeThemeList: any[]) {
-    this.thematicTabs = THEMATIC_LIST.filter((theme) => activeThemeList.includes(theme.name));
-    this.selectTab('synthese');
-  }
-
-
-  private setSelectedTabIndex(tabId: string) {
-    let indexModifier = 0;
-    for (let i = 0; i < THEMATIC_LIST.length; i++) {
-      if (THEMATIC_LIST[i].name === tabId) {
-        this.selectedTabIndex = i - indexModifier;
-      } else if (!THEMATIC_LIST[i].active) {
-        indexModifier++;
-      }
-    }
-  }
-
-
-  private initFicheList() {
-    this.thematicTabs = THEMATIC_LIST.map((fiche) => {
-      if (!fiche.layers) {
-        fiche.layers = [];
-      }
-      return fiche;
-    });
-  }
-
-
-  private updateFiche() {
-    this.thematicTabs = this.thematicTabs.map((fiche) => {
-      fiche.layers = fiche.layers.map((layer: LayerFiche) => this.updateFicheLayer(layer));
-      fiche.setHasFeature();
-      return fiche;
-    });
-  }
+  // private setSelectedTabIndex(tabId: string) {
+  //   let indexModifier = 0;
+  //   for (let i = 0; i < this.thematics.length; i++) {
+  //     if (this.thematics[i].name === tabId) {
+  //       this.selectedTabIndex = i - indexModifier;
+  //     } else if (!this.thematics[i].active) {
+  //       indexModifier++;
+  //     }
+  //   }
+  // }
 
 
   private updateFicheLayer(layer: LayerFiche) {
-    layer.flatview = false;
+    layer.displaySituationMap = false;
     layer.features = [];
     layer.features = this.responseFeatures.filter((feature) => {
-      if(this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer) {
-        if((layer.title === 'Coeurs de parcs nationaux' && feature.zone != 'Coeur') ||
-            (layer.title === 'Zones d\'adhésion de parcs nationaux' && feature.zone != 'Adhesion') ||
-            (layer.title === 'Monuments historiques' && feature.suptype != 'ac1') ||
-            (layer.title === 'Sites inscrits et classés' && feature.suptype != 'ac2')
-          ) {
+      if (this.parseLayerFromTechnicalName(layer.technicalName) === feature.layer) {
+        if ((layer.title === 'Coeurs de parcs nationaux' && feature.zone != 'Coeur') ||
+          (layer.title === 'Zones d\'adhésion de parcs nationaux' && feature.zone != 'Adhesion') ||
+          (layer.title === 'Monuments historiques' && feature.suptype != 'ac1') ||
+          (layer.title === 'Sites inscrits et classés' && feature.suptype != 'ac2')
+        ) {
           return false
         }
         return true
@@ -131,10 +98,10 @@ export class ThematicTabsComponent implements OnInit {
     }
   }
 
-  private deleteRedundantFeatures(features : any[]) : any[]{
-    let res : any[] = [];
+  private deleteRedundantFeatures(features: any[]): any[] {
+    let res: any[] = [];
     features.forEach((feature) => {
-      if(!res.filter((elem) => feature.layer == elem.layer && feature.name == elem.name && feature.link == elem.link).length) {
+      if (!res.filter((elem) => feature.layer == elem.layer && feature.name == elem.name && feature.link == elem.link).length) {
         res.push(feature);
       }
     })

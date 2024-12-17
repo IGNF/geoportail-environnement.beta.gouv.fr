@@ -103,11 +103,12 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
     }
     this.step = 1;
     this.nextStep();
+    this.mapContextService.centerOnDessin();
   }
 
 
   private loadPageComponent() {
-    const label = this.foret ? `Requête ${this.foret}` : 'Nouvelle requête';
+    const label = this.foret ? `Requête sur ${this.foret.name}` : 'Nouvelle requête';
     this.breadcrumb = this.breadcrumbTransformerService.fromOptions({
       label: label, route: ''
     });

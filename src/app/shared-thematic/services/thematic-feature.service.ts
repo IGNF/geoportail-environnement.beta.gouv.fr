@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, zip } from 'rxjs';
 import { environment } from '../../../environments/environment';
+
 import { GeoplateformeWfsService, LON_LAT_ORDER } from './geoplateforme-wfs.service';
 import { MapContextService } from '../../shared-map/services/map-context.service';
 import { WfsRequest } from '../models/wfs-request';
@@ -17,14 +18,13 @@ export class ThematicFeatureService {
     private mapContextService: MapContextService
   ) { }
 
-
   /**
    * Get all features from all Thematics
    * @returns 
    */
-  listFicheFeatures(): Observable<any[]> {
+  listAllFeatures(): Observable<any[]> {
     return zip(THEMATIC_LIST.filter(fiche => fiche.layers).reduce((request: Observable<any>[], fiche) => {
-      request = [...request, ...this.getFicheFeatures(fiche)];
+      request = [...request, ...this.getThematicFeatures(fiche)];
       return request;
     }, [])).pipe(
       map((featuresByThematics) => {
@@ -38,11 +38,11 @@ export class ThematicFeatureService {
   }
 
   /**
-   * Get all features from one Thematic
+   * Get features from one Thematic
    * @param thematic 
    * @returns 
    */
-  getFicheFeatures(thematic: Thematic): Observable<any>[] {
+  getThematicFeatures(thematic: Thematic): Observable<any>[] {
     const requests = thematic.layers.map((layer) => this.buildRequest(layer));
     return requests.map((request) => {
       return this.geoplateformeWfsService.getFeatures(request).pipe(
@@ -52,6 +52,34 @@ export class ThematicFeatureService {
         })
       )
     });
+  }
+
+  /**
+   * Join features to thematics
+   * @param features 
+   * @returns 
+   */
+  joinThematicsFeatures(features: any[]): Thematic[] {
+    return THEMATIC_LIST.map((thematic) => this.joinFeaturesToThematic(thematic, features));
+  }
+
+
+  private joinFeaturesToThematic(thematic: Thematic, features: any[]): Thematic {
+    if (!thematic.layers) {
+      thematic.layers = [];
+    }
+    thematic.layers = thematic.layers.map((layer: any) => {
+      const name = layer.technicalName;
+      const layerName = name.split(':').length > 0 ? name.split(':')[1] : name;
+      // TODO must be override in thematic list component
+      layer.displaySituationMap = false;
+      layer.features = [];
+      layer.features = features.filter((feature) => {
+        return layerName === feature.layer;
+      });
+      return layer;
+    });
+    return thematic;
   }
 
   /**
@@ -80,15 +108,15 @@ export class ThematicFeatureService {
       request.filterByAttribute('suptype', 'ac2');
     }
 
-    if(layer.title === 'Coeurs de parcs nationaux') {
+    if (layer.title === 'Coeurs de parcs nationaux') {
       request.filterByAttribute('zone', 'Coeur');
     }
 
-    if(layer.title === 'Zones d\'adhésion de parcs nationaux') {
+    if (layer.title === 'Zones d\'adhésion de parcs nationaux') {
       request.filterByAttribute('zone', 'Adhesion');
     }
 
-    if(layer.title === 'Espaces boisés classés') {
+    if (layer.title === 'Espaces boisés classés') {
       request.filterByAttribute('typepsc', '01');
       request.filterByAttributeInValues('stypepsc', ['00', '01', '02', '03']);
     }
@@ -107,9 +135,9 @@ export class ThematicFeatureService {
     const layer = this.parseLayerFromId(id);
     const properties = feature.properties;
     let link;
-    let zone = properties['zone'] ||'';
+    let zone = properties['zone'] || '';
     if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier'] || properties['nomfic']) {
-      let fichier = properties['fichier']?properties['fichier']:properties['nomfic'];
+      let fichier = properties['fichier'] ? properties['fichier'] : properties['nomfic'];
       link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${fichier}`;
     } else {
       link = properties.url;
