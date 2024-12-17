@@ -26,10 +26,9 @@ export class ThematicTabsComponent implements OnInit {
   ngOnInit() {
 
     this.thematicFeatureService.listAllFeatures().subscribe((features: any[]) => {
-      this.thematics = this.thematicFeatureService.joinThematicsFeatures(features);
-
       this.responseFeatures = this.deleteRedundantFeatures(features);
-      this.updateActiveThematicLayersFromFeatures(features);
+      this.thematics = this.thematicFeatureService.joinThematicsFeatures(this.responseFeatures);
+      this.updateActiveThematicLayersFromFeatures(this.responseFeatures);
       this.mapContextService.updateLayersVisibility('synthese');
     });
 
@@ -66,7 +65,7 @@ export class ThematicTabsComponent implements OnInit {
   private deleteRedundantFeatures(features: any[]): any[] {
     let res: any[] = [];
     features.forEach((feature) => {
-      if (!res.filter((elem) => feature.layer == elem.layer && feature.name == elem.name && feature.link == elem.link).length) {
+      if (!res.filter((elem) => feature.layer == elem.layer && feature.name == elem.name && feature.link == elem.link && feature.zone == elem.zone).length) {
         res.push(feature);
       }
     })
