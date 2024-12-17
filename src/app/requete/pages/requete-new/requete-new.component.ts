@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
@@ -23,7 +23,8 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
   constructor(
     private breadcrumbTransformerService: BreadcrumbTransformerService,
     private mapContextService: MapContextService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +34,9 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
         if (response && response.data) {
           this.foret = response.data;
         }
+        // if (response && !response.data) {
+        //   this.router.navigate(['/', '404']);
+        // }
         this.loadPageComponent();
       })
     ).subscribe();

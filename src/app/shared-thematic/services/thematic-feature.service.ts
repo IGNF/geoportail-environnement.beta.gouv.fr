@@ -7,6 +7,7 @@ import { MapContextService } from '../../shared-map/services/map-context.service
 import { WfsRequest } from '../models/wfs-request';
 import { THEMATIC_LIST } from '../models/thematic-list.enum';
 import { Thematic } from '../models/thematic.model';
+import { LayerFiche } from '../models/layer-fiche.model';
 
 @Injectable({
   providedIn: 'root'
@@ -69,17 +70,28 @@ export class ThematicFeatureService {
       thematic.layers = [];
     }
     thematic.layers = thematic.layers.map((layer: any) => {
-      const name = layer.technicalName;
-      const layerName = name.split(':').length > 0 ? name.split(':')[1] : name;
       // TODO must be override in thematic list component
       layer.displaySituationMap = false;
       layer.features = [];
-      layer.features = features.filter((feature) => {
-        return layerName === feature.layer;
-      });
+      layer.features = features.filter((feature) => this.isFeatureBelongToLayer(feature, layer));
       return layer;
     });
     return thematic;
+  }
+
+
+  private isFeatureBelongToLayer(featureProperties: any, layer: LayerFiche) {
+    console.log(featureProperties, layer);
+    if (featureProperties.layer !== layer.name) {
+      return false;
+    }
+    if (layer.restrictions) {
+      const restrictionNotMet = layer.restrictions.find((restriction) => {
+        return featureProperties[restriction.attribute] !== restriction.value;
+      });
+      return !restrictionNotMet;
+    }
+    return true;
   }
 
   /**

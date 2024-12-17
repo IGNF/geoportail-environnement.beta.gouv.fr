@@ -2,13 +2,21 @@ import { Serializable } from '../../core/models/serializable.model';
 
 export class LayerFiche implements Serializable {
 
+  id: string = '';
+
   title: string = '';
+
+  // wfs result name
+  name: string = '';
+
+  // wfs request name
+  technicalName: string = '';
 
   group: string = '';
 
-  technicalName: string = '';
-
   features: any[] = [];
+
+  restrictions: any[] = [];
 
   // uniquement a l'execution du front (permet de suivre l'affichage d'une carte de situation)
   displaySituationMap: boolean = false;
@@ -17,22 +25,28 @@ export class LayerFiche implements Serializable {
 
   deserialise(input: any) {
     Object.assign(this, {
+      id: input.id,
       title: input.title,
-      group: input.group,
+      name: input.name,
       technicalName: input.technicalName,
-      displaySituationMap: input.displaySituationMap || false,
-      features: input.features || []
+      group: input.group,
+      features: input.features || [],
+      restrictions: input.restrictions || [],
+      displaySituationMap: input.displaySituationMap || false
     });
     return this;
   }
 
   serialise() {
     return {
+      id: this.id,
       title: this.title,
-      group: this.group,
+      name: this.name,
       technicalName: this.technicalName,
-      displaySituationMap: this.displaySituationMap,
-      features: this.features
+      group: this.group,
+      features: this.features,
+      restrictions: this.restrictions,
+      displaySituationMap: this.displaySituationMap
     };
   }
 

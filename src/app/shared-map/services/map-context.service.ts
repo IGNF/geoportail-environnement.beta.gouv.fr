@@ -216,6 +216,7 @@ export class MapContextService {
   }
 
   updateLayersVisibility(event: any) {
+    console.log('updateLayersVisibility', event);
     const layersGroup: any = this.map?.getLayers().getArray();
     layersGroup?.forEach((layerGroup: any) => {
       const group = layerGroup.get('group') || 'base-layer';
