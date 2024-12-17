@@ -81,7 +81,6 @@ export class ThematicFeatureService {
 
 
   private isFeatureBelongToLayer(featureProperties: any, layer: LayerFiche) {
-    console.log(featureProperties, layer);
     if (featureProperties.layer !== layer.name) {
       return false;
     }
@@ -148,11 +147,11 @@ export class ThematicFeatureService {
     const properties = feature.properties;
     let link;
     let zone = properties['zone'] || '';
-    if (properties['partition'] && properties['gpu_doc_id'] && properties['fichier'] || properties['nomfic']) {
+    if (properties['partition'] && properties['gpu_doc_id'] && (properties['fichier'] || properties['nomfic'])) {
       let fichier = properties['fichier'] ? properties['fichier'] : properties['nomfic'];
       link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${fichier}`;
     } else {
-      link = properties.url;
+      link = properties.url || properties.urlfic;
     }
     const name = properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt'] || properties['idurba']);
     const newFeature = Object.assign(feature.properties, {
