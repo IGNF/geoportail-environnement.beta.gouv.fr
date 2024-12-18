@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 
 import { MapContextService } from '../../../shared-map/services/map-context.service';
 import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
 import { THEMATIC_LIST } from '../../../shared-thematic/models/thematic-list.enum';
 import { Foret } from '../../../shared/models/foret.model';
+import { LocalStorageForetService } from '../../../shared/services/local-storage-foret.service';
 
 @Component({
   selector: 'app-requete-new',
@@ -22,9 +23,9 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
 
   constructor(
     private breadcrumbTransformerService: BreadcrumbTransformerService,
+    private localStorageForetService: LocalStorageForetService,
     private mapContextService: MapContextService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -46,20 +47,16 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
     this.loadWithForet();
   }
 
-  saveForet() { 
+  saveForet() {
     const geoJson = this.mapContextService.maForetToGeoJson();
   }
 
   confirmSelect() {
-    if (this.step === 0) {
-      this.nextStep();
-    }
   }
-
 
   nextStep() {
     this.step++;
-    if (this.step === 2) {
+    if (this.step === 1) {
       if (!this.mapContextService.getLayerDessin().getSource().getFeatures().length) {
         alert("Veuillez préciser le périmètre de votre forêt à l'aide des outils de dessins disponible sur la carte.");
         this.step--;
@@ -71,6 +68,10 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
       }
       this.mapContextService.updateLayers();
     }
+
+    if (this.step === 2) {
+      this.localSaveForet();
+    }
   }
 
 
@@ -79,8 +80,6 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
     switch (this.step) {
       case 0:
         this.mapContextService.resetDessin();
-        return;
-      case 1:
         this.mapContextService.addDrawingTools();
         for (let i = this.mapContextService.getActiveThematicLayers().length; i >= 0; i--) {
           this.mapContextService.getActiveThematicLayers().pop();
@@ -92,12 +91,19 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
     }
   }
 
-  
+
   updateThematics() {
     this.mapContextService.updateLayers();
   }
 
-  
+
+  private localSaveForet() {
+    if (this.foret) {
+      this.localStorageForetService.setForet(this.foret);
+    }
+  }
+
+
   private loadWithForet() {
     if (!this.foret) {
       return;
@@ -105,7 +111,7 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
     if (this.foret.geometry) {
       this.mapContextService.maForetFromGeoJson(this.foret.geometry);
     }
-    this.step = 1;
+    this.step = 0;
     this.nextStep();
     this.mapContextService.centerOnDessin();
   }

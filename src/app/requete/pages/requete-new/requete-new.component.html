@@ -16,7 +16,7 @@
   <app-requete-stepper-control [step]="step" (previous)="previousStep()"
     (next)="nextStep()" (save)="saveForet()"></app-requete-stepper-control>
 
-  <div *ngIf="step === 0 || step === 1" class="fr-grid-row fr-mb-4v">
+  <div *ngIf="step === 0" class="fr-grid-row fr-mb-4v">
     <div class="fr-col-12 fr-col-lg-6">
       <app-geolocalise-form (select)="confirmSelect()"></app-geolocalise-form>
     </div>
@@ -24,13 +24,17 @@
 
   <div class="fr-grid-row fr-grid-row--gutters">
 
-    <div class="fr-col-12 fr-col-lg-6" [class.fr-col-lg-12]="step === 1" [class.map-hidden]="step < 1">
+    <div class="fr-col-12 fr-col-lg-6" [class.fr-col-lg-12]="step === 0">
+      @if (step === 0) {
+        <p class="fr-label">Dessiner, sur la carte ci-dessous, le périmètre de la forêt ou des parcelles à l'aide de l'outil de dessin (polygon)</p>
+        <p class="fr-hint-text">Changer de fond de carte (PLAN IGN / ORTHOPHOTOS) avec l'outil de sélection de couche</p>
+      }
       <app-map-viewer></app-map-viewer>
     </div>
 
     <div class="fr-col-12 fr-col-lg-6">
-      <app-thematic-tabs *ngIf="step === 2"></app-thematic-tabs>
-      <app-requete-export-list *ngIf="step === 3"></app-requete-export-list>
+      <app-thematic-tabs *ngIf="step === 1"></app-thematic-tabs>
+      <app-requete-export-list *ngIf="step === 2"></app-requete-export-list>
     </div>
 
   </div>

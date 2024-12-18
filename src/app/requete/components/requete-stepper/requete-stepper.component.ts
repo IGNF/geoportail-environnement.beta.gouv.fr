@@ -1,10 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 export const STEPPER_CONFIG = [
-  { currentStep: 1, currentStepTitle: 'Localiser la forêt', nextStepTitle: 'Préciser le périmètre de la forêt' },
-  { currentStep: 2, currentStepTitle: 'Préciser le périmètre', nextStepTitle: 'Sélectionner les informations' },
-  { currentStep: 3, currentStepTitle: 'Sélectionnez les informations', nextStepTitle: 'Exporter les informations' },
-  { currentStep: 4, currentStepTitle: 'Exporter les informations', nextStepTitle: 'Aucune' },
+  { currentStep: 1, currentStepTitle: 'Préciser le périmètre', nextStepTitle: 'Sélectionner les informations' },
+  { currentStep: 2, currentStepTitle: 'Sélectionnez les informations', nextStepTitle: 'Exporter les informations' },
+  { currentStep: 3, currentStepTitle: 'Exporter les informations', nextStepTitle: 'Aucune' },
 ];
 
 @Component({
@@ -14,7 +13,7 @@ export const STEPPER_CONFIG = [
 })
 export class RequeteStepperComponent implements OnInit, OnChanges {
 
-  @Input() step: number = 0;
+  @Input() step: number = 1;
 
   currentStep!: number;
 

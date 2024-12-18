@@ -15,11 +15,14 @@ export class BreadcrumbTransformerService {
       items.push({
         label: options.label,
         route: options.route
-      })
+      });
+    }
+    if (options.items) {
+      items.push(...options.items);
     }
     return {
-      items: items,
-      ariaLabel: 'Vous êtes ici :'
+      items: items
     };
   }
+
 }

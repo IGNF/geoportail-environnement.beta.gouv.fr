@@ -10,7 +10,7 @@ export const THEMATIC_LIST = [
   new Thematic().deserialise({
     name: 'biodiversite',
     label: 'Biodiversité',
-    title: 'Votre forêt se trouve t-elle sur des zones de biodiversité ?',
+    title: 'Le périmètre délimité est concerné par',
     active: true,
     layers: [
       {
@@ -135,7 +135,7 @@ export const THEMATIC_LIST = [
   new Thematic().deserialise({
     name: 'patrimoine',
     label: 'Patrimoine',
-    title: 'Votre forêt se trouve t-elle sur des zones patrimonial ?',
+    title: 'Le périmètre délimité est concerné par',
     active: true,
     layers: [
       {

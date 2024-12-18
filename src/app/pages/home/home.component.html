@@ -3,15 +3,24 @@
   <!-- first ligne - logo + title -->
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-6">
-      <h1>Découvrez Foreg</h1>
-      <p>Visualiser les réglementations en forêt</p>
+      <h1>Découvrez FOREG</h1>
+      <p>Foreg permet de visualiser les réglementations environnementales et patrimoniales applicables aux espaces
+        forestiers.</p>
       <p>
-        Faciliter la visualisation des règlementations et enjeux applicables aux espaces forestiers
+        Foreg est en version BETA et fournit les informations sur les espaces protégés pour la biodiversité, les abords
+        de monuments historiques et les espaces boisés classés à conserver.
       </p>
-      <dsfr-buttons-group inline="always" iconPosition="left">
+
+      <!-- <dsfr-buttons-group inline="always" iconPosition="left">
         <dsfr-button label="Découvrir" variant="secondary" icon="fr-icon-info-fill" iconPosition="left"></dsfr-button>
         <dsfr-button label="Créer mon compte" icon="fr-icon-arrow-right-fill" iconPosition="left"></dsfr-button>
+      </dsfr-buttons-group> -->
+
+      <dsfr-buttons-group inline="always" iconPosition="left">
+        <dsfr-button label="Démarrer" icon="fr-icon-arrow-right-fill" iconPosition="left"
+          (click)="newRequete()"></dsfr-button>
       </dsfr-buttons-group>
+
     </div>
     <div class="fr-col-12 fr-col-lg-6">
       <div class="img-box">
@@ -22,6 +31,7 @@
 
 </div>
 
+<!-- 
 <div class="fr-container fr-mt-4v fr-mb-4v">
 
   <dsfr-buttons-group inline="always" iconPosition="left">
@@ -30,19 +40,23 @@
   </dsfr-buttons-group>
 
 </div>
+-->
 
 <div class="fr-container fr-mt-4v fr-mb-8v">
 
-  <h2>Trouver la réglementation sur votre forêt et préserver la biodiversité</h2>
+  <h2>Trouver la réglementation applicable dans une forêt et contribuer à préserver la biodiversité</h2>
   <ul>
     <li>
-      Nos activités en forêt on un impact sur l’environnement.
-      Des règlementations ont été édictées pour
-      préserver les enjeux liés à cet impact.
+      Les activités et travaux réalisés en forêts peuvent avoir un impact sur
+      l’environnement et les paysages.
     </li>
     <li>
-      La valorisation de données spatiales permettrait de mieux identifier quelle règlementation s’applique.
-      Cela nécessiterait de disposer de couches de données de référence et de pouvoir les interroger.
+      Des réglementations ont été édictées pour préserver les enjeux liés à cet impact.
+    </li>
+    <li>
+      Interroger Foreg en amont de travaux, ou pour planifier la gestion,
+      permet une meilleure prise en compte de ces enjeux et limite le risque
+      de se trouver en infraction.
     </li>
   </ul>
 

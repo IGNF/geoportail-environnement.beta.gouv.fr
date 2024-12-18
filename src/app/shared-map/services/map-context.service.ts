@@ -124,11 +124,12 @@ export class MapContextService {
 
     const style = new Style({
       fill: new Fill({
-        color: 'rgba(73,73,232,0.4)',
+        color: 'rgba(73, 73, 232, 0.1)',
       }),
       stroke: new Stroke({
-        color: '#3399CC',
-      }),
+        color: '#134a1e',
+        width: 4
+      })
     });
 
     this.getLayerDessin().setStyle(style);
@@ -216,7 +217,6 @@ export class MapContextService {
   }
 
   updateLayersVisibility(event: any) {
-    console.log('updateLayersVisibility', event);
     const layersGroup: any = this.map?.getLayers().getArray();
     layersGroup?.forEach((layerGroup: any) => {
       const group = layerGroup.get('group') || 'base-layer';

@@ -1,6 +1,15 @@
+<div *ngIf="breadcrumb" class="fr-container">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+</div>
+
 <div class="fr-container">
 
-  <h1>Votre forêt - Impression</h1>
+  <h1>
+    Votre forêt
+    @if (foret && foret.name) {
+      <span> - {{ foret.name }}</span>
+    }
+  </h1>
 
   <app-thematic-list></app-thematic-list>
 

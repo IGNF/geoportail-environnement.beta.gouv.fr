@@ -20,24 +20,6 @@ const EXPORT_TILE_CONFIG = [
     artworkDirPath: 'artwork',
     artworkFilePath: 'artwork/pictograms/document/document-download.svg',
     detail: 'Détail (optionnel)'
-  },
-  {
-    customBackground: 'default',
-    customBorder: 'default',
-    description: 'Exporter les données de la requête',
-    disabled: false,
-    downloadDirect: true,
-    downloadAssessFile: false,
-    enlargeLink: true,
-    heading: 'Export',
-    headingLevel: 'H3',
-    horizontal: false,
-    route: 'requete/nouvelle/impression',
-    size: 'MD',
-    download: false,
-    artworkDirPath: 'artwork',
-    artworkFilePath: 'artwork/pictograms/document/document.svg',
-    detail: 'Détail (optionnel)'
   }
 ];
 
