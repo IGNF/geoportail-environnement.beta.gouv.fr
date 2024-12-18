@@ -35,8 +35,8 @@ export class ThematicTabsComponent implements OnInit {
   }
 
 
-  selectTab(event: any) {
-    this.selectedTabIndex = event;
+  updateMap(event: any) {
+    console.log('selectTab', event);
     this.mapContextService.updateLayersVisibility(event);
   }
 

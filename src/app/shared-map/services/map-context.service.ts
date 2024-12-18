@@ -337,7 +337,7 @@ export class MapContextService {
     // Centrer la carte et ajuster le zoom pour voir toutes les entités
     map?.getView().fit(globalExtent, {
       size: this.map?.getSize(), // Taille de la carte
-      padding: [50, 50, 50, 50], // Espacement autour des entités (en pixels)
+      padding: [200, 200, 200, 200], // Espacement autour des entités (en pixels)
       duration: 500, // Durée de l'animation (en ms)
       maxZoom: 20, // Facultatif : limite maximale du zoom
     });
