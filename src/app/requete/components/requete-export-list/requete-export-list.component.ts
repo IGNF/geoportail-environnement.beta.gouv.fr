@@ -19,7 +19,7 @@ const EXPORT_TILE_CONFIG = [
     download: false,
     artworkDirPath: 'artwork',
     artworkFilePath: 'artwork/pictograms/document/document-download.svg',
-    detail: 'Détail (optionnel)'
+    detail: ''
   }
 ];
 

@@ -75,9 +75,9 @@ export class MapContextService {
   }
 
   // Ajouter une carte situation, clone de la map origine
-  createSituationMap(idClone: string, technicalName: string): Map {
+  createSituationMap(idClone: string, idLayer: string): Map {
     // Rechercher la couche correspondant au technicalName
-    const selectedLayer = this.getLayerByTechnicalName(technicalName);
+    const selectedLayer = this.getLayerById(idLayer);
 
     const layerCopy = new LayerGroup({
       properties: {
@@ -355,6 +355,15 @@ export class MapContextService {
     ];
 
     return allLayers.find((layer) => layer.get('technicalName') === technicalName) || null;
+  }
+
+  private getLayerById(id: string): any {
+    const allLayers = [
+      ...MAP_BIODIVERISTE_LAYER_GROUP.getLayers().getArray(),
+      ...MAP_PATRIMOINE_LAYER_GROUP.getLayers().getArray(),
+    ];
+
+    return allLayers.find((layer) => layer.get('id') === id) || null;
   }
 
 }
