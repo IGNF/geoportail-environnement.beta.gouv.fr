@@ -20,6 +20,7 @@ import {
   DsfrHeaderModule,
   DsfrHighlightModule,
   DsfrLinkModule,
+  DsfrNoticeModule,
   DsfrPaginationModule,
   DsfrQuoteModule,
   DsfrResponseModule,
@@ -70,6 +71,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     DsfrSkiplinksModule,
     DsfrStepperModule,
     DsfrResponseModule,
+    DsfrNoticeModule
   ],
   exports: [
     DsfrTranscriptionComponent,
@@ -104,6 +106,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     DsfrStepperModule,
     DsfrResponseModule,
     BreadcrumbComponent,
+    DsfrNoticeModule
   ]
 })
 export class SharedDesignDsfrModule { }

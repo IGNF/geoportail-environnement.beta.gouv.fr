@@ -39,13 +39,14 @@ export class HeaderComponent {
   searchSelect(event: any) { }
 
   ngOnInit() {
+    this.headerToolsLinks = [];
     // TODO subscribe to change user event
-    this.headerToolsLinks = this.logoutHeadersToolsLinks();
-    if (this.tokenService.hasToken()) {
-      this.loginService.getUserInfo().subscribe((user: any) => {
-        this.headerToolsLinks = this.connectedHeadersToolsLinks(user);
-      });
-    }
+    // this.headerToolsLinks = this.logoutHeadersToolsLinks();
+    // if (this.tokenService.hasToken()) {
+    //   this.loginService.getUserInfo().subscribe((user: any) => {
+    //     this.headerToolsLinks = this.connectedHeadersToolsLinks(user);
+    //   });
+    // }
   }
 
   private connectedHeadersToolsLinks(user: any) {
