@@ -16,11 +16,42 @@
   <app-requete-stepper-control [step]="step" (previous)="previousStep()"
     (next)="nextStep()" (save)="saveForet()"></app-requete-stepper-control>
 
-  <div *ngIf="step === 0" class="fr-grid-row fr-mb-4v">
-    <div class="fr-col-12 fr-col-lg-6">
-      <app-geolocalise-form (select)="confirmSelect()"></app-geolocalise-form>
+<div *ngIf="step === 0" class="fr-grid-row fr-grid-row--gutters fr-mb-4v">
+  <div class="fr-col-12 fr-col-lg-4">
+    <app-geolocalise-form (select)="confirmSelect()"></app-geolocalise-form>
+  </div>
+  <div class="fr-col-12 fr-col-lg-6">
+    <div class="fr-upload-group">
+      <label class="fr-label" for="upload-id-contour">
+        Importation de contour 
+        <span class="fr-hint-text">Indication : taille maximale : 10 Mo. Format supporté : zip(geojsons/shapefile), shapefile, geojsons.</span>
+      </label>
+      <input 
+        class="fr-upload" 
+        aria-describedby="upload-id-messages-contour" 
+        multiple
+        type="file" 
+        id="upload-id-contour" 
+        name="uploadcontour" 
+        (change)="uploadContour($event)">
+      <div class="fr-messages-group" id="upload-id-messages" aria-live="polite">
+        <p 
+          class="fr-message fr-message--error" 
+          id="upload-id-message-error" 
+          *ngIf="fileFormatError">
+          Format de fichier non supporté. Format supporté zips/geojsons/shapefile(shp, prj, shx, dbf).
+        </p>
+      </div>
     </div>
   </div>
+</div>
+
+
+
+
+
+
+
 
   <div class="fr-grid-row fr-grid-row--gutters">
 
