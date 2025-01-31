@@ -285,6 +285,10 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
 
     const sourceProj = this.detectGeoJsonProjection(geoJson) || 'EPSG:4326'; // Si non trouvé, on suppose WGS84
 
+    if (sourceProj === targetProj) {
+      return geoJson;
+    }
+    
     return {
       ...geoJson,
       features: geoJson.features.map((feature: GeoJSON.Feature) => {
