@@ -65,6 +65,12 @@ export class GeoplateformeWfsService {
     return this;
   }
 
+  setIntersectsPointFilter(geomName: string, coordinate: Array<number>, lonLatOrder: boolean = LON_LAT_ORDER) {
+    coordinate = toLonLat(coordinate);
+    this.request.cqlFilters.push('INTERSECTS(' + geomName + ', POINT(' + coordinate[1] + " " + coordinate[0] + '))');
+    return this;
+  };
+
   getRequest(): WfsRequest {
     return this.request;
   }

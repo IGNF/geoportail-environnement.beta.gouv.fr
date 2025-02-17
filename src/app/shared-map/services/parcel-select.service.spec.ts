@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { appConfig } from '../../app.config';
-import { parcelSelectService } from './parcel-select.service';
+import { MapContextService } from './map-context.service';
 
 describe('MapContextService', () => {
-  let service: parcelSelectService;
+  let service: MapContextService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({providers: appConfig.providers});
-    service = TestBed.inject(parcelSelectService);
+    service = TestBed.inject(MapContextService);
   });
 
   it('should be created', () => {

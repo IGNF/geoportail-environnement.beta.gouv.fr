@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { appConfig } from '../../../app.config';
 import { MapViewerComponent } from './map-viewer.component';
 
 describe('MapViewerComponent', () => {
@@ -8,7 +8,8 @@ describe('MapViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MapViewerComponent]
+      declarations: [MapViewerComponent],
+      providers: appConfig.providers
     })
     .compileComponents();
 

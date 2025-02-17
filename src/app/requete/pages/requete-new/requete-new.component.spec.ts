@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-
+import { appConfig } from '../../../app.config';
 import { RequeteNewComponent } from './requete-new.component';
 import { RequeteStepperComponent } from '../../components/requete-stepper/requete-stepper.component';
 import { RequeteStepperControlComponent } from '../../components/requete-stepper-control/requete-stepper-control.component';
@@ -27,7 +27,8 @@ describe('RequeteNewComponent', () => {
         SharedDesignDsfrModule
       ],
       providers: [
-        provideRouter([])
+        provideRouter([]),
+        appConfig.providers
       ]
     }).compileComponents();
 

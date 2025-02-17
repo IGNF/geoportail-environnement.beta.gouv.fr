@@ -17,6 +17,8 @@ import GeoJSON from 'ol/format/GeoJSON.js';
 import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
 import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
 import { THEMATIC_LIST } from '../../shared-thematic/models/thematic-list.enum';
+import { parcelSelectControl } from '../controls/parcelSelectControl';
+import { parcelSelectService } from './parcel-select.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +32,9 @@ export class MapContextService {
   private activeThematicLayers: any[] = [];
 
   private clones: Map[] = []; // Liste des clones de cartes
+  
 
-  constructor() { }
+  constructor(private parcelSelectService: parcelSelectService) { }
 
   // Obtenir la carte
   getMap(): Map | undefined {
@@ -167,11 +170,27 @@ export class MapContextService {
       source: this.getLayerDessin().getSource(),
     });
     editBar.setProperties({ name: 'editBar' });
+
+    this.parcelSelectService.setLayerDessin(this.getLayerDessin());
+
+    let parcelControl = new parcelSelectControl({map : this.map, parcelSelectService : this.parcelSelectService, editBar : editBar});
+    editBar.addControl(parcelControl);
+
     let controls : any = editBar.getControls();
+    controls[0].set('autoActivate', false);
     controls[0].setTitle('Sélectionner un objet');
     controls[0].getSubBar().getControls()[0].setTitle('Supprimer l\'objet sélectionné')
     controls[1].setTitle('Dessiner un polygone');
     controls[2].setTitle('Délimiter un trou dans un polygone');
+
+    let newOrderControls = [];
+    newOrderControls.push(controls[0]);
+    newOrderControls.push(controls[3]);
+    newOrderControls.push(controls[1]);
+    newOrderControls.push(controls[2]);
+    //@ts-ignore
+    editBar.controls_ = newOrderControls;
+
     this.map?.addControl(editBar);
   }
 
@@ -182,6 +201,8 @@ export class MapContextService {
         editBar = control;
       }
     });
+ 
+    editBar.getControls()[0].setActive(true); //nécessaire pour être sûr que la sélection de parcelle est désactivée
 
     this.map?.removeControl(editBar);
   }
