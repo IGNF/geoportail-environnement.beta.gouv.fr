@@ -96,6 +96,7 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
       case 0:
         this.mapContextService.resetDessin();
         this.mapContextService.addDrawingTools();
+        this.mapContextService.setIsMerged(false);
         for (let i = this.mapContextService.getActiveThematicLayers().length; i >= 0; i--) {
           this.mapContextService.getActiveThematicLayers().pop();
         }

@@ -8,6 +8,8 @@ import { Select } from 'ol/interaction';
 import VectorLayer from 'ol/layer/Vector';
 import { Vector } from 'ol/source';
 import Geometry from 'ol/geom/Geometry';
+import Polygon from 'ol/geom/Polygon.js';
+import * as turf from "@turf/turf";
 import { extend } from 'ol/extent';
 import GeoportailLayer from 'ol-ext/layer/Geoportail';
 import EditBar from 'ol-ext/control/EditBar.js';
@@ -30,6 +32,8 @@ export class MapContextService {
   private activeThematicLayers: any[] = [];
 
   private clones: Map[] = []; // Liste des clones de cartes
+
+  private isMerged : boolean = false;
 
   constructor() { }
 
@@ -186,6 +190,10 @@ export class MapContextService {
     this.map?.removeControl(editBar);
   }
 
+  setIsMerged(bool : boolean) {
+    this.isMerged = bool;
+  }
+
   updateLayers() {
     const layers: any = this.map?.getLayers().getArray();
     //utiliser 'layers.forEach(...)' ne fonctionne pas
@@ -264,9 +272,18 @@ export class MapContextService {
     if (!this.getLayerDessin()) {
       return [];
     }
-    return this.getLayerDessin().getSource().getFeatures();
+    let features = this.getLayerDessin().getSource().getFeatures();
+
+    if(!this.isMerged) {
+      let mergedPolygons = this.mergePolygons(features);
+      this.resetDessin();
+      this.getLayerDessin().getSource().addFeatures(mergedPolygons);
+      this.setIsMerged(true);
+      return mergedPolygons;
+    }
+
+    return features;
   }
-  
 
   maForetFromGeoJson(geoJson: any) {
     if (!this.getLayerDessin()) {
@@ -364,6 +381,66 @@ export class MapContextService {
     ];
 
     return allLayers.find((layer) => layer.get('id') === id) || null;
+  }
+  
+  private mergePolygons(polygons : any) {
+
+    if(polygons.length < 2) {
+      return polygons[0];
+    }
+
+    let recursiveUnion = function(polygons : any) {
+      let turfPolygons = [];
+
+      for(let i in polygons) {
+        turfPolygons.push(turf.polygon(polygons[i].getGeometry().getCoordinates()))
+      }
+
+      let mergedPolygons = [];
+      let indexToRemove : any[] = [];
+
+      for( let i = 0; i < turfPolygons.length-1; i++) {
+        for( let j = i+1; j < turfPolygons.length; j++) {
+          let fc = turf.featureCollection([turfPolygons[i], turfPolygons[j]])
+          if(turf.intersect(fc)){
+            mergedPolygons.push(turf.union(fc));
+            if(!indexToRemove.find((element) => element == i)) {
+              indexToRemove.unshift(i);
+            }
+            if(!indexToRemove.find((element) => element == j)) {
+              indexToRemove.unshift(j);
+            }
+            
+            break;
+          }
+        }
+      }
+
+      let olPolygons = [];
+
+      if(!mergedPolygons.length) {
+        for(let i in turfPolygons) {
+          olPolygons.push(new Feature ({geometry: new Polygon(turfPolygons[i].geometry.coordinates)}));
+        }
+        return olPolygons;
+      }
+
+      for(let i in indexToRemove) {
+        turfPolygons.splice(indexToRemove[i],1);
+      }
+      for(let i in mergedPolygons) {
+        turfPolygons.push(mergedPolygons[i]);
+      }
+
+      for(let i = 0; i < turfPolygons.length; i++) {
+        //@ts-ignore
+        olPolygons.push(new Feature ({geometry: new Polygon(turfPolygons[i].geometry.coordinates)}));
+      }
+      return recursiveUnion(olPolygons);
+
+    };
+    return recursiveUnion(polygons);
+
   }
 
 }

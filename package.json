@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@edugouvfr/ngx-dsfr": "^1.11.9",
+    "@turf/turf": "^7.2.0",
+    "jsts": "^2.12.1",
     "jszip": "^3.10.1",
     "ol": "^10.2.1",
     "ol-ext": "^4.0.24",
