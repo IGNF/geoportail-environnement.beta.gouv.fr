@@ -65,19 +65,27 @@ export class GeoplateformeWfsService {
     return this;
   }
 
+  setIntersectsPointFilter(geomName: string, coordinate: Array<number>) {
+    coordinate = toLonLat(coordinate);
+    this.request.cqlFilters.push('INTERSECTS(' + geomName + ', POINT(' + coordinate[1] + " " + coordinate[0] + '))');
+    return this;
+  };
+
   getRequest(): WfsRequest {
     return this.request;
   }
 
   getFeatures(request: WfsRequest): Observable<any> {
-    // TODO correct error 500 on POST
-    return this.httpClient.get(this.toQueryParams(request), { headers: this.headers });
-  }
+    let url = 'https://data.geopf.fr/wfs/ows';
+    let params = request.serialise();
+    
+    let body = 'cql_filter=' + params.cql_filter;
+    delete params["cql_filter"];
 
-  private toQueryParams(request: WfsRequest): string {
-    const serialiseRequest = request.serialise();
-    const queryParams = Object.keys(serialiseRequest).map(key => `${key}=${serialiseRequest[key]}`).join('&');
-    return `${this.url}?${queryParams}`;
+    return this.httpClient.post(url, body, {
+      params : params,
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
   }
 
 
