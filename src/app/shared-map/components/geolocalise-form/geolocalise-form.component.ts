@@ -42,7 +42,7 @@ export class GeolocaliseFormComponent implements OnInit {
       const searchControl = new SearchGeoportail({
         type: 'StreetAddress', //Par defaut StreetAddress,PositionOfInterest
         target: 'location',
-        maxItems: 3,
+        maxItems: 10,
         className: 'fr-input-wrap fr-input-wrap--addon',
         placeholder: 'Rechercher...'
       });

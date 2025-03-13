@@ -9,7 +9,7 @@
     <dsfr-button label="Enregistrer Ma Forêt" (click)="emitSave()"></dsfr-button>
   </ng-container>
 
-  <ng-container *ngIf="step !== 3">
+  <ng-container *ngIf="step !== 2">
     <dsfr-button [label]="nextButtonLabel" icon="fr-icon-arrow-right-fill" (click)="emitNext()"
       [disabled]="step > 2"></dsfr-button>
   </ng-container>

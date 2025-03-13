@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 export const STEPPER_CONFIG = [
-  { currentStep: 1, currentStepTitle: 'Préciser le périmètre', nextStepTitle: 'Sélectionner les informations' },
-  { currentStep: 2, currentStepTitle: 'Sélectionnez les informations', nextStepTitle: 'Exporter les informations' },
+  { currentStep: 1, currentStepTitle: 'Préciser le périmètre', nextStepTitle: 'Visualiser les informations' },
+  { currentStep: 2, currentStepTitle: 'Visualiser les informations', nextStepTitle: 'Exporter les informations' },
   { currentStep: 3, currentStepTitle: 'Exporter les informations', nextStepTitle: 'Aucune' },
 ];
 
