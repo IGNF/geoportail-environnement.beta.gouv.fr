@@ -65,7 +65,7 @@ export class GeoplateformeWfsService {
     return this;
   }
 
-  setIntersectsPointFilter(geomName: string, coordinate: Array<number>, lonLatOrder: boolean = LON_LAT_ORDER) {
+  setIntersectsPointFilter(geomName: string, coordinate: Array<number>) {
     coordinate = toLonLat(coordinate);
     this.request.cqlFilters.push('INTERSECTS(' + geomName + ', POINT(' + coordinate[1] + " " + coordinate[0] + '))');
     return this;
@@ -76,29 +76,16 @@ export class GeoplateformeWfsService {
   }
 
   getFeatures(request: WfsRequest): Observable<any> {
-    // TODO correct error 500 on POST
-    console.log(this.toQueryParams(request));
-    console.log(this.headers);
-    console.log(request)
-    let url = "https://data.geopf.fr/wfs/ows";
+    let url = 'https://data.geopf.fr/wfs/ows';
     let params = request.serialise();
     
-    let body = "cql_filter=" + params.cql_filter;
+    let body = 'cql_filter=' + params.cql_filter;
     delete params["cql_filter"];
 
-    console.log(params);
-    console.log(body);
     return this.httpClient.post(url, body, {
       params : params,
-      headers : { "Accept": "application/json" }
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
-    return this.httpClient.get(this.toQueryParams(request), { headers: this.headers });
-  }
-
-  private toQueryParams(request: WfsRequest): string {
-    const serialiseRequest = request.serialise();
-    const queryParams = Object.keys(serialiseRequest).map(key => `${key}=${serialiseRequest[key]}`).join('&');
-    return `${this.url}?${queryParams}`;
   }
 
 
