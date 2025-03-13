@@ -295,7 +295,7 @@ export class MapContextService {
     }
     let features = this.getLayerDessin().getSource().getFeatures();
 
-    if(!this.isMerged) {
+    if(!this.isMerged && features.length > 1) {
       let mergedPolygons = this.mergePolygons(features);
       this.resetDessin();
       this.getLayerDessin().getSource().addFeatures(mergedPolygons);
