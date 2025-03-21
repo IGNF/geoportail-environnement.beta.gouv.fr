@@ -2,8 +2,9 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
+//import { MesForetsComponent } from './pages/mes-forets/mes-forets.component';
 import { SimplePageComponent } from './pages/simple-page/simple-page.component';
+import { InformationsComponent } from './pages/informations/informations.component';
 
 export const routes: Routes = [
   {
@@ -18,10 +19,15 @@ export const routes: Routes = [
     path: 'requete',
     loadChildren: () => import('./requete/requete.module').then(m => m.RequeteModule)
   },
+  // {
+  //   path: 'mes-forets',
+  //   component: MesForetsComponent,
+  //   title: 'Mes Forêts'
+  // },
   {
-    path: 'mes-forets',
-    component: MesForetsComponent,
-    title: 'Mes Forêts'
+    path: 'informations',
+    component: InformationsComponent,
+    title: 'Informations sur les données'
   },
   {
     path: 'accessibilite',

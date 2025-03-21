@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { TokenService } from '../../shared/services/token.service';
 import { LoginService } from '../../shared/services/login.service';
+import { RouterLink } from '@angular/router';
 
 const DEFAULT_HEADER_TOOLS_LINKS = [
   { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' }
@@ -28,7 +29,8 @@ export class HeaderComponent {
   menuHeader: any = [
     { label: 'Découvrir', routerLink: '/accueil' },
     { label: 'Nouvelle requête', routerLink: '/requete/nouvelle' },
-    { label: 'Mes forêts', routerLink: '/mes-forets' },
+    // { label: 'Mes forêts', routerLink: '/mes-forets' },
+    { label: 'Informations sur les données', routerLink: '/informations'}
   ];
 
   constructor(
