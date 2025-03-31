@@ -8,6 +8,7 @@ import { CardTransformerService } from '../../shared-design-dsfr/transformers/ca
 import { BreadcrumbTransformerService } from '../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
 
 @Component({
+  standalone: false,
   selector: 'app-mes-forets',
   templateUrl: './mes-forets.component.html',
   styleUrl: './mes-forets.component.css'

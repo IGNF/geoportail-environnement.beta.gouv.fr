@@ -22,6 +22,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 @Component({
+  standalone: false,
   selector: 'app-requete-new',
   templateUrl: './requete-new.component.html',
   styleUrl: './requete-new.component.css'

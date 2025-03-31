@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Thematic } from '../../models/thematic.model';
 
 @Component({
+  standalone: false,
   selector: 'app-synthese',
   templateUrl: './synthese.component.html',
   styleUrl: './synthese.component.css'

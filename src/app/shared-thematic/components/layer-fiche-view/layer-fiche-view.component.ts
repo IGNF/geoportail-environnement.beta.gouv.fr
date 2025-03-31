@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { LayerFiche } from '../../models/layer-fiche.model';
 
 @Component({
+  standalone: false,
   selector: 'app-layer-fiche-view',
   templateUrl: './layer-fiche-view.component.html',
   styleUrl: './layer-fiche-view.component.css'

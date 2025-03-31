@@ -6,6 +6,7 @@ import { InseeService } from '../../services/insee.service';
 import { AnnuairePublicService } from '../../services/annuaire-public.service';
 
 @Component({
+  standalone: false,
   selector: 'app-contact-view',
   templateUrl: './contact-view.component.html',
   styleUrl: './contact-view.component.css'

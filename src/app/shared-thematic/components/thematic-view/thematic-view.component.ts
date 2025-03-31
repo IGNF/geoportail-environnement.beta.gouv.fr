@@ -3,6 +3,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Thematic } from '../../models/thematic.model';
 
 @Component({
+  standalone: false,
   selector: 'app-thematic-view',
   templateUrl: './thematic-view.component.html',
   styleUrl: './thematic-view.component.css'

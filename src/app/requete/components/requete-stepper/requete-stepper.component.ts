@@ -7,6 +7,7 @@ export const STEPPER_CONFIG = [
 ];
 
 @Component({
+  standalone: false,
   selector: 'app-requete-stepper',
   templateUrl: './requete-stepper.component.html',
   styleUrl: './requete-stepper.component.css'

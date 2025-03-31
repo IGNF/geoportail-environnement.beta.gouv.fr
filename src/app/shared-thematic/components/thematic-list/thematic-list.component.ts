@@ -6,6 +6,7 @@ import { Thematic } from '../../models/thematic.model';
 import { map } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'app-thematic-list',
   templateUrl: './thematic-list.component.html',
   styleUrl: './thematic-list.component.css'

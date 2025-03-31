@@ -24,6 +24,7 @@ const EXPORT_TILE_CONFIG = [
 ];
 
 @Component({
+  standalone: false,
   selector: 'app-requete-export-list',
   templateUrl: './requete-export-list.component.html',
   styleUrl: './requete-export-list.component.css'

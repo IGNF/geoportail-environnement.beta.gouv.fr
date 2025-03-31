@@ -3,6 +3,7 @@ import { Reglementation } from '../../models/reglementation.model';
 import { REGLEMENTATION_LIST } from '../../models/reglementation-list.enum';
 
 @Component({
+  standalone: false,
   selector: 'app-reglementation-view',
   templateUrl: './reglementation-view.component.html',
   styleUrl: './reglementation-view.component.css'

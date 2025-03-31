@@ -2,7 +2,8 @@ import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Pipe({
-  name: 'extendDate'
+  name: 'extendDate',
+  standalone: false
 })
 export class ExtendDatePipe extends DatePipe implements PipeTransform {
 

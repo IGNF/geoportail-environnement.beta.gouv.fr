@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import template from '../../../assets/simple-pages-template';
 
 @Component({
+  standalone: false,
   selector: 'app-simple-page',
   templateUrl: './simple-page.component.html',
   styleUrl: './simple-page.component.css'

@@ -3,6 +3,7 @@ import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { MapContextService } from '../../services/map-context.service';
 
 @Component({
+  standalone: false,
   selector: 'app-map-viewer',
   templateUrl: './map-viewer.component.html',
   styleUrl: './map-viewer.component.css'
