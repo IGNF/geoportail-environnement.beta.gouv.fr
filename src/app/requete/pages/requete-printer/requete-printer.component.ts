@@ -4,6 +4,7 @@ import { Foret } from '../../../shared/models/foret.model';
 import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
 
 @Component({
+  standalone: false,
   selector: 'app-requete-printer',
   templateUrl: './requete-printer.component.html',
   styleUrl: './requete-printer.component.css',

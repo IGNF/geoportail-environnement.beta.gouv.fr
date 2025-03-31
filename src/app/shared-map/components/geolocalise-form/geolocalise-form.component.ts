@@ -4,6 +4,7 @@ import { distinctUntilChanged, first, map } from 'rxjs';
 import { MapContextService } from '../../services/map-context.service';
 
 @Component({
+  standalone: false,
   selector: 'app-geolocalise-form',
   templateUrl: './geolocalise-form.component.html',
   styleUrl: './geolocalise-form.component.css'

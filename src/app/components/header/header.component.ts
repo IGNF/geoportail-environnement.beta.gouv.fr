@@ -10,6 +10,7 @@ const DEFAULT_HEADER_TOOLS_LINKS = [
 ];
 
 @Component({
+  standalone: false,
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

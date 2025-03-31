@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, S
 import { STEPPER_CONFIG } from '../requete-stepper/requete-stepper.component';
 
 @Component({
+  standalone: false,
   selector: 'app-requete-stepper-control',
   templateUrl: './requete-stepper-control.component.html',
   styleUrl: './requete-stepper-control.component.css'

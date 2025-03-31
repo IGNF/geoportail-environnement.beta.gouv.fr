@@ -5,6 +5,7 @@ import { Thematic } from '../../models/thematic.model';
 import { ThematicFeatureService } from '../../services/thematic-feature.service';
 
 @Component({
+  standalone: false,
   selector: 'app-thematic-tabs',
   templateUrl: './thematic-tabs.component.html',
   styleUrl: './thematic-tabs.component.css'
