@@ -32,11 +32,6 @@ export class SimplePageComponent implements OnInit{
         this.content = template.mentions;
         this.pageTitle = 'Mentions légales'
         break;
-      case 'donnees-a-caractere-personnel':
-        this.content = template.personnel;
-        this.pageTitle = 'Données à caractère personnel'
-
-        break;
       case 'cookies-et-statistiques':
         this.content = template.cookies;
         this.pageTitle = 'Cookies et statistiques'

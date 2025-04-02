@@ -1,7 +1,16 @@
 <div class="fr-container fr-mt-6v">
+  <h1> Informations sur les données</h1>
+  <p>
+    Foreg est un service qui vous permet d’obtenir les réglementations applicables en forêt sur la base des couches de données décrites ci-dessous. 
+    <br>
+    Cette liste ne couvre pas toutes les réglementations existantes applicables en forêt, pour lesquelles l’usager peut se rapprocher de la (des) autorité(s) compétente(s).
+    <br>
+    Les données disponibles sont réparties par catégories.
+  </p>
+  
   @for(theme of thematicList; track theme.name) {
     @if(theme.name != "synthese") {
-      <h3>{{theme.label}}</h3>
+      <h2>{{theme.label}}</h2>
       <p>Sur cette thématique, l'outil Foreg interroge <a href='https://geoservices.ign.fr/services-geoplateforme-diffusion' target=_blank>les flux WFS de la Géoplateforme</a> suivants :</p>
       <ul>
       @for(layer of theme.layers; track layer.id) {
@@ -9,7 +18,22 @@
           <li>{{layer.title}} ({{layer.technicalName}})</li>
       }
       </ul>
+      @if(theme.name == "patrimoine") {
+        <br>
+        <p>
+          Les données relatives aux espaces boisés classés à conserver ou à créer (EBC) en vertu de l'article L.113-1 du code de l'urbanisme, sont issues des plans locaux d'urbanisme (PLU) déposés par les collectivités sur le géoportail de l'urbanisme.
+          <br>          
+          Les PLU rendus exécutoires avant le 31/12/2022 sont opposables même s'ils n'ont pas été publiés sur le Géoportail de l'urbanisme. 
+          <br>
+          Par conséquent si l'interrogation de FoReg ne renvoit pas de résultat d'EBC, il convient de vérifier auprès de la commune concernée si elle est dotée d'un PLU n'ayant pas été publié au géoportail de l'urbanisme.
+        </p>
+      }
     }
   <br>
   }
+  <h2> Autre </h2>
+  <p> Sur cette thématique, l'outil Foreg interroge les flux suivants : </p>
+  <ul>
+    <li> Périmètres de captage d’alimentation en eau potable (prochainement disponible) </li>
+  </ul>
 </div>

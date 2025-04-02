@@ -181,11 +181,15 @@ export class MapContextService {
     editBar.addControl(parcelControl);
 
     let controls : any = editBar.getControls();
+    console.log(controls);
     controls[0].set('autoActivate', false);
     controls[0].setTitle('Sélectionner un objet');
     controls[0].getSubBar().getControls()[0].setTitle('Supprimer l\'objet sélectionné')
     controls[1].setTitle('Dessiner un polygone');
+    controls[1].getSubBar().getControls()[0].setHtml('annuler');
+    controls[1].getSubBar().setVisible(false);
     controls[2].setTitle('Délimiter un trou dans un polygone');
+    controls[2].getSubBar().setVisible(false);
 
     let newOrderControls = [];
     newOrderControls.push(controls[0]);

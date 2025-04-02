@@ -12,9 +12,8 @@ export class FooterComponent {
   presentation = `
     <p><strong>foreg.beta.gouv.fr</strong></p>
     <p>
-      Texte optionnel 3 lignes maximum.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Consectetur et vel quam auctor semper. Cras si amet mollis dolor.
+      Trouver simplement la réglementation applicable dans une forêt </br>
+      et contribuer à préserver la biodiversité. 
     </p>
   `;
 
@@ -38,9 +37,8 @@ export class FooterComponent {
   mandatoryLinks: any = [
     { label: 'Déclaration d\'accessiblité', route: 'accessibilite' },
     { label: 'Mentions légales', route: 'mentions-legales' },
-    { label: 'Données personnelles', route: 'donnees-a-caractere-personnel' },
-    { label: 'Gestion des cookies', route: 'cookies-et-statistiques' },
-    { label: 'Plan du site', route: 'plan-du-site' }
+    { label: 'Données personnelles', link: 'https://www.ign.fr/institut/donnees-caractere-personnel', target: '_blank' },
+    { label: 'Gestion des cookies', route: 'cookies-et-statistiques' }
   ];
 
   reboundLinks: any = [];
