@@ -34,7 +34,7 @@ describe('TitlePrefixStrategy', () => {
 
     router.navigate(['/fake-path']);
     tick();
-    expect(document.title).toBe('Géoportail de l\'environnement');
+    expect(document.title).toBe('Foreg');
   }));
 
   it('should set page title correctly when title is provided', fakeAsync(() => {
@@ -46,7 +46,7 @@ describe('TitlePrefixStrategy', () => {
 
     router.navigate(['/fake-path']);
     tick();
-    expect(document.title).toBe('Fake title - Géoportail de l\'environnement');
+    expect(document.title).toBe('Fake title - Foreg');
   }));
 });
 

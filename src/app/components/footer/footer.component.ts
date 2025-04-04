@@ -53,6 +53,9 @@ export class FooterComponent {
   ) { }
 
   linkSelect(event: any) { 
+    if(event == "https://www.ign.fr/institut/donnees-caractere-personnel") {
+      return;
+    }
     this.router.navigate(['/', event]);
   }
 

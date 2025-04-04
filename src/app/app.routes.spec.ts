@@ -26,14 +26,14 @@ describe('Router - Requete lazy loading', () => {
   it('should set page title correctly when navigate /', fakeAsync(() => {
     router.navigate(['/']);
     tick();
-    expect(document.title).toBe('Géoportail de l\'environnement');
+    expect(document.title).toBe('Foreg');
   }));
 
 
   it('should set page title correctly when navigate /requete/nouvelle', fakeAsync(() => {
     router.navigate(['/', 'requete', 'nouvelle']);
     tick();
-    expect(document.title).toBe('Nouvelle Requête - Géoportail de l\'environnement');
+    expect(document.title).toBe('Nouvelle Requête - Foreg');
   }));
 
 });

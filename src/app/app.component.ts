@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  title: string = 'Géoportail de l\'environnement';
+  title: string = 'Foreg';
 
   skiplinks: any[] = [
     { label: 'Contenu', route: 'content' },

@@ -14,7 +14,7 @@ export class TitlePrefixStrategy extends TitleStrategy {
   updateTitle(snapshot: RouterStateSnapshot): void {
     const title = this.buildTitle(snapshot);
     let content = title ? `${title} - ` : '';
-    content += 'Géoportail de l\'environnement';
+    content += 'Foreg';
     this.title.setTitle(content);
   }
 

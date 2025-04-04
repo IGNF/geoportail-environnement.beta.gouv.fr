@@ -46,7 +46,7 @@ describe('AppComponent', () => {
 
   it('should display a title', () => {
     fixture.detectChanges();
-    expect(title.textContent?.trim()).toContain('Géoportail de l\'environnement');
+    expect(title.textContent?.trim()).toContain('Foreg');
   });
 
 
@@ -69,7 +69,7 @@ describe('AppComponent', () => {
   it('should focus on footer', () => {
     component.skipLinkSelect('footer');
     fixture.detectChanges();
-    expect(title.textContent?.trim()).toContain('Géoportail de l\'environnement');
+    expect(title.textContent?.trim()).toContain('Foreg');
   });
 
   it('should set the title and focus on the title element on router events', () => {

@@ -40,11 +40,6 @@ export const routes: Routes = [
     title: 'Mentions légales'
   },
   {
-    path: 'donnees-a-caractere-personnel',
-    component: SimplePageComponent,
-    title: 'Données à caractère personnel'
-  },
-  {
     path: 'cookies-et-statistiques',
     component: SimplePageComponent,
     title: 'Gestion des cookies'
