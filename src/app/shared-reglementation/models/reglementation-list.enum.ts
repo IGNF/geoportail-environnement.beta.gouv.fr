@@ -252,5 +252,16 @@ export const REGLEMENTATION_LIST = [
     referenceUrl: 'https://www.service-public.fr/particuliers/vosdroits/R11646',
     contactReference: ['Mairie'],
     contactReferenceLayer: 'BDTOPO_V3:commune'
+  }),
+  new Reglementation().deserialise({
+    thematicName: 'Autres',
+    layerName: 'Élément hydrographique - Cours d\'eau',
+    title: 'Élément hydrographique - Cours d\'eau',
+    description: '<p>La base de données cartographiques de l\'IGN mentionne la présence d\'un ou de plusieurs tronçons hydrographiques pouvant avoir les caractéristiques d\'un cours d\'eau. </p>',
+    impactReglementaire: '<p>Lors de l\'exploitation forestière, il faut éviter de franchir les cours d\'eau, au risque de dégrader le lit et les berges, de nuire aux espèces ou d\'engendrer des pollutions aux hydrocarbures.</p>',
+    impactProcedure: '<p>Si jamais un franchissement est nécessaire, il faut réaliser au préalable une procédure de déclaration ou d\'autorisation ; et ce quel que le dispositif envisagé soit temporaire (pont de rondins, tubes PEHD, etc.) ou permanent (busages, arches métalliques, ponceau, gué enroché)</p><p>Toutes les installations, ouvrages ou travaux conduisant à modifier le profil du lit d\'un cours d\'eau et les berges sont également soumis à une procédure préalable.</p><p>Contacter la direction départementale des territoires avant toute exploitation ou réalisation de travaux.</p>',
+    referenceUrl: '',
+    contactReference: ['Direction départementale des territoires'],
+    contactReferenceLayer: 'BDTOPO_V3:departement'
   })
 ];

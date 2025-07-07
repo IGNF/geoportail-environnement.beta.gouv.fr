@@ -106,8 +106,10 @@ export class ThematicFeatureService {
 
     if (layer.group === 'biodiversite') {
       request.intersectCollection(maForet, 'geom', !LON_LAT_ORDER);
-    } else {
+    } else if(layer.group === 'patrimoine') {
       request.intersectCollection(maForet);
+    } else {
+      request.intersectCollection(maForet, 'geometrie');
     }
 
     if (layer.title === 'Monuments historiques') {
@@ -151,9 +153,9 @@ export class ThematicFeatureService {
       let fichier = properties['fichier'] ? properties['fichier'] : properties['nomfic'];
       link = `${environment.geoportailUrbanismeDocumentsUrl}/${properties['partition']}/${properties['gpu_doc_id']}/${fichier}`;
     } else {
-      link = properties.url || properties.urlfic;
+      link = properties.url || properties.urlfic || '';
     }
-    const name = properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt'] || properties['idurba']);
+    const name = properties.sitename || properties.nom || properties.nom_site || this.forceUtfEncoded(properties['nomsuplitt'] || properties['idurba'] || properties.cleabs);
     const newFeature = Object.assign(feature.properties, {
       id: id,
       layer: layer,

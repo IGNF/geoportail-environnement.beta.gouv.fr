@@ -17,7 +17,7 @@ import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
 import GeoJSON from 'ol/format/GeoJSON.js';
 
 import { MAP_DEFAULT_LAYER_GROUP } from '../models/map-layers-default.enum';
-import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP } from '../../shared-thematic/models/map-thematic-layers.enum';
+import { MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP, MAP_AUTRES_LAYER_GROUP} from '../../shared-thematic/models/map-thematic-layers.enum';
 import { THEMATIC_LIST } from '../../shared-thematic/models/thematic-list.enum';
 import { parcelSelectControl } from '../controls/parcelSelectControl';
 import { parcelSelectService } from './parcel-select.service';
@@ -181,7 +181,6 @@ export class MapContextService {
     editBar.addControl(parcelControl);
 
     let controls : any = editBar.getControls();
-    console.log(controls);
     controls[0].set('autoActivate', false);
     controls[0].setTitle('Sélectionner un objet');
     controls[0].getSubBar().getControls()[0].setTitle('Supprimer l\'objet sélectionné')
@@ -229,10 +228,11 @@ export class MapContextService {
       }
     }
 
-    [MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP].forEach((newlayer) => {
+    [MAP_BIODIVERISTE_LAYER_GROUP, MAP_PATRIMOINE_LAYER_GROUP, MAP_AUTRES_LAYER_GROUP].forEach((newlayer) => {
       const group = newlayer.get('group') || 'no-group';
       for (let i = 0; i < THEMATIC_LIST.length; i++) {
         if (group === THEMATIC_LIST[i].name && THEMATIC_LIST[i].active) {
+          console.log(group);
           this.map?.addLayer(newlayer);
           continue;
         }
@@ -394,6 +394,7 @@ export class MapContextService {
     const allLayers = [
       ...MAP_BIODIVERISTE_LAYER_GROUP.getLayers().getArray(),
       ...MAP_PATRIMOINE_LAYER_GROUP.getLayers().getArray(),
+      ...MAP_AUTRES_LAYER_GROUP.getLayers().getArray()
     ];
 
     return allLayers.find((layer) => layer.get('technicalName') === technicalName) || null;
@@ -403,6 +404,7 @@ export class MapContextService {
     const allLayers = [
       ...MAP_BIODIVERISTE_LAYER_GROUP.getLayers().getArray(),
       ...MAP_PATRIMOINE_LAYER_GROUP.getLayers().getArray(),
+      ...MAP_AUTRES_LAYER_GROUP.getLayers().getArray()
     ];
 
     return allLayers.find((layer) => layer.get('id') === id) || null;
