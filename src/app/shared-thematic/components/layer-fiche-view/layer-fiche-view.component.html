@@ -6,6 +6,7 @@
 <app-map-viewer [id]="map" [situationMap]="displaySituationMap"></app-map-viewer>
 }
 
+@if(layer.id != 'troncons_hydrographiques') {
   <ul>
     @for (feature of layer.features; track feature) {
     <li>
@@ -17,6 +18,7 @@
     </li>
     }
   </ul>
+}
 
 <app-reglementation-view [layerReference]="layer.title"></app-reglementation-view>
 
