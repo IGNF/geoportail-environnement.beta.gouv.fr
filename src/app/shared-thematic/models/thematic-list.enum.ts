@@ -162,5 +162,20 @@ export const THEMATIC_LIST = [
         name: 'prescription_surf'
       }
     ]
+  }),
+  new Thematic().deserialise({
+    name: 'autres',
+    label: 'Autres',
+    title: 'Le périmètre délimité est concerné par',
+    active: true,
+    layers: [
+      {
+        id: 'troncons_hydrographiques',
+        title: 'Élément hydrographique - Cours d\'eau',
+        group: 'autres',
+        technicalName: 'BDTOPO_V3:troncon_hydrographique',
+        name: 'troncon_hydrographique'
+      },
+    ]
   })
 ];

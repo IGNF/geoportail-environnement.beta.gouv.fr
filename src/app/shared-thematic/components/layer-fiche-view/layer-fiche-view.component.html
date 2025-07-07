@@ -6,26 +6,21 @@
 <app-map-viewer [id]="map" [situationMap]="displaySituationMap"></app-map-viewer>
 }
 
-<ul>
-  @for (feature of layer.features; track feature) {
-  <li>
-    @if (feature.link !== "") {
-    <a [href]="feature.link" target="_blank">{{ feature.name }}</a>
-    } @else {
-    {{ feature.name }}
-    }
-  </li>
+@if(layer.id != 'troncons_hydrographiques') {
+  <ul>
+    @for (feature of layer.features; track feature) {
+    <li>
+      @if (feature.link !== "") {
+      <a [href]="feature.link" target="_blank">{{ feature.name }}</a>
+      } @else {
+      {{ feature.name }}
+      }
+    </li>
 
-  }
-</ul>
+    }
+  </ul>
+}
 
 <app-reglementation-view [layerReference]="layer.title"></app-reglementation-view>
-
-
-<!-- <dsfr-tags-group>
-  @for (feature of layer.features; track feature) {
-  <dsfr-tag [label]="feature.name" [route]="" (click)="openTab(feature.link)"></dsfr-tag>
-  }
-</dsfr-tags-group> -->
 
 }

@@ -511,6 +511,6 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
           'cql_filter': "typepsc = '01' AND stypepsc IN ('00', '01', '02', '03')"
         }
       })
-    }),
+    })
   ]
 });
