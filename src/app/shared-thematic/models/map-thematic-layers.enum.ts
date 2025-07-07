@@ -514,3 +514,34 @@ export const MAP_PATRIMOINE_LAYER_GROUP = new LayerGroup({
     })
   ]
 });
+
+export const MAP_AUTRES_LAYER_GROUP = new LayerGroup({
+  properties: {
+    title: 'Autres',
+    group: 'autres'
+  },
+  layers: [
+    new TileLayer({
+      properties: THEMATIC_LIST.find((g) => g.name === 'autres')?.layers?.find((l) => l.technicalName === 'BDTOPO_V3:troncon_hydrographique' && l.title === 'Élément hydrographique - Cours d\'eau'),
+      extent: [
+        -20037508.342789244,
+        -44927335.42709704,
+        20037508.342789244,
+        44927335.42709663
+      ],
+      minResolution: 0,
+      maxResolution: 156543.03392804097,
+      source: new TileWMS({
+        url: 'https://data.geopf.fr/wms-v/ows?',
+        projection: 'EPSG:3857',
+        attributions: [],
+        crossOrigin: 'anonymous',
+        params: {
+          'LAYERS': 'BDTOPO-GEOPO-HYDROGRAPHIE_WLD_WGS84G',
+          'FORMAT': 'image/png',
+          'VERSION': '1.3.0'
+        }
+      })
+    })
+  ]
+});
