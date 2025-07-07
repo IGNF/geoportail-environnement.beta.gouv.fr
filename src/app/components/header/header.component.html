@@ -1,3 +1,20 @@
 <dsfr-header [beta]="true" [logoLink]="'/'" [logoTooltipMessage]="logoTooltipMessage" [serviceTitle]="serviceTitle"
   [serviceTagline]="serviceTagline" [operatorImagePath]="operatorImagePath" [menu]="menuHeader"
   [headerToolsLinks]="headerToolsLinks" [searchBar]="false"></dsfr-header>
+  <dsfr-notice
+  [heading]="'Aidez nous à améliorer cet outil ! Faites-nous part de'"
+  [closeable]="false"
+  [noIcon]="false"
+  [icon]="''"
+  [description]="''"
+  [type]="'info'"
+  
+>
+  <dsfr-link
+    #link
+    link="https://jedonnemonavis.numerique.gouv.fr/Demarches/3598?button=3885"
+    customClass="fr-notice__link"
+    label="votre avis"
+    linkTarget="_blank"
+  ></dsfr-link>
+</dsfr-notice>
