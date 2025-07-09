@@ -106,16 +106,17 @@ export class MapContextService {
       ]
     })
 
+    const layersTab = [layerCopy, this.getLayerDessin()];
+    if(selectedLayer) {
+      layersTab.push(selectedLayer);
+    }
+
     const clone = new Map({
       view: new View({
         center: [261271, 6249998],
         zoom: 13,
       }),
-      layers: [
-        layerCopy,
-        this.getLayerDessin(),
-        selectedLayer
-      ],
+      layers: layersTab,
       target: idClone
     });
 
@@ -232,7 +233,6 @@ export class MapContextService {
       const group = newlayer.get('group') || 'no-group';
       for (let i = 0; i < THEMATIC_LIST.length; i++) {
         if (group === THEMATIC_LIST[i].name && THEMATIC_LIST[i].active) {
-          console.log(group);
           this.map?.addLayer(newlayer);
           continue;
         }

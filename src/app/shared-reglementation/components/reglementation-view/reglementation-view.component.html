@@ -6,7 +6,7 @@
 
 @if(reglementation.referenceUrl){
 <p>
-  <a [href]="reglementation.referenceUrl" target="_blank">Consulter la référence réglementaire</a>
+  <a [href]="reglementation.referenceUrl" target="_blank">Consulter la référence réglementaire <span>{{reglementation.referenceUrl}}</span></a>
 </p>
 }
 @if(reglementation.contactReference) {

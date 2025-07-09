@@ -7,18 +7,15 @@ import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transf
 import { THEMATIC_LIST } from '../../../shared-thematic/models/thematic-list.enum';
 import { Foret } from '../../../shared/models/foret.model';
 import { LocalStorageForetService } from '../../../shared/services/local-storage-foret.service';
-import GeoJSON from 'ol/format/GeoJSON';
 
 import shp from 'shpjs';
 import JSZip from 'jszip';
 import proj4 from 'proj4';
 import { transform, get as getProjection, ProjectionLike } from 'ol/proj';
+import { Router } from '@angular/router';
 
 // Définition d'alias pour EPSG:3857
 proj4.defs("EPSG:3857", "+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs");
-
-
-import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -41,7 +38,8 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
     private breadcrumbTransformerService: BreadcrumbTransformerService,
     private localStorageForetService: LocalStorageForetService,
     private mapContextService: MapContextService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -51,9 +49,6 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
         if (response && response.data) {
           this.foret = response.data;
         }
-        // if (response && !response.data) {
-        //   this.router.navigate(['/', '404']);
-        // }
         this.loadPageComponent();
       })
     ).subscribe();

@@ -1,0 +1,9 @@
+a span{
+    display: none;
+}
+
+@media print{
+    a span{
+        display: block;
+    }
+}

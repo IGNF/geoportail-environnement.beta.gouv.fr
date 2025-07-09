@@ -2,8 +2,8 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 
 export const STEPPER_CONFIG = [
   { currentStep: 1, currentStepTitle: 'Préciser le périmètre', nextStepTitle: 'Visualiser les informations' },
-  { currentStep: 2, currentStepTitle: 'Visualiser les informations', nextStepTitle: 'Exporter les informations' },
-  { currentStep: 3, currentStepTitle: 'Exporter les informations', nextStepTitle: 'Aucune' },
+  { currentStep: 2, currentStepTitle: 'Visualiser les informations', nextStepTitle: 'Exporter les informations' }
+  //{ currentStep: 3, currentStepTitle: 'Exporter les informations', nextStepTitle: 'Aucune' },
 ];
 
 @Component({
@@ -33,8 +33,8 @@ export class RequeteStepperComponent implements OnInit, OnChanges {
   }
 
   updateStep() {
-    if (this.step > 3) {
-      this.step = 3;
+    if (this.step > 2) {
+      this.step = 2;
     }
     if (this.step < 0) {
       this.step = 0;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageForetService } from '../../../shared/services/local-storage-foret.service';
+//import { LocalStorageForetService } from '../../../shared/services/local-storage-foret.service';
 import { Foret } from '../../../shared/models/foret.model';
 import { BreadcrumbTransformerService } from '../../../shared-design-dsfr/transformers/breadcrumb-transformer.service';
 
@@ -17,14 +17,20 @@ export class RequetePrinterComponent implements OnInit {
 
   constructor(
     private breadcrumbTransformerService: BreadcrumbTransformerService,
-    private localStorageForetService: LocalStorageForetService
+    //private localStorageForetService: LocalStorageForetService
   ) {}
 
   ngOnInit(): void {
-    this.foret = this.localStorageForetService.getForet();
+    // this.foret = this.localStorageForetService.getForet();
+
+    this.foret = new Foret().deserialise({createdAt: new Date()}); 
 
     this.loadPageComponent();
   }
+
+   print() {
+    window.print();
+  };
 
   private loadPageComponent() {
     const label = this.foret ? `Requête sur ${this.foret.name}` : 'Nouvelle requête';

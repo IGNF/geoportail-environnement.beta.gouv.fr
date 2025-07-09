@@ -1,11 +1,13 @@
-<app-synthese [thematics]="thematics"></app-synthese>
+<app-synthese [thematics]="thematics" class="breakafter"></app-synthese>
 
-@for (thematic of thematics; track $index; let first = $first) {
+@for (thematic of thematics; track $index; let first = $first; let last=$last) {
   @if (thematic.active) {
       @if (first) {
 
+      } @else if(last) {
+        <app-thematic-view [thematic]="thematic"></app-thematic-view>
       } @else {
-      <app-thematic-view [thematic]="thematic"></app-thematic-view>
+        <app-thematic-view [thematic]="thematic" class="breakafter"></app-thematic-view>
       }
   }
 }

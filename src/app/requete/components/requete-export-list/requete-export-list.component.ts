@@ -6,7 +6,7 @@ const EXPORT_TILE_CONFIG = [
   {
     customBackground: 'default',
     customBorder: 'default',
-    description: 'Vous allez être dirigé vers une aperçu de l\'impression',
+    description: 'Vous allez être dirigé vers un aperçu de l\'impression',
     disabled: false,
     downloadDirect: true,
     downloadAssessFile: false,
