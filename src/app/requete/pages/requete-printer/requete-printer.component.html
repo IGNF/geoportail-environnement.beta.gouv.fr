@@ -6,11 +6,14 @@
 
   <h1>
     Votre forêt
-    @if (foret && foret.name) {
-      <span> - {{ foret.name }}</span>
+    @if (foret && foret.createdAt) {
+      <p> Rapport généré le {{ foret.createdAt.toLocaleDateString("fr") }}</p>
     }
   </h1>
 
   <app-thematic-list></app-thematic-list>
 
+  <dsfr-button label="Imprimer" (click)="print()"></dsfr-button>
+
 </div>
+

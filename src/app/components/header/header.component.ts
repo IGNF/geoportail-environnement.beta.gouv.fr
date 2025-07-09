@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { TokenService } from '../../shared/services/token.service';
 import { LoginService } from '../../shared/services/login.service';
-import { RouterLink } from '@angular/router';
 
 const DEFAULT_HEADER_TOOLS_LINKS = [
   { label: 'Aide', routerLink: '/help', routerLinkActive: 'class-active' }

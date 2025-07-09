@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { appConfig } from './app.config';
 import { SimplePageComponent } from './pages/simple-page/simple-page.component';
 import { HeaderComponent } from './components/header/header.component';
+import { HeaderPrintComponent } from './components/header-print/header-print.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FooterPrintComponent } from './components/footer-print/footer-print.component';
 import { SharedDesignDsfrModule } from './shared-design-dsfr/shared-design-dsfr.module';
-import { of } from 'rxjs';
 
 
 describe('AppComponent', () => {
@@ -24,7 +25,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         HeaderComponent,
+        HeaderPrintComponent,
         FooterComponent,
+        FooterPrintComponent,
         SimplePageComponent
       ],
       imports: [SharedDesignDsfrModule, RouterModule],
@@ -55,15 +58,6 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     expect(title.textContent?.trim()).toContain('Test');
   });
-
-
-  // it('should display a different title after routing', async () => {
-  //   // spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
-  //   await router.navigate(['/accessibilite']);
-  //   await fixture.whenStable();
-  //   fixture.detectChanges();
-  //   expect(title.textContent?.trim()).toContain(document.title);
-  // });
 
 
   it('should focus on footer', () => {

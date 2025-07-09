@@ -62,7 +62,7 @@
 
     <div class="fr-col-12 fr-col-lg-6">
       <app-thematic-tabs *ngIf="step === 1"></app-thematic-tabs>
-      <app-requete-export-list *ngIf="step === 2"></app-requete-export-list>
+      <!-- <app-requete-export-list *ngIf="step === 2"></app-requete-export-list> -->
     </div>
 
   </div>
@@ -72,8 +72,4 @@
   <app-requete-stepper-control *ngIf="step > 0" class="padding" [step]="step" (previous)="previousStep()"
     (next)="nextStep()" (save)="saveForet()"></app-requete-stepper-control>
 
-  <!-- <div class="fr-mt-4v">
-    <app-requete-stepper-control [step]="step" (previous)="previousStep()"
-      (next)="nextStep()"></app-requete-stepper-control>
-  </div> -->
 </div>

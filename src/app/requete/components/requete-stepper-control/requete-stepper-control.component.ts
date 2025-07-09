@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { STEPPER_CONFIG } from '../requete-stepper/requete-stepper.component';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: false,
@@ -21,7 +22,10 @@ export class RequeteStepperControlComponent implements OnChanges {
 
   nextButtonLabel = 'Suivant';
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['step']) {
@@ -45,6 +49,10 @@ export class RequeteStepperControlComponent implements OnChanges {
   emitSave() {
     this.save.emit(true);
   }
+
+  emitPrint() {
+    this.router.navigate(['/', 'requete', 'nouvelle', 'impression']);
+  };
 
 
   private updateButtonLabel() {

@@ -31,9 +31,6 @@ export class MapViewerComponent implements OnInit, AfterViewInit {
 
   newMap() {
     this.mapContextService.createMap(this.id);
-    //   if (!this.mapContextService.isMapLoaded()) {
-    //   this.mapContextService.createMap('map');
-    // }
     this.mapContextService.setView([261271, 6249998], 13);
     this.mapContextService.addDrawingTools();
   }

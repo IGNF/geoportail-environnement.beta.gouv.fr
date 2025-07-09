@@ -51,19 +51,25 @@ export class ThematicListComponent {
   private updateActiveThematicLayersFromFeatures(features: any) {
     for (let i = 0; i < features.length; i++) {
       const layer = features[i].layer;
+
       switch (layer) {
         case 'assiette_sup_s':
-          if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'patrimoine', name: "assiette_sup_s" })) {
-            this.mapContextService.getActiveThematicLayers().push({ theme: 'patrimoine', name: "assiette_sup_s" });
+          if (!this.mapContextService.getActiveThematicLayers().some(elem => {return JSON.stringify({ theme: 'patrimoine', name: 'assiette_sup_s' }) === JSON.stringify(elem);})) {
+            this.mapContextService.getActiveThematicLayers().push({ theme: 'patrimoine', name: 'assiette_sup_s' });
           }
           break;
         case 'prescription_surf':
-          if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'patrimoine', name: "prescription_surf" })) {
-            this.mapContextService.getActiveThematicLayers().push({ theme: 'patrimoine', name: "prescription_surf" });
+          if (!this.mapContextService.getActiveThematicLayers().some(elem => {return JSON.stringify({ theme: 'patrimoine', name: 'prescription_surf' }) === JSON.stringify(elem);})) {
+            this.mapContextService.getActiveThematicLayers().push({ theme: 'patrimoine', name: 'prescription_surf' });
+          }
+          break;
+        case 'troncon_hydrographique':
+          if (!this.mapContextService.getActiveThematicLayers().some(elem => {return JSON.stringify({ theme: 'autres', name: 'troncon_hydrographique' }) === JSON.stringify(elem);})) {
+            this.mapContextService.getActiveThematicLayers().push({ theme: 'autres', name: 'troncon_hydrographique' });
           }
           break;
         default:
-          if (!this.mapContextService.getActiveThematicLayers().includes({ theme: 'biodiversite', name: layer })) {
+          if (!this.mapContextService.getActiveThematicLayers().some(elem => {return JSON.stringify({ theme: 'biodiversite', name: layer }) === JSON.stringify(elem);})) {
             this.mapContextService.getActiveThematicLayers().push({ theme: 'biodiversite', name: layer });
           }
       }

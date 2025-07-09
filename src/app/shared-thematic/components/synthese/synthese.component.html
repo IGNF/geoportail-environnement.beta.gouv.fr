@@ -1,64 +1,68 @@
 @if(noFeatures) {
 
-<p>
-  Pour le périmètre saisi, aucun zonage à caractère environnemental ou patrimonial
-  n'a été identifié parmi ceux intégrés à l'outil FOREG :
-</p>
-<ul>
-  <li>les aires protégées en faveur de la protection de l'environnement et de la préservation de la biodiversité</li>
-  <li>les sites et les abords des monuments historiques inscrits ou classés</li>
-</ul>
-<p>
-  La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi est concerné par d'autres
-  réglementations.
-</p>
+  <p>
+    Pour le périmètre saisi, aucun zonage à caractère environnemental ou patrimonial
+    n'a été identifié parmi ceux intégrés à l'outil FOREG :
+  </p>
+  <ul>
+    <li>les aires protégées en faveur de la protection de l'environnement et de la préservation de la biodiversité</li>
+    <li>les sites et les abords des monuments historiques inscrits ou classés</li>
+  </ul>
+  <p>
+    La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi est concerné par d'autres
+    réglementations.
+  </p>
 
 } @else {
 
-<h3 class="fr-h6">Conseils pour instruire vos travaux</h3>
+  <h3 class="fr-h6">Conseils pour instruire vos travaux</h3>
 
-<ul>
-  <li>
-    Si votre chantier nécessite de contacter divers établissements
-    un ordre sera à respecter pour éviter les allers-retours.
-  </li>
-</ul>
+  <ul>
+    <li>
+      Si votre chantier nécessite de contacter divers établissements
+      un ordre sera à respecter pour éviter les allers-retours.
+    </li>
+  </ul>
 
-@for (thematic of thematics; track $index; let first = $first) {
+  @for (thematic of thematics; track $index; let first = $first) {
 
-@if (!first) {
-<h3 class="fr-h6">{{thematic.label}}</h3>
-@if (checkThematicFeatures(thematic)) {
-<p>Le périmètre saisi est concerné par les zones suivantes :</p>
-<ul>
-  @for (layer of thematic.layers; track $index) {
-  @if (layer.features.length) {
-  <li>{{layer.title}}</li>
+    @if (!first) {
+      <h3 class="fr-h6">{{thematic.label}}</h3>
+      @if (checkThematicFeatures(thematic)) {
+        <p>Le périmètre saisi est concerné par les zones suivantes :</p>
+        <ul>
+          @for (layer of thematic.layers; track $index) {
+          @if (layer.features.length) {
+          <li>{{layer.title}}</li>
+          }
+          }
+        </ul>
+      }
+      @else {
+        @if (thematic.name === 'biodiversite') {
+          <p>
+            Pour le périmètre saisi, aucun zonage à caractère environnemental
+            n'a été identifié parmi ceux intégrés à l'outil FOREG.
+          </p>
+          <p>
+            La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi
+            est concerné par d'autres réglementations.
+          </p>
+        } @else if(thematic.name === 'patrimoine'){
+          <p>
+            Pour le périmètre saisi, aucun zonage à caractère patrimonial n'a été identifié
+            parmi ceux intégrés à l'outil FOREG.
+          </p>
+          <p>
+            La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi
+            est concerné par d'autres réglementations.
+          </p>
+        } @else {
+            <p>
+              Pour le périmètre saisi, aucun zonage d'un autre type n'a été identifié.
+            </p>
+        }
+      }
+    }
   }
-  }
-</ul>
-}
-@else {
-@if (thematic.name === 'biodiversite') {
-<p>
-  Pour le périmètre saisi, aucun zonage à caractère environnemental
-  n'a été identifié parmi ceux intégrés à l'outil FOREG.
-</p>
-<p>
-  La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi
-  est concerné par d'autres réglementations.
-</p>
-} @else {
-<p>
-  Pour le périmètre saisi, aucun zonage à caractère patrimonial n'a été identifié
-  parmi ceux intégrés à l'outil FOREG.
-</p>
-<p>
-  La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi
-  est concerné par d'autres réglementations.
-</p>
-}
-}
-}
-}
 }

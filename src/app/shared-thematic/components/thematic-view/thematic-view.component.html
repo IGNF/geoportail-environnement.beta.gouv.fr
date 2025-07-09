@@ -3,14 +3,16 @@
   <h3 class="fr-h6">{{ thematic.title }}</h3>
 
   @if (noFeatures) {
-    <p>Pour le périmètre saisi, aucun élément n'a été identifié parmi ceux intégrés à l'outil FOREG pour cette thématique.</p>
+    <p>Pour le périmètre saisi, aucun élément n'a été identifié parmi ceux intégrés à l'outil FOREG pour la thématique {{thematic.name}}.</p>
     <p>La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi est concerné par d'autres réglementations sur cette thématique.</p>
   }
 
-  @for (layer of thematic.layers; track layer) {
-
-    <app-layer-fiche-view [layer]="layer" [displaySituationMap]="layer.displaySituationMap"></app-layer-fiche-view>
-
+  @for (layer of thematic.layers; track layer; let last=$last) {
+    @if(layer.features.length && last) {
+      <app-layer-fiche-view [layer]="layer" [displaySituationMap]="layer.displaySituationMap"></app-layer-fiche-view>
+    } @else if(layer.features.length) {
+      <app-layer-fiche-view [layer]="layer" [displaySituationMap]="layer.displaySituationMap" class="breakafter"></app-layer-fiche-view>
+    }
   }
 
 }

@@ -11,7 +11,7 @@
     @for (feature of layer.features; track feature) {
     <li>
       @if (feature.link !== "") {
-      <a [href]="feature.link" target="_blank">{{ feature.name }}</a>
+      <a [href]="feature.link" target="_blank">{{ feature.name }} <span>{{feature.link}}</span></a> 
       } @else {
       {{ feature.name }}
       }

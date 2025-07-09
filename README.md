@@ -4,7 +4,7 @@
 
 Reglementation en Foret. Application web Angular.
 
-* [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7
+* [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4
 * [Ngx DSFR](https://foad.phm.education.gouv.fr/edugouvfr/ngx-dsfr/1-11-9/?path=/docs/introduction-readme--docs) version 1.11.9
 
 ## Install via NPM
