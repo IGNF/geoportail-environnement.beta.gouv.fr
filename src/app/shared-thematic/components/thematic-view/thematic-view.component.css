@@ -1,3 +1,7 @@
+app-layer-fiche-view{
+    display: block;
+}
+
 .breakafter{
         page-break-after: always; 
     }

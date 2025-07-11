@@ -33,8 +33,16 @@ export class RequetePrinterComponent implements OnInit {
   };
 
   private loadPageComponent() {
-    const label = this.foret ? `Requête sur ${this.foret.name}` : 'Nouvelle requête';
-    const foretRoute = this.foret ? `/requete/${this.foret.id}` : '';
+    let label = 'Nouvelle requête';
+    let foretRoute = ''
+    if(this.foret && this.foret.name) {
+      if(this.foret.name) {
+        label = `Requête sur ${this.foret.name}`;
+      }
+      if(this.foret.id) {
+        foretRoute = `/requete/${this.foret.id}`;
+      }
+    }
     this.breadcrumb = this.breadcrumbTransformerService.fromOptions({
       items: [
         {label: label, route: foretRoute },

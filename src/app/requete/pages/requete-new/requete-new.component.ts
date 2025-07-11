@@ -130,7 +130,10 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
 
 
   private loadPageComponent() {
-    const label = this.foret ? `Requête sur ${this.foret.name}` : 'Nouvelle requête';
+    let label = 'Nouvelle requête';
+    if(this.foret && this.foret.name) {
+      label = `Requête sur ${this.foret.name}`;
+    }
     this.breadcrumb = this.breadcrumbTransformerService.fromOptions({
       label: label, route: ''
     });
@@ -244,7 +247,6 @@ export class RequeteNewComponent implements OnInit, AfterViewInit {
       return Array.isArray(shapefileGeoJson) ? shapefileGeoJson : [shapefileGeoJson];
 
     } catch (error) {
-      //console.error("Erreur lors de la conversion du Shapefile :", error);
       return [];
     }
   }

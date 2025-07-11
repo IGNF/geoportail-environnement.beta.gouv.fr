@@ -1,3 +1,7 @@
+app-thematic-view, app-synthese{
+    display: block;
+}
+
 .breakafter{
         page-break-after: always; 
     }

@@ -33,13 +33,6 @@ jobs:
             exit 1
           fi
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
-      # - name: Validate version input
-      #   id: validate_version
-      #   run: |
-      #     if [[ ! "${{ github.event.inputs.version }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-      #       echo "Error: Version must follow the format vX.X.X"
-      #       exit 1
-      #     fi
 
       - name: Checkout repository
         uses: actions/checkout@v3

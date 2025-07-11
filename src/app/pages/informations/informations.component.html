@@ -1,15 +1,15 @@
 <div class="fr-container fr-mt-6v">
   <h1> Informations sur les données</h1>
   <p>
-    Foreg est un service qui vous permet d’obtenir les réglementations applicables en forêt sur la base des couches de données décrites ci-dessous. 
+    Foreg est un service qui vous permet d'obtenir les réglementations applicables en forêt à partir des couches de données décrites ci-dessous. 
     <br>
-    Cette liste ne couvre pas toutes les réglementations existantes applicables en forêt, pour lesquelles l’usager peut se rapprocher de la (des) autorité(s) compétente(s).
+    Cette liste ne couvre pas toutes les réglementations existantes applicables en forêt, pour lesquelles l'usager peut se rapprocher de la (des) autorité(s) compétente(s).
     <br>
     Les données disponibles sont réparties par catégories.
   </p>
   
   @for(theme of thematicList; track theme.name) {
-    @if(theme.name != "synthese") {
+    @if(theme.name != 'synthese') {
       <h2>{{theme.label}}</h2>
       <p>Sur cette thématique, l'outil Foreg interroge <a href='https://geoservices.ign.fr/services-geoplateforme-diffusion' target=_blank>les flux WFS de la Géoplateforme</a> suivants :</p>
       <ul>
@@ -18,7 +18,7 @@
           <li>{{layer.title}} ({{layer.technicalName}})</li>
       }
       </ul>
-      @if(theme.name == "patrimoine") {
+      @if(theme.name == 'patrimoine') {
         <br>
         <p>
           Les données relatives aux espaces boisés classés à conserver ou à créer (EBC) en vertu de l'article L.113-1 du code de l'urbanisme, sont issues des plans locaux d'urbanisme (PLU) déposés par les collectivités sur le géoportail de l'urbanisme.
@@ -31,9 +31,11 @@
     }
   <br>
   }
-  <h2> Autre </h2>
-  <p> Sur cette thématique, l'outil Foreg interroge les flux suivants : </p>
+
+  <h2>À venir (prochainement disponible)</h2>
+  <p>Il est prévu que l'outil Foreg s'enrichisse prochainement et interroge les flux de données suivants :</p>
   <ul>
-    <li> Périmètres de captage d’alimentation en eau potable (prochainement disponible) </li>
+    <li>Périmètres de captage d'alimentation en eau potable </li>
+    <li>Masque forêt </li>
   </ul>
 </div>

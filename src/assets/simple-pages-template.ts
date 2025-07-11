@@ -66,7 +66,7 @@ Téléphone&nbsp;: <span>0143988000</span>
 
 E-mail&nbsp;: 
 
-<a href="mailto:contact.geoservices@ign.fr">contact.geoservices@ign.fr</a> 
+<a href="mailto:foreg@ign.fr ">foreg@ign.fr </a> 
 
 </li> 
 
