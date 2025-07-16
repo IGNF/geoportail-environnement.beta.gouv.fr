@@ -3,7 +3,11 @@
   <h3 class="fr-h6">{{ thematic.title }}</h3>
 
   @if (noFeatures) {
-    <p>Pour le périmètre saisi, aucun élément n'a été identifié parmi ceux intégrés à l'outil FOREG pour la thématique {{thematic.name}}.</p>
+    @if(thematic.name == 'biodiversite') {
+      <p>Pour le périmètre saisi, aucun élément n'a été identifié parmi ceux intégrés à l'outil FOREG pour la thématique biodiversité.</p>
+    } @else {
+      <p>Pour le périmètre saisi, aucun élément n'a été identifié parmi ceux intégrés à l'outil FOREG pour la thématique {{thematic.name}}.</p>
+    }
     <p>La version actuelle de FOREG ne permet pas de déterminer si le périmètre saisi est concerné par d'autres réglementations sur cette thématique.</p>
   }
 

@@ -172,7 +172,7 @@ Les illustrations, le contenu éditorial, les divers éléments de la charte gra
 L’utilisation des documents ou éléments du site est soumise à l’accord préalable de notre établissement.
 </p>
 
-<h2> Liens hypertextes proposés sur foreg.gouv.fr </h2>
+<h2> Liens hypertextes proposés sur foreg.beta.gouv.fr </h2>
 
 <p>
 Les liens insérés dans les pages du site foreg.gouv.fr vers des sites tiers sont proposés à titre d’information ; le contenu des sites vers lesquels ces liens conduisent n’engage pas la responsabilité de l’éditeur.
