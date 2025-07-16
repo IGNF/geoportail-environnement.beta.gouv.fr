@@ -11,17 +11,17 @@ const template = {
 
 <p> 
 
-<span>L’Institut national de l'Information géographique et forestière (IGN) </span> 
+<span>L'Institut national de l'Information géographique et forestière (IGN) </span> 
 
-s’engage à rendre son service accessible, conformément à 
+s'engage à rendre son service accessible, conformément à 
 
-l’article 47 de la loi n° 2005-102 du 11 février 2005. 
+l'article 47 de la loi n° 2005-102 du 11 février 2005. 
 
 </p> 
 
 <p> 
 
-Cette déclaration d’accessibilité s’applique à 
+Cette déclaration d'accessibilité s'applique à 
 
 <strong>foreg</strong><span> 
 
@@ -41,16 +41,16 @@ est
 
 avec le 
 
-<abbr title="Référentiel général d’amélioration de l’accessibilité">RGAA</abbr>. <span>Le site n’a encore pas été audité.<br></span> 
+<abbr title="Référentiel général d'amélioration de l'accessibilité">RGAA</abbr>. <span>Le site n'a encore pas été audité.<br></span> 
 
 </p> 
 
 <h2>Amélioration et contact</h2> 
 
 <p> 
-Si vous n’arrivez pas à accéder à un contenu ou à un service, 
+Si vous n'arrivez pas à accéder à un contenu ou à un service, 
 
-Formevous pouvez contacter l’IGN : 
+Formevous pouvez contacter l'IGN : 
 
 </p> 
 
@@ -90,9 +90,9 @@ Cette procédure est à utiliser dans le cas suivant&nbsp;: vous avez
 
 signalé au responsable du site internet un défaut 
 
-d’accessibilité qui vous empêche d’accéder à un contenu ou à un 
+d'accessibilité qui vous empêche d'accéder à un contenu ou à un 
 
-des services du portail et vous n’avez pas obtenu de réponse 
+des services du portail et vous n'avez pas obtenu de réponse 
 
 satisfaisante. 
 
@@ -136,13 +136,13 @@ Libre réponse 71120 75342 Paris CEDEX 07
 
 <p> 
 
-Cette déclaration d’accessibilité a été créé le 
+Cette déclaration d'accessibilité a été créé le 
 
 <span>18 mars 2025</span> 
 
 grâce au 
 
-<a href="https://betagouv.github.io/a11y-generateur-declaration/#create">Générateur de Déclaration d’Accessibilité</a>. 
+<a href="https://betagouv.github.io/a11y-generateur-declaration/#create">Générateur de Déclaration d'Accessibilité</a>. 
 
 </p> 
 `,
@@ -151,7 +151,7 @@ grâce au
 <h2> Éditeur </h2>
 
 <p>
-Le site foreg.beta.gouv.fr est édité par l’Institut national de l’information géographique et forestière (IGN), 73 avenue de Paris, 94165 SAINT-MANDE CEDEX, France.
+Le site foreg.beta.gouv.fr est édité par l'Institut national de l'information géographique et forestière (IGN), 73 avenue de Paris, 94165 SAINT-MANDE CEDEX, France.
 <br>
 Tél. : 01 43 98 80 00
 <br>
@@ -167,22 +167,22 @@ Le site foreg.beta.gouv.fr est hébergé par OVH SAS, 2 rue Kellermann, 59100 Ro
 <h2> Droit de propriété intellectuelle </h2>
 
 <p>
-Les illustrations, le contenu éditorial, les divers éléments de la charte graphique ainsi que les données cartographiques issues de la consultation en ligne figurant sur le site foreg.beta.gouv.fr sont des éléments dont l’IGN détient la propriété ou le droit d’exploitation.
+Les illustrations, le contenu éditorial, les divers éléments de la charte graphique ainsi que les données cartographiques issues de la consultation en ligne figurant sur le site foreg.beta.gouv.fr sont des éléments dont l'IGN détient la propriété ou le droit d'exploitation.
 <br>
-L’utilisation des documents ou éléments du site est soumise à l’accord préalable de notre établissement.
+L'utilisation des documents ou éléments du site est soumise à l'accord préalable de notre établissement.
 </p>
 
 <h2> Liens hypertextes proposés sur foreg.beta.gouv.fr </h2>
 
 <p>
-Les liens insérés dans les pages du site foreg.gouv.fr vers des sites tiers sont proposés à titre d’information ; le contenu des sites vers lesquels ces liens conduisent n’engage pas la responsabilité de l’éditeur.
+Les liens insérés dans les pages du site foreg.beta.gouv.fr vers des sites tiers sont proposés à titre d'information ; le contenu des sites vers lesquels ces liens conduisent n'engage pas la responsabilité de l'éditeur.
 </p>
 
 `,
     cookies: 
 `
 <p>   
-En vue d’adapter le site foreg.beta.gouv.fr aux demandes de ses visiteurs, l’IGN mesure le nombre de visites, le nombre de pages vues ainsi que l'activité des visiteurs sur le site et leur fréquence de retour. 
+En vue d'adapter le site foreg.beta.gouv.fr aux demandes de ses visiteurs, l'IGN mesure le nombre de visites, le nombre de pages vues ainsi que l'activité des visiteurs sur le site et leur fréquence de retour. 
 <br>
 Les données recueillies ne sont pas cédées à des tiers ni utilisées à d'autres fins.
 </p>

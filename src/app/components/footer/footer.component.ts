@@ -25,7 +25,7 @@ export class FooterComponent {
   ];
 
   institutionalLinks: any = [
-    { label: 'Institut national de l’information géographique et forestière', link: 'https://www.ign.fr/', target: '_blank' },
+    { label: 'Institut national de l\'information géographique et forestière', link: 'https://www.ign.fr/', target: '_blank' },
     { label: 'Office national des forêts', link: 'https://www.ign.fr/', target: '_blank' },
     { label: 'Office français de la biodiversité', link: 'https://www.ign.fr/', target: '_blank' },
     { label: 'Centre national de la propriété forestière', link: 'https://www.ign.fr/', target: '_blank' },

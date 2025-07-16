@@ -228,7 +228,7 @@ describe('RequeteNewComponent', () => {
       expect(result).toBeUndefined();
     });
 
-    it('devrait retourner undefined si aucun crs ni proj4 n’est défini', () => {
+    it('devrait retourner undefined si aucun crs ni proj4 n\'est défini', () => {
       const geoJson = {
         type: 'FeatureCollection'
       };

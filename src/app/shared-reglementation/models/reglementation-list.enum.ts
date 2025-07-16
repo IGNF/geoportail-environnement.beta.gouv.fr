@@ -214,7 +214,7 @@ export const REGLEMENTATION_LIST = [
     thematicName: 'Patrimoine',
     layerName: 'Monuments historiques',
     title: 'Protection des abords des monuments historiques ( Périmètre délimité des abords ou abords de 500m)',
-    description: '<p>Un monument historique est un immeuble protégé pour son intérêt protégé ou dont la préservation présente un intérêt du point de vue de l\'architecture ou de l\'histoire . Aux abords de ce monument, un périmètre de protection est destiné à garantir le caractère paysager des abords.</p>',
+    description: '<p>Un monument historique est un immeuble protégé pour son intérêt ou dont la préservation présente un intérêt du point de vue de l\'architecture ou de l\'histoire. Aux abords de ce monument, un périmètre de protection est destiné à garantir le caractère paysager des abords.</p>',
     impactReglementaire: '<p>Les travaux susceptibles de modifier le paysage aux abords des monuments historiques sont soumis à autorisation. C\'est le cas notamment des coupes ou des créations de voiries forestières.</p>',
     impactProcedure: '<p>Si les travaux se situent également en site classé ou nécessitent une autre autorisation (se rapprocher de la DDT), l\'architecte des bâtiments de France sera consulté par le service qui instruira l\'autorisation.</p><p> Sinon, une demande d\'autorisation est à déposer en mairie. Il est recommandé de contacter auparavant l\'UDAP pour avoir son avis.</p>',
     referenceUrl: '',
