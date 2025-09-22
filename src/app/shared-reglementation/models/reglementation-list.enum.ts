@@ -248,8 +248,8 @@ export const REGLEMENTATION_LIST = [
     title: 'Espaces boisés classés au PLU au titre du  L.113-1 CU',
     description: '<p>Les espaces boisés classés  à conserver, à protéger ou à créer sont définis dans le plan local d\'urbanisme de la commune. Ils sont destinés à maintenir le paysage, réaliser des coulées vertes, protéger contre les risques naturels etc. </p>',
     impactReglementaire: '<p>Les terrains ne peuvent changer d\'affectation : ils doivent rester forestiers. Il ne peut donc y avoir de défrichement. Les coupes qui ne sont pas prévues dans un plan simple de gestion doivent faire l\'objet d\'une déclaration préalable.</p>',
-    impactProcedure: '<p>La déclaration de coupe est à envoyer en mairie du lieu de la coupe, à l\'aide du formulaire Cerfa n° 13404 en cochant "Coupe et abattage d\'arbres" en page 4.</p>',
-    referenceUrl: 'https://www.service-public.gouv.fr/particuliers/vosdroits/R11646',
+    impactProcedure: '<p>La déclaration de coupe est à envoyer en mairie du lieu de la coupe, à l\'aide du formulaire Cerfa n° 16703 en remplissant les cadres 1 ; 2 ; 3 et 4.3</p>',
+    referenceUrl: 'https://www.service-public.gouv.fr/particuliers/vosdroits/R1995',
     contactReference: ['Mairie'],
     contactReferenceLayer: 'BDTOPO_V3:commune'
   }),
