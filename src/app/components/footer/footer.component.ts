@@ -19,7 +19,7 @@ export class FooterComponent {
 
   govLinks: any = [
     { label: 'info.gouv.fr', link: 'https://info.gouv.fr/', target: '_blank' },
-    { label: 'service-public.fr', link: 'https://service-public.fr/', target: '_blank' },
+    { label: 'service-public.gouv.fr', link: 'https://service-public.gouv.fr/', target: '_blank' },
     { label: 'legifrance.gouv.fr', link: 'https://legifrance.gouv.fr/', target: '_blank' },
     { label: 'data.gouv.fr', link: 'https://data.gouv.fr/', target: '_blank' },
   ];

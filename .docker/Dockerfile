@@ -28,7 +28,7 @@ RUN ng test --watch=false --code-coverage
 RUN ng build --configuration production --output-path=dist
 
 # Étape finale : image légère pour la production
-FROM ${registry}/nginxinc/nginx-unprivileged:stable AS prod
+FROM ${registry}/nginxinc/nginx-unprivileged:stable-alpine3.22 AS prod
 
 COPY --from=build /app/dist/browser /usr/share/nginx/html
 COPY .docker/nginx.conf /etc/nginx/conf.d/default.conf
