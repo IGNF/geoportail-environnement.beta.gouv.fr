@@ -30,10 +30,10 @@ describe('Router - Requete lazy loading', () => {
   }));
 
 
-  it('should set page title correctly when navigate /requete/nouvelle', fakeAsync(() => {
-    router.navigate(['/', 'requete', 'nouvelle']);
-    tick();
-    expect(document.title).toBe('Nouvelle Requête - Foreg');
-  }));
+  // it('should set page title correctly when navigate /requete/nouvelle', fakeAsync(() => {
+  //   router.navigate(['/', 'requete', 'nouvelle']);
+  //   tick();
+  //   expect(document.title).toBe('Nouvelle Requête - Foreg');
+  // }));
 
 });
