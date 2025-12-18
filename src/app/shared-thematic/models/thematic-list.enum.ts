@@ -17,117 +17,117 @@ export const THEMATIC_LIST = [
         id: 'terrains-des-conservatoires-d-espaces-naturels',
         title: 'Terrains des conservatoires d\'espaces naturels',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.MNHN.CONSERVATOIRES:cen',
+        technicalName: 'patrinat_cen:cen',
         name: 'cen'
       }, {
         id: 'conservatoire-du-littoral-sites-sous-responsabilite-du-conservatoire',
         title: 'Conservatoire du littoral - sites sous responsabilité du conservatoire',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl',
+        technicalName: 'patrinat_cdl:conservatoire_littoral',
         name: 'cdl'
       }, {
         id: 'parcs-naturels-regionaux',
         title: 'Parcs naturels régionaux',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.PNR:pnr',
+        technicalName: 'patrinat_pnr:pnr',
         name: 'pnr'
       }, {
         id: 'reserves-nationales-de-chasse-et-de-faune-sauvage',
         title: 'Réserves nationales de chasse et de faune sauvage',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.RNCF:rncfs',
+        technicalName: 'patrinat_rncfs:rncfs',
         name: 'rncfs'
       }, {
         id: 'reserves-biologiques',
         title: 'Réserves Biologiques',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.RB:rb',
+        technicalName: 'patrinat_rb:reserve_biologique',
         name: 'rb'
       }, {
         id: 'arretes-listes-de-sites-d-interet-geologique',
         title: 'Arrêtés listes de sites d\'intérêt géologique',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.APLG:aplg',
+        technicalName: 'patrinat_aplg:aplg',
         name: 'aplg'
       }, {
         id: 'perimetres-de-protection-de-reserves-naturelles',
         title: 'Périmètres de protection de réserves naturelles',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.MNHN.RN.PERIMETER:pprnn',
+        technicalName: 'patrinat_pprnn:pprnn',
         name: 'pprnn'
       }, {
         id: 'reserves-naturelles-regionales',
         title: 'Réserves naturelles régionales',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDSITES.MNHN.RESERVES-REGIONALES:rnr',
+        technicalName: 'patrinat_rnr:rnr',
         name: 'rnr'
       }, {
         id: 'reserves-naturelles-nationales',
         title: 'Réserves naturelles nationales',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.RNN:rnn',
+        technicalName: 'patrinat_rnn:rnn',
         name: 'rnn'
       }, {
         id: 'reserves-naturelles-de-corse',
         title: 'Réserves Naturelles de Corse',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.RNC:rnc',
+        technicalName: 'patrinat_rnc:pnm',
         name: 'rnc'
       }, {
         id: 'biotopes-d-especes-protegees',
         title: 'Biotopes d\'espèces protégées',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.APB:apb',
+        technicalName: 'patrinat_apb:apb',
         name: 'apb'
       }, {
         id: 'arretes-de-protection-d-habitats-naturels',
         title: 'Arrêtés de protection d\'habitats naturels',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.APHN:aphn',
+        technicalName: 'patrinat_aphn:aire_protection_habitats_naturels',
         name: 'aphn'
       }, {
         id: 'arretes-de-protection-de-geotope',
         title: 'Arrêtés de protection de géotope',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.APG:apg',
+        technicalName: 'patrinat_apg:apg',
         name: 'apg'
       }, {
         id: 'coeurs-de-parcs-nationaux',
         title: 'Coeurs de parcs nationaux',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.PN:pn',
+        technicalName: 'patrinat_pn2:pn',
         name: 'pn',
         restrictions: [{ attribute: 'zone', value: 'Coeur' }]
       }, {
         id: 'zones-d-adhesion-de-parcs-nationaux',
         title: 'Zones d\'adhésion de parcs nationaux',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.PN:pn',
+        technicalName: 'patrinat_pn2:pn',
         name: 'pn',
         restrictions: [{ attribute: 'zone', value: 'Adhesion' }]
       }, {
         id: 'natura-deux-milles-habitats',
         title: 'Natura 2000 Habitats',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.SIC:sic',
+        technicalName: 'patrinat_sic:sic',
         name: 'sic'
       }, {
         id: 'natura-deux-milles-oiseaux',
         title: 'Natura 2000 Oiseaux',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.ZPS:zps',
+        technicalName: 'patrinat_zps:zps',
         name: 'zps'
       }, {
         id: 'znieff-deux',
         title: 'ZNIEFF2',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.ZNIEFF2:znieff2',
+        technicalName: 'patrinat_znieff2:znieff2',
         name: 'znieff2'
       }, {
         id: 'znieff-un',
         title: 'ZNIEFF1',
         group: 'biodiversite',
-        technicalName: 'PROTECTEDAREAS.ZNIEFF1:znieff1',
+        technicalName: 'patrinat_znieff1:znieff1',
         name: 'znieff1'
       }
     ]

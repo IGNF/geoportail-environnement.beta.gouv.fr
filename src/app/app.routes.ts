@@ -15,10 +15,10 @@ export const routes: Routes = [
     path: 'accueil',
     component: HomeComponent
   },
-  {
-    path: 'requete',
-    loadChildren: () => import('./requete/requete.module').then(m => m.RequeteModule)
-  },
+  // {
+  //   path: 'requete',
+  //   loadChildren: () => import('./requete/requete.module').then(m => m.RequeteModule)
+  // },
   // {
   //   path: 'mes-forets',
   //   component: MesForetsComponent,

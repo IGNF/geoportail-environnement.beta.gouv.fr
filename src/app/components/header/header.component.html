@@ -2,19 +2,12 @@
   [serviceTagline]="serviceTagline" [operatorImagePath]="operatorImagePath" [menu]="menuHeader"
   [headerToolsLinks]="headerToolsLinks" [searchBar]="false"></dsfr-header>
   <dsfr-notice
-  [heading]="'Aidez nous à améliorer cet outil ! Faites-nous part de'"
+  [heading]="`Malheureusement, l’expérimentation FOREG prend fin, et le service ne sera plus maintenu. Nous vous remercions pour l’intérêt que vous avez montré pour le produit, et espérons bientôt pouvoir vous proposer une solution.`"
   [closeable]="false"
   [noIcon]="false"
   [icon]="''"
   [description]="''"
-  [type]="'info'"
+  [type]="'alert'"
   
 >
-  <dsfr-link
-    #link
-    link="https://jedonnemonavis.numerique.gouv.fr/Demarches/3598?button=3885"
-    customClass="fr-notice__link"
-    label="votre avis"
-    linkTarget="_blank"
-  ></dsfr-link>
 </dsfr-notice>

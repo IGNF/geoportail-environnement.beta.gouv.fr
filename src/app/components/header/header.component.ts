@@ -28,7 +28,7 @@ export class HeaderComponent {
 
   menuHeader: any = [
     { label: 'Découvrir', routerLink: '/accueil' },
-    { label: 'Nouvelle requête', routerLink: '/requete/nouvelle' },
+    // { label: 'Nouvelle requête', routerLink: '/requete/nouvelle' },
     // { label: 'Mes forêts', routerLink: '/mes-forets' },
     { label: 'Informations sur les données', routerLink: '/informations'}
   ];
