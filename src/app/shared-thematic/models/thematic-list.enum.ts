@@ -47,7 +47,7 @@ export const THEMATIC_LIST = [
         id: 'arretes-listes-de-sites-d-interet-geologique',
         title: 'Arrêtés listes de sites d\'intérêt géologique',
         group: 'biodiversite',
-        technicalName: 'patrinat_aplg:aplg',
+        technicalName: 'patrinat_aplg:apg',
         name: 'aplg'
       }, {
         id: 'perimetres-de-protection-de-reserves-naturelles',
@@ -95,14 +95,14 @@ export const THEMATIC_LIST = [
         id: 'coeurs-de-parcs-nationaux',
         title: 'Coeurs de parcs nationaux',
         group: 'biodiversite',
-        technicalName: 'patrinat_pn2:pn',
+        technicalName: 'patrinat_pn:parc_national',
         name: 'pn',
-        restrictions: [{ attribute: 'zone', value: 'Coeur' }]
+        restrictions: [{ attribute: 'zone', value: 'Cœur' }]
       }, {
         id: 'zones-d-adhesion-de-parcs-nationaux',
         title: 'Zones d\'adhésion de parcs nationaux',
         group: 'biodiversite',
-        technicalName: 'patrinat_pn2:pn',
+        technicalName: 'patrinat_pn:parc_national',
         name: 'pn',
         restrictions: [{ attribute: 'zone', value: 'Adhesion' }]
       }, {

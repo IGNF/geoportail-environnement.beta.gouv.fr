@@ -122,7 +122,7 @@ export class ThematicFeatureService {
     }
 
     if (layer.title === 'Coeurs de parcs nationaux') {
-      request.filterByAttribute('zone', 'Coeur');
+      request.filterByAttribute('zone', 'Cœur');
     }
 
     if (layer.title === 'Zones d\'adhésion de parcs nationaux') {

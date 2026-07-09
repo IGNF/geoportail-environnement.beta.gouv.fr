@@ -11,7 +11,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
   },
   layers: [
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CONSERVATOIRES:cen'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_cen:cen'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -21,19 +21,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.MNHN.CONSERVATOIRES',
+          'LAYERS': 'Patrinat_CEN_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.CDL.PARCELS:cdl'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_cdl:conservatoire_littoral'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -43,19 +43,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.MNHN.CDL.PARCELS',
+          'LAYERS': 'Patrinat_CDL_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PNR:pnr'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_pnr:pnr'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -65,19 +65,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.PNR',
+          'LAYERS': 'Patrinat_PNR_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNCF:rncfs'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_rncfs:rncfs'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -87,19 +87,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.RNCF',
+          'LAYERS': 'Patrinat_RNCFS_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RB:rb'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_rb:reserve_biologique'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -109,19 +109,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.RB',
+          'LAYERS': 'Patrinat_RB_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APLG:aplg'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_aplg:apg'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -132,19 +132,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.APLG',
+          'LAYERS': 'Patrinat_APLG_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.MNHN.RN.PERIMETER:pprnn'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_pprnn:pprnn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -154,19 +154,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.MNHN.RN.PERIMETER',
+          'LAYERS': 'Patrinat_PPRNN_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDSITES.MNHN.RESERVES-REGIONALES:rnr'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_rnr:rnr'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -176,19 +176,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDSITES.MNHN.RESERVES-REGIONALES',
+          'LAYERS': 'Patrinat_RNR_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNN:rnn'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_rnn:rnn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -198,19 +198,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.RN',
+          'LAYERS': 'Patrinat_RNN_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.RNC:rnc'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_rnc:pnm'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -220,19 +220,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.RNC',
+          'LAYERS': 'Patrinat_RNC_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APB:apb'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_apb:apb'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -242,19 +242,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.APB',
+          'LAYERS': 'Patrinat_APB_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APHN:aphn'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_aphn:aire_protection_habitats_naturels'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -264,19 +264,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.APHN',
+          'LAYERS': 'Patrinat_APHN_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.APG:apg'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_apg:apg'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -286,19 +286,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.APG',
+          'LAYERS': 'Patrinat_APG_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PN:pn' && l.title === 'Coeurs de parcs nationaux'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_pn:parc_national' && l.title === 'Coeurs de parcs nationaux'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -308,20 +308,20 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.PN',
+          'LAYERS': 'Patrinat_Parc_national',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0',
-          'cql_filter': "zone = 'Coeur'"
+          'cql_filter': "zone = 'Cœur'"
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.PN:pn' && l.title === 'Zones d\'adhésion de parcs nationaux'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_pn:parc_national' && l.title === 'Zones d\'adhésion de parcs nationaux'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -331,12 +331,12 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.PN',
+          'LAYERS': 'Patrinat_Parc_national',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0',
           'cql_filter': "zone = 'Adhesion'"
@@ -344,7 +344,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.SIC:sic'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_sic:sic'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -354,19 +354,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.SIC',
+          'LAYERS': 'Patrinat_SIC_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         },
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZPS:zps'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_zps:zps'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -376,19 +376,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.ZPS',
+          'LAYERS': 'Patrinat_ZPS_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         }
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZNIEFF2:znieff2'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_znieff2:znieff2'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -398,19 +398,19 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.ZNIEFF2',
+          'LAYERS': 'Patrinat_ZNIEFF2_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         }
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'PROTECTEDAREAS.ZNIEFF1:znieff1'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_znieff1:znieff1'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -420,12 +420,12 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       minResolution: 0,
       maxResolution: 156543.03392804097,
       source: new TileWMS({
-        url: 'https://data.geopf.fr/wms-r/ows?',
+        url: 'https://data.geopf.fr/wms-v/ows?',
         projection: 'EPSG:3857',
         attributions: [],
         crossOrigin: 'anonymous',
         params: {
-          'LAYERS': 'PROTECTEDAREAS.ZNIEFF1',
+          'LAYERS': 'Patrinat_ZNIEFF1_France',
           'FORMAT': 'image/png',
           'VERSION': '1.3.0'
         }
