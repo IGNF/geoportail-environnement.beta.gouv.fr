@@ -99,7 +99,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_rb:reserve_biologique'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_rb:rb'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -121,7 +121,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_aplg:apg'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_aplg:aplg'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,
@@ -254,7 +254,7 @@ export const MAP_BIODIVERISTE_LAYER_GROUP = new LayerGroup({
       })
     }),
     new TileLayer({
-      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_aphn:aire_protection_habitats_naturels'),
+      properties: THEMATIC_LIST.find((g) => g.name === 'biodiversite')?.layers?.find((l) => l.technicalName === 'patrinat_aphn:aphn'),
       extent: [
         -20037508.342789244,
         -44927335.42709704,

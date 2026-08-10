@@ -41,13 +41,13 @@ export const THEMATIC_LIST = [
         id: 'reserves-biologiques',
         title: 'Réserves Biologiques',
         group: 'biodiversite',
-        technicalName: 'patrinat_rb:reserve_biologique',
+        technicalName: 'patrinat_rb:rb',
         name: 'rb'
       }, {
         id: 'arretes-listes-de-sites-d-interet-geologique',
         title: 'Arrêtés listes de sites d\'intérêt géologique',
         group: 'biodiversite',
-        technicalName: 'patrinat_aplg:apg',
+        technicalName: 'patrinat_aplg:aplg',
         name: 'aplg'
       }, {
         id: 'perimetres-de-protection-de-reserves-naturelles',
@@ -83,7 +83,7 @@ export const THEMATIC_LIST = [
         id: 'arretes-de-protection-d-habitats-naturels',
         title: 'Arrêtés de protection d\'habitats naturels',
         group: 'biodiversite',
-        technicalName: 'patrinat_aphn:aire_protection_habitats_naturels',
+        technicalName: 'patrinat_aphn:aphn',
         name: 'aphn'
       }, {
         id: 'arretes-de-protection-de-geotope',
